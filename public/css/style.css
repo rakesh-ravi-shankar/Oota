@@ -14,7 +14,11 @@ body {
 	z-index: -1;
 	filter: brightness(50%);
 }
+.register-user label{
+	color:white;
+	margin-top: 2em;
 
+}
 #title {
 	font-size: 5em;
 	font-family: 'Pacifico', cursive;
