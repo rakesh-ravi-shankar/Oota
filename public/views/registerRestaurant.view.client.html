@@ -1,8 +1,45 @@
+<div id="background-img"></div>
+
 <div class="container">
-    <div >
+    <div id="card">
         <h1 id="title">Register</h1>
         <form>
-            <div class="form-group">
+            <div class="form-group register">
+                <label> User Name </label>
+                <input type="text" name="username" placeholder="username" class="form-control" ng-model="restaurant.username">
+                <label> Password </label>
+                <input type="password" name="password" placeholder="*****" class="form-control" ng-model="restaurant.password">
+
+                <label> Verify Password </label>
+                <input type="password" name="v_password" placeholder="*****" class="form-control" ng-model="restaurant.verifyPassword">
+
+                <label> Restaurant Name </label>
+                <input type="text" name="name" placeholder="Restaurant Name" class="form-control" ng-model="restaurant.restaurantName">
+
+                <label> Address Line 1 </label>
+                <input type="text" name="Address1" placeholder="Address Line 1" class="form-control" ng-model="restaurant.addressOne">
+
+                <label> Address Line 2 </label>
+                <input type="text" name="Address2" placeholder="Address Line 2" class="form-control" ng-model="restaurant.addressTwo">
+
+                <label> Pincode </label>
+                <input type="text" name="Pincode" placeholder="Pincode" pattern="[0-9]{5}" maxlength="5" class="form-control" ng-model="restaurant.pincode">
+
+                <label> Store Opening Time </label>
+                <input type="time" name="startTime" placeholder="HH:MM" class="form-control" ng-model="restaurant.startTime">
+
+                <label> Store Closing Time </label>
+                <input type="time" name="closeTime" placeholder="HH:MM" class="form-control" ng-model="restaurant.closeTime">
+
+                <input type="checkbox" name="deliveryOption" value="Delivery Available" ng-model="restaurant.deliveryOption"> <label>Delivery Available?</label><br>
+
+                <label> Contact Number </label>
+                <input type="text" name="phoneNumber" placeholder="Phone Number" class="form-control" ng-model="restaurant.phoneNumber">
+
+                <label> Email </label>
+                <input type="email" name="email" placeholder="Email" class="form-control" ng-model="restaurant.email">
+
+                <button id="register" class="btn btn-block btn-primary" ng-click="model.register(restaurant)">Register</button>
 
 
 
