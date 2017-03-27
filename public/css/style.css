@@ -14,10 +14,16 @@ body {
 	z-index: -1;
 	filter: brightness(50%);
 }
-.register-user label{
+
+
+.register label{
 	color:white;
 	margin-top: 2em;
+	font-size: 2em;
 
+}
+#Birthday{
+	margin-left: -3%;
 }
 #title {
 	font-size: 5em;
@@ -26,7 +32,9 @@ body {
 	text-align: center;
 
 }
-
+#datetimepicker4{
+	margin-left: 2%;
+}
 .form-control {
 	background-color: #F2F2F1;
 }
