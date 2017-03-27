@@ -1,23 +1,23 @@
 (function () {
     angular
         .module("Oota")
-        .factory("UserService",userService);
+        .factory("RestaurantService",restaurantService);
 
-    function userService($http) {
+    function restaurantService($http) {
 
 
         var api={
-            "createUser":createUser,
+            "createRestaurant":createRestaurant,
             // "findUserById":findUserById,
-            "findUserByUsername":findUserByUsername,
-            "findUserByCredentials":findUserByCredentials
+            "findRestaurantByUsername":findRestaurantByUsername,
+            "findRestaurantByCredentials":findRestaurantByCredentials
             // "updateUser":updateUser,
             // "deleteUser":deleteUser
         };
         return api;
 
-        function createUser(user) {
-            return $http.post("/api/user",user);
+        function createRestaurant(restaurant) {
+            return $http.post("/api/restaurant",restaurant);
         }
         //
         // function findUserById(userId) {
@@ -25,15 +25,15 @@
         //
         // }
         //
-        function findUserByUsername(username) {
-            return $http.get("/api/user?username="+username);
+        function findRestaurantByUsername(username) {
+            return $http.get("/api/restaurant?username="+username);
 
 
         }
 
-        function findUserByCredentials(username,password) {
+        function findRestaurantByCredentials(restaurant,password) {
 
-            return $http.get("/api/user?username="+username+"&password="+password);
+            return $http.get("/api/restaurant?username="+username+"&password="+password);
 
         }
         //

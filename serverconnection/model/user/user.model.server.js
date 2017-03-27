@@ -94,7 +94,7 @@ function updateUser(user,userId) {
     userModel
         .update(
             {_id: userId },
-            {$set: {firstName:user.firstName,lastName:user.lastName ,email:user.email}},function (err, user) {
+            {$set: user},function (err, user) {
                 if(err) {
                     deffered.abort(err);
                 }

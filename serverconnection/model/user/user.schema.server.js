@@ -7,7 +7,8 @@ var userSchema= mongoose.Schema({
     lastName:String,
     email:String,
     phone:String,
-    dateofbirth:Date
+    dateofbirth:Date,
+    registerationDate:{type: Date, default: Date.now}
 },{collection:'user.project.collection'});
 
 
