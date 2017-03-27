@@ -5,15 +5,18 @@
         <form>
             <div class="form-group register">
                 <label>User Name</label>
-                <input type="text"
+                <input ng-model="user.username"
+                        type="text"
                        class="form-control"
                        placeholder="Username"/>
                 <label>First Name</label>
-                <input type="text"
+                <input  ng-model="user.firstName"
+                        type="text"
                         class="form-control"
                         placeholder="First Name"/>
                 <label>Last Name</label>
-                <input type="text"
+                <input   ng-model="user.lastName"
+                        type="text"
                         class="form-control"
                         placeholder="Last Name"/>
                 <label>Birthday</label>
@@ -23,7 +26,8 @@
                         <div class='col-sm-6'>
                             <div class="form-group">
                                 <div class='input-group date' id='datetimepicker1'>
-                                    <input type='text' class="form-control" />
+                                    <input  ng-model="user.dob"
+                                            type='text' class="form-control" />
                                     <span class="input-group-addon">
                                       <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
@@ -39,15 +43,18 @@
                 </div>
 
                 <label>Email</label>
-                <input type="email"
+                <input  ng-model="user.email"
+                        type="email"
                         class="form-control"
                         placeholder="Email"/>
                 <label>Phone Number</label>
-                <input type="number"
+                <input  ng-model="user.contact"
+                        type="number"
                        class="form-control"
                        placeholder="Phone Number"/>
                 <label>Password</label>
-                <input type="password"
+                <input  ng-model="user.password"
+                        type="password"
                         class="form-control"
                         placeholder="Password"/>
                 <label>Confirm Password</label>
@@ -55,7 +62,7 @@
                        class="form-control"
                        placeholder="Confirm Password"/>
                 <label></label>
-                <button id="register" class="btn btn-block btn-primary" ng-click="model.register(restaurant)">Register</button>
+                <button id="register" class="btn btn-block btn-primary" ng-click="model.register(user)">Register</button>
 
             </div>
         </form>
