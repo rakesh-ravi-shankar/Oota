@@ -1,4 +1,4 @@
 (function() {
 	angular
-		.module("Oota", ["ngRoute"]);
+		.module("Oota", ["ngRoute", "ngMap"]);
 	})();
