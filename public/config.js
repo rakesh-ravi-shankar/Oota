@@ -21,6 +21,11 @@
                 controller: 'RegisterRestaurantController',
                 controllerAs: 'model'
             })
+            .when("/view", {
+                templateUrl: 'views/view.html',
+                controller: 'EatinController',
+                controllerAs: 'model'
+            })
             .otherwise({
                 templateUrl: 'views/login.view.client.html',
                 controller: 'LoginController',

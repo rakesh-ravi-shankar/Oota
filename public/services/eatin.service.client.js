@@ -1,0 +1,40 @@
+(function () {
+    angular
+        .module("Oota")
+        .factory("EatinService",EatinService);
+
+    function EatinService($http) {
+
+        var api = {
+            "searchMenu": searchMenu,
+            "searchRestaurant":searchRestaurant,
+            "addOrder":addOrder
+
+        };
+        return api;
+
+
+
+        function searchRestaurant(restaurant,location) {
+            console.log(restaurant);
+            console.log(location);
+            var restaurantname=encodeURIComponent(restaurant);
+            var res = encodeURIComponent(location);
+            var url = "https://api.eatstreet.com/publicapi/v1/restaurant/search?method=both&search="+restaurantname+"&street-address="+res+"&access-token=9519d5bba99b4fc1";
+            return $http.get(url);
+        }
+
+        function searchMenu(apikey) {
+
+            var res = encodeURI(apikey);
+            var url = "https://api.eatstreet.com/publicapi/v1/restaurant/"+res+"/menu?includeCustomizations=false&access-token=9519d5bba99b4fc1";
+            return $http.get(url);
+        }
+        
+        function addOrder() {
+            
+        }
+
+
+    }
+})();
