@@ -1,0 +1,52 @@
+<ng-map id="mapDemo"
+        default-style="true"
+        center="{{model.origin}}"
+        draggable="true"
+        zoom="15">
+
+
+
+
+ <marker id="event-location"
+                  position="{{model.origin}}"
+                  on-click="model.showInfoWindow(model.origin)">
+ </marker>
+
+ <marker id="event-location"
+         position="250 Huntington, Boston, MA"
+         on-click="model.showInfoWindow()">
+ </marker>
+
+ <marker id="event-location"
+         position="{{model.destination}}"
+         on-click="model.showInfoWindow()">
+ </marker>
+
+
+ <marker id="event-location"
+         position="current-location"
+         on-click="model.showInfoWindow()">
+ </marker>
+
+
+ <info-window id="event-location-info">
+     <div ng-non-bindable>
+      {{model.position}}
+     </div>
+ </info-window>
+
+
+ <directions
+         draggable="true"
+         panel=""
+         avoid-ferries="true"
+         travel-mode="WALKING"
+         waypoints="{{model.waypoints}}"
+         origin="179 Northampton, Boston, MA"
+         destination="271 Huntington, Boston, MA"
+         suppress-markers="true"
+         >
+
+ </directions>
+
+</ng-map>

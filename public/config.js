@@ -21,6 +21,11 @@
                 controller: 'RegisterRestaurantController',
                 controllerAs: 'model'
             })
+            .when("/deliver", {
+                templateUrl: 'views/deliver.view.client.html',
+                controller: 'DeliverController',
+                controllerAs: 'model'
+            })
             .otherwise({
                 templateUrl: 'views/login.view.client.html',
                 controller: 'LoginController',
