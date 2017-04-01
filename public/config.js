@@ -21,6 +21,25 @@
                 controller: 'RegisterRestaurantController',
                 controllerAs: 'model'
             })
+
+            .when("/view", {
+                templateUrl: 'views/view.html',
+                controller: 'EatinController',
+                controllerAs: 'model'
+            })
+
+
+            .when("/view-menu/:resid", {
+                templateUrl: 'views/view-menu.client.html',
+                controller: 'MenuController',
+                controllerAs: 'model'
+            })
+
+            .when("/deliver", {
+                templateUrl: 'views/deliver.view.client.html',
+                controller: 'DeliverController',
+                controllerAs: 'model'
+            })
             .otherwise({
                 templateUrl: 'views/login.view.client.html',
                 controller: 'LoginController',

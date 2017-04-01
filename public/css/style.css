@@ -59,3 +59,7 @@ body {
 .register {
 	margin-top: 1em;
 }
+
+#map {
+	height: 100%;
+}

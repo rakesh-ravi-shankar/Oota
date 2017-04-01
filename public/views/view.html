@@ -1,0 +1,50 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6">
+            <input ng-model="searchLoc"
+                   placeholder="Area"
+                   type="text" class="form-control">
+        </div>
+        <div class="col-sm-6">
+            <div class="input-group">
+                <input ng-model="searchRes" type="text"
+                       placeholder="Restaurant Name"
+                       class="form-control">
+                <span class="input-group-btn">
+                <a ng-click="model.searchRestaurant(searchRes,searchLoc)" class="btn btn-default" type="button">
+                    <span class="glyphicon glyphicon-search widget-class"></span>
+                </a>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!--<div class="row" ng-show="model.restaurants">-->
+
+        <!--<ul ng-repeat="res in model.restaurants.data.restaurants">-->
+            <!--<img src="{{res.logoUrl}}">-->
+        <!--</ul>-->
+    <!--<div>-->
+
+
+        <div class="card-group" style="display: flex;" ng-show="model.restaurants">
+            <div class="row">
+            <div class="card col-lg-6 col-sm-12" style="border:1px solid;padding:3%" ng-repeat="res in model.restaurants.data.restaurants">
+                <img class="card-img-top" src="{{res.logoUrl}}" alt="Card image cap">
+                <div class="card-block">
+                    <h4 class="card-title">{{res.name}}</h4>
+                    <p class="card-text">
+                        <button class="btn btn-block btn-info"
+                                ng-click="model.searchMenu(res.apiKey)">
+                            MENU</button>
+                    </p>
+
+                </div>
+            </div>
+            </div>
+
+        </div>
+
+
+
+</div>
