@@ -20,8 +20,6 @@
 
                             });
 
-
-
             })
 
 
@@ -34,14 +32,14 @@
             EatinService
                 .searchRestaurant(res,loc)
                 .then(function(response) {
-
-                    EatinService
-                        .searchMenu(response.data.restaurants[0].apiKey)
-                        .then(function (menu) {
-                            vm.menu=menu;
-                            console.log(menu);
-
-                        });
+                        vm.restaurants=response;
+                    // EatinService
+                    //     .searchMenu(response.data.restaurants[0].apiKey)
+                    //     .then(function (menu) {
+                    //         vm.menu=menu;
+                    //         console.log(menu);
+                    //
+                    //     });
 
                 });
         }

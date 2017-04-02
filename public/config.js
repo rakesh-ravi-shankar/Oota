@@ -22,7 +22,7 @@
                 controllerAs: 'model'
             })
 
-            .when("/view", {
+            .when("/user/:uid", {
                 templateUrl: 'views/view.html',
                 controller: 'EatinController',
                 controllerAs: 'model'
