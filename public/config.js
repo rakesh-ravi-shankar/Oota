@@ -25,11 +25,11 @@
             .when("/view", {
                 templateUrl: 'views/view.html',
                 controller: 'EatinController',
-
+                controllerAs: 'model'
+            })
             .when("/deliver", {
                 templateUrl: 'views/deliver.view.client.html',
                 controller: 'DeliverController',
-
                 controllerAs: 'model'
             })
             .otherwise({

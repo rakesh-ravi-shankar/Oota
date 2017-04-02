@@ -1,37 +1,53 @@
+<div class="modal fade" id="destinationModal">
+ <div class="modal-dialog" role="document">
+  <div class="modal-content">
+   <div class="modal-header">
+    <h5 class="modal-title">Enter your destination</h5>
+   </div>
+   <div class="modal-body">
+    <input type="text" class="form-control" placeholder="Snell Library" ng-model="destination">
+   </div>
+   <div class="modal-footer">
+    <button type="button" class="btn btn-primary" ng-click="model.saveDestination(destination)">Save changes</button>
+   </div>
+  </div>
+ </div>
+</div>
+
 <ng-map id="mapDemo"
         default-style="true"
-        center="{{model.origin}}"
+        center="current-location"
         draggable="true"
         zoom="15">
 
 
 
-
- <marker id="event-location"
-                  position="{{model.origin}}"
-                  on-click="model.showInfoWindow(model.origin)">
- </marker>
-
- <marker id="event-location"
-         position="250 Huntington, Boston, MA"
+ <marker id="start"
+         icon="{{model.startIcon}}"
+         position="current-location"
          on-click="model.showInfoWindow()">
  </marker>
 
- <marker id="event-location"
+ <marker id="destination"
          position="{{model.destination}}"
          on-click="model.showInfoWindow()">
  </marker>
 
 
- <marker id="event-location"
-         position="current-location"
+ <marker ng-repeat="pickup in model.waypoints"
+         icon="{{model.waypointIcon}}"
+         position="{{pickup.location}}"
          on-click="model.showInfoWindow()">
  </marker>
 
 
+
+
+
  <info-window id="event-location-info">
      <div ng-non-bindable>
-      {{model.position}}
+      <p>Restaurant:<p/>
+      <a href="" class="btn btn-primary btn-sm">Pick-up Order</a>
      </div>
  </info-window>
 
@@ -41,12 +57,15 @@
          panel=""
          avoid-ferries="true"
          travel-mode="WALKING"
-         waypoints="{{model.waypoints}}"
-         origin="179 Northampton, Boston, MA"
-         destination="271 Huntington, Boston, MA"
-         suppress-markers="true"
-         >
-
+         waypoints="{{model.selectedWaypoint}}"
+         origin="current-location"
+         destination="{{model.destination}}"
+         suppress-markers="true">
  </directions>
 
 </ng-map>
+
+<div class="container">
+ <h1>{{model.restaurantName}}</h1>
+</div>
+

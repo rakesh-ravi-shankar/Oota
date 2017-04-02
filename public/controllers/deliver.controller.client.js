@@ -8,9 +8,37 @@
 
     function DeliverController(NgMap, $window) {
         var vm = this;
-        vm.origin = "179 Northampton, Boston, MA";
-        vm.destination = "271 Huntington, Boston, MA";
-        vm.waypoints = [];
+
+        $(document).ready(function() {
+            $("#destinationModal").modal({backdrop: 'static', keyboard: true});
+            $("#destinationModal").modal("show")
+        });
+
+        vm.saveDestination = function(dest) {
+            console.log(dest);
+            vm.destination = dest;
+            $("#destinationModal").modal("hide");
+        };
+
+
+        vm.destination = "";
+        vm.waypoints = [{location:"250 Huntington, Boston, MA"}, {location:"Symphony, Boston, MA"}, {location:"179 Northampton st, Boston, MA"}];
+        vm.selectedWaypoint = [];
+
+
+        $window.navigator.geolocation.getCurrentPosition(function() {
+            vm.startIcon = {
+                scaledSize: [32, 32],
+                url: "img/startIcon.png"
+            };
+            vm.waypointIcon = {
+                scaledSize: [32, 32],
+                url: "img/waypointIcon.png"
+            };
+        });
+
+
+
 
         NgMap.getMap('mapDemo')
             .then(function(map) {
@@ -18,21 +46,14 @@
             });
 
         vm.showInfoWindow = function(pos) {
-            vm.waypoints = [{location:"250 Huntington, Boston, MA"}];
-            vm.position = pos;
+            vm.selectedWaypoint = [{
+                location: new google.maps.LatLng(pos.latLng.lat(), pos.latLng.lng()),
+                stopover: true
+            }];
             vm.map.showInfoWindow('event-location-info', this);
+            vm.restaurantName = "Pho & I"
         };
 
-
-
-        $window.navigator.geolocation.getCurrentPosition(function(position) {
-            console.log(position)
-        });
-
-
-
-
     }
-
 
 })();
