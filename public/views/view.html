@@ -18,30 +18,33 @@
             </div>
         </div>
     </div>
-    <div class="row" ng-show="model.menu">
-        <!--{{model.menu}}-->
-        <table id="countTable" class="table table-striped">
-            <tbody ng-repeat="category in model.menu.data">
-            <tr>
-                <th  >{{category.name}}</th>
-            </tr>
-            <tr>
-                <th>Name </th>
-                <th>Price</th>
-                <th>QTY</th>
-            </tr>
-            <tr ng-repeat="order in category.items">
-                <td>{{order.name}}</td>
-                <td>{{order.basePrice}}</td>
 
-                <td><a ng-click="model.addOrder({{order.name}},{{order.basePrice}})"
-                       class="btn btn-default" type="button">
-                    <span class=" glyphicon glyphicon-plus"></span>
-                </a></td>
+    <!--<div class="row" ng-show="model.restaurants">-->
 
-            </tr>
-            <tr><td></td><td></td></tr>
-            </tbody>
-        </table>
-    </div>
+        <!--<ul ng-repeat="res in model.restaurants.data.restaurants">-->
+            <!--<img src="{{res.logoUrl}}">-->
+        <!--</ul>-->
+    <!--<div>-->
+
+
+        <div class="card-group" style="display: flex;" ng-show="model.restaurants">
+            <div class="row">
+            <div class="card col-lg-6 col-sm-12" style="border:1px solid;padding:3%" ng-repeat="res in model.restaurants.data.restaurants">
+                <img class="card-img-top" src="{{res.logoUrl}}" alt="Card image cap">
+                <div class="card-block">
+                    <h4 class="card-title">{{res.name}}</h4>
+                    <p class="card-text">
+                        <button class="btn btn-block btn-info"
+                                ng-click="model.searchMenu(res.apiKey)">
+                            MENU</button>
+                    </p>
+
+                </div>
+            </div>
+            </div>
+
+        </div>
+
+
+
 </div>

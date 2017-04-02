@@ -7,10 +7,22 @@
         .controller("EatinController", EatinController)
 
 
-    function EatinController($routeParams,$location,EatinService) {
+    function EatinController($routeParams,$window,$location,EatinService) {
 
         vm=this;
         function init() {
+            $window.navigator.geolocation.getCurrentPosition(function(position) {
+                       // console.log(position.coords.latitude);
+                        EatinService
+                            .searchRestaurantByLocation(position.coords.latitude,position.coords.longitude)
+                            .then(function (res) {
+                                vm.restaurants=res;
+
+                            });
+
+
+
+            })
 
 
         }
@@ -32,15 +44,12 @@
                         });
 
                 });
-            EatinService
-                .addOrder(name,qty)
-                .then(function(response) {
-
-
-
-                });
         }
 
+        vm.searchMenu=function (res) {
+            $location.url("/view-menu/"+res);
+
+        }
 
 
     }
