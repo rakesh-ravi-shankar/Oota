@@ -18,11 +18,15 @@
             <td><a ng-click="model.addOrder({{order.name}},{{order.basePrice}})"
                    class="btn btn-default" type="button">
                 <span class=" glyphicon glyphicon-plus"></span>
-            </a></td>
-
+            </a>
+            </td>
         </tr>
         <tr><td></td><td></td></tr>
         </tbody>
     </table>
 </div>
+    <a type="button" class="btn btn-primary bmd-btn-fab" ng-click="model.checkout()">
+        <i class="material-icons">grade</i>
+    </a>
+
 </div>

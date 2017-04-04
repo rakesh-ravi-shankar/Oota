@@ -19,7 +19,6 @@
             console.log(lon);
             var url = "https://api.eatstreet.com/publicapi/v1/restaurant/search?latitude="+lat+"&longitude="+lon+"&method=both&access-token=9519d5bba99b4fc1";
             return $http.get(url);
-            return $http.get(url);
         }
 
 

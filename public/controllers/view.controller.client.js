@@ -34,7 +34,6 @@
             EatinService
                 .searchRestaurant(res,loc)
                 .then(function(response) {
-
                     EatinService
                         .searchMenu(response.data.restaurants[0].apiKey)
                         .then(function (menu) {
