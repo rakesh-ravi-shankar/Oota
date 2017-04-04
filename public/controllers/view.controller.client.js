@@ -33,19 +33,19 @@
                 .searchRestaurant(res,loc)
                 .then(function(response) {
                         vm.restaurants=response;
-                    // EatinService
-                    //     .searchMenu(response.data.restaurants[0].apiKey)
-                    //     .then(function (menu) {
-                    //         vm.menu=menu;
-                    //         console.log(menu);
-                    //
-                    //     });
 
                 });
         }
 
         vm.searchMenu=function (res) {
-            $location.url("/view-menu/"+res);
+
+            EatinService.saveResDetails(res);
+
+                    $location.url("/view-menu/"+res.apiKey);
+
+
+
+
 
         }
 

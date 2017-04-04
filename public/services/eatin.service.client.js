@@ -5,11 +5,13 @@
 
     function EatinService($http) {
 
+        var restaurantdetails;
         var api = {
             "searchMenu": searchMenu,
             "searchRestaurant":searchRestaurant,
-            "addOrder":addOrder,
-            "searchRestaurantByLocation":searchRestaurantByLocation
+            "searchRestaurantByLocation":searchRestaurantByLocation,
+            "saveResDetails":saveResDetails,
+            "getResDetails":getResDetails
         };
         return api;
 
@@ -32,14 +34,19 @@
         }
 
         function searchMenu(apikey) {
-
+            console.log(restaurantdetails);
             var res = encodeURI(apikey);
             var url = "https://api.eatstreet.com/publicapi/v1/restaurant/"+res+"/menu?includeCustomizations=false&access-token=9519d5bba99b4fc1";
             return $http.get(url);
         }
         
-        function addOrder() {
-            
+        function saveResDetails(restaurant) {
+           restaurantdetails =restaurant;
+            return true;
+        }
+
+        function getResDetails() {
+          return  restaurantdetails;
         }
 
 

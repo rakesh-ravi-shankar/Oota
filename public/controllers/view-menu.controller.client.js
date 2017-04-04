@@ -11,6 +11,7 @@
 
         vm=this;
         function init() {
+
             var res=$routeParams['resid'];
             EatinService
                 .searchMenu(res)
@@ -18,11 +19,14 @@
                     vm.menu=menu;
 
 
-
                 });
+
+            vm.res_details=EatinService.getResDetails();
+
 
         }
         init();
+
 
 
 

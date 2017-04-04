@@ -1,8 +1,10 @@
+
+
 <div class="container">
 <div class="row" ng-show="model.menu">
-
     <div style="margin-top:1px" ng-repeat="category in model.menu.data">
-        <button type="button" class="btn btn-info btn-large btn-block" data-toggle="collapse" data-target="#demo{{$index}}">
+        <button type="button" class="btn btn-info btn-large btn-block"
+                data-toggle="collapse" data-target="#demo{{$index}}">
             {{category.name}}</button>
         <div id="demo{{$index}}" class="collapse">
             <table class="table table-striped">
@@ -19,11 +21,21 @@
                 <td>{{order.name}}</td>
                 <td>{{order.basePrice}}</td>
 
-                <td><a ng-click="model.addOrder({{order.name}},{{order.basePrice}})"
-                class="btn btn-default" type="button">
+                <td>
+                    <a class="btn btn-default"
+                       ng-model="numLimit"
+                       ng-click="count = count+1"
+                       ng-init="count = 0"
+                       type="button">
                 <span class=" glyphicon glyphicon-plus"></span>
-                </a></td>
-
+                </a>
+                    {{count | limitTo : 6}}
+                        <a class="btn btn-default"
+                           ng-click="count = count-1"
+                           type="button">
+                           <span class=" glyphicon glyphicon-minus"></span>
+                        </a>
+                    </td>
                 </tr>
                 </tbody>
 
@@ -31,29 +43,6 @@
         </div>
     </div>
 
-    <!--<table id="countTable" class="table table-striped">-->
-        <!--<tbody ng-repeat="category in model.menu.data">-->
-        <!--<tr>-->
-            <!--<th  >{{category.name}}</th>-->
-        <!--</tr>-->
-        <!--<tr>-->
-            <!--<th>Name </th>-->
-            <!--<th>Price</th>-->
-            <!--<th>QTY</th>-->
-        <!--</tr>-->
-        <!--<tr ng-repeat="order in category.items">-->
-            <!--<td>{{order.name}}</td>-->
-            <!--<td>{{order.basePrice}}</td>-->
-
-            <!--<td><a ng-click="model.addOrder({{order.name}},{{order.basePrice}})"-->
-                   <!--class="btn btn-default" type="button">-->
-                <!--<span class=" glyphicon glyphicon-plus"></span>-->
-            <!--</a></td>-->
-
-        <!--</tr>-->
-        <!--<tr><td></td><td></td></tr>-->
-        <!--</tbody>-->
-    <!--</table>-->
 </div>
 </div>
 
