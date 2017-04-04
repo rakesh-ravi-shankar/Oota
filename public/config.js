@@ -6,6 +6,16 @@
 
 	function configuration($routeProvider) {
 		$routeProvider
+            .when("/homePage", {
+                templateUrl: 'views/homePage.view.client.html',
+                controller: 'HomePageController',
+                controllerAs: 'model'
+            })
+            .when("/user/:uid/restaurant/:resid/order", {
+                templateUrl: 'views/myOrders.view.client.html',
+                controller: 'OrderController',
+                controllerAs: 'model'
+            })
             .when("/login", {
                 templateUrl: 'views/login.view.client.html',
                 controller: 'LoginController',

@@ -17,36 +17,32 @@
                             .searchRestaurantByLocation(position.coords.latitude,position.coords.longitude)
                             .then(function (res) {
                                 vm.restaurants=res;
-
                             });
-
             })
-
-
         }
         init();
 
 
         vm.searchRestaurant = function(res,loc) {
-
             EatinService
                 .searchRestaurant(res,loc)
                 .then(function(response) {
+                    EatinService
+                        .searchMenu(response.data.restaurants[0].apiKey)
+                        .then(function (menu) {
+                            vm.menu=menu;
+                            console.log(menu);
+
+                        });
                         vm.restaurants=response;
+
 
                 });
         }
 
         vm.searchMenu=function (res) {
-
             EatinService.saveResDetails(res);
-
                     $location.url("/view-menu/"+res.apiKey);
-
-
-
-
-
         }
 
 

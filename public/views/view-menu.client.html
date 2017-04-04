@@ -1,49 +1,43 @@
-
-
 <div class="container">
-<div class="row" ng-show="model.menu">
-    <div style="margin-top:1px" ng-repeat="category in model.menu.data">
-        <button type="button" class="btn btn-info btn-large btn-block"
-                data-toggle="collapse" data-target="#demo{{$index}}">
-            {{category.name}}</button>
-        <div id="demo{{$index}}" class="collapse">
-            <table class="table table-striped">
-                <tbody>
-                <col width="70%" />
-                <col width="15%" />
-                <col width="15%" />
-                <tr>
-                <th>Name </th>
-                <th>Price</th>
-                <th>QTY</th>
-                </tr>
-                <tr ng-repeat="order in category.items">
-                <td>{{order.name}}</td>
-                <td>{{order.basePrice}}</td>
+    <div class="row" ng-show="model.menu">
+        <div style="margin-top:1px" ng-repeat="category in model.menu.data">
+            <button type="button" class="btn btn-info btn-large btn-block"
+                    data-toggle="collapse" data-target="#demo{{$index}}">
+                {{category.name}}</button>
+            <div id="demo{{$index}}" class="collapse">
+                <table class="table table-striped">
+                    <tbody>
+                    <col width="70%" />
+                    <col width="15%" />
+                    <col width="15%" />
+                    <tr>
+                        <th>Name </th>
+                        <th>Price</th>
+                        <th>QTY</th>
+                    </tr>
+                    <tr ng-repeat="order in category.items">
+                        <td>{{order.name}}</td>
+                        <td>{{order.basePrice}}</td>
+                        <td>
+                            <a class="btn btn-default"
+                               ng-click="count = count+1"
+                               ng-init="count = 0"
+                               type="button">
+                                <span class=" glyphicon glyphicon-plus"></span>
+                            </a>
+                            {{count}}
+                            <a class="btn btn-default"
+                               ng-click="count = count-1"
+                               type="button">
+                                <span class=" glyphicon glyphicon-minus"></span>
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
 
-                <td>
-                    <a class="btn btn-default"
-                       ng-model="numLimit"
-                       ng-click="count = count+1"
-                       ng-init="count = 0"
-                       type="button">
-                <span class=" glyphicon glyphicon-plus"></span>
-                </a>
-                    {{count | limitTo : 6}}
-                        <a class="btn btn-default"
-                           ng-click="count = count-1"
-                           type="button">
-                           <span class=" glyphicon glyphicon-minus"></span>
-                        </a>
-                    </td>
-                </tr>
-                </tbody>
-
-            </table>
+                </table>
+            </div>
         </div>
+
     </div>
-
 </div>
-</div>
-
-

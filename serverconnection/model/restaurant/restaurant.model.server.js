@@ -35,7 +35,7 @@ function createRestaurant(restaurant) {
 function findRestaurantById(restaurantId) {
     var deffered=q.defer();
     restaurantModel
-        .findById(restaurant,function (err,restaurant) {
+        .findById(restaurantId,function (err,restaurant) {
             if(err){
                 deffered.abort(err);
             }
