@@ -17,20 +17,13 @@
                             .searchRestaurantByLocation(position.coords.latitude,position.coords.longitude)
                             .then(function (res) {
                                 vm.restaurants=res;
-
                             });
-
-
-
             })
-
-
         }
         init();
 
 
         vm.searchRestaurant = function(res,loc) {
-
             EatinService
                 .searchRestaurant(res,loc)
                 .then(function(response) {
@@ -41,13 +34,15 @@
                             console.log(menu);
 
                         });
+                        vm.restaurants=response;
+
 
                 });
         }
 
         vm.searchMenu=function (res) {
-            $location.url("/view-menu/"+res);
-
+            EatinService.saveResDetails(res);
+                    $location.url("/view-menu/"+res.apiKey);
         }
 
 

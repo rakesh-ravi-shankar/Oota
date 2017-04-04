@@ -11,20 +11,14 @@
                        placeholder="Restaurant Name"
                        class="form-control">
                 <span class="input-group-btn">
-                <a ng-click="model.searchRestaurant(searchRes,searchLoc)" class="btn btn-default" type="button">
+                <a ng-click="model.searchRestaurant(searchRes,searchLoc)"
+                   class="btn btn-default" type="button">
                     <span class="glyphicon glyphicon-search widget-class"></span>
                 </a>
                 </span>
             </div>
         </div>
     </div>
-
-    <!--<div class="row" ng-show="model.restaurants">-->
-
-        <!--<ul ng-repeat="res in model.restaurants.data.restaurants">-->
-            <!--<img src="{{res.logoUrl}}">-->
-        <!--</ul>-->
-    <!--<div>-->
 
 
         <div class="card-group" style="display: flex;" ng-show="model.restaurants">
@@ -35,7 +29,7 @@
                     <h4 class="card-title">{{res.name}}</h4>
                     <p class="card-text">
                         <button class="btn btn-block btn-info"
-                                ng-click="model.searchMenu(res.apiKey)">
+                                ng-click="model.searchMenu(res)">
                             MENU</button>
                     </p>
 

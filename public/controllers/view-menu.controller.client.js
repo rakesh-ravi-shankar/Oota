@@ -17,12 +17,19 @@
         vm.checkout = checkout;
 
         function init() {
+
             var res=$routeParams['resid'];
             EatinService
                 .searchMenu(res)
                 .then(function (menu) {
                     vm.menu=menu;
                         });
+
+
+
+
+            vm.res_details=EatinService.getResDetails();
+
 
         }
         init();
@@ -36,6 +43,7 @@
             console.log("checkout");
             $location.url('/user/58e07aa2c81b421eb099875a/restaurant/2a670fba22c2b580144247b91fbcb2f37ddc2eba8dfab49d/order');
         }
+
 
     }
 })();
