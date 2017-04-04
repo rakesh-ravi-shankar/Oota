@@ -1,3 +1,37 @@
-<div>
-    <h1> MY ORDERS</h1>
+<div class="container">
+    <h1>{{model.restaurantName}}</h1>
+    <h3>Orders:</h3>
+
+    <table class="table table-striped">
+        <tbody>
+        <col width="70%" />
+        <col width="15%" />
+        <col width="15%" />
+        <tr>
+            <th>Name </th>
+            <th>Price</th>
+            <th>QTY</th>
+        </tr>
+        <tr ng-repeat="order in model.orders">
+            <td>{{order.dish}}</td>
+            <td>{{order.price}}</td>
+            <td>
+                <a class="btn btn-default"
+                   ng-click="count = model.updateOrder(count+1, order.name, order.basePrice)"
+                   ng-init="count = order.count"
+                   type="button">
+                    <span class=" glyphicon glyphicon-plus"></span>
+                </a>
+                {{count}}
+                <a class="btn btn-default"
+                   ng-click="count = model.updateOrder(count-1, order.name, order.basePrice)"
+                   type="button">
+                    <span class=" glyphicon glyphicon-minus"></span>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+
+    </table>
+
 </div>

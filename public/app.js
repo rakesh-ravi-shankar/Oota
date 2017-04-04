@@ -1,4 +1,4 @@
 (function() {
 	angular
-		.module("Oota", ["ngRoute", "ngMap"]);
+		.module("Oota", ["ngRoute", "ngMap", "LocalStorageModule"]);
 	})();

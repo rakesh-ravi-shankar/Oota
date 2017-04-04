@@ -6,7 +6,7 @@
         .module("Oota")
         .controller("LoginController", LoginController);
 
-    function LoginController($location) {
+    function LoginController(UserService, $location) {
         var vm = this;
         vm.login = login;
 

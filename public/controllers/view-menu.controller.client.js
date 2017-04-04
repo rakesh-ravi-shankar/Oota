@@ -4,40 +4,63 @@
 (function () {
     angular
         .module("Oota")
-        .controller("MenuController", MenuController)
+        .controller("MenuController", MenuController);
 
 
-    function MenuController($routeParams,EatinService,$location) {
-
+    function MenuController($routeParams, EatinService, $location, localStorageService) {
         vm=this;
-
-        vm.restuarantId = $routeParams['resid'];
-        vm.userId = $routeParams['uid'];
-        vm.addOrder = addOrder;
+        vm.updateOrder = updateOrder;
         vm.checkout = checkout;
+        vm.initializeCount = initializeCount;
 
         function init() {
-
-            var res=$routeParams['resid'];
+            vm.restaurantId = $routeParams['resid'];
+            vm.userId = $routeParams['uid'];
+            var res = $routeParams['resid'];
             EatinService
                 .searchMenu(res)
                 .then(function (menu) {
                     vm.menu=menu;
                         });
-
-
-
-
-            vm.res_details=EatinService.getResDetails();
-
-
+            vm.res_details = EatinService.getResDetails();
+            localStorageService.set("restaurantName", vm.res_details.name);
+            var restaurantAddress = vm.res_details.streetAddress + ", " + vm.res_details.city + ", " + vm.res_details.state;
+            localStorageService.set("pickupLoc", restaurantAddress);
         }
         init();
 
-        function addOrder(name,price)
-        {
 
+        function updateOrder(count, dish, price)
+        {
+            if (count < 0)
+            {
+                localStorageService.remove(dish);
+                return 0;
+            }
+            if (localStorageService.get(dish) == null)
+            {
+                localStorageService.set(dish, {"price": price, "count": count});
+            }
+            else
+            {
+                localStorageService.set(dish, {"price": price, "count": count});
+            }
+            return count;
         }
+
+
+        function initializeCount(dish)
+        {
+            if (localStorageService.get(dish) == null)
+            {
+                return 0;
+            }
+            else {
+                return localStorageService.get(dish).count;
+            }
+        }
+
+
         function checkout()
         {
             console.log("checkout");

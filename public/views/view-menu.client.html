@@ -20,14 +20,14 @@
                         <td>{{order.basePrice}}</td>
                         <td>
                             <a class="btn btn-default"
-                               ng-click="count = count+1"
-                               ng-init="count = 0"
+                               ng-click="count = model.updateOrder(count+1, order.name, order.basePrice)"
+                               ng-init="count = model.initializeCount(order.name)"
                                type="button">
                                 <span class=" glyphicon glyphicon-plus"></span>
                             </a>
                             {{count}}
                             <a class="btn btn-default"
-                               ng-click="count = count-1"
+                               ng-click="count = model.updateOrder(count-1, order.name, order.basePrice)"
                                type="button">
                                 <span class=" glyphicon glyphicon-minus"></span>
                             </a>
@@ -40,4 +40,5 @@
         </div>
 
     </div>
+    <a class="btn btn-primary" href="#/user/{{model.userId}}/restaurant/{{model.restaurantId}}/order">Checkout</a>
 </div>
