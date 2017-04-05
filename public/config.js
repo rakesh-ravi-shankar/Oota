@@ -11,35 +11,34 @@
                 controller: 'HomePageController',
                 controllerAs: 'model'
             })
-            .when("/user/:uid/restaurant/:resid/order", {
-                templateUrl: 'views/myOrders.view.client.html',
-                controller: 'OrderController',
+            .when("/restaurantList", {
+                templateUrl: 'views/restaurantList.view.client.html',
+                controller: 'RestaurantListController',
                 controllerAs: 'model'
             })
-            .when("/login", {
-                templateUrl: 'views/login.view.client.html',
-                controller: 'LoginController',
+            .when("/restaurantList/:resid/restaurantMenu", {
+                templateUrl: 'views/menuList.view.client.html',
+                controller: 'MenuListController',
                 controllerAs: 'model'
             })
-            .when("/registerUser", {
-                templateUrl: 'views/registerUser.view.client.html',
-                controller: 'RegisterUserController',
+            .when("/restaurantList/:resid/restaurantMenu/:uid/order", {
+                templateUrl: 'views/reviewOrders.view.client.html',
+                controller: 'ReviewOrderController',
                 controllerAs: 'model'
             })
+            // .when("/login", {
+            //     templateUrl: 'views/login.view.client.html',
+            //     controller: 'LoginController',
+            //     controllerAs: 'model'
+            // })
+            // .when("/registerUser", {
+            //     templateUrl: 'views/registerUser.view.client.html',
+            //     controller: 'RegisterUserController',
+            //     controllerAs: 'model'
+            // })
             .when("/registerRestaurant", {
                 templateUrl: 'views/registerRestaurant.view.client.html',
                 controller: 'RegisterRestaurantController',
-                controllerAs: 'model'
-            })
-
-            .when("/user/:uid", {
-                templateUrl: 'views/view.html',
-                controller: 'EatinController',
-                controllerAs: 'model'
-            })
-            .when("/view-menu/:resid", {
-                templateUrl: 'views/view-menu.client.html',
-                controller: 'MenuController',
                 controllerAs: 'model'
             })
             .when("/deliver", {

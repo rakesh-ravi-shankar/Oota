@@ -4,16 +4,15 @@
 (function () {
     angular
         .module("Oota")
-        .controller("EatinController", EatinController)
+        .controller("RestaurantListController", RestaurantListController);
 
 
-    function EatinController($routeParams,$window,$location,EatinService) {
-
-        vm=this;
+    function RestaurantListController($routeParams, $window, $location, RestaurantListService) {
+        var vm = this;
         function init() {
             $window.navigator.geolocation.getCurrentPosition(function(position) {
                        // console.log(position.coords.latitude);
-                        EatinService
+                RestaurantListService
                             .searchRestaurantByLocation(position.coords.latitude,position.coords.longitude)
                             .then(function (res) {
                                 vm.restaurants=res;
@@ -24,10 +23,10 @@
 
 
         vm.searchRestaurant = function(res,loc) {
-            EatinService
+            RestaurantListService
                 .searchRestaurant(res,loc)
                 .then(function(response) {
-                    EatinService
+                    RestaurantListService
                         .searchMenu(response.data.restaurants[0].apiKey)
                         .then(function (menu) {
                             vm.menu=menu;
@@ -38,11 +37,11 @@
 
 
                 });
-        }
+        };
 
         vm.searchMenu=function (res) {
-            EatinService.saveResDetails(res);
-                    $location.url("/view-menu/"+res.apiKey);
+            RestaurantListService.saveResDetails(res);
+                    $location.url("/restaurantList/" + res.apiKey + "/restaurantMenu");
         }
 
 

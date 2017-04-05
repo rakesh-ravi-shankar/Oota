@@ -4,11 +4,11 @@
 (function () {
     angular
         .module("Oota")
-        .controller("MenuController", MenuController);
+        .controller("MenuListController", MenuListController);
 
 
-    function MenuController($routeParams, EatinService, $location, localStorageService) {
-        vm=this;
+    function MenuListController($routeParams, RestaurantListService, $location, localStorageService) {
+        var vm = this;
         vm.updateOrder = updateOrder;
         vm.checkout = checkout;
         vm.initializeCount = initializeCount;
@@ -17,15 +17,20 @@
             vm.restaurantId = $routeParams['resid'];
             vm.userId = $routeParams['uid'];
             var res = $routeParams['resid'];
-            EatinService
+
+            RestaurantListService
                 .searchMenu(res)
                 .then(function (menu) {
                     vm.menu=menu;
                         });
-            vm.res_details = EatinService.getResDetails();
-            localStorageService.set("restaurantName", vm.res_details.name);
-            var restaurantAddress = vm.res_details.streetAddress + ", " + vm.res_details.city + ", " + vm.res_details.state;
-            localStorageService.set("pickupLoc", restaurantAddress);
+
+            vm.res_details = RestaurantListService.getResDetails();
+            if (vm.res_details != undefined)
+            {
+                localStorageService.set("restaurantName", vm.res_details.name);
+                var restaurantAddress = vm.res_details.streetAddress + ", " + vm.res_details.city + ", " + vm.res_details.state;
+                localStorageService.set("pickupLoc", restaurantAddress);
+            }
         }
         init();
 
@@ -64,7 +69,7 @@
         function checkout()
         {
             console.log("checkout");
-            $location.url('/user/58e07aa2c81b421eb099875a/restaurant/2a670fba22c2b580144247b91fbcb2f37ddc2eba8dfab49d/order');
+            $location.url("/restaurantList/" + vm.restaurantId + "/restaurantMenu" + "/58e30ad972fddf087761e437/order");
         }
 
 

@@ -2,16 +2,17 @@
 (function() {
     angular
         .module("Oota")
-        .controller("OrderController", OrderController);
+        .controller("ReviewOrderController", ReviewOrderController);
 
-    function OrderController($location, $routeParams, localStorageService) {
+    function ReviewOrderController($location, $routeParams, localStorageService) {
         var vm = this;
-        vm.updateCount = updateCount;
+        vm.updateOrder = updateOrder;
+        vm.placeOrder = placeOrder;
 
         function init() {
             vm.restuarantId = $routeParams['resid'];
             vm.userId = $routeParams['uid'];
-            var restaurantLoc = localStorageService.get("pickupLoc");
+            vm.restaurantLoc = localStorageService.get("pickupLoc");
             vm.restaurantName = localStorageService.get("restaurantName");
             localStorageService.remove("restaurantName");
             localStorageService.remove("pickupLoc");
@@ -22,6 +23,8 @@
             });
 
         }
+
+        init();
 
         function updateOrder(count, dish, price)
         {
@@ -41,7 +44,14 @@
             return count;
         }
 
-        init();
+
+        function placeOrder() {
+            // vm.orders
+            // vm.restaurantName
+            // vm.restaurantLoc
+        }
+
+
 
     }
 })();

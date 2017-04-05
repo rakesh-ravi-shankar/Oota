@@ -1,9 +1,9 @@
 (function () {
     angular
         .module("Oota")
-        .factory("EatinService",EatinService);
+        .factory("RestaurantListService",RestaurantListService);
 
-    function EatinService($http) {
+    function RestaurantListService($http) {
 
         var restaurantdetails;
         var api = {
