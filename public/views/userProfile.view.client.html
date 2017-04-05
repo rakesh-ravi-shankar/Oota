@@ -36,17 +36,29 @@
     </div>
 </nav>
 
-<div ng-controller="" class="container-fluid col-md-4 col-sm-4 hidden-xs vertical-line web-left-pane" >
+<div class="container-fluid col-md-4 col-sm-4 hidden-xs vertical-line web-left-pane" >
 
-    <button>TRACK ORDER</button>
-    <button>ORDER HISTORY</button>
-    <button>COMMENTS</button>
+    <button ng-click="model.updateCurrentSelection('trackorder')">TRACK ORDER</button>
+    <button ng-click="model.updateCurrentSelection('orderhistory')">ORDER HISTORY</button>
+    <button ng-click="model.updateCurrentSelection('comments')">COMMENTS</button>
 
 </div>
 
-<div class="container-fluid col-md-8 col-sm-8 col-xs-12 web-right-pane">
+<div ng-switch="model.currentSelection" class="container-fluid col-md-8 col-sm-8 col-xs-12 web-right-pane">
 
+    <div ng-switch-when="trackorder">
+       TRACKK
+    </div>
+    <div ng-switch-when="orderhistory">
+     works
+    </div>
+    <div ng-switch-when="comments">
+        <div ng-repeat="comment in model.comments.data">
+            {{comment.feedback_giver_name}}
+            {{comment.comment}}
 
+        </div>
+           </div>
 
 </div>
 
