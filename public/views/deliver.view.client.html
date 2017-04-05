@@ -20,8 +20,6 @@
         draggable="true"
         zoom="15">
 
-
-
  <marker id="start"
          icon="{{model.startIcon}}"
          position="current-location"
@@ -33,15 +31,15 @@
          on-click="model.showInfoWindow()">
  </marker>
 
-
  <marker ng-repeat="pickup in model.waypoints"
          icon="{{model.waypointIcon}}"
-         position="{{pickup.location}}"
-         on-click="model.showInfoWindow()">
+         position="{{pickup.pickupLoc}}"
+         on-click="model.showInfoWindow({{pickup}})">
  </marker>
 
-
-
+ <marker position="{{model.dropOff}}"
+         on-click="model.showInfoWindow()">
+ </marker>
 
 
  <info-window id="event-location-info">
@@ -53,6 +51,7 @@
 
 
  <directions
+         polyline-options='{strokeColor: "pink"}'
          draggable="true"
          panel=""
          avoid-ferries="true"
@@ -62,6 +61,7 @@
          destination="{{model.destination}}"
          suppress-markers="true">
  </directions>
+
 
 </ng-map>
 

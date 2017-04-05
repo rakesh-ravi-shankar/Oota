@@ -22,7 +22,8 @@
 
 
         vm.destination = "";
-        vm.waypoints = [{location:"250 Huntington, Boston, MA"}, {location:"Symphony, Boston, MA"}, {location:"179 Northampton st, Boston, MA"}];
+        vm.waypoints = [{pickupLoc:"250 Huntington, Boston, MA", deliveryLoc: "300 Huntington, Boston, MA"},
+                        {pickupLoc:"179 Northampton st, Boston, MA", deliveryLoc: "185 Northampton st, Boston, MA"}];
         vm.selectedWaypoint = [];
 
 
@@ -39,20 +40,21 @@
         });
 
 
-
-
         NgMap.getMap('mapDemo')
             .then(function(map) {
                 vm.map = map;
             });
 
-        vm.showInfoWindow = function(pos) {
-            vm.selectedWaypoint = [{
-                location: new google.maps.LatLng(pos.latLng.lat(), pos.latLng.lng()),
-                stopover: true
-            }];
-            vm.map.showInfoWindow('event-location-info', this);
-            vm.restaurantName = "Pho & I"
+        vm.showInfoWindow = function(event, pos) {
+            if (pos)
+            {
+                vm.selectedWaypoint = [];
+                vm.selectedWaypoint.push({location: pos.pickupLoc});
+                vm.selectedWaypoint.push({location: pos.deliveryLoc});
+                vm.dropOff = pos.deliveryLoc;
+                vm.map.showInfoWindow('event-location-info', this);
+                vm.restaurantName = "Restaurant Name"
+            }
         };
 
     }
