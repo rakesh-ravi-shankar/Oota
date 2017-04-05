@@ -10,7 +10,8 @@ var orderSchema= mongoose.Schema({
     pickupLoc:String,
     deliveryStatus:{type: String, enum: ['ORDERED','INCART','CANCELLED','DELIVERED'],default:'ORDERED'},
     items:[{type:String}],
-    prices:[{type:Number}]
+    prices:[{type:Number}],
+    qty:[{type:Number}]
 },{collection:'order.project.collection'});
 
 
