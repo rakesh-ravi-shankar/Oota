@@ -73,3 +73,45 @@ body {
 #map {
 	height: 100%;
 }
+
+.vertical-line{
+	/* Use only border style */
+
+	border-right: 1px inset;
+	/* This is default border style for <hr> tag */
+}
+.web-left-pane{
+	/*position: absolute;*/
+	/*top:0px;*/
+	/*bottom: 0px;*/
+	/*margin-top: 60px;*/
+	/*overflow: auto;*/
+
+
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	margin-top: 50px;
+	margin-bottom: 50px;
+	padding-top: 15px;
+	overflow: auto;
+}
+.web-right-pane{
+	/*position: absolute;*/
+	/*top:0px;*/
+	/*bottom: 0px;*/
+	/*margin-top: 60px;*/
+	/*right: 0px;*/
+	/*overflow-y: auto;*/
+
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	padding-top: 15px;
+	bottom: 0px;
+	margin-bottom: 52px;
+	margin-top: 50px;
+	padding-left: 15px;
+	padding-right: 15px;
+	overflow-y: auto;
+}
