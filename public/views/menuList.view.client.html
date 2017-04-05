@@ -1,3 +1,22 @@
+<div class="modal fade" id="validateUserModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Login/Register</h5>
+            </div>
+            <div class="modal-body">
+                <label>Username:</label>
+                <input type="text" class="form-control" placeholder="username" ng-model="user.username">
+                <label>Password:</label>
+                <input type="text" class="form-control" placeholder="password" ng-model="user.password">
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-primary" ng-click="model.loginUser(user)">Login</a>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="container">
     <div class="row" ng-show="model.menu">
         <div style="margin-top:1px" ng-repeat="category in model.menu.data">
@@ -38,7 +57,7 @@
                 </table>
             </div>
         </div>
-
     </div>
     <a class="btn btn-primary" ng-click="model.checkout()">Checkout</a>
 </div>
+

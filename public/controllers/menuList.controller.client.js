@@ -7,11 +7,13 @@
         .controller("MenuListController", MenuListController);
 
 
-    function MenuListController($routeParams, RestaurantListService, $location, localStorageService) {
+    function MenuListController($routeParams, RestaurantListService, $location, localStorageService, UserService) {
         var vm = this;
         vm.updateOrder = updateOrder;
         vm.checkout = checkout;
         vm.initializeCount = initializeCount;
+        vm.loginUser = loginUser;
+        vm.registerUser = registerUser;
 
         function init() {
             vm.restaurantId = $routeParams['resid'];
@@ -66,11 +68,40 @@
         }
 
 
+        function loginUser(user)
+        {
+            UserService
+                .findUserByCredentials(user.username, user.password)
+                .success(function (loggedUser) {
+                    if(loggedUser)
+                    {
+                        $("#validateUserModal").modal("hide");
+                        $("body").removeClass("modal-open");
+                        $(".modal-backdrop").remove();
+                        $location.url("/restaurantList/" + vm.restaurantId + "/restaurantMenu/" + loggedUser._id + "/order");
+                    }
+                    else
+                    {
+                        vm.error="user not found";
+                    }
+            });
+        }
+
+
+        function registerUser()
+        {
+
+        }
+
+
         function checkout()
         {
             console.log("checkout");
-            $location.url("/restaurantList/" + vm.restaurantId + "/restaurantMenu" + "/58e30ad972fddf087761e437/order");
+            $("#validateUserModal").modal({backdrop: 'static', keyboard: true});
+            $("#validateUserModal").modal("show");
         }
+
+
 
 
     }

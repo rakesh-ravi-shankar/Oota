@@ -27,6 +27,7 @@
 
 
         $window.navigator.geolocation.getCurrentPosition(function() {
+            console.log("Fetching current location");
             vm.startIcon = {
                 scaledSize: [32, 32],
                 url: "img/startIcon.png"
