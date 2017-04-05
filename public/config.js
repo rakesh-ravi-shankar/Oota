@@ -45,7 +45,8 @@
             })
             .when("/userProfile", {
                 templateUrl: 'views/userProfile.view.client.html',
-
+                controller: 'userProfileController',
+                controllerAs: 'model'
             })
             .otherwise({
                 templateUrl: 'views/login.view.client.html',
