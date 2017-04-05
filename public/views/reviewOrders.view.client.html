@@ -17,14 +17,14 @@
             <td>{{order.price}}</td>
             <td>
                 <a class="btn btn-default"
-                   ng-click="count = model.updateOrder(count+1, order.name, order.basePrice)"
+                   ng-click="count = model.updateOrder(count+1, order.dish, order.price)"
                    ng-init="count = order.count"
                    type="button">
                     <span class=" glyphicon glyphicon-plus"></span>
                 </a>
                 {{count}}
                 <a class="btn btn-default"
-                   ng-click="count = model.updateOrder(count-1, order.name, order.basePrice)"
+                   ng-click="count = model.updateOrder(count-1, order.dish, order.price)"
                    type="button">
                     <span class=" glyphicon glyphicon-minus"></span>
                 </a>

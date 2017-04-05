@@ -21,14 +21,14 @@
             dishes.forEach(function (dish) {
                 vm.orders.push({"dish":dish, "price": localStorageService.get(dish).price, "count": localStorageService.get(dish).count});
             });
-
+            console.log(vm.orders);
         }
 
         init();
 
         function updateOrder(count, dish, price)
         {
-            if (count < 0)
+            if (count <= 0)
             {
                 localStorageService.remove(dish);
                 return 0;
