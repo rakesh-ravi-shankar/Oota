@@ -21,7 +21,7 @@
             dishes.forEach(function (dish) {
                 vm.orders.push({"dish":dish, "price": localStorageService.get(dish).price, "count": localStorageService.get(dish).count});
             });
-            console.log(vm.orders);
+            //console.log(vm.orders);
         }
 
         init();
@@ -46,9 +46,7 @@
 
 
         function placeOrder() {
-            // vm.orders
-            // vm.restaurantName
-            // vm.restaurantLoc
+            console.log("place order : " + vm.orders[0].dish + " " + vm.orders[0].count );
         }
 
 
