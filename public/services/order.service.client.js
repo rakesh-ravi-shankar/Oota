@@ -7,7 +7,7 @@
 
 
         var api={
-            //"createRestaurant":createRestaurant,
+            "createOrder":createOrder,
             // "findUserById":findUserById,
             //"findRestaurantByUsername":findRestaurantByUsername,
             //"findRestaurantByCredentials":findRestaurantByCredentials
@@ -16,9 +16,9 @@
             getCurrentAddress:getCurrentAddress
         };
         return api;
-/*
-        function createRestaurant(restaurant) {
-            return $http.post("/api/restaurant",restaurant);
+
+        function createOrder(order) {
+            return $http.post("/api/order",order);
         }
         //
         // function findUserById(userId) {
@@ -26,6 +26,7 @@
         //
         // }
         //
+        /*
         function findRestaurantByUsername(username) {
             return $http.get("/api/restaurant?username="+username);
 

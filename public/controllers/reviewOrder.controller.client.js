@@ -9,22 +9,22 @@
         vm.updateOrder = updateOrder;
         vm.placeOrder = placeOrder;
         vm.getCurrentAddress = getCurrentAddress;
-
+        vm.orders = [];
         function init() {
             vm.restuarantId = $routeParams['resid'];
             vm.userId = $routeParams['uid'];
-            vm.restaurantLoc = localStorageService.get("pickupLoc");
+            vm.pickupLoc = localStorageService.get("pickupLoc");
             vm.restaurantName = localStorageService.get("restaurantName");
             localStorageService.remove("restaurantName");
             localStorageService.remove("pickupLoc");
             var dishes = localStorageService.keys();
-            vm.orders = [];
+
             dishes.forEach(function (dish) {
                 vm.orders.push({"dish":dish, "price": localStorageService.get(dish).price, "count": localStorageService.get(dish).count});
             });
             localStorageService.set("restaurantName", vm.restaurantName);
             localStorageService.set("pickupLoc", vm.pickupLoc);
-            //console.log(vm.orders);
+            console.log("orders" + vm.orders);
         }
 
         init();
@@ -54,30 +54,32 @@
                     .getCurrentAddress(position.coords.latitude,position.coords.longitude)
                     .then(function (res) {
                         console.log(res);
-                        vm.currentAddress=res.data.results[0].formatted_address;
+                        vm.deliveryLoc=res.data.results[0].formatted_address;
                     });
                 console.log(position)})
         }
 
         function placeOrder() {
+            var orderItems = [];
+            var orderPrices = [];
+            var orderQtys = [];
+            vm.orders.forEach(function(orderItem){
+                orderItems.push(orderItem.dish);
+                orderPrices.push(orderItem.price);
+                orderQtys.push(orderItem.count);
+            });
 
-            // _orderer:{type: mongoose.Schema.Types.ObjectId, ref: 'UserModel'},
-            // restaurantName:String,
-            //     orderTime:{type: Date, default: Date.now},
-            // deliveryTime:Date,
-            //     _deliverer:{type: mongoose.Schema.Types.ObjectId, ref: 'UserModel'},
-            // deliveryLoc:String,
-            //     pickupLoc:String,
-            //     deliveryStatus:{type: String, enum: ['ORDERED','INCART','CANCELLED','DELIVERED'],default:'ORDERED'},
-            // items:[{type:String}],
-            //     prices:[{type:Number}],
-            //     qty:[{type:Number}]
-
-            var order = {   _orderer: vm.userId,
-                            restaurantName: vm.restaurantName
-
+            var order = {
+                _orderer: vm.userId,
+                restaurantName: vm.restaurantName,
+                deliveryLoc: vm.deliveryLoc,
+                pickupLoc: vm.restaurantLoc,
+                items:orderItems,
+                prices:orderPrices,
+                qty:orderQtys
             };
-            console.log("place order : " + vm.orders[0].dish + " " + vm.orders[0].count );
+            console.log("place order : " + order);
+            OrderService.createOrder(order);
         }
 
 
