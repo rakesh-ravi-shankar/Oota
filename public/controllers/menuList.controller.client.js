@@ -75,17 +75,18 @@
 
         function loginUser(user)
         {
+
             UserService
                 .findUserByCredentials(user.username, user.password)
                 .success(function (loggedUser) {
                     console.log(loggedUser);
                     if(loggedUser)
                     {
-                        console.log(loggedUser)
+                        console.log(loggedUser);
                         $("#validateUserModal").modal("hide");
                         $("body").removeClass("modal-open");
                         $(".modal-backdrop").remove();
-                        $location.url("/restaurantList/" + vm.restaurantId + "/restaurantMenu/" + loggedUser[0]._id + "/order");
+                        $location.url("/restaurantList/" + vm.restaurantId + "/restaurantMenu/" + loggedUser._id + "/order");
                     }
                     else
                     {

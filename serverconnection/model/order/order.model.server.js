@@ -83,13 +83,13 @@ function findActiveOrders() {
     return deffered.promise;
 }
 
-function updateOrder(order,orderId) {
+function updateOrder(order) {
 
     var deffered =q.defer();
     orderModel
         .update(
-            {_id: orderId },
-            {$set: order},function (err, order) {
+            {_id: order._id },
+            order, function (err, order) {
                 if(err) {
                     deffered.reject(err);
                 }

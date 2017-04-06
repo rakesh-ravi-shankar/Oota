@@ -37,10 +37,26 @@
 </nav>
 
 <div class="container-fluid col-md-4 col-sm-4 hidden-xs vertical-line web-left-pane" >
+        <div class="profile-edit-button">
+            <a href="#"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a>
+        </div>
+    <div class="row">
+            <div class="square">
+                <img src="../img/food.jpg" class="img-responsive img-circle content"/>
 
-    <button ng-click="model.updateCurrentSelection('trackorder')">TRACK ORDER</button>
-    <button ng-click="model.updateCurrentSelection('orderhistory')">ORDER HISTORY</button>
-    <button ng-click="model.updateCurrentSelection('comments')">COMMENTS</button>
+            </div>
+    </div>
+
+<h1 style="text-align: center">MONICA MALKANI</h1>
+<br><br>
+    <div class="container-fluid">
+       <h3><a  ng-click="model.updateCurrentSelection('trackorder')">TRACK ORDER</a></h3>
+        <h3><a ng-click="model.updateCurrentSelection('orderhistory')">ORDER HISTORY</a></h3>
+        <h3><a ng-click="model.updateCurrentSelection('comments')">COMMENTS</a></h3>
+    </div>
+</div>
+
+
 
 </div>
 
@@ -50,7 +66,10 @@
        TRACKK
     </div>
     <div ng-switch-when="orderhistory">
-     works
+        <div ng-repeat="order in model.oldorders">
+            {{order}}
+
+        </div>
     </div>
     <div ng-switch-when="comments">
         <div ng-repeat="comment in model.comments.data">
@@ -58,7 +77,8 @@
             {{comment.comment}}
 
         </div>
-           </div>
+    </div>
+
 
 </div>
 
