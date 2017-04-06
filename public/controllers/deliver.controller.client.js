@@ -8,6 +8,8 @@
 
     function DeliverController(NgMap, $window) {
         var vm = this;
+        vm.restaurantName = "";
+        vm.pickUpOrder = pickUpOrder;
 
         $(document).ready(function() {
             $("#destinationModal").modal({backdrop: 'static', keyboard: true});
@@ -56,6 +58,14 @@
                 vm.restaurantName = "Restaurant Name"
             }
         };
+
+        function pickUpOrder() {
+            for (i in vm.waypoints){
+                if (vm.waypoints[i].pickupLoc != vm.selectedWaypoint[0].location){
+                    vm.waypoints.splice(i, 1);
+                }
+            }
+        }
 
     }
 

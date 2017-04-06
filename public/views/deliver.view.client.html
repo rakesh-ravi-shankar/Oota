@@ -31,7 +31,8 @@
          on-click="model.showInfoWindow()">
  </marker>
 
- <marker ng-repeat="pickup in model.waypoints"
+ <marker
+         ng-repeat="pickup in model.waypoints"
          icon="{{model.waypointIcon}}"
          position="{{pickup.pickupLoc}}"
          on-click="model.showInfoWindow({{pickup}})">
@@ -44,8 +45,8 @@
 
  <info-window id="event-location-info">
      <div ng-non-bindable>
-      <p>Restaurant:<p/>
-      <a href="" class="btn btn-primary btn-sm">Pick-up Order</a>
+      <p>Restaurant: {{model.restaurantName}}<p/>
+      <a class="btn btn-primary btn-sm" ng-click="model.pickUpOrder()">Pick-up Order</a>
      </div>
  </info-window>
 
