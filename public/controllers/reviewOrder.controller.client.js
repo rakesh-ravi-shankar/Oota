@@ -9,7 +9,8 @@
         vm.updateOrder = updateOrder;
         vm.placeOrder = placeOrder;
         vm.getCurrentAddress = getCurrentAddress;
-        vm.getActiveOrder = getActiveOrder;
+        vm.getActiveOrderForUser = getActiveOrderForUser;
+        vm.getActiveOrders = getActiveOrders;
         vm.orders = [];
         function init() {
             vm.restuarantId = $routeParams['resid'];
@@ -83,15 +84,24 @@
             OrderService.createOrder(order);
         }
 
-        function getActiveOrder() {
-            vm.activeOrders= [];
+        function getActiveOrderForUser() {
+            vm.activeOrdersForUser= [];
             OrderService
                 .findActiveOrdersForOrderer(vm.userId)
                 .then(function (orders) {
                     console.log(orders);
+                    vm.activeOrdersForUser = orders;
+                });
+        }
+        function getActiveOrders() {
+            vm.activeOrders= [];
+            OrderService
+                .findActiveOrders()
+                .then(function (orders) {
+                    console.log(orders);
                     vm.activeOrders = orders;
                 });
-            }
+        }
 
 
 

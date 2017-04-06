@@ -9,7 +9,10 @@ var orderModel=mongoose.model("OrderModel",orderSchema);
 
 orderModel.findOrderById = findOrderById;
 orderModel.findOrderByUserIdAndStatus = findOrderByUserIdAndStatus;
+orderModel.findActiveOrders = findActiveOrders;
 orderModel.createOrder = createOrder;
+orderModel.updateOrder = updateOrder;
+
 
 module.exports=orderModel;
 
@@ -64,6 +67,43 @@ function findOrderByUserIdAndStatus(userId,status) {
 
 
 }
+
+function findActiveOrders() {
+    var deffered =q.defer();
+    orderModel
+        .find({deliveryStatus:"ORDERED"},function (err,order) {
+            if(err){
+                deffered.reject(err);
+            }
+            else
+            {
+                deffered.resolve(order);
+            }
+    });
+    return deffered.promise;
+}
+
+function updateOrder(order,orderId) {
+
+    var deffered =q.defer();
+    orderModel
+        .update(
+            {_id: orderId },
+            {$set: order},function (err, order) {
+                if(err) {
+                    deffered.reject(err);
+                }
+                else{
+                    deffered.resolve(order);
+                }
+
+            });
+
+    return deffered.promise;
+
+}
+
+
 /*
 function findRestaurantByUsername(username) {
     var deffered =q.defer();
@@ -82,25 +122,6 @@ function findRestaurantByUsername(username) {
 
 }
 
-function updateRestaurant(restaurant,restaurantId) {
-
-    var deffered =q.defer();
-    restaurantModel
-        .update(
-            {_id: restaurantId },
-            {$set: restaurant},function (err, restaurant) {
-                if(err) {
-                    deffered.abort(err);
-                }
-                else{
-                    deffered.resolve(restaurant);
-                }
-
-            });
-
-    return deffered.promise;
-
-}
 
 function deleteRestaurant(restaurantId) {
 

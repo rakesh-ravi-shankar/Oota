@@ -8,6 +8,9 @@ module.exports=function(app){
 
     app.post("/api/order",createOrder);
     app.get("/api/order/orderer/:uid",findActiveOrdersForOrderer);
+    app.get("/api/order/activeOrders",findActiveOrders);
+    app.post("/api/order/updateOrder",updateOrder);
+
     // app.get("/api/restaurant/:uid",findRestaurantById);
     // app.put("/api/restaurant/:uid",updateRestaurant);
     // app.delete("/api/restaurant/:uid",deleteRestaurant);
@@ -46,6 +49,35 @@ module.exports=function(app){
 
 
     }
+
+    function findActiveOrders(req,res) {
+
+        orderModel
+            .findActiveOrders()
+            .then(function (activeOrders) {
+                res.json(activeOrders);
+            }, function (error) {
+                res.sendStatus(500).send(error);
+            });
+
+
+    }
+
+
+
+
+    function updateOrder(req,res) {
+        var order=req.body;
+        orderModel
+            .updateOrder(order)
+            .then(function (order) {
+                res.json(order);
+            }, function (error) {
+                res.sendStatus(500).send(error);
+            });
+
+    }
+
     /*
      function findRestaurant(req,res) {
 
@@ -101,20 +133,6 @@ module.exports=function(app){
      }
 
 
-
-
-     function updateRestaurant(req,res) {
-     var restaurantId=req.params.uid;
-     var restaurant=req.body;
-     restaurantModel
-     .updateRestaurant(restaurant,restaurantId)
-     .then(function (restaurant) {
-     res.json(restaurant);
-     }, function (error) {
-     res.sendStatus(500).send(error);
-     });
-
-     }
 
      function deleteRestaurant(req,res) {
      var restaurantId=req.params.uid;

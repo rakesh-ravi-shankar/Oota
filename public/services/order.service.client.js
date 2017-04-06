@@ -9,9 +9,9 @@
         var api={
             "createOrder":createOrder,
             "findActiveOrdersForOrderer":findActiveOrdersForOrderer,
-            //"findRestaurantByUsername":findRestaurantByUsername,
+            "findActiveOrders":findActiveOrders,
             //"findRestaurantByCredentials":findRestaurantByCredentials
-            // "updateUser":updateUser,
+            "updateOrder":updateOrder,
             // "deleteUser":deleteUser
             getCurrentAddress:getCurrentAddress
         };
@@ -23,6 +23,13 @@
 
         function findActiveOrdersForOrderer(userId) {
             return $http.get("/api/order/orderer/"+userId);
+        }
+
+        function findActiveOrders() {
+            return $http.get("/api/order/activeOrders");
+        }
+        function updateOrder(order) {
+            return $http.post("/api/order/updateOrder",order);
         }
 
         /*
