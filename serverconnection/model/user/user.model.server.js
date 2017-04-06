@@ -6,12 +6,12 @@ var q=require("q");
 var userSchema =require("./user.schema.server");
 var userModel=mongoose.model("UserModel",userSchema);
 
-
-    userModel.findUserByUsername=findUserByUsername;
+userModel.findUserByUsername=findUserByUsername;
 userModel.findUserByCredentials=findUserByCredentials;
-// userModel.findUserById=findUserById;
+userModel.findUserById=findUserById;
 userModel.createUser =createUser;
-// userModel.updateUser=updateUser;
+userModel.addOrderToOrderer=addOrderToOrderer;
+userModel.updateUser=updateUser;
 // userModel.deleteUser=deleteUser;
 
 module.exports=userModel;
@@ -67,8 +67,6 @@ function findUserByCredentials(username,password) {
 
         });
     return deffered.promise;
-
-
 }
 
 function findUserByUsername(username) {
@@ -121,7 +119,22 @@ function deleteUser(userId) {
             }
         });
     return deffered.promise;
+}
 
-
+function addOrderToOrderer(userId, orderId){
+    var deffered =q.defer();
+    userModel
+        .findById(userId,function (err,user) {
+            if(err){
+                deffered.abort(err);
+            }
+            else
+            {
+                user.foodOrdered.push(orderId);
+                user.save();
+                deffered.resolve(user);
+            }
+        });
+    return deffered.promise;
 }
 

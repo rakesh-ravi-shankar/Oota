@@ -8,7 +8,7 @@ var orderSchema= mongoose.Schema({
     _deliverer:{type: mongoose.Schema.Types.ObjectId, ref: 'UserModel'},
     deliveryLoc:String,
     pickupLoc:String,
-    deliveryStatus:{type: String, enum: ['ORDERED','INCART','CANCELLED','DELIVERED'],default:'ORDERED'},
+    deliveryStatus:{type: String, enum: ['ORDERED','SELECTED_FOR_DELIVERY','PICKED_ORDER','CANCELLED','DELIVERED'],default:'ORDERED'},
     items:[{type:String}],
     prices:[{type:Number}],
     qty:[{type:Number}]

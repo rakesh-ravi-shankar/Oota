@@ -18,7 +18,7 @@ function createOrder(order) {
     orderModel
         .create(order,function (err,order) {
             if(err){
-                deffered.abort(err);
+                deffered.reject(err);
             }
             else
             {
@@ -35,15 +35,12 @@ function findOrderById(orderId) {
     orderModel
         .findById(orderId,function (err,order) {
             if(err){
-                deffered.abort(err);
+                deffered.reject(err);
             }
             else
             {
                 deffered.resolve(order);
             }
-
-
-
         });
     return deffered.promise;
 
@@ -53,14 +50,13 @@ function findOrderByUserIdAndStatus(userId,status) {
 
     var deffered =q.defer();
     orderModel
-        .find({_user: userId , deliveryStatus:status},function (err,order) {
+        .find({_orderer: userId , deliveryStatus:status},function (err,order) {
             if(err){
-                deffered.abort(err);
+                deffered.reject(err);
             }
             else
             {
                 deffered.resolve(order);
-
             }
 
         });
