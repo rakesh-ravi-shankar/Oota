@@ -35,19 +35,22 @@
             .then(function (orders) {
                 vm.waypoints = orders.data;
                 console.log(vm.waypoints[0].pickupLoc);
+
+                $window.navigator.geolocation.getCurrentPosition(function() {
+                    console.log("Fetching current location");
+                    vm.startIcon = {
+                        scaledSize: [32, 32],
+                        url: "img/startIcon.png"
+                    };
+                    vm.waypointIcon = {
+                        scaledSize: [32, 32],
+                        url: "img/waypointIcon.png"
+                    };
+                });
+
+
             });
 
-        $window.navigator.geolocation.getCurrentPosition(function() {
-            console.log("Fetching current location");
-            vm.startIcon = {
-                scaledSize: [32, 32],
-                url: "img/startIcon.png"
-            };
-            vm.waypointIcon = {
-                scaledSize: [32, 32],
-                url: "img/waypointIcon.png"
-            };
-        });
 
 
         NgMap.getMap('mapDemo')
@@ -55,15 +58,16 @@
                 vm.map = map;
             });
 
-        vm.showInfoWindow = function(event, pos) {
-            if (pos)
+        vm.showInfoWindow = function(event, order) {
+            if (order)
             {
+                console.log(order);
                 vm.selectedWaypoint = [];
-                vm.selectedWaypoint.push({location: pos.pickupLoc});
-                vm.selectedWaypoint.push({location: pos.deliveryLoc});
-                vm.dropOff = pos.deliveryLoc;
+                vm.selectedWaypoint.push({location: order.pickupLoc});
+                vm.selectedWaypoint.push({location: order.deliveryLoc});
+                vm.dropOff = order.deliveryLoc;
                 vm.map.showInfoWindow('event-location-info', this);
-                vm.restaurantName = "Restaurant Name"
+                vm.restaurantName = order.restaurantName
             }
         };
 
