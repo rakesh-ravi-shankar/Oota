@@ -7,7 +7,8 @@
 
         var api={
             "findUserComments":findUserComments,
-            "findUserDetails":findUserDetails
+            "findUserDetails":findUserDetails,
+            "findoldorder":findoldorder
         };
         return api;
 
@@ -17,6 +18,10 @@
 
         function findUserDetails(user) {
             return $http.get("/userdetails",user);
+        }
+        function findoldorder(user) {
+            return $http.get("/order-history",user);
+
         }
 
 
