@@ -48,10 +48,10 @@
                 controller: 'userProfileController',
                 controllerAs: 'model'
             })
-            .otherwise({
-                templateUrl: 'views/login.view.client.html',
-                controller: 'LoginController',
-                controllerAs: 'model'
+             .otherwise({
+                 templateUrl: 'views/homePage.view.client.html',
+                 controller: 'HomePageController',
+                 controllerAs: 'model'
             })
 	}
 
