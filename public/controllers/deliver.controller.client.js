@@ -6,7 +6,7 @@
         .module("Oota")
         .controller("DeliverController", DeliverController);
 
-    function DeliverController(NgMap, $window) {
+    function DeliverController(NgMap, $window, OrderService) {
         var vm = this;
         vm.restaurantName = "";
         vm.pickUpOrder = pickUpOrder;
@@ -24,10 +24,18 @@
 
 
         vm.destination = "";
-        vm.waypoints = [{pickupLoc:"250 Huntington, Boston, MA", deliveryLoc: "300 Huntington, Boston, MA"},
-                        {pickupLoc:"179 Northampton st, Boston, MA", deliveryLoc: "185 Northampton st, Boston, MA"}];
-        vm.selectedWaypoint = [];
+        // vm.waypoints = [{pickupLoc:"250 Huntington, Boston, MA", deliveryLoc: "300 Huntington, Boston, MA"},
+        //                 {pickupLoc:"179 Northampton st, Boston, MA", deliveryLoc: "185 Northampton st, Boston, MA"}];
 
+        vm.selectedWaypoint = [];
+        vm.waypoints = [];
+
+        OrderService
+            .findActiveOrders()
+            .then(function (orders) {
+                vm.waypoints = orders.data;
+                console.log(vm.waypoints[0].pickupLoc);
+            });
 
         $window.navigator.geolocation.getCurrentPosition(function() {
             console.log("Fetching current location");

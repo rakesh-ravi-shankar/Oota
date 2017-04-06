@@ -12,6 +12,7 @@
         vm.getActiveOrderForUser = getActiveOrderForUser;
         vm.getActiveOrders = getActiveOrders;
         vm.orders = [];
+
         function init() {
             vm.restuarantId = $routeParams['resid'];
             vm.userId = $routeParams['uid'];
@@ -65,6 +66,17 @@
             var orderItems = [];
             var orderPrices = [];
             var orderQtys = [];
+
+            localStorageService.remove("restaurantName");
+            localStorageService.remove("pickupLoc");
+            var dishes = localStorageService.keys();
+            vm.orders = [];
+            dishes.forEach(function (dish) {
+                vm.orders.push({"dish":dish, "price": localStorageService.get(dish).price, "count": localStorageService.get(dish).count});
+            });
+
+            console.log(vm.orders);
+
             vm.orders.forEach(function(orderItem){
                 orderItems.push(orderItem.dish);
                 orderPrices.push(orderItem.price);
@@ -75,13 +87,20 @@
                 _orderer: vm.userId,
                 restaurantName: vm.restaurantName,
                 deliveryLoc: vm.deliveryLoc,
-                pickupLoc: vm.restaurantLoc,
+                pickupLoc: vm.pickupLoc,
                 items:orderItems,
                 prices:orderPrices,
                 qty:orderQtys
             };
+
+            localStorageService.clearAll();
+
             console.log("place order : " + order);
-            OrderService.createOrder(order);
+            OrderService
+                .createOrder(order)
+                .then(function () {
+                    $location.url("/restaurantList");
+                })
         }
 
         function getActiveOrderForUser() {
