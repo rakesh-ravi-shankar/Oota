@@ -14,6 +14,7 @@
         vm.initializeCount = initializeCount;
         vm.loginUser = loginUser;
         vm.registerUser = registerUser;
+        vm.closeModal=closeModal;
 
         function init() {
             vm.restaurantId = $routeParams['resid'];
@@ -36,6 +37,10 @@
         }
         init();
 
+        function closeModal() {
+            $("#validateUserModal").modal("hide");
+            return;
+        }
 
         function updateOrder(count, dish, price)
         {
@@ -75,6 +80,7 @@
                 .success(function (loggedUser) {
                     if(loggedUser)
                     {
+                        console.log(loggedUser)
                         $("#validateUserModal").modal("hide");
                         $("body").removeClass("modal-open");
                         $(".modal-backdrop").remove();
@@ -97,7 +103,7 @@
         function checkout()
         {
             console.log("checkout");
-            $("#validateUserModal").modal({backdrop: 'static', keyboard: true});
+            //$("#validateUserModal").modal({backdrop: 'static', keyboard: true});
             $("#validateUserModal").modal("show");
         }
 

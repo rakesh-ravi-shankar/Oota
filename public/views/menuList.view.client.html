@@ -5,13 +5,28 @@
                 <h5 class="modal-title">Login/Register</h5>
             </div>
             <div class="modal-body">
-                <label>Username:</label>
-                <input type="text" class="form-control" placeholder="username" ng-model="user.username">
-                <label>Password:</label>
-                <input type="text" class="form-control" placeholder="password" ng-model="user.password">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" data-target="#home">Login</a></li>
+                    <li><a data-toggle="tab" data-target="#menu1">Register</a></li>
+
+                </ul>
+
+                <div class="tab-content">
+                    <div id="home" class="tab-pane fade in active">
+                        <ng-include src="'views/login.view.client.html'"></ng-include>
+                    </div>
+                    <div id="menu1" class="tab-pane fade">
+                        <ng-include src="'views/registerUser.view.client.html'"></ng-include>
+                    </div>
+                </div>
+                <!--<label>Username:</label>-->
+                <!--<input type="text" class="form-control" placeholder="username" ng-model="user.username">-->
+                <!--<label>Password:</label>-->
+                <!--<input type="text" class="form-control" placeholder="password" ng-model="user.password">-->
             </div>
+
             <div class="modal-footer">
-                <a class="btn btn-primary" ng-click="model.loginUser(user)">Login</a>
+                <a class="btn btn-success" ng-click="model.closeModal()">Close</a>
             </div>
         </div>
     </div>
