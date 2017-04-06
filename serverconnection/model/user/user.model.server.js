@@ -61,7 +61,7 @@ function findUserByCredentials(username,password) {
             }
             else
             {
-                deffered.resolve(user);
+                deffered.resolve(user[0]);
 
             }
 
