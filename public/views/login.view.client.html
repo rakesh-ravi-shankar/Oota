@@ -1,7 +1,6 @@
-<div id="background-img"></div>
 
-    <div class="container">
-	    <div id="card">
+    <div class="container-fluid">
+
 			<h1 id="title">Oota</h1>
 	    	<form>
 	    		<div class="form-group">
@@ -10,21 +9,13 @@
 					</div>
 		    		<input type="text" name="username" placeholder="username"
 						   class="form-control" ng-model="user.username">
+					<br>
 		    		<input type="password" name="password" placeholder="*****"
 						   class="form-control" ng-model="user.password">
+					<br>
 		    		<button id="login" class="btn btn-block btn-primary"
 							ng-click="model.login(user)">Login</button>
-					<div class="row">
-						<div class="col-lg-6 col-sm-6">
-		    		<a  class="register btn btn-block btn-warning"
-						href="#/registerUser">Register as User</a>
-						</div>
-						<div class="col-lg-6 col-sm-6">
-					<a  class="register btn btn-block btn-info"
-						href="#/registerRestaurant">Register as Restaurant</a>
-						</div>
-					</div>
 		    	</div>
 	    	</form>
-	    </div>
+
     </div>

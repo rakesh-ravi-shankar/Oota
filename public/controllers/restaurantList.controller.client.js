@@ -18,6 +18,8 @@
                                 vm.restaurants=res;
                             });
             })
+            $("body").removeClass("modal-open");
+            $(".modal-backdrop").remove();
         }
         init();
 

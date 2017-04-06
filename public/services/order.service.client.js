@@ -8,7 +8,7 @@
 
         var api={
             "createOrder":createOrder,
-            // "findUserById":findUserById,
+            "findActiveOrdersForOrderer":findActiveOrdersForOrderer,
             //"findRestaurantByUsername":findRestaurantByUsername,
             //"findRestaurantByCredentials":findRestaurantByCredentials
             // "updateUser":updateUser,
@@ -20,12 +20,11 @@
         function createOrder(order) {
             return $http.post("/api/order",order);
         }
-        //
-        // function findUserById(userId) {
-        //     return $http.get("/api/user/"+userId);
-        //
-        // }
-        //
+
+        function findActiveOrdersForOrderer(userId) {
+            return $http.get("/api/order/orderer/"+userId);
+        }
+
         /*
         function findRestaurantByUsername(username) {
             return $http.get("/api/restaurant?username="+username);
