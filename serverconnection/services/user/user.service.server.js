@@ -4,7 +4,7 @@ module.exports=function(app){
 
     app.get("/api/user",findUser);
     app.post("/api/user",createUser);
-    // app.get("/api/user/:uid",findUserById);
+    app.get("/api/user/:uid",findUserById);
     // app.put("/api/user/:uid",updateUser);
     // app.delete("/api/user/:uid",deleteUser);
 

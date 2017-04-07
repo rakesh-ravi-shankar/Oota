@@ -37,14 +37,12 @@ function findUserById(userId) {
     userModel
         .findById(userId,function (err,user) {
             if(err){
-                deffered.abort(err);
+                deffered.reject(err);
             }
             else
             {
                 deffered.resolve(user);
             }
-
-
 
         });
     return deffered.promise;

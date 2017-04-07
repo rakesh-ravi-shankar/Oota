@@ -8,7 +8,7 @@
 
         var api={
             "createUser":createUser,
-            // "findUserById":findUserById,
+            "findUserById":findUserById,
             "findUserByUsername":findUserByUsername,
             "findUserByCredentials":findUserByCredentials
             // "updateUser":updateUser,
@@ -19,12 +19,12 @@
         function createUser(user) {
             return $http.post("/api/user",user);
         }
-        //
-        // function findUserById(userId) {
-        //     return $http.get("/api/user/"+userId);
-        //
-        // }
-        //
+
+        function findUserById(userId) {
+            return $http.get("/api/user/"+userId);
+
+        }
+
         function findUserByUsername(username) {
             return $http.get("/api/user?username="+username);
 
