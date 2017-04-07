@@ -99,7 +99,7 @@
             OrderService
                 .createOrder(order)
                 .then(function () {
-                    $location.url("/restaurantList");
+                    $location.url("/userProfile");
                 })
         }
 

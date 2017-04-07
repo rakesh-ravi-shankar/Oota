@@ -55,10 +55,11 @@ module.exports=function(app){
         userModel
             .findUserByUsername(username)
             .then(function (user) {
+                console.log(user);
                 res.json(user);
 
             }, function (error) {
-
+                console.log('ERRRRR')
                 res.sendStatus(500).send(error);
             });
 

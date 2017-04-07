@@ -1,5 +1,8 @@
 
 <div class="container-fluid">
+    <div ng-show="model.message" class="alert alert-danger" role="alert">
+        {{model.message}}
+    </div>
     <div >
         <h1 id="title">Oota</h1>
         <form>
@@ -49,7 +52,7 @@
                         placeholder="Email"/>
                 <label>Phone Number</label>
                 <input  ng-model="user.contact"
-                        type="number"
+                      type="tel" pattern="[0-9]{10}"
                        class="form-control"
                        placeholder="Phone Number"/>
                 <label>Password</label>
@@ -62,7 +65,8 @@
                        class="form-control"
                        placeholder="Confirm Password"/>
                 <label></label>
-                <button id="register" class="btn btn-block btn-primary" ng-click="model.register(user)">Register</button>
+                <button id="register" class="btn btn-block btn-primary"
+                        ng-click="model.registerUser(user)">Register</button>
 
             </div>
         </form>

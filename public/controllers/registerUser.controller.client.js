@@ -36,13 +36,6 @@
 
 
                 });
-            // var user=UserService.createUser(user);
-            // if(user)
-            // {
-            //     $location.url("/user/"+user._id);
-            // }
-            // else
-            //     vm.error="User not created successfully!"
-        }
+               }
     }
 })();
