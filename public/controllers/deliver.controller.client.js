@@ -6,18 +6,20 @@
         .module("Oota")
         .controller("DeliverController", DeliverController);
 
-    function DeliverController(NgMap, $window, OrderService, localStorageService) {
+    function DeliverController(NgMap, $window, OrderService, UserService, localStorageService) {
         var vm = this;
         vm.restaurantName = "";
         vm.pickUpOrder = pickUpOrder;
         vm.orderPickedUp = orderPickedUp;
         vm.orderDelivered = orderDelivered;
 
+        // Ask user to enter his destination first
         $(document).ready(function() {
             $("#destinationModal").modal({backdrop: 'static', keyboard: true});
             $("#destinationModal").modal("show")
         });
 
+        // Save the destination after user enters it in the modal form
         vm.saveDestination = function(dest) {
             console.log(dest);
             vm.destination = dest;
@@ -26,12 +28,10 @@
 
 
         vm.destination = "";
-        // vm.waypoints = [{pickupLoc:"250 Huntington, Boston, MA", deliveryLoc: "300 Huntington, Boston, MA"},
-        //                 {pickupLoc:"179 Northampton st, Boston, MA", deliveryLoc: "185 Northampton st, Boston, MA"}];
-
         vm.selectedWaypoint = [];
         vm.waypoints = [];
 
+        // each waypoint in vm.waypoints is an order
         OrderService
             .findActiveOrders()
             .then(function (orders) {
@@ -46,6 +46,7 @@
                 }
                 console.log(vm.waypoints);
 
+                // Get current location and set marker icons
                 $window.navigator.geolocation.getCurrentPosition(function() {
                     console.log("Fetching current location");
                     vm.startIcon = {
@@ -62,12 +63,14 @@
             });
 
 
-
+        // Get a handle on the map instance
         NgMap.getMap('mapDemo')
             .then(function(map) {
                 vm.map = map;
             });
 
+
+        // Handle the marker clicks
         vm.showInfoWindow = function(event, order) {
             if (order)
             {
@@ -79,14 +82,23 @@
                 vm.map.showInfoWindow('event-location-info', this);
                 vm.restaurantName = order.restaurantName;
                 vm.orders = [];
+                // Parse the order
                 for (i in order.items) {
                     vm.orders.push({"dish":order.items[i], "price":order.prices[i], "count":order.qty[i]});
                 }
-
+                // Find who ordered the food
+                UserService
+                    .findUserById(order._orderer)
+                    .success(function(orderer) {
+                        vm.orderer = orderer;
+                    });
             }
         };
 
+
+        // Selected for delivery
         function pickUpOrder() {
+            // Remove all other unselected markers
             for (i in vm.waypoints){
                 if (vm.waypoints[i].pickupLoc != vm.selectedWaypoint[0].location){
                     vm.waypoints.splice(i, 1);
@@ -95,38 +107,54 @@
                     localStorageService.set("cachedLoc", vm.waypoints[i]);
                 }
             }
-            console.log(vm.selectedOrder);
             vm.selectedOrder.deliveryStatus = "SELECTED_FOR_DELIVERY";
+
             OrderService
                 .updateOrder(vm.selectedOrder)
                 .then(function(order){
                     //vm.selectedOrder = order;
                     console.log("Status updated");
-                    $("#orderPickedUpBtn").fadeIn(500);
+                    $("#windowBtn").addClass("disabled");
+                    $("#orderPickedUpBtn").removeClass("disabled");
                 });
 
+
         }
+
+
+
 
         function orderPickedUp() {
             localStorageService.clearAll();
             vm.selectedOrder.deliveryStatus = "PICKED_ORDER";
+
             OrderService
                 .updateOrder(vm.selectedOrder)
                 .then(function(order){
                     //vm.selectedOrder = order;
                    console.log("Status updated");
+                   $("#orderPickedUpBtn").addClass("disabled");
+                   $("#orderDeliveredBtn").removeClass("disabled");
                 });
-            $("#orderDeliveredBtn").fadeIn("slow");
+
+
         }
+
+
+
 
         function orderDelivered() {
             vm.selectedOrder.deliveryStatus = "DELIVERED";
+
             OrderService
                 .updateOrder(vm.selectedOrder)
                 .then(function(order){
                     //vm.selectedOrder = order;
                     console.log("Status updated");
+                    $("#orderDeliveredBtn").addClass("disabled");
                 });
+
+
         }
 
     }

@@ -46,7 +46,7 @@
  <info-window id="event-location-info">
      <div ng-non-bindable>
       <p>Restaurant: {{model.restaurantName}}<p/>
-      <a class="btn btn-primary btn-sm" ng-click="model.pickUpOrder()">Pick-up Order</a>
+      <a id="windowBtn" class="btn btn-primary btn-sm" ng-click="model.pickUpOrder()">Pick-up Order</a>
      </div>
  </info-window>
 
@@ -92,11 +92,14 @@
    <h3>Pickup Details:</h3>
    <h5>Restaurant Name:</h5>{{model.restaurantName}}
    <h5>Restaurant Location:</h5>{{model.selectedWaypoint[0].location}}
+
   </div>
 
   <div class="col-sm-6">
    <h3>Delivery Details:</h3>
+   <h5>Drop off to:</h5>{{model.orderer.firstName}} {{model.orderer.lastName}}
    <h5>Drop off point:</h5>{{model.selectedWaypoint[1].location}}
+
   </div>
  </div>
 
@@ -104,10 +107,10 @@
  <div class="row" ng-if="model.selectedWaypoint.length > 0">
   <div class="col-sm-2"></div>
   <div class="col-sm-4">
-   <a id="#orderPickedUpBtn" class="btn btn-success" ng-click="model.orderPickedUp()">Order Picked Up</a>
+   <a id="orderPickedUpBtn" class="disabled btn btn-success" style="margin-top: 2em;" ng-click="model.orderPickedUp()">Order Picked Up</a>
   </div>
   <div class="col-sm-4">
-   <a id="#orderDeliveredBtn" class="btn btn-success" ng-click="model.orderDelivered()">Order Delivered</a>
+   <a id="orderDeliveredBtn" class="disabled btn btn-success" style="margin-top: 2em;" ng-click="model.orderDelivered()">Order Delivered</a>
   </div>
   <div class="col-sm-2"></div>
  </div>
