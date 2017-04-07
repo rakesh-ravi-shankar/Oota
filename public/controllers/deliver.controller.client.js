@@ -6,7 +6,7 @@
         .module("Oota")
         .controller("DeliverController", DeliverController);
 
-    function DeliverController(NgMap, $window, OrderService) {
+    function DeliverController(NgMap, $window, OrderService, localStorageService) {
         var vm = this;
         vm.restaurantName = "";
         vm.pickUpOrder = pickUpOrder;
@@ -35,7 +35,15 @@
         OrderService
             .findActiveOrders()
             .then(function (orders) {
-                vm.waypoints = orders.data;
+                cachedLoc = localStorageService.get("cachedLoc");
+                if (cachedLoc != undefined)
+                {
+                    vm.waypoints = [cachedLoc];
+                }
+                else
+                {
+                    vm.waypoints = orders.data;
+                }
                 console.log(vm.waypoints);
 
                 $window.navigator.geolocation.getCurrentPosition(function() {
@@ -83,6 +91,9 @@
                 if (vm.waypoints[i].pickupLoc != vm.selectedWaypoint[0].location){
                     vm.waypoints.splice(i, 1);
                 }
+                else {
+                    localStorageService.set("cachedLoc", vm.waypoints[i]);
+                }
             }
             console.log(vm.selectedOrder);
             vm.selectedOrder.deliveryStatus = "SELECTED_FOR_DELIVERY";
@@ -91,15 +102,13 @@
                 .then(function(order){
                     //vm.selectedOrder = order;
                     console.log("Status updated");
-                    $("#orderPickedUpBtn").fadeIn("slow");
-                    $("#orderDeliveredBtn").fadeIn("slow");
+                    $("#orderPickedUpBtn").fadeIn(500);
                 });
-
-
 
         }
 
         function orderPickedUp() {
+            localStorageService.clearAll();
             vm.selectedOrder.deliveryStatus = "PICKED_ORDER";
             OrderService
                 .updateOrder(vm.selectedOrder)
@@ -107,6 +116,7 @@
                     //vm.selectedOrder = order;
                    console.log("Status updated");
                 });
+            $("#orderDeliveredBtn").fadeIn("slow");
         }
 
         function orderDelivered() {
