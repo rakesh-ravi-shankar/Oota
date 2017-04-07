@@ -72,13 +72,13 @@ function findUserByCredentials(username,password) {
 function findUserByUsername(username) {
     var deffered =q.defer();
     userModel
-        .find({userName: username },function (err,user) {
+        .find({username: username },function (err,user) {
             if(err){
-                deffered.abort(err);
+                deffered.reject(err);
             }
             else
             {
-                deffered.resolve(user);
+                deffered.resolve();
             }
 
         });

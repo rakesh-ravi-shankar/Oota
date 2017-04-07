@@ -7,7 +7,13 @@
         var vm = this;
         vm.updateCurrentSelection=updateCurrentSelection;
 
-        vm.uid="58e049bb363adf1ebba05706"
+        vm.uid="58e049bb363adf1ebba05706";
+
+        function init() {
+            vm.currentSelection="trackorder";
+
+        }
+        init();
         function updateCurrentSelection(cs) {
 
             vm.currentSelection = cs;

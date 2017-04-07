@@ -48,7 +48,13 @@
                 controller: 'userProfileController',
                 controllerAs: 'model'
             })
-             .otherwise({
+            .when("/editProfile", {
+                templateUrl: 'views/profile.edit.view.client.html',
+                controller: 'RegisterUserController',
+                controllerAs: 'model'
+            })
+
+            .otherwise({
                  templateUrl: 'views/homePage.view.client.html',
                  controller: 'HomePageController',
                  controllerAs: 'model'

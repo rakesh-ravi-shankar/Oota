@@ -96,8 +96,53 @@
         }
 
 
-        function registerUser()
-        {
+        function registerUser(user) {
+
+            UserService.findUserByUsername(user.username)
+                .success(function (u) {
+                    if(u.length == 0)
+                    {
+                        vm.message="User name NOT taken!";
+                        UserService.createUser(user)
+                            .success(function (user) {
+                                if (user) {
+                                    $("#validateUserModal").modal("hide");
+                                    $("body").removeClass("modal-open");
+                                    $(".modal-backdrop").remove();
+                                    $location.url("/restaurantList/" + vm.restaurantId + "/restaurantMenu/" + user._id + "/order");
+
+                                    vm.message = "User created successfully";
+                                }
+                                else
+                                    vm.error = "User not created successfully!"
+                            });
+                    }
+                    else {
+                        vm.message="User name already taken!";
+                        console.log("EXXISTS")
+                    }
+
+
+                })
+                .error(function (err) {
+                    vm.message="User name NOT taken!";
+                    UserService.createUser(user)
+                        .success(function (user) {
+                            if (user) {
+                                $("#validateUserModal").modal("hide");
+                                $("body").removeClass("modal-open");
+                                $(".modal-backdrop").remove();
+                                $location.url("/restaurantList/" + vm.restaurantId + "/restaurantMenu/" + user._id + "/order");
+
+                                vm.message = "User created successfully";
+                            }
+                            else
+                                vm.error = "User not created successfully!"
+                        });
+
+                });
+
+
 
         }
 
