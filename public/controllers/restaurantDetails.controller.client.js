@@ -9,6 +9,7 @@
 
     function RestaurantDetailController($routeParams, $window, $location, RestaurantListService, localStorageService) {
         var vm = this;
+        vm.submitReview = submitReview;
 
         function init() {
             var restaurant = localStorageService.get("restaurant");
@@ -21,6 +22,10 @@
         }
         init();
 
+
+        function submitReview(review) {
+
+        }
 
     }
 })();
