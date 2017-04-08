@@ -8,8 +8,9 @@ module.exports=function(app){
     app.get("/userdetails",findUserDetails);
     app.get("/order-history",findoldorders);
     app.put("/update-user/:uid",updateUser);
-
-
+    app.put("/follow-user",followUser)
+    app.put("/unfollow-user",unfollowUser)
+    app.put("/already-following",alreadyFollowing)
     var multer = require('multer'); // npm install multer --save
     var storage = multer.diskStorage({
         destination: function (req, file, cb) {
@@ -53,7 +54,42 @@ module.exports=function(app){
         }
     }
 
+    function alreadyFollowing(req,res) {
+        var obj=req.body;
+        userModel
+            .alreadyFollowing(obj)
+            .then(function (user) {
+                console.log(user);
+                res.json(user);
+            }, function (error) {
+                res.sendStatus(500).send(error);
+            });
 
+    }
+    function followUser(req,res) {
+        var obj=req.body;
+        userModel
+            .followUser(obj)
+            .then(function (user) {
+                res.json(user);
+            }, function (error) {
+                res.sendStatus(500).send(error);
+            });
+
+
+    }
+    function unfollowUser(req,res) {
+        var obj=req.body;
+        userModel
+            .unfollowUser(obj)
+            .then(function (user) {
+                res.json(user);
+            }, function (error) {
+                res.sendStatus(500).send(error);
+            });
+
+
+    }
     function updateUser(req,res) {
         var userId=req.params.uid;
         var user=req.body;

@@ -60,7 +60,6 @@ function findOrderByUserIdAndStatus(userId,status) {
             }
             else
             {
-                console.log(order);
                 deffered.resolve(order);
             }
 
@@ -77,7 +76,6 @@ function findOrderByUserId(userId) {
             }
             else
             {
-                console.log(order);
                 deffered.resolve(order);
             }
 
