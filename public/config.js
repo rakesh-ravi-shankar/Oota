@@ -50,7 +50,12 @@
             })
             .when("/editProfile", {
                 templateUrl: 'views/profile.edit.view.client.html',
-                controller: 'RegisterUserController',
+                controller: 'editProfileController',
+                controllerAs: 'model'
+            })
+            .when("/:resid/restaurantDetails", {
+                templateUrl: 'views/restaurantDetails.view.client.html',
+                controller: '',
                 controllerAs: 'model'
             })
 

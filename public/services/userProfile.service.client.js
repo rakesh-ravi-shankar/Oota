@@ -8,7 +8,8 @@
         var api={
             "findUserComments":findUserComments,
             "findUserDetails":findUserDetails,
-            "findoldorder":findoldorder
+            "findoldorder":findoldorder,
+            "updateUser":updateUser
         };
         return api;
 
@@ -23,7 +24,10 @@
             return $http.get("/order-history",user);
 
         }
+        function updateUser(userId,user) {
+            return $http.put("/update-user/"+userId,user);
 
+        }
 
 
     };

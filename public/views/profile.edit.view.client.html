@@ -10,10 +10,21 @@
         {{model.message}}
     </div>
 
-    <form>
+    <form action="/api/upload"  method="post" enctype="multipart/form-data">
         <div class="form-group">
+            <a  ng-click="model.updateUser(model.user)">
+                <span class="glyphicon glyphicon-ok"></span>
+            </a>
+
+            <label>Upload</label>
+            <input type="file"
+                   class="form-control"
+                   name="myFile"
+                   value="https://www.google.com/search?q=images&espv=2&biw=753&bih=970&source=lnms"
+            />
+            <button type="submit" class="btn btn-primary btn-block">Upload Image</button>
             <label for="username">Username</label>
-            <input type="text" ng-model="model.user.username" class="form-control" id="username" placeholder="Username">
+            <h2 ng-model="model.user.username" id="username"></h2>
         </div>
         <div class="form-group">
             <label for="email">Email</label>
@@ -27,12 +38,26 @@
             <label for="last-name">Last Name</label>
             <input type="text" ng-model="model.user.lastName" class="form-control" id="last-name" placeholder="Wonderland">
         </div>
+        <div class="form-group">
+            <label for="phone-no">Phone Number</label>
+            <input type="tel" ng-model="model.user.phone" class="form-control" id="phone-no" placeholder="Wonderland">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" ng-model="model.user.lastName" class="form-control" id="password" placeholder="Wonderland">
+        </div>
+        <div class="form-group">
+            <label for="confirm-password">Confirm Password</label>
+            <input type="password" ng-model="model.user.password" class="form-control" id="confirm-password" placeholder="Wonderland">
+        </div>
+        <div class="form-group">
+            <label for="birthday">Birthday</label>
+            <input ng-model="model.user.password" class="form-control" id="birthday" placeholder="Wonderland">
+        </div>
     </form>
 
-    <a class="btn btn-primary btn-block"
-       href="#/user/{{model.user._id}}/website">Websites</a>
     <a class="btn btn-danger btn-block"
-       ng-click="model.deleteUser()">Delete User</a>
+       ng-click="model.deleteUser()">Delete Account</a>
     <a class="btn btn-success  btn-block"
        href="#/login">Logout</a>
 </div>
