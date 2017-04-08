@@ -8,9 +8,14 @@
         var api={
             "findUserComments":findUserComments,
             "findUserDetails":findUserDetails,
-            "findoldorder":findoldorder
+            "findoldorder":findoldorder,
+            "createUserComment":createUserComment
         };
         return api;
+
+        function createUserComment(comment) {
+            return $http.post("/create-comment", comment);
+        }
 
         function findUserComments(user) {
             return $http.get("/usercomments",user);

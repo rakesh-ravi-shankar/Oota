@@ -6,12 +6,13 @@
         .module("Oota")
         .controller("DeliverController", DeliverController);
 
-    function DeliverController(NgMap, $window, OrderService, UserService, localStorageService) {
+    function DeliverController(NgMap, $window, OrderService, UserService, localStorageService, userProfileService) {
         var vm = this;
         vm.restaurantName = "";
         vm.pickUpOrder = pickUpOrder;
         vm.orderPickedUp = orderPickedUp;
         vm.orderDelivered = orderDelivered;
+        vm.saveComment = saveComment;
 
         // Ask user to enter his destination first
         $(document).ready(function() {
@@ -118,7 +119,6 @@
                     $("#orderPickedUpBtn").removeClass("disabled");
                 });
 
-
         }
 
 
@@ -137,7 +137,6 @@
                    $("#orderDeliveredBtn").removeClass("disabled");
                 });
 
-
         }
 
 
@@ -152,9 +151,29 @@
                     //vm.selectedOrder = order;
                     console.log("Status updated");
                     $("#orderDeliveredBtn").addClass("disabled");
+                    $("#commentModal").modal("show")
                 });
 
 
+        }
+
+
+
+        function saveComment(comm) {
+            var comment = {
+                feedback_giver_id:"58e83082ecad77117d9f2232",
+                feedback_giver_name:"Hardcoded Value",
+                feedback_reciever_id:vm.orderer._id,
+                comment:comm,
+                order_id:vm.selectedOrder._id
+            };
+            console.log(comment);
+
+            userProfileService
+                .createUserComment(comment)
+                .then(function() {
+                    $("#commentModal").modal("hide")
+                });
         }
 
     }
