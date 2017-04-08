@@ -17,7 +17,7 @@
         return api;
 
         function createUser(user) {
-            return $http.post("/api/user",user);
+            return $http.post("/api/register",user);
         }
 
         function findUserById(userId) {
@@ -31,9 +31,9 @@
 
         }
 
-        function findUserByCredentials(username,password) {
+        function findUserByCredentials(user) {
 
-            return $http.get("/api/user?username="+username+"&password="+password);
+            return $http.post("/api/login",user);
 
         }
         //

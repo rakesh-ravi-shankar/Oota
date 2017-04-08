@@ -7,13 +7,25 @@
         .controller("RestaurantDetailController", RestaurantDetailController);
 
 
-    function RestaurantDetailController($routeParams, $window, $location, RestaurantListService) {
+    function RestaurantDetailController($routeParams, $window, $location, RestaurantListService, localStorageService) {
         var vm = this;
+        vm.submitReview = submitReview;
+
         function init() {
-
-
+            var restaurant = localStorageService.get("restaurant");
+            // console.log(restaurant);
+            vm.apiKey = restaurant.apiKey;
+            vm.restaurantLogo = restaurant.logoUrl;
+            vm.restaurantName = restaurant.name;
+            vm.restaurantPhone = restaurant.phone;
+            vm.restaurantAddress = restaurant.streetAddress + " " + restaurant.city + " " + restaurant.state;
         }
         init();
+
+
+        function submitReview(review) {
+
+        }
 
     }
 })();

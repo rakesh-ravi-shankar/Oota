@@ -9,6 +9,7 @@
             "findUserComments":findUserComments,
             "findUserDetails":findUserDetails,
             "findoldorder":findoldorder,
+            "createUserComment":createUserComment,
             "updateUser":updateUser,
             "followUser":followUser,
             "unfollowUser":unfollowUser,
@@ -34,6 +35,12 @@
             // var usertofollow="";
             var obj=[{user_id:uid,usertofollow:usertofollow}];
             return $http.put("/unfollow-user",obj);
+
+        };
+        return api;
+
+        function createUserComment(comment) {
+            return $http.post("/create-comment", comment);
         }
 
         function findUserComments(user) {
