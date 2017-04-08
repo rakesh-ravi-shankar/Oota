@@ -14,6 +14,22 @@
  </div>
 </div>
 
+<div class="modal fade" id="commentModal">
+ <div class="modal-dialog" role="document">
+  <div class="modal-content">
+   <div class="modal-header">
+    <h5 class="modal-title">Write {{model.orderer.firstName}} {{model.orderer.lastName}} a message:</h5>
+   </div>
+   <div class="modal-body">
+    <textarea type="text" class="form-control" placeholder="Great meeting you...enjoy your meal" ng-model="comment"></textarea>
+   </div>
+   <div class="modal-footer">
+    <button type="button" class="btn btn-primary" ng-click="model.saveComment(comment)">Save changes</button>
+   </div>
+  </div>
+ </div>
+</div>
+
 <ng-map id="mapDemo"
         default-style="true"
         center="current-location"

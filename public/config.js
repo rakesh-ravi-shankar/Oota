@@ -55,6 +55,11 @@
             })
             .when("/:resid/restaurantDetails", {
                 templateUrl: 'views/restaurantDetails.view.client.html',
+                controller: 'RestaurantDetailController',
+                controllerAs: 'model'
+            })
+            .when("/delivererLogin", {
+                templateUrl: 'views/deliverer.login.view.client.html',
                 controller: '',
                 controllerAs: 'model'
             })
