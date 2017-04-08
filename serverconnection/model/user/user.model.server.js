@@ -34,6 +34,7 @@ function createUser(user) {
 
 function findUserById(userId) {
     var deffered=q.defer();
+
     userModel
         .findById(userId,function (err,user) {
             if(err){
@@ -92,9 +93,10 @@ function updateUser(user,userId) {
             {_id: userId },
             {$set: user},function (err, user) {
                 if(err) {
-                    deffered.abort(err);
+                    deffered.reject(err);
                 }
                 else{
+                    console.log("yay");
                     deffered.resolve(user);
                 }
 

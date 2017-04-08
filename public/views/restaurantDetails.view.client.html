@@ -1,0 +1,124 @@
+<div class="modal fade" id="validateUserModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Login/Register</h5>
+            </div>
+            <div class="modal-body">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" data-target="#home">Login</a></li>
+                    <li><a data-toggle="tab" data-target="#menu1">Register</a></li>
+
+                </ul>
+
+                <div class="tab-content">
+                    <div id="home" class="tab-pane fade in active">
+                        <ng-include src="'views/login.view.client.html'"></ng-include>
+                    </div>
+                    <div id="menu1" class="tab-pane fade">
+                        <ng-include src="'views/registerUser.view.client.html'"></ng-include>
+                    </div>
+                </div>
+                <!--<label>Username:</label>-->
+                <!--<input type="text" class="form-control" placeholder="username" ng-model="user.username">-->
+                <!--<label>Password:</label>-->
+                <!--<input type="text" class="form-control" placeholder="password" ng-model="user.password">-->
+            </div>
+
+            <div class="modal-footer">
+                <a class="btn btn-success" ng-click="model.closeModal()">Close</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<nav class=" navbar navbar-default navbar-fixed-top">
+
+    <div class="row container-fluid">
+        <div class="hidden-xs col-sm-4 col-md-4 col-lg-4">
+            <div class="navbar-text pull-left" >
+                <a>
+                    <span class="glyphicon  glyphicon-user"></span>
+                </a>
+            </div>
+
+            <div class="navbar-header pull-left">
+                <a class="navbar-brand" href="">
+                    RESTAURANT DETAILS
+                </a>
+            </div>
+
+        </div>
+        <div class="col-xs-1 hidden-lg hidden-md hidden-sm">
+            <div class="navbar-text pull-left" >
+                <a>
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+            </div>
+        </div>
+        <div class="col-xs-10 col-sm-8 col-md-8">
+            <div class="navbar-header pull-left">
+                <a class="navbar-brand" href="#">
+                    REVIEWS
+                </a>
+            </div>
+
+
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid col-md-4 col-sm-4 hidden-xs vertical-line web-left-pane" >
+
+
+    <div class="row">
+        <div class="square">
+            <img src="../img/food.jpg" class="img-responsive img-circle content"/>
+
+        </div>
+    </div>
+
+    <h1 style="text-align: center">RESTAURANT NAME</h1>
+
+    <div>
+        <h2>Write a Review</h2>
+        <textarea rows="5" style="width: 100%"></textarea>
+        <button class="btn btn-success">Submit</button>
+    </div>
+</div>
+
+
+
+
+</div>
+
+<div class="container-fluid col-md-8 col-sm-8 col-xs-12 web-right-pane">
+    We shall display reviews here
+
+</div>
+
+
+<nav class=" navbar navbar-default navbar-fixed-bottom">
+    <div class="row container-fluid">
+        <div class="col-xs-8">
+        </div>
+        <div class="col-xs-4">
+            <div class="navbar-text pull-right">
+                <a>
+                    <span class="glyphicon glyphicon-user"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+</nav>
+
+
+
+
+
+
+
+

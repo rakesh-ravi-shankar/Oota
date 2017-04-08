@@ -9,7 +9,8 @@
             "findUserComments":findUserComments,
             "findUserDetails":findUserDetails,
             "findoldorder":findoldorder,
-            "createUserComment":createUserComment
+            "createUserComment":createUserComment,
+            "updateUser":updateUser
         };
         return api;
 
@@ -28,7 +29,10 @@
             return $http.get("/order-history",user);
 
         }
+        function updateUser(userId,user) {
+            return $http.put("/update-user/"+userId,user);
 
+        }
 
 
     };
