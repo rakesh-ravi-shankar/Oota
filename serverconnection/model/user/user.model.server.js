@@ -45,8 +45,6 @@ function findUserById(userId) {
                 deffered.resolve(user);
             }
 
-
-
         });
     return deffered.promise;
 

@@ -38,9 +38,8 @@ module.exports=function(app){
     function findActiveOrdersForOrderer(req,res) {
 
         var userId=req.params.uid;
-        console.log(userId);
         orderModel
-            .findOrderByUserIdAndStatus(userId,"ORDERED")
+            .findOrderByUserId(userId)
             .then(function (activeOrders) {
                 res.json(activeOrders);
             }, function (error) {

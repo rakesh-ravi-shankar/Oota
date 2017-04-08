@@ -12,6 +12,7 @@ orderModel.findOrderByUserIdAndStatus = findOrderByUserIdAndStatus;
 orderModel.findActiveOrders = findActiveOrders;
 orderModel.createOrder = createOrder;
 orderModel.updateOrder = updateOrder;
+orderModel.findOrderByUserId = findOrderByUserId;
 
 
 module.exports=orderModel;
@@ -59,13 +60,29 @@ function findOrderByUserIdAndStatus(userId,status) {
             }
             else
             {
+                console.log(order);
                 deffered.resolve(order);
             }
 
         });
     return deffered.promise;
+}
 
+function findOrderByUserId(userId) {
+    var deffered =q.defer();
+    orderModel
+        .find({_orderer: userId},function (err,order) {
+            if(err){
+                deffered.reject(err);
+            }
+            else
+            {
+                console.log(order);
+                deffered.resolve(order);
+            }
 
+        });
+    return deffered.promise;
 }
 
 function findActiveOrders() {

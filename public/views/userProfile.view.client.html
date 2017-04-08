@@ -1,5 +1,3 @@
-
-
 <nav class=" navbar navbar-default navbar-fixed-top">
 
     <div class="row container-fluid">
@@ -47,7 +45,7 @@
             </div>
     </div>
 
-<h1 style="text-align: center">MONICA MALKANI</h1>
+<h1 style="text-align: center">{{model.user.firstName}} {{model.user.lastName}}</h1>
 <br><br>
     <div class="container-fluid">
        <h3><a  ng-click="model.updateCurrentSelection('trackorder')">TRACK ORDER</a></h3>
@@ -63,14 +61,37 @@
 <div ng-switch="model.currentSelection" class="container-fluid col-md-8 col-sm-8 col-xs-12 web-right-pane">
 
     <div ng-switch-when="trackorder">
-       TRACKK
+
+        <table class="table table-striped">
+            <tbody>
+            <col width="40%" />
+            <col width="40%" />
+            <col width="20%" />
+            <tr>
+                <th>Order</th>
+                <th>Restaurant Name</th>
+                <th>Status</th>
+            </tr>
+            <tr ng-repeat="order in model.orders">
+                <td>{{$index + 1}}</td>
+                <td>{{order.restaurantName}}</td>
+                <td>{{order.deliveryStatus}}</td>
+            </tr>
+            </tbody>
+        </table>
     </div>
+
+
+
     <div ng-switch-when="orderhistory">
         <div ng-repeat="order in model.oldorders">
             {{order}}
 
         </div>
     </div>
+
+
+
     <div ng-switch-when="comments">
         <div ng-repeat="comment in model.comments.data">
             {{comment.feedback_giver_name}}
@@ -78,9 +99,11 @@
 
         </div>
     </div>
-
-
 </div>
+
+
+
+
 
 
 <nav class=" navbar navbar-default navbar-fixed-bottom">
@@ -95,5 +118,4 @@
             </div>
         </div>
     </div>
-
 </nav>

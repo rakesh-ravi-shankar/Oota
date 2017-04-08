@@ -3,19 +3,42 @@
         .module("Oota")
         .controller("userProfileController", userProfileController);
 
-    function userProfileController(userProfileService) {
+    function userProfileController(userProfileService, UserService, OrderService) {
         var vm = this;
         vm.updateCurrentSelection=updateCurrentSelection;
 
-        vm.uid="58e049bb363adf1ebba05706";
+
 
         function init() {
+            vm.uid="58e7a533c3e90d03cad0203b";
             vm.currentSelection="trackorder";
-
+            UserService
+                .findUserById(vm.uid)
+                .success(function (user) {
+                    vm.user = user;
+                });
+            OrderService
+                .findActiveOrdersForOrderer(vm.uid)
+                .success(function (orders) {
+                    vm.orders = orders;
+                });
+            window.setInterval(updateStatus, 5000);
+            console.log(vm.orders);
         }
-        init();
-        function updateCurrentSelection(cs) {
 
+        init();
+
+
+        function updateStatus() {
+            console.log("updating..");
+            OrderService
+                .findActiveOrdersForOrderer(vm.uid)
+                .success(function (orders) {
+                    vm.orders = orders;
+                });
+        }
+
+        function updateCurrentSelection(cs) {
             vm.currentSelection = cs;
 
             if (cs == 'comments')
