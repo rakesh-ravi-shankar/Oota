@@ -61,7 +61,8 @@
                                  class="img-responsive"
                                  src="{{model.restaurants.data.restaurants[$index+1].logoUrl}}">
                             <div class="profile-info">
-                                <h2 class="hvr-underline-from-center"><a href="#/restaurantList/{{model.restaurants.data.restaurants[$index+1].apiKey}}/restaurantDetails">{{model.restaurants.data.restaurants[$index+1].name}}</a>
+                                <h2 class="hvr-underline-from-center">
+                                    <a href="#/{{model.restaurants.data.restaurants[$index+1].apiKey}}/restaurantDetails">{{model.restaurants.data.restaurants[$index+1].name}}</a>
                                     <span>{{model.restaurants.data.restaurants[$index+1].streetAddress}}</span></h2>
                                 <br>
                                 <h4>{{model.restaurants.data.restaurants[$index+1].url}}</h4>
