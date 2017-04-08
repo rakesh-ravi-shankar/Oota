@@ -7,7 +7,7 @@
         .controller("MenuListController", MenuListController);
 
 
-    function MenuListController($routeParams, RestaurantListService, $location, localStorageService, UserService) {
+    function MenuListController($routeParams, RestaurantListService, $location, localStorageService, UserService, $rootScope) {
         var vm = this;
         vm.updateOrder = updateOrder;
         vm.checkout = checkout;
@@ -77,7 +77,7 @@
         {
 
             UserService
-                .findUserByCredentials(user.username, user.password)
+                .findUserByCredentials(user)
                 .success(function (loggedUser) {
                     console.log(loggedUser);
                     if(loggedUser)
@@ -86,6 +86,7 @@
                         $("#validateUserModal").modal("hide");
                         $("body").removeClass("modal-open");
                         $(".modal-backdrop").remove();
+                        $rootScope.currentUser = user;
                         $location.url("/restaurantList/" + vm.restaurantId + "/restaurantMenu/" + loggedUser._id + "/order");
                     }
                     else
@@ -109,6 +110,7 @@
                                     $("#validateUserModal").modal("hide");
                                     $("body").removeClass("modal-open");
                                     $(".modal-backdrop").remove();
+                                    $rootScope.currentUser = user;
                                     $location.url("/restaurantList/" + vm.restaurantId + "/restaurantMenu/" + user._id + "/order");
 
                                     vm.message = "User created successfully";
@@ -119,7 +121,7 @@
                     }
                     else {
                         vm.message="User name already taken!";
-                        console.log("EXXISTS")
+                        console.log("EXISTS")
                     }
 
 
@@ -132,6 +134,7 @@
                                 $("#validateUserModal").modal("hide");
                                 $("body").removeClass("modal-open");
                                 $(".modal-backdrop").remove();
+                                $rootScope.currentUser = user;
                                 $location.url("/restaurantList/" + vm.restaurantId + "/restaurantMenu/" + user._id + "/order");
 
                                 vm.message = "User created successfully";
