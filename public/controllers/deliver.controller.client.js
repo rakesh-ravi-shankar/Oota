@@ -144,6 +144,8 @@
 
         function orderDelivered() {
             vm.selectedOrder.deliveryStatus = "DELIVERED";
+            vm.selectedOrder.deliveryTime = new Date().getDate();
+            //TODO: update the _deliverer id in the selected order
 
             OrderService
                 .updateOrder(vm.selectedOrder)
@@ -160,6 +162,7 @@
 
 
         function saveComment(comm) {
+            //TODO: remove the hardcoded values
             var comment = {
                 feedback_giver_id:"58e83082ecad77117d9f2232",
                 feedback_giver_name:"Hardcoded Value",
@@ -172,6 +175,7 @@
             userProfileService
                 .createUserComment(comment)
                 .then(function() {
+                    //TODO: this button is not being disabled
                     $("#commentModal").modal("hide")
                 });
         }

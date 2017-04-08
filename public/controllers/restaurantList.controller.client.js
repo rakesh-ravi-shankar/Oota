@@ -7,9 +7,15 @@
         .controller("RestaurantListController", RestaurantListController);
 
 
-    function RestaurantListController($routeParams, $window, $location, RestaurantListService) {
+    function RestaurantListController($routeParams, $window, $location, RestaurantListService, localStorageService) {
         var vm = this;
+        vm.getRestaurantDetails = getRestaurantDetails;
+
+
         function init() {
+            //clear the local storage
+            localStorageService.clearAll();
+
             $window.navigator.geolocation.getCurrentPosition(function(position) {
                        // console.log(position.coords.latitude);
                 RestaurantListService
@@ -17,7 +23,7 @@
                             .then(function (res) {
                                 vm.restaurants=res;
                             });
-            })
+            });
             $("body").removeClass("modal-open");
             $(".modal-backdrop").remove();
         }
@@ -36,14 +42,20 @@
 
                         });
                         vm.restaurants=response;
-
-
                 });
         };
 
         vm.searchMenu=function (res) {
             RestaurantListService.saveResDetails(res);
                     $location.url("/restaurantList/" + res.apiKey + "/restaurantMenu");
+        };
+
+
+        function getRestaurantDetails(index) {
+            localStorageService.set("restaurant", vm.restaurants.data.restaurants[index]);
+
+            console.log(vm.restaurants.data.restaurants[index]);
+            $location.url("/" + vm.restaurants.data.restaurants[index].apiKey + "/restaurantDetails");
         }
 
 

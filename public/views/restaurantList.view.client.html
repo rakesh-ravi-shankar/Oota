@@ -31,7 +31,7 @@
                                  src="{{model.restaurants.data.restaurants[$index].logoUrl}}">
                             <div class="profile-info">
                                 <h2 class="hvr-underline-from-center">
-                                    <a href="#/{{model.restaurants.data.restaurants[$index].apiKey}}/restaurantDetails">
+                                    <a ng-click="model.getRestaurantDetails($index)">
                                         {{model.restaurants.data.restaurants[$index].name}}</a>
                                     <span>{{model.restaurants.data.restaurants[$index].streetAddress}}</span></h2>
                                 <br>
@@ -62,7 +62,7 @@
                                  src="{{model.restaurants.data.restaurants[$index+1].logoUrl}}">
                             <div class="profile-info">
                                 <h2 class="hvr-underline-from-center">
-                                    <a href="#/{{model.restaurants.data.restaurants[$index+1].apiKey}}/restaurantDetails">{{model.restaurants.data.restaurants[$index+1].name}}</a>
+                                    <a ng-click="model.getRestaurantDetails($index + 1)">{{model.restaurants.data.restaurants[$index+1].name}}</a>
                                     <span>{{model.restaurants.data.restaurants[$index+1].streetAddress}}</span></h2>
                                 <br>
                                 <h4>{{model.restaurants.data.restaurants[$index+1].url}}</h4>
@@ -91,7 +91,7 @@
                                  src="{{model.restaurants.data.restaurants[$index+2].logoUrl}}">
                             <div class="profile-info">
                                 <h2 class="hvr-underline-from-center">
-                                    <a href="#/{{model.restaurants.data.restaurants[$index+2].apiKey}}/restaurantDetails">{{model.restaurants.data.restaurants[$index+2].name}}</a>
+                                    <a ng-click="model.getRestaurantDetails($index + 2)">{{model.restaurants.data.restaurants[$index+2].name}}</a>
                                     <span>{{model.restaurants.data.restaurants[$index+2].streetAddress}}
                                     </span>
                                 </h2>
