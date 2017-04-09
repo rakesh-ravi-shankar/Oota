@@ -7,6 +7,8 @@ var userSchema= mongoose.Schema({
     lastName:String,
     email:String,
     phone:String,
+    followers:[{type:mongoose.Schema.Types.ObjectId, ref:"UserModel"}],
+    following:[{type:mongoose.Schema.Types.ObjectId, ref:"UserModel"}],
     dateofbirth:Date,
     profilepicurl:String,
     registerationDate:{type: Date, default: Date.now},

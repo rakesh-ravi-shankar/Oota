@@ -13,6 +13,9 @@ userModel.createUser =createUser;
 userModel.addOrderToOrderer=addOrderToOrderer;
 userModel.updateUser=updateUser;
 userModel.findUserByGoogleId = findUserByGoogleId;
+userModel.followUser=followUser;
+userModel.alreadyFollowing=alreadyFollowing;
+userModel.unfollowUser=unfollowUser;
 // userModel.deleteUser=deleteUser;
 
 
@@ -30,6 +33,113 @@ function findUserByGoogleId(googleId) {
             }
 
         });
+    return deffered.promise;
+
+}
+
+
+function alreadyFollowing(userobj) {
+    console.log(userobj);
+    var deffered =q.defer();
+    var userId=userobj[0].user_id;//myid
+    var useridtofollow=userobj[0].usertofollow;
+    var deffered =q.defer();
+    userModel
+        .findById(userId , function (err, user) {
+            if(err)
+                deffered.reject(err);
+            else
+            { if(user.following.indexOf(useridtofollow)!=-1)
+            {deffered.resolve(user);
+            }
+            else
+            {deffered.resolve();}
+            }
+
+
+        });
+
+
+    return deffered.promise;
+}
+
+function unfollowUser(userobj) {
+    var deffered =q.defer();
+    var userId=userobj[0].user_id;//myid
+    var useridtofollow=userobj[0].usertofollow;
+    var deffered =q.defer();
+    userModel
+        .findById(useridtofollow , function (err, user) {
+            for(i in user.followers)
+            {
+                if (userId == user.followers[i])
+                {
+                    user.followers.splice(i, 1);
+                }
+            }
+            user.save(function (err,user) {
+                if(err)
+                {deffered.reject(err);}
+                else
+                {
+                    userModel
+                        .findById(userId , function (err, user) {
+                            for(i in user.following)
+                            {
+                                if (useridtofollow == user.following[i])
+                                {
+                                    user.following.splice(i, 1);
+                                }
+                            }
+                            user.save(function (err,user) {
+                                if(err)
+                                {deffered.reject(err);}
+                                else
+                                {deffered.resolve(user);}
+                            });
+                        });
+                }
+
+            })
+
+        });
+
+
+    return deffered.promise;
+
+}
+
+
+function followUser(userobj) {
+    var deffered =q.defer();
+    var userId=userobj[0].user_id;//myid
+    var useridtofollow=userobj[0].usertofollow;
+    var deffered =q.defer();
+    userModel
+        .findById(useridtofollow , function (err, user) {
+            user.followers.push(userId);
+            user.save(function (err,user) {
+            if(err)
+            {deffered.reject(err);}
+            else
+            {
+                userModel
+                    .findById(userId , function (err, user) {
+                        user.following.push(useridtofollow);
+                        user.save(function (err,user) {
+                            if(err)
+                            {deffered.reject(err);}
+                            else
+                            {deffered.resolve(user);}
+                        });
+                    });
+            }
+
+        })
+
+    });
+
+
     return deffered.promise;
 
 }
@@ -115,7 +225,6 @@ function updateUser(user,userId) {
                     deffered.reject(err);
                 }
                 else{
-                    console.log("yay");
                     deffered.resolve(user);
                 }
 
