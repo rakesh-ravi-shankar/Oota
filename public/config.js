@@ -63,6 +63,11 @@
                 controller: '',
                 controllerAs: 'model'
             })
+            .when("/adminPage", {
+                templateUrl: 'views/adminPage.view.client.html',
+                controller: 'AdminController',
+                controllerAs: 'model'
+            })
 
             .otherwise({
                  templateUrl: 'views/homePage.view.client.html',

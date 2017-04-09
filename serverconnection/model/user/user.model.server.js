@@ -16,6 +16,7 @@ userModel.findUserByGoogleId = findUserByGoogleId;
 userModel.followUser=followUser;
 userModel.alreadyFollowing=alreadyFollowing;
 userModel.unfollowUser=unfollowUser;
+userModel.findAllUsers=findAllUsers;
 // userModel.deleteUser=deleteUser;
 
 
@@ -166,6 +167,24 @@ function findUserById(userId) {
 
     userModel
         .findById(userId,function (err,user) {
+            if(err){
+                deffered.reject(err);
+            }
+            else
+            {
+                deffered.resolve(user);
+            }
+
+        });
+    return deffered.promise;
+
+}
+
+function findAllUsers() {
+    var deffered=q.defer();
+
+    userModel
+        .find(function (err,user) {
             if(err){
                 deffered.reject(err);
             }

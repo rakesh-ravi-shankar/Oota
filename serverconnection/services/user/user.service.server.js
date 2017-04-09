@@ -12,6 +12,7 @@ module.exports=function(app){
     app.post  ('/api/login', passport.authenticate('local'), login);
     app.post  ('/api/logout',         logout);
     app.post  ('/api/register',       register);
+    app.get  ('/api/allusers',  findAllUsers);
     //app.post  ('/api/user',     auth, createUser);
     //app.get   ('/api/loggedin',       loggedin);
     //app.get   ('/api/user',     auth, findAllUsers);
@@ -36,7 +37,7 @@ module.exports=function(app){
     var googleConfig = {
         clientID     : "1073284949463-7pg2bp9g1u0buahb1tnie0uquvbaq2jj.apps.googleusercontent.com",
         clientSecret : "dQpcCHPXWyhyAVGlKGY-5hyG",
-        callbackURL  : "http://localhost:3000/#/"
+        callbackURL  : "http://localhost:3000/google/oauth/callback"
     };
 
     passport.use(new GoogleStrategy(googleConfig, googleStrategy));
@@ -165,6 +166,18 @@ module.exports=function(app){
 
 
     }
+    function findAllUsers(req,res) {
+        //var userId=req.params.uid;
+        userModel
+            .findAllUsers()
+            .then(function (users) {
+                res.json(users);
+            }, function (error) {
+                res.sendStatus(500).send(error);
+            });
+
+
+    }
 
     function findUser(req,res) {
 
@@ -197,6 +210,7 @@ module.exports=function(app){
 
 
     }
+
 
     function findUserByCredentials(req,res) {
 
@@ -235,6 +249,7 @@ module.exports=function(app){
             });
 
     }
+
 
     function deleteUser(req,res) {
         var userId=req.params.uid;

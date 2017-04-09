@@ -43,12 +43,13 @@
                 </a>
             </div>
             <div class="navbar-text pull-right" >
+                <a href="#/adminPage"> Admin </a>
                 <a >
                     <div ng-show=model.user ng-click="model.logout()">
-                        <span class="glyphicon  glyphicon-log-out"></span>
+                        <span class="btn btn-primary"> Logout</span>
                     </div>
                     <div ng-show=!model.user ng-click="model.loginClick()">
-                        <span class="glyphicon  glyphicon-log-in"></span>
+                        <span class="btn btn-primary"> Login</span>
                     </div>
                 </a>
             </div>

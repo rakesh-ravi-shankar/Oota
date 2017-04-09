@@ -9,6 +9,7 @@ module.exports=function(app){
     app.post("/api/order",createOrder);
     app.get("/api/order/orderer/:uid",findActiveOrdersForOrderer);
     app.get("/api/order/activeOrders",findActiveOrders);
+    app.get("/api/allOrders",findAllOrders);
     app.post("/api/order/updateOrder",updateOrder);
 
     // app.get("/api/restaurant/:uid",findRestaurantById);
@@ -55,6 +56,18 @@ module.exports=function(app){
             .findActiveOrders()
             .then(function (activeOrders) {
                 res.json(activeOrders);
+            }, function (error) {
+                res.sendStatus(500).send(error);
+            });
+
+
+    }
+    function findAllOrders(req,res) {
+
+        orderModel
+            .findAllOrders()
+            .then(function (orders) {
+                res.json(orders);
             }, function (error) {
                 res.sendStatus(500).send(error);
             });
