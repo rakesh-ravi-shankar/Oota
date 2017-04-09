@@ -10,7 +10,8 @@
             "createUser":createUser,
             "findUserById":findUserById,
             "findUserByUsername":findUserByUsername,
-            "findUserByCredentials":findUserByCredentials
+            "findUserByCredentials":findUserByCredentials,
+            "logout":logout
             // "updateUser":updateUser,
             // "deleteUser":deleteUser
         };
@@ -33,7 +34,13 @@
 
         function findUserByCredentials(user) {
 
-            return $http.post("/api/login",user);
+            var user = $http.post("/api/login",user);
+            console.log("client : "+user);
+            return user;
+        }
+        function logout(user) {
+
+            return $http.post("/api/logout",user);
 
         }
         //

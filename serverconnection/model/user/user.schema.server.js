@@ -11,7 +11,11 @@ var userSchema= mongoose.Schema({
     profilepicurl:String,
     registerationDate:{type: Date, default: Date.now},
     foodOrdered:[{type: mongoose.Schema.Types.ObjectId, ref: 'OrderModel'}],
-    foodDelivered:[{type: mongoose.Schema.Types.ObjectId, ref: 'OrderModel'}]
+    foodDelivered:[{type: mongoose.Schema.Types.ObjectId, ref: 'OrderModel'}],
+    google: {
+        id: String,
+        token: String
+    }
 },{collection:'user.project.collection'});
 
 

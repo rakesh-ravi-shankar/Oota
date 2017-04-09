@@ -12,9 +12,28 @@ userModel.findUserById=findUserById;
 userModel.createUser =createUser;
 userModel.addOrderToOrderer=addOrderToOrderer;
 userModel.updateUser=updateUser;
+userModel.findUserByGoogleId = findUserByGoogleId;
 // userModel.deleteUser=deleteUser;
 
+
 module.exports=userModel;
+function findUserByGoogleId(googleId) {
+    var deffered =q.defer();
+    userModel
+        .findOne({'google.id': googleId},function (err,user){
+            if(err){
+                deffered.abort(err);
+            }
+            else
+            {
+                deffered.resolve(user);
+            }
+
+        });
+    return deffered.promise;
+
+}
+
 
 function createUser(user) {
     var deffered =q.defer();

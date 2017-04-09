@@ -1,3 +1,63 @@
+<div class="modal fade" id="validateUserModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Login/Register</h5>
+            </div>
+            <div class="modal-body">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" data-target="#home">Login</a></li>
+                    <li><a data-toggle="tab" data-target="#menu1">Register</a></li>
+
+                </ul>
+
+                <div class="tab-content">
+                    <div id="home" class="tab-pane fade in active">
+                        <ng-include src="'views/login.view.client.html'"></ng-include>
+                    </div>
+                    <div id="menu1" class="tab-pane fade">
+                        <ng-include src="'views/registerUser.view.client.html'"></ng-include>
+                    </div>
+                </div>
+                <!--<label>Username:</label>-->
+                <!--<input type="text" class="form-control" placeholder="username" ng-model="user.username">-->
+                <!--<label>Password:</label>-->
+                <!--<input type="text" class="form-control" placeholder="password" ng-model="user.password">-->
+            </div>
+
+            <div class="modal-footer">
+                <a class="btn btn-success" ng-click="model.closeModal()">Close</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<nav class=" navbar navbar-default navbar-fixed-top">
+
+    <div class="row container-fluid">
+
+            <div class="navbar-header pull-left">
+                <a class="navbar-brand" href="#">
+                    RESTAURANTS
+                </a>
+            </div>
+            <div class="navbar-text pull-right" >
+                <a >
+                    <div ng-show=model.user ng-click="model.logout()">
+                        <span class="glyphicon  glyphicon-log-out"></span>
+                    </div>
+                    <div ng-show=!model.user ng-click="model.loginClick()">
+                        <span class="glyphicon  glyphicon-log-in"></span>
+                    </div>
+                </a>
+            </div>
+
+
+
+    </div>
+</nav>
+
 <div class="container">
     <div class="row">
         <div class="col-sm-6">

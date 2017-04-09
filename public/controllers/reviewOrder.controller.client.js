@@ -4,7 +4,7 @@
         .module("Oota")
         .controller("ReviewOrderController", ReviewOrderController);
 
-    function ReviewOrderController($window, $location, $routeParams, localStorageService,OrderService) {
+    function ReviewOrderController($window, $location, $routeParams, localStorageService,OrderService,$rootScope) {
         var vm = this;
         vm.updateOrder = updateOrder;
         vm.placeOrder = placeOrder;
@@ -15,7 +15,7 @@
 
         function init() {
             vm.restuarantId = $routeParams['resid'];
-            vm.userId = $routeParams['uid'];
+            vm.userId = $rootScope.user._id;
             vm.pickupLoc = localStorageService.get("pickupLoc");
             vm.restaurantName = localStorageService.get("restaurantName");
             localStorageService.remove("restaurantName");

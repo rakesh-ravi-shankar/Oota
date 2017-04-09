@@ -86,8 +86,8 @@
                         $("#validateUserModal").modal("hide");
                         $("body").removeClass("modal-open");
                         $(".modal-backdrop").remove();
-                        $rootScope.currentUser = user;
-                        $location.url("/restaurantList/" + vm.restaurantId + "/restaurantMenu/" + loggedUser._id + "/order");
+                        $rootScope.user = loggedUser;
+                        $location.url("/restaurantList/" + vm.restaurantId + "/restaurantMenu/order");
                     }
                     else
                     {
@@ -110,8 +110,8 @@
                                     $("#validateUserModal").modal("hide");
                                     $("body").removeClass("modal-open");
                                     $(".modal-backdrop").remove();
-                                    $rootScope.currentUser = user;
-                                    $location.url("/restaurantList/" + vm.restaurantId + "/restaurantMenu/" + user._id + "/order");
+                                    $rootScope.user = user;
+                                    $location.url("/restaurantList/" + vm.restaurantId + "/restaurantMenu/order");
 
                                     vm.message = "User created successfully";
                                 }
@@ -134,8 +134,8 @@
                                 $("#validateUserModal").modal("hide");
                                 $("body").removeClass("modal-open");
                                 $(".modal-backdrop").remove();
-                                $rootScope.currentUser = user;
-                                $location.url("/restaurantList/" + vm.restaurantId + "/restaurantMenu/" + user._id + "/order");
+                                $rootScope.user = user;
+                                $location.url("/restaurantList/" + vm.restaurantId + "/restaurantMenu/order");
 
                                 vm.message = "User created successfully";
                             }
@@ -154,7 +154,13 @@
         {
             console.log("checkout");
             //$("#validateUserModal").modal({backdrop: 'static', keyboard: true});
-            $("#validateUserModal").modal("show");
+            if($rootScope.user == null){
+                $("#validateUserModal").modal("show");
+            }
+            else{
+                console.log($rootScope.user);
+                $location.url("/restaurantList/" + vm.restaurantId + "/restaurantMenu/order");
+            }
         }
 
 
