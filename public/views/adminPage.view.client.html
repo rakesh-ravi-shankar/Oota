@@ -1,0 +1,167 @@
+<nav class=" navbar navbar-default navbar-fixed-top">
+
+    <div class="row container-fluid">
+        <div class="hidden-xs col-sm-4 col-md-4 col-lg-4">
+
+            <div class="navbar-header pull-left">
+                <a class="navbar-brand" href="">
+                    ADMIN
+                </a>
+            </div>
+
+        </div>
+        <div class="col-xs-1 hidden-lg hidden-md hidden-sm">
+            <div class="navbar-text pull-left" >
+                <a>
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+            </div>
+        </div>
+        <div class="col-xs-10 col-sm-8 col-md-8">
+            <div class="navbar-header pull-left">
+                <a class="navbar-brand" href="#">
+                    ADMIN
+                </a>
+            </div>
+
+
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid col-md-4 col-sm-4 hidden-xs vertical-line web-left-pane" >
+    <div class="profile-edit-button">
+        <a href="#/editProfile  "><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a>
+    </div>
+    <div class="row">
+        <div class="square">
+            <img src="../img/admin.jpg" class="img-responsive img-circle content"/>
+
+        </div>
+
+    </div>
+
+
+    <h1 style="text-align: center">{{model.user.firstName}} {{model.user.lastName}}</h1>
+    <br><br>
+    <div class="container-fluid">
+        <h3><a  ng-click="model.updateCurrentSelection('users')">USERS</a></h3>
+        <h3><a ng-click="model.updateCurrentSelection('orders')">ORDERS</a></h3>
+        <h3><a ng-click="model.updateCurrentSelection('restaurants')">RESTAURANTS</a></h3>
+    </div>
+</div>
+
+
+
+</div>
+
+<div ng-switch="model.currentSelection" class="container-fluid col-md-8 col-sm-8 col-xs-12 web-right-pane">
+
+    <div ng-switch-when="users">
+
+        <!--
+        <table class="table table-striped">
+            <tbody>
+            <col width="80%" />
+            <col width="20%" />
+            <tr>
+                <th>Username</th>
+                <th>Status</th>
+            </tr>
+            <tr ng-repeat="order in model.orders">
+                <td>{{$index + 1}}</td>
+                <td>{{order.restaurantName}}</td>
+                <td>{{order.deliveryStatus}}</td>
+            </tr>
+            </tbody>
+        </table>
+-->
+        <div class="container-fluid">
+            <div class="row">
+                <div >
+                    <h3> Users </h3>
+                    <ul class="list-group">
+                        <li ng-repeat="user in model.users" class="list-group-item">
+                            <!-- <a href="#/user/{{websiteNewController.userId}}/website/{{website._id}}/page"> -->
+                                <a href="#" >
+                                {{user.username}}  {{ user.lastname}}
+                            </a>
+                            <a href="#">
+                                <span class="pull-right glyphicon glyphicon-cog"></span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+
+
+    <div ng-switch-when="orders">
+        <div ng-repeat="order in model.orders">
+            <div class="container-fluid">
+                <div class="row">
+                    <div >
+                        <h3> Orders </h3>
+                        <ul class="list-group">
+                            <li ng-repeat="order in model.orders" class="list-group-item">
+                                <!-- <a href="#/user/{{websiteNewController.userId}}/website/{{website._id}}/page"> -->
+                                <a href="#">
+                                    {{order._id}}
+                                </a>
+                                <a href="#">
+                                    {{order._orderer}}
+                                </a>
+                                <a href="#">
+                                    {{order._deliverer}}
+                                </a>
+                                <a href="#">
+                                    <span class="pull-right glyphicon glyphicon-cog"></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+    <div ng-switch-when="restaurants">
+        <div class="container-fluid">
+            <div class="row">
+                <div >
+                    <ul class="list-group">
+                        <li ng-repeat="restaurant in model.restaurants" class="list-group-item">
+                            <!-- <a href="#/user/{{websiteNewController.userId}}/website/{{website._id}}/page"> -->
+                            <a href="#">
+                                {{restaurant.username}}
+                            </a>
+                            <a href="#">
+                                <span class="pull-right glyphicon glyphicon-cog"></span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+

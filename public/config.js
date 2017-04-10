@@ -21,7 +21,7 @@
                 controller: 'MenuListController',
                 controllerAs: 'model'
             })
-            .when("/restaurantList/:resid/restaurantMenu/:uid/order", {
+            .when("/restaurantList/:resid/restaurantMenu/order", {
                 templateUrl: 'views/reviewOrders.view.client.html',
                 controller: 'ReviewOrderController',
                 controllerAs: 'model'
@@ -61,6 +61,11 @@
             .when("/delivererLogin", {
                 templateUrl: 'views/deliverer.login.view.client.html',
                 controller: '',
+                controllerAs: 'model'
+            })
+            .when("/adminPage", {
+                templateUrl: 'views/adminPage.view.client.html',
+                controller: 'AdminController',
                 controllerAs: 'model'
             })
 

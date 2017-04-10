@@ -13,6 +13,7 @@ orderModel.findActiveOrders = findActiveOrders;
 orderModel.createOrder = createOrder;
 orderModel.updateOrder = updateOrder;
 orderModel.findOrderByUserId = findOrderByUserId;
+orderModel.findAllOrders=findAllOrders;
 
 
 module.exports=orderModel;
@@ -94,7 +95,22 @@ function findActiveOrders() {
             {
                 deffered.resolve(order);
             }
-    });
+        });
+    return deffered.promise;
+}
+
+function findAllOrders() {
+    var deffered =q.defer();
+    orderModel
+        .find(function (err,orders) {
+            if(err){
+                deffered.reject(err);
+            }
+            else
+            {
+                deffered.resolve(orders);
+            }
+        });
     return deffered.promise;
 }
 

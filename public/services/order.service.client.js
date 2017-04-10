@@ -12,6 +12,7 @@
             "findActiveOrders":findActiveOrders,
             //"findRestaurantByCredentials":findRestaurantByCredentials
             "updateOrder":updateOrder,
+            "findAllOrders":findAllOrders,
             // "deleteUser":deleteUser
             getCurrentAddress:getCurrentAddress
         };
@@ -30,6 +31,9 @@
         }
         function updateOrder(order) {
             return $http.post("/api/order/updateOrder",order);
+        }
+        function findAllOrders() {
+            return $http.get("/api/allOrders");
         }
 
         /*

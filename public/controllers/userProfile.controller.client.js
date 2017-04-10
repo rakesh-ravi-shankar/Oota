@@ -3,7 +3,7 @@
         .module("Oota")
         .controller("userProfileController", userProfileController);
 
-    function userProfileController(userProfileService, UserService, OrderService) {
+    function userProfileController(userProfileService, UserService, OrderService, $rootScope) {
         var vm = this;
         vm.updateCurrentSelection=updateCurrentSelection;
         vm.followUser=followUser;
@@ -11,7 +11,8 @@
 
 
         function init() {
-            vm.uid="58e8633aaef6f1574cd71198";
+
+            vm.uid=$rootScope.user._id;
             vm.currentSelection="trackorder";
             UserService
                 .findUserById(vm.uid)
