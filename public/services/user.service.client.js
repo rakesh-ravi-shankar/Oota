@@ -10,7 +10,8 @@
             "createUser":createUser,
             "findUserById":findUserById,
             "findUserByUsername":findUserByUsername,
-            "findUserByCredentials":findUserByCredentials
+            "findUserByCredentials":findUserByCredentials,
+            "findAllUsers":findAllUsers
             // "updateUser":updateUser,
             // "deleteUser":deleteUser
         };
@@ -27,14 +28,14 @@
 
         function findUserByUsername(username) {
             return $http.get("/api/user?username="+username);
-
-
         }
 
         function findUserByCredentials(user) {
-
             return $http.post("/api/login",user);
+        }
 
+        function findAllUsers() {
+            return $http.get("/api/user");
         }
         //
         // function updateUser(userId,user) {
