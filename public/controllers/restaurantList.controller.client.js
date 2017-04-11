@@ -7,7 +7,7 @@
         .controller("RestaurantListController", RestaurantListController);
 
 
-    function RestaurantListController($rootScope, $window, $location, RestaurantListService, localStorageService, UserService) {
+    function RestaurantListController($rootScope, $http, $window, $location, RestaurantListService, localStorageService, UserService) {
         var vm = this;
         vm.getRestaurantDetails = getRestaurantDetails;
         vm.logout = logout;
@@ -20,6 +20,19 @@
 
         function init() {
             //clear the local storage
+
+            $http.get('/api/loggedin').success(function(user) {
+                $rootScope.errorMessage = null;
+                if (user !== '0') {
+                    $rootScope.user = user;
+                } else {
+                    console.log("Dont come here!!!");
+                }
+            });
+
+            if($rootScope.user != null){
+                vm.user=$rootScope.user;
+            }
             localStorageService.clearAll();
             //vm.user= $rootScope.user;
 

@@ -22,6 +22,8 @@ userModel.findAllUsers=findAllUsers;
 
 
 module.exports=userModel;
+
+
 function findUserByGoogleId(googleId) {
     var deffered =q.defer();
     userModel
@@ -169,7 +171,7 @@ function createUser(user) {
     userModel
         .create(user,function (err,user) {
             if(err){
-                deffered.abort(err);
+                deffered.reject(err);
             }
             else
             {
