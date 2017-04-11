@@ -41,7 +41,7 @@
         }
 
         function findAllUsers() {
-            return $http.get("/api/user");
+            return $http.get("/api/allusers");
         }
         //
         // function updateUser(userId,user) {

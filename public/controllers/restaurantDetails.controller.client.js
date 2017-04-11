@@ -41,10 +41,30 @@
                     //         });
                     // }
 
+                    if (allReviews != null)
+                    {
+                        UserService
+                            .findAllUsers()
+                            .success(function (users) {
 
+                                var user_objs = {};
+                                users.forEach(function (user) {
+                                    if (allReviews._users.includes(user._id))
+                                    {
+                                        user_objs[user._id] = user;
+                                    }
+                                });
 
+                                console.log(allReviews);
 
-                })
+                                for (i in allReviews._users)
+                                {
+                                    vm.allReviews.push({firstName: user_objs[allReviews._users[i]].firstName, lastName: user_objs[allReviews._users[i]].lastName, reviewText: allReviews.reviews[i], createdAt:allReviews.dateCreated[i]});
+                                }
+                            });
+                    }
+
+                });
         }
 
 
