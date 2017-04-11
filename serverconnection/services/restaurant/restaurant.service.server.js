@@ -7,6 +7,7 @@ module.exports=function(app){
     app.get("/api/restaurant/:uid",findRestaurantById);
     app.put("/api/restaurant/:uid",updateRestaurant);
     app.delete("/api/restaurant/:uid",deleteRestaurant);
+    app.get("/api/allRrestaurants",findAllRestaurants);
 
 
     function createRestaurant(req,res) {
@@ -103,6 +104,19 @@ module.exports=function(app){
             });
 
     }
+
+    function findAllRestaurants(req,res) {
+        restaurantModel
+            .findAllRestaurants()
+            .then(function (restaurants) {
+                res.json(restaurants);
+            }, function (error) {
+                res.sendStatus(500).send(error);
+            });
+
+    }
+
+
 
     function deleteRestaurant(req,res) {
         var restaurantId=req.params.uid;

@@ -11,8 +11,10 @@ restaurantModel.findRestaurantByUsername = findRestaurantByUsername;
 restaurantModel.findRestaurantByCredentials = findRestaurantByCredentials;
 restaurantModel.findRestaurantById = findRestaurantById;
 restaurantModel.createRestaurant = createRestaurant;
-restaurantModel.updateRestaurant=updateRestaurant;
-restaurantModel.deleteRestaurant=deleteRestaurant;
+restaurantModel.updateRestaurant = updateRestaurant;
+restaurantModel.deleteRestaurant = deleteRestaurant;
+restaurantModel.findAllRestaurants=findAllRestaurants;
+
 
 module.exports=restaurantModel;
 
@@ -42,6 +44,25 @@ function findRestaurantById(restaurantId) {
             else
             {
                 deffered.resolve(restaurant);
+            }
+
+
+
+        });
+    return deffered.promise;
+
+}
+
+function findAllRestaurants() {
+    var deffered=q.defer();
+    restaurantModel
+        .findById(function (err,restaurants) {
+            if(err){
+                deffered.abort(err);
+            }
+            else
+            {
+                deffered.resolve(restaurants);
             }
 
 
@@ -109,7 +130,6 @@ function updateRestaurant(restaurant,restaurantId) {
 }
 
 function deleteRestaurant(restaurantId) {
-
     var deffered = q.defer();
     restaurantModel
         .findByIdAndRemove(restaurantId, function (err, restaurant) {
@@ -121,7 +141,5 @@ function deleteRestaurant(restaurantId) {
             }
         });
     return deffered.promise;
-
-
 }
 
