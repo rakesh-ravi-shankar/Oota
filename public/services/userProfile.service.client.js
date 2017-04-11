@@ -13,9 +13,15 @@
             "updateUser":updateUser,
             "followUser":followUser,
             "unfollowUser":unfollowUser,
-            "alreadyfollowing":alreadyfollowing
+            "alreadyfollowing":alreadyfollowing,
+            "findfollowers":findfollowers
         };
         return api;
+
+        function findfollowers(uid) {
+            return $http.get("/followers/"+uid);
+
+        }
 
         function alreadyfollowing(uid,usertofollow) {
             var obj=[{user_id:uid,usertofollow:usertofollow}];

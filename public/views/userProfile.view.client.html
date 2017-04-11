@@ -40,7 +40,7 @@
         </div>
     <div class="row">
             <div class="square">
-                <img src="../img/food.jpg" class="img-responsive img-circle content"/>
+                <img src="{{model.user.profilepicurl}}" class="img-responsive img-circle content"/>
 
             </div>
 
@@ -54,6 +54,10 @@
        <h3><a  ng-click="model.updateCurrentSelection('trackorder')">TRACK ORDER</a></h3>
         <h3><a ng-click="model.updateCurrentSelection('orderhistory')">ORDER HISTORY</a></h3>
         <h3><a ng-click="model.updateCurrentSelection('comments')">COMMENTS</a></h3>
+        <h3><a ng-click="model.updateCurrentSelection('followers')">FOLLOWERS</a></h3>
+        <h3><a ng-click="model.updateCurrentSelection('following')">FOLLOWING</a></h3>
+
+
     </div>
 </div>
 
@@ -101,6 +105,12 @@
             {{comment.comment}}
 
         </div>
+    </div>
+    <div ng-switch-when="followers">
+        {{model.followers}}
+    </div>
+    <div ng-switch-when="following">
+        {{model.following}}
     </div>
 </div>
 

@@ -3,10 +3,10 @@
         .module("Oota")
         .controller("editProfileController", editProfileController);
 
-    function editProfileController(userProfileService,$rootScope,$http) {
+    function editProfileController(UserService,userProfileService,$location,$rootScope,$http) {
         var vm = this;
         vm.updateUser=updateUser;
-
+        vm.logout=logout;
         function init() {
 
             $http.get('/api/loggedin').success(function(user) {
@@ -40,7 +40,17 @@
         init();
 
 
+        function logout() {
+            UserService
+                .logout()
+                .success(function () {
 
+                    console.log("User logged out");
+                    $rootScope.user = null;
+                    vm.user = null;
+                    $location.url("/homePage");
+                });
+        }
 
 
 

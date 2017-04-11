@@ -123,7 +123,7 @@
                     .findUserComments(vm.uid)
                     .then(function (comments) {
                         vm.comments = comments;
-                        console.log(comments);
+
                     });
             }
             else if(cs == 'orderhistory')
@@ -132,8 +132,27 @@
                     .findoldorder(vm.uid)
                     .then(function (orders) {
                         vm.oldorders = orders;
-                        console.log("pp ");
-                        console.log(orders);
+
+                    });
+
+            }
+            else if(cs == 'followers')
+            {
+                userProfileService
+                    .findfollowers(vm.uid)
+                    .then(function (users) {
+                        vm.followers = users.followers;
+
+
+                    });
+
+            }
+            else if(cs == 'following')
+            {
+                userProfileService
+                    .findfollowers(vm.uid)
+                    .then(function (users) {
+                        vm.following = users.data.following;
                     });
 
             }

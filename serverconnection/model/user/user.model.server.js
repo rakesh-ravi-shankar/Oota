@@ -22,6 +22,8 @@ userModel.findAllUsers=findAllUsers;
 
 
 module.exports=userModel;
+
+
 function findUserByGoogleId(googleId) {
     var deffered =q.defer();
     userModel
