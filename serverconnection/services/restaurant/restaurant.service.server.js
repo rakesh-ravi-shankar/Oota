@@ -7,11 +7,13 @@ module.exports=function(app){
     app.get("/api/restaurant/:uid",findRestaurantById);
     app.put("/api/restaurant/:uid",updateRestaurant);
     app.delete("/api/restaurant/:uid",deleteRestaurant);
+    app.get("/api/allRestaurants",findAllRestaurants);
 
 
     function createRestaurant(req,res) {
         console.log("creaate")
         var newRestaurant = req.body;
+
         restaurantModel
             .createRestaurant(newRestaurant)
             .then(function(restaurant) {
@@ -103,6 +105,19 @@ module.exports=function(app){
             });
 
     }
+
+    function findAllRestaurants(req,res) {
+        restaurantModel
+            .findAllRestaurants()
+            .then(function (restaurants) {
+                res.json(restaurants);
+            }, function (error) {
+                res.sendStatus(500).send(error);
+            });
+
+    }
+
+
 
     function deleteRestaurant(req,res) {
         var restaurantId=req.params.uid;

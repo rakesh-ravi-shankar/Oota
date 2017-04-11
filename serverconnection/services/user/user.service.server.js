@@ -29,8 +29,8 @@ module.exports=function(app){
     app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
     app.get('/google/oauth/callback',
         passport.authenticate('google', {
-            successRedirect: '/#/restaurantList',
-            failureRedirect: '/#/login'
+            successRedirect: '/#!/restaurantList',
+            failureRedirect: '/#!/login'
         }));
 
 
