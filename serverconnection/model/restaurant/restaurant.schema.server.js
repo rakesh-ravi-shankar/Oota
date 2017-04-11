@@ -5,15 +5,19 @@ var restaurantSchema= mongoose.Schema({
     username:String,
     password:String,
     restaurantName:String,
-    address2:String,
+    address:String,
     pincode:Number,
     apiKey:String,
     startTime:Number,
     closeTime:Number,
-    deliveryOption:Boolean,
     phone:String,
     email:String,
-    registerationDate:{type: Date, default: Date.now}
+    registerationDate:{type: Date, default: Date.now},
+    acceptsCard:Boolean,
+    acceptsCash:Boolean,
+    logoUrl:String,
+    url:String,
+    offersPickup:Boolean
 },{collection:'restaurant.project.collection'});
 
 

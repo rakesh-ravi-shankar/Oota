@@ -1,6 +1,7 @@
 var mongoose=require("mongoose");
 
 var orderSchema= mongoose.Schema({
+    apiKey:String,
     _orderer:{type: mongoose.Schema.Types.ObjectId, ref: 'UserModel'},
     restaurantName:String,
     orderTime:{type: Date, default: Date.now},

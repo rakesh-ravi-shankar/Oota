@@ -13,6 +13,7 @@
             //"findRestaurantByCredentials":findRestaurantByCredentials
             "updateOrder":updateOrder,
             "findAllOrders":findAllOrders,
+            "findAllOrdersForRestaurant":findAllOrdersForRestaurant,
             // "deleteUser":deleteUser
             getCurrentAddress:getCurrentAddress
         };
@@ -34,6 +35,9 @@
         }
         function findAllOrders() {
             return $http.get("/api/allOrders");
+        }
+        function findAllOrdersForRestaurant(apiKey){
+            return $http.get("/api/allOrders/" + apiKey);
         }
 
         /*

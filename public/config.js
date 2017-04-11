@@ -58,7 +58,7 @@
                 controller: 'RestaurantDetailController',
                 controllerAs: 'model'
             })
-            .when("/:resid/restaurantDashboard", {
+            .when("/:apiKey/restaurantDashboard", {
                 templateUrl: 'views/restaurantDashboard.view.client.html',
                 controller: 'RestaurantDashboardController',
                 controllerAs: 'model'

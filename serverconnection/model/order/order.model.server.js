@@ -14,6 +14,7 @@ orderModel.createOrder = createOrder;
 orderModel.updateOrder = updateOrder;
 orderModel.findOrderByUserId = findOrderByUserId;
 orderModel.findAllOrders=findAllOrders;
+orderModel.findAllOrdersForRestaurant = findAllOrdersForRestaurant
 
 
 module.exports=orderModel;
@@ -103,6 +104,21 @@ function findAllOrders() {
     var deffered =q.defer();
     orderModel
         .find(function (err,orders) {
+            if(err){
+                deffered.reject(err);
+            }
+            else
+            {
+                deffered.resolve(orders);
+            }
+        });
+    return deffered.promise;
+}
+
+function findAllOrdersForRestaurant(ak) {
+    var deffered =q.defer();
+    orderModel
+        .find({apiKey:ak}, function (err,orders) {
             if(err){
                 deffered.reject(err);
             }

@@ -1,3 +1,4 @@
+<script src="../services/restaurantReview.service.client.js"></script>
 <nav class=" navbar navbar-inverse navbar-fixed-top">
 
     <div class="row container-fluid">
@@ -10,7 +11,6 @@
             <div class="navbar-brand">
                 Restaurant Profile
             </div>
-
     </div>
 </nav>
 
@@ -38,22 +38,59 @@
     <div id="page-content-wrapper" style="margin-top: 3em;">
 
         <div class="container-fluid" ng-switch="model.currentSelection">
+
+
             <div ng-switch-when="overview">
-                <h1>Overview</h1>
+                <img src="{{model.restaurant.logoUrl}}" style="width: 100%; height: 20em;">
+                <div class="container-fluid">
+                    <a href="{{model.restaurant.url}}"><h3>{{model.restaurant.restaurantName}}, {{model.restaurant.address}}</h3></a>
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            Ph no: {{model.restaurant.phone}}
+                        </li>
+                        <li class="list-group-item">
+                            Ph no: {{model.restaurant.acceptsCard}}
+                        </li>
+                        <li class="list-group-item">
+                            Ph no: {{model.restaurant.acceptsCash}}
+                        </li>
+                        <li class="list-group-item">
+                            Ph no: {{model.restaurant.phone}}
+                        </li>
+
+                    </ul>
+                </div>
             </div>
 
 
 
-            <div ng-switch-when="graphical">
-                <h1>Graphical</h1>
+            <div id="graph" ng-switch-when="graphical">
             </div>
 
 
 
             <div ng-switch-when="reviews">
                 <h1>Reviews</h1>
+                <ul class="list-group">
+                    <li class="list-group-item" ng-repeat="review in model.allReviews">
+                        <a href="#" class="pull-left">
+                            <img src="assets/img/1.png" alt="" class="img-circle">
+                        </a>
+                        <div class="media-body">
+                <span class="text-muted pull-right">
+                    <small class="text-muted">{{review.createdAt}}</small>
+                </span>
+                            <strong class="text-success">{{review.firstName}} {{review.lastName}}</strong>
+                            <p>
+                                {{review.reviewText}}
+                            </p>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
+
+
     </div>
     <!-- /#page-content-wrapper -->
 

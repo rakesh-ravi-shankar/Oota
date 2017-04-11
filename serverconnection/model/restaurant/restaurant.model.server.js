@@ -14,6 +14,7 @@ restaurantModel.createRestaurant = createRestaurant;
 restaurantModel.updateRestaurant = updateRestaurant;
 restaurantModel.deleteRestaurant = deleteRestaurant;
 restaurantModel.findAllRestaurants=findAllRestaurants;
+restaurantModel.findRestaurantByApiKey = findRestaurantByApiKey;
 
 
 module.exports=restaurantModel;
@@ -53,6 +54,22 @@ function findRestaurantById(restaurantId) {
         });
     return deffered.promise;
 
+}
+
+function findRestaurantByApiKey(ak) {
+    var deffered = q.defer();
+    restaurantModel
+        .findOne({apiKey:ak}, function(err, restaurant){
+            if(err)
+            {
+                deffered.reject(err);
+            }
+            else
+            {
+                deffered.resolve(restaurant);
+            }
+        });
+    return deffered.promise;
 }
 
 function findAllRestaurants() {

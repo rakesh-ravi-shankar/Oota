@@ -84,6 +84,7 @@
             });
 
             var order = {
+                apiKey:vm.restuarantId,
                 _orderer: vm.userId,
                 restaurantName: vm.restaurantName,
                 deliveryLoc: vm.deliveryLoc,

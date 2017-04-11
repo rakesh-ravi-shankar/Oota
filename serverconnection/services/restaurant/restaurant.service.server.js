@@ -8,6 +8,7 @@ module.exports=function(app){
     app.put("/api/restaurant/:uid",updateRestaurant);
     app.delete("/api/restaurant/:uid",deleteRestaurant);
     app.get("/api/allRestaurants",findAllRestaurants);
+    app.get("/api/restaurantDashboard/:apiKey", findRestaurantByApiKey);
 
 
     function createRestaurant(req,res) {
@@ -33,8 +34,17 @@ module.exports=function(app){
             }, function (error) {
                 res.sendStatus(500).send(error);
             });
+    }
 
-
+    function findRestaurantByApiKey(req, res) {
+        var apiKey = req.params.apiKey;
+        restaurantModel
+            .findRestaurantByApiKey(apiKey)
+            .then(function (restaurant) {
+                res.json(restaurant);
+            }, function (error) {
+                res.sendStatus(500).send(error);
+            });
     }
 
     function findRestaurant(req,res) {
