@@ -90,9 +90,28 @@
 
     <div class="well">
         <h3>Write a Review</h3>
-        <textarea rows="3" style="width: 100%" ng-model="review"></textarea>
-        <button class="btn btn-success" ng-click="model.submitReview(review)">Submit</button>
+        <textarea id="reviewTextArea" rows="3" style="width: 100%" ng-model="reviewText"></textarea>
+        <button class="btn btn-success" ng-click="model.submitReview(reviewText)">Submit</button>
     </div>
+
+
+
+    <ul class="list-group">
+        <li class="list-group-item" ng-repeat="review in model.allReviews">
+            <a href="#" class="pull-left">
+                <img src="assets/img/1.png" alt="" class="img-circle">
+            </a>
+            <div class="media-body">
+                <span class="text-muted pull-right">
+                    <small class="text-muted">{{review.createdAt}}</small>
+                </span>
+                <strong class="text-success">{{review.firstName}} {{review.lastName}}</strong>
+                <p>
+                    {{review.reviewText}}
+                </p>
+            </div>
+        </li>
+    </ul>
 
 </div>
 

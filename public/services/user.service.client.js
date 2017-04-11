@@ -29,23 +29,19 @@
 
         function findUserByUsername(username) {
             return $http.get("/api/user?username="+username);
-
-
         }
-        function findAllUsers() {
-            return $http.get("/api/allusers");
-        }
+
 
         function findUserByCredentials(user) {
-
-            var user = $http.post("/api/login",user);
-            console.log("client : "+user);
-            return user;
+            return $http.post("/api/login",user);
         }
+
         function logout(user) {
+            return $http.post("/api/logout", user);
+        }
 
-            return $http.post("/api/logout",user);
-
+        function findAllUsers() {
+            return $http.get("/api/allusers");
         }
         //
         // function updateUser(userId,user) {
