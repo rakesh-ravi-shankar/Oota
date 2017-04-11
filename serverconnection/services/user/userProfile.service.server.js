@@ -4,11 +4,11 @@ module.exports=function(app){
     var userModel =require("../../model/user/user.model.server");
     var orderModel =require("../../model/order/order.model.server");
 
-    app.get("/usercomments",findUserComments);
+    app.get("/:uid/usercomments",findUserComments);
     app.post("/create-comment",createUserComment);
-    app.get("/userdetails",findUserDetails);
-    app.get("/order-history",findoldorders);
-    app.put("/update-user/:uid",updateUser);
+    app.get("/:uid/userdetails",findUserDetails);
+    app.get("/:uid/orderhistory",findoldorders);
+    app.put("/:uid/updateuser",updateUser);
     app.put("/follow-user",followUser)
     app.put("/unfollow-user",unfollowUser)
     app.put("/already-following",alreadyFollowing)
@@ -24,7 +24,7 @@ module.exports=function(app){
         }
     });
     var upload = multer({storage: storage});
-    app.post("/api/upload", upload.single('myFile'), uploadImage);
+    app.post("/api/:uid/upload", upload.single('myFile'), uploadImage);
 
     function uploadImage(req, res) {
 
@@ -35,7 +35,7 @@ module.exports=function(app){
 
 
 
-            var userid="58e6df044d23541bfe8b35d6";
+            var userid=req.params['uid'];
             userModel
                 .findUserById(userid)
                 .then(function (user) {
@@ -107,7 +107,7 @@ module.exports=function(app){
     function findoldorders(req,res) {
 
         console.log("hi");
-        var userid="58e049bb363adf1ebba05706";
+        var userid=req.params['uid'];
         var status="DELIVERED";
         orderModel
             .findOrderByUserIdAndStatus(userid,status)
@@ -136,7 +136,7 @@ module.exports=function(app){
 
 
     function findUserComments(req,res) {
-        var uid="58e7a533c3e90d03cad0203b";
+        var uid=req.params.uid;
         userCommentModel
             .findUserComments(uid)
             .then(function (comments) {
@@ -149,7 +149,7 @@ module.exports=function(app){
     }
 
     function findUserDetails(req,res) {
-        var userid="58e6df044d23541bfe8b35d6";
+        var userid=req.params.uid;
         userModel
             .findUserById(userid)
             .then(function (user) {

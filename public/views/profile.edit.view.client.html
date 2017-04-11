@@ -10,7 +10,8 @@
         {{model.message}}
     </div>
 
-    <form action="/api/upload"  method="post" enctype="multipart/form-data">
+    <form action="{{model.uploadURL}}"  method="post" enctype="multipart/form-data">
+        <input name="uid" value="model.user_id" style="display: none">
         <div class="form-group">
             <a  ng-click="model.updateUser(model.user)">
                 <span class="glyphicon glyphicon-ok"></span>
@@ -68,7 +69,7 @@
         </div>
         <div class="col-xs-4">
             <div class="navbar-text pull-right">
-                <a href="#/user/{{model.userId}}">
+                <a href="">
                     <span class="glyphicon glyphicon-user"></span>
                 </a>
             </div>

@@ -6,7 +6,7 @@
         .module("Oota")
         .controller("DeliverController", DeliverController);
 
-    function DeliverController(NgMap, $window, OrderService, UserService, localStorageService, userProfileService) {
+    function DeliverController(NgMap, $window, OrderService,$rootScope, UserService, localStorageService, userProfileService) {
         var vm = this;
         vm.restaurantName = "";
         vm.pickUpOrder = pickUpOrder;
@@ -109,7 +109,7 @@
                 }
             }
             vm.selectedOrder.deliveryStatus = "SELECTED_FOR_DELIVERY";
-
+            vm.selectedOrder._deliverer=$rootScope.user._id;
             OrderService
                 .updateOrder(vm.selectedOrder)
                 .then(function(order){
@@ -162,10 +162,9 @@
 
 
         function saveComment(comm) {
-            //TODO: remove the hardcoded values
             var comment = {
-                feedback_giver_id:"58e83082ecad77117d9f2232",
-                feedback_giver_name:"Hardcoded Value",
+                feedback_giver_id:$rootScope.user._id,
+                feedback_giver_name:$rootScope.user.firstName,
                 feedback_reciever_id:vm.orderer._id,
                 comment:comm,
                 order_id:vm.selectedOrder._id

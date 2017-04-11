@@ -63,7 +63,7 @@
         init();
 
         function followUser(usertofollow) {
-            vm.uid="58e8633aaef6f1574cd71198";
+            vm.uid=$rootScope.user._id;
 
             if(!vm.followed) {
                 userProfileService
