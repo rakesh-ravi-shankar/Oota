@@ -39,7 +39,6 @@
 
         <div class="container-fluid" ng-switch="model.currentSelection">
 
-
             <div ng-switch-when="overview">
                 <img src="{{model.restaurant.logoUrl}}" style="width: 100%; height: 20em;">
                 <div class="container-fluid">
@@ -49,13 +48,13 @@
                             Ph no: {{model.restaurant.phone}}
                         </li>
                         <li class="list-group-item">
-                            Ph no: {{model.restaurant.acceptsCard}}
+                            Accepts Card: {{model.restaurant.acceptsCard}}
                         </li>
                         <li class="list-group-item">
-                            Ph no: {{model.restaurant.acceptsCash}}
+                            Accepts Cash: {{model.restaurant.acceptsCash}}
                         </li>
                         <li class="list-group-item">
-                            Ph no: {{model.restaurant.phone}}
+                            Offers Pickup: {{model.restaurant.offersPickup}}
                         </li>
 
                     </ul>
