@@ -43,7 +43,7 @@
                 controller: 'DeliverController',
                 controllerAs: 'model'
             })
-            .when("/userProfile", {
+            .when("/userProfile/:username", {
                 templateUrl: 'views/userProfile.view.client.html',
                 controller: 'userProfileController',
                 controllerAs: 'model'

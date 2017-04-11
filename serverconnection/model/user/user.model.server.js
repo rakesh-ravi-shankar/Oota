@@ -13,6 +13,7 @@ userModel.createUser =createUser;
 userModel.addOrderToOrderer=addOrderToOrderer;
 userModel.updateUser=updateUser;
 userModel.findUserByGoogleId = findUserByGoogleId;
+userModel.findUserByFacebookId = findUserByFacebookId,
 userModel.followUser=followUser;
 userModel.alreadyFollowing=alreadyFollowing;
 userModel.unfollowUser=unfollowUser;
@@ -25,6 +26,23 @@ function findUserByGoogleId(googleId) {
     var deffered =q.defer();
     userModel
         .findOne({'google.id': googleId},function (err,user){
+            if(err){
+                deffered.abort(err);
+            }
+            else
+            {
+                deffered.resolve(user);
+            }
+
+        });
+    return deffered.promise;
+
+}
+
+function findUserByFacebookId(facebookId) {
+    var deffered =q.defer();
+    userModel
+        .findOne({'facebook.id': facebookId},function (err,user){
             if(err){
                 deffered.abort(err);
             }

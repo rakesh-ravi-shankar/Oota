@@ -3,12 +3,12 @@
         .module("Oota")
         .controller("AdminController", AdminController);
 
-    function AdminController( UserService, OrderService, $rootScope) {
+    function AdminController( UserService, OrderService, RestaurantService, $rootScope) {
         var vm = this;
         vm.updateCurrentSelection=updateCurrentSelection;
         vm.users = [];
         vm.orders = [];
-        vm.restautrants = [];
+        vm.restaurants = [];
 
 
 
@@ -59,15 +59,11 @@
             }
             else if(cs == 'restaurants')
             {
-                /*
-                 userProfileService
-                 .findoldorder(vm.uid)
-                 .then(function (orders) {
-                 vm.oldorders = orders;
-                 console.log("pp ");
-                 console.log(orders);
-                 });
-                 */
+                RestaurantService
+                    .findAllRestaurants()
+                    .success(function (restaurants) {
+                        vm.restaurants = restaurants;
+                    });
             }
         }
 

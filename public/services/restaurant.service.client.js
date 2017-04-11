@@ -10,7 +10,10 @@
             "createRestaurant":createRestaurant,
 
             "findRestaurantByUsername":findRestaurantByUsername,
-            "findRestaurantByCredentials":findRestaurantByCredentials
+            "findRestaurantByCredentials":findRestaurantByCredentials,
+            "findAllRestaurants":findAllRestaurants
+            // "updateUser":updateUser,
+            // "deleteUser":deleteUser
 
         };
         return api;
@@ -31,6 +34,25 @@
             return $http.get("/api/restaurant?username="+username+"&password="+password);
 
         }
+
+        function findAllRestaurants() {
+
+            return $http.get("/api/allRestaurants");
+
+        }
+
+        //
+        // function updateUser(userId,user) {
+        //     return $http.put("/api/user/"+userId, user);
+        //
+        // }
+        //
+        // function deleteUser(userId) {
+        //     return $http.delete("/api/user/"+userId);
+        //
+        //
+        // }
+
 
 
 
