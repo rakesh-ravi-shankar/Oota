@@ -60,7 +60,7 @@
             })
             .when("/delivererLogin", {
                 templateUrl: 'views/deliverer.login.view.client.html',
-                controller: '',
+                controller: 'LoginController',
                 controllerAs: 'model'
             })
             .when("/adminPage", {

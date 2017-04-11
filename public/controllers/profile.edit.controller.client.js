@@ -3,11 +3,13 @@
         .module("Oota")
         .controller("editProfileController", editProfileController);
 
-    function editProfileController(userProfileService) {
+    function editProfileController(userProfileService,$rootScope) {
         var vm = this;
+        vm.updateUser=updateUser;
 
-        var user_id="58e6df044d23541bfe8b35d6";
         function init() {
+            var user_id=$rootScope.user._id;
+            console.log("monica"+user_id);
             userProfileService
                 .findUserDetails(user_id)
                 .success(function (user) {
@@ -15,11 +17,16 @@
 
                 });
 
-
+            vm.user_id=user_id;
+            vm.uploadURL = '/api/' + vm.user_id + "/upload";
 
         }
         init();
-        vm.updateUser=updateUser;
+
+
+
+
+
 
         function updateUser(newUser) {
 

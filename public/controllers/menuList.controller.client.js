@@ -115,7 +115,7 @@
 
                                     vm.message = "User created successfully";
                                 }
-                                else
+                                 else
                                     vm.error = "User not created successfully!"
                             });
                     }

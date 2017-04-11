@@ -40,22 +40,25 @@
         return api;
 
         function createUserComment(comment) {
-            return $http.post("/create-comment", comment);
+            return $http.post("/createcomment", comment);
         }
+        //done
 
-        function findUserComments(user) {
-            return $http.get("/usercomments",user);
+        function findUserComments(userId) {
+            return $http.get("/"+userId+"/usercomments");
         }
+//done
+        function findUserDetails(userId) {
+            return $http.get("/"+userId+"/userdetails");
+        }
+ //done       
+        function findoldorder(userId) {
+            return $http.get("/"+userId+"/orderhistory");
 
-        function findUserDetails(user) {
-            return $http.get("/userdetails",user);
         }
-        function findoldorder(user) {
-            return $http.get("/order-history",user);
-
-        }
+        //done
         function updateUser(userId,user) {
-            return $http.put("/update-user/"+userId,user);
+            return $http.put("/"+userId+"/updateuser",user);
 
         }
 
