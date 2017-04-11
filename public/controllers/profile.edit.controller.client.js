@@ -57,7 +57,7 @@
         function updateUser(newUser) {
 
             userProfileService
-                .updateUser(user_id,newUser)
+                .updateUser($rootScope.user._id,newUser)
                 .success(function (user) {
                     if(user!=null)
                     {vm.message="user successfully updated";}
