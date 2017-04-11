@@ -8,25 +8,22 @@
 
         var api={
             "createRestaurant":createRestaurant,
-            // "findUserById":findUserById,
+
             "findRestaurantByUsername":findRestaurantByUsername,
             "findRestaurantByCredentials":findRestaurantByCredentials,
             "findAllRestaurants":findAllRestaurants
             // "updateUser":updateUser,
             // "deleteUser":deleteUser
+
         };
         return api;
 
         function createRestaurant(restaurant) {
             return $http.post("/api/restaurant",restaurant);
         }
-        //
-        // function findUserById(userId) {
-        //     return $http.get("/api/user/"+userId);
-        //
-        // }
-        //
+
         function findRestaurantByUsername(username) {
+            var username= encodeURIComponent(username);
             return $http.get("/api/restaurant?username="+username);
 
 
@@ -37,9 +34,10 @@
             return $http.get("/api/restaurant?username="+username+"&password="+password);
 
         }
+
         function findAllRestaurants() {
 
-            return $http.get("/api/allRrestaurants");
+            return $http.get("/api/allRestaurants");
 
         }
 
@@ -54,6 +52,7 @@
         //
         //
         // }
+
 
 
 
