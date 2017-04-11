@@ -169,7 +169,7 @@ function createUser(user) {
     userModel
         .create(user,function (err,user) {
             if(err){
-                deffered.abort(err);
+                deffered.reject(err);
             }
             else
             {

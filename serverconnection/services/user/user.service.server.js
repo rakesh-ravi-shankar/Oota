@@ -4,6 +4,7 @@ module.exports=function(app){
     var passport      = require('passport');
     var LocalStrategy = require('passport-local').Strategy;
     var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+    var FacebookStrategy = require('passport-facebook').Strategy;
     passport.use(new LocalStrategy(localStrategy));
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
@@ -13,6 +14,7 @@ module.exports=function(app){
     app.post  ('/api/logout',         logout);
     app.post  ('/api/register',       register);
     app.get  ('/api/allusers',  findAllUsers);
+    app.get ('/api/loggedin', loggedin);
     //app.post  ('/api/user',     auth, createUser);
     //app.get   ('/api/loggedin',       loggedin);
     //app.get   ('/api/user',     auth, findAllUsers);
@@ -26,11 +28,19 @@ module.exports=function(app){
     // app.delete("/api/user/:uid",deleteUser);
 
 
+    app.get ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
+    app.get('/auth/facebook/callback',
+        passport.authenticate('facebook', {
+            successRedirect: '/#/restaurantList',
+            failureRedirect: '/#/login'
+        }));
+
+
     app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
     app.get('/google/oauth/callback',
         passport.authenticate('google', {
-            successRedirect: '/#!/restaurantList',
-            failureRedirect: '/#!/login'
+            successRedirect: '/#/restaurantList',
+            failureRedirect: '/#/login'
         }));
 
 
@@ -40,7 +50,51 @@ module.exports=function(app){
         callbackURL  : "http://localhost:3000/google/oauth/callback"
     };
 
+    var facebookConfig = {
+        clientID     : "1846643555623628",
+        clientSecret : "bb873f797ae32cb11c07d6b07853aeaf",
+        callbackURL  : "http://localhost:3000/auth/facebook/callback"
+    };
+
     passport.use(new GoogleStrategy(googleConfig, googleStrategy));
+    passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
+
+    function facebookStrategy(token, refreshToken, profile, done) {
+        console.log(profile.id);
+        userModel
+            .findUserByFacebookId(profile.id)
+            .then(function (user) {
+                console.log(user);
+                if(user) {
+                    console.log(111);
+                    done(null, user);
+                } else {
+                    console.log(profile);
+                    var displayname = profile.displayName;
+                    var user = {
+
+                        //username: profile.emails[0].value,
+                        //photo: profile.photos[0].value,
+                        firstName: displayname.split()[0],
+                        lastName:  displayname.split()[0],
+                        facebook: {
+                            id:    profile.id
+                        }
+                    };
+                    return userModel.createUser(user);
+                }
+            }, function (err) {
+                console.log(err);
+                done(err, null);
+            })
+            .then(function (user) {
+                done(null, user);
+            }, function (err) {
+                console.log(err);
+                done(err, null);
+            });
+    }
+
 
     function googleStrategy(token, refreshToken, profile, done) {
         console.log(profile.id);
@@ -100,6 +154,10 @@ module.exports=function(app){
                     done(err, null);
                 }
             );
+    }
+
+    function loggedin(req, res) {
+        res.send(req.isAuthenticated() ? req.user : '0');
     }
 
     function localStrategy(username, password, done) {
