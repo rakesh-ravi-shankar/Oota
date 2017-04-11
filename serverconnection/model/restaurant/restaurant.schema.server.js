@@ -1,12 +1,13 @@
 var mongoose=require("mongoose");
 
+
 var restaurantSchema= mongoose.Schema({
     username:String,
     password:String,
     restaurantName:String,
-    address1:String,
     address2:String,
     pincode:Number,
+    apiKey:String,
     startTime:Number,
     closeTime:Number,
     deliveryOption:Boolean,

@@ -12,6 +12,7 @@ module.exports=function(app){
     function createRestaurant(req,res) {
         console.log("creaate")
         var newRestaurant = req.body;
+
         restaurantModel
             .createRestaurant(newRestaurant)
             .then(function(restaurant) {

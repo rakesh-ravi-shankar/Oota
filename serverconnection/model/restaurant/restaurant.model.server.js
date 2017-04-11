@@ -17,6 +17,7 @@ restaurantModel.deleteRestaurant=deleteRestaurant;
 module.exports=restaurantModel;
 
 function createRestaurant(restaurant) {
+    console.log(restaurant);
     var deffered =q.defer();
     restaurantModel
         .create(restaurant,function (err,restaurant) {
@@ -25,6 +26,7 @@ function createRestaurant(restaurant) {
             }
             else
             {
+                console.log("resolved")
                 deffered.resolve(restaurant);
             }
 
@@ -76,10 +78,11 @@ function findRestaurantByUsername(username) {
     restaurantModel
         .find({userName: username },function (err,restaurant) {
             if(err){
+
                 deffered.abort(err);
             }
             else
-            {
+            {   console.log(restaurant);
                 deffered.resolve(restaurant);
             }
 
