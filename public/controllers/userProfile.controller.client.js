@@ -3,7 +3,7 @@
         .module("Oota")
         .controller("userProfileController", userProfileController);
 
-    function userProfileController($routeParams,$rootScope, userProfileService, UserService, OrderService, $location) {
+    function userProfileController($http, $routeParams,$rootScope, userProfileService, UserService, OrderService, $location) {
         var vm = this;
         vm.updateCurrentSelection=updateCurrentSelection;
         vm.followUser=followUser;
@@ -11,51 +11,64 @@
 
 
         function init() {
-            if($rootScope.user != null){
-                vm.uid=$rootScope.user._id;
-                vm.loggedInUsername=$rootScope.user.username;
-            }
-            vm.urlUsername=$routeParams[username];
 
 
-            console.log("curr user : " + vm.uid + "other user name" + vm.otherUser);
-            if(vm.loggedInUsername == vm.urlUsername){
+            $http.get('/api/loggedin').success(function(user) {
+                $rootScope.errorMessage = null;
+                if (user !== '0') {
+                    $rootScope.user = user;
+                    vm.uid=user._id;
+                    vm.urlUsername=$routeParams['username'];
+                    vm.loggedInUsername=$rootScope.user.username;
 
-                vm.currentSelection = "trackorder";
-                UserService
-                    .findUserById(vm.uid)
-                    .success(function (user) {
-                        vm.user = user;
-                    });
-                OrderService
-                    .findActiveOrdersForOrderer(vm.uid)
-                    .success(function (orders) {
-                        vm.orders = orders;
-                    });
-                window.setInterval(updateStatus, 5000);
-                console.log(vm.orders);
 
-                //check if already followed
-                var usertofollow = '58e862d6aef6f1574cd71197';
-                userProfileService
-                    .alreadyfollowing(vm.uid, usertofollow)
-                    .then(function (followed) {
-                        if (followed.data.length != 0)
-                            vm.followed = true;
-                        else
-                            vm.followed = false
+                    //console.log("curr user : " + vm.uid + "other user name" + vm.otherUser);
+                    if(vm.loggedInUsername == vm.urlUsername){
 
-                        if (vm.followed) {
-                            $("#followBtn").addClass("btn-danger");
-                            vm.followStatus = "Unfollow";
-                        }
-                        else {
-                            $("#followBtn").addClass("btn-success");
-                            vm.followStatus = "Follow";
-                        }
-                    });
+                        vm.currentSelection = "trackorder";
+                        UserService
+                            .findUserById(vm.uid)
+                            .success(function (user) {
+                                vm.user = user;
+                            });
+                        OrderService
+                            .findActiveOrdersForOrderer(vm.uid)
+                            .success(function (orders) {
+                                vm.orders = orders;
+                            });
+                        window.setInterval(updateStatus, 5000);
+                       // console.log(vm.orders);
 
-            }
+                        //check if already followed
+                        var usertofollow = '58e862d6aef6f1574cd71197';
+                        userProfileService
+                            .alreadyfollowing(vm.uid, usertofollow)
+                            .then(function (followed) {
+                                if (followed.data.length != 0)
+                                    vm.followed = true;
+                                else
+                                    vm.followed = false
+
+                                if (vm.followed) {
+                                    $("#followBtn").addClass("btn-danger");
+                                    vm.followStatus = "Unfollow";
+                                }
+                                else {
+                                    $("#followBtn").addClass("btn-success");
+                                    vm.followStatus = "Follow";
+                                }
+                            });
+
+                    }
+
+
+                } else {
+                    console.log("Dont come here!!!");
+                }
+            });
+
+
+
 
 
         }

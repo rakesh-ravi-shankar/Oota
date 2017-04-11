@@ -99,7 +99,7 @@
             OrderService
                 .createOrder(order)
                 .then(function () {
-                    $location.url("/userProfile");
+                    $location.url("/userProfile/"+$rootScope.user.username);
                 })
         }
 
