@@ -1,0 +1,63 @@
+<nav class=" navbar navbar-inverse navbar-fixed-top">
+
+    <div class="row container-fluid">
+            <div class="navbar-text">
+                <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">
+                    <span class="glyphicon glyphicon-menu-hamburger"></span>
+                </a>
+            </div>
+
+            <div class="navbar-brand">
+                Restaurant Profile
+            </div>
+
+    </div>
+</nav>
+
+
+
+<div id="wrapper" class="toggled">
+
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav" style="margin-top: 2em;">
+            <li>
+                <a ng-click="model.updateCurrentSelection('overview')">Overview</a>
+            </li>
+            <li>
+                <a ng-click="model.updateCurrentSelection('graphical')">Graphical</a>
+            </li>
+            <li>
+                <a ng-click="model.updateCurrentSelection('reviews')">Reviews</a>
+            </li>
+        </ul>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper" style="margin-top: 3em;">
+
+        <div class="container-fluid" ng-switch="model.currentSelection">
+            <div ng-switch-when="overview">
+                <h1>Overview</h1>
+            </div>
+
+
+
+            <div ng-switch-when="graphical">
+                <h1>Graphical</h1>
+            </div>
+
+
+
+            <div ng-switch-when="reviews">
+                <h1>Reviews</h1>
+            </div>
+        </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+
+

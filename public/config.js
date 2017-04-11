@@ -58,6 +58,11 @@
                 controller: 'RestaurantDetailController',
                 controllerAs: 'model'
             })
+            .when("/:resid/restaurantDashboard", {
+                templateUrl: 'views/restaurantDashboard.view.client.html',
+                controller: 'RestaurantDashboardController',
+                controllerAs: 'model'
+            })
             .when("/delivererLogin", {
                 templateUrl: 'views/deliverer.login.view.client.html',
                 controller: 'LoginController',
