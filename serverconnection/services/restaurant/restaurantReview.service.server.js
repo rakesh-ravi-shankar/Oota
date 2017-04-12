@@ -30,6 +30,19 @@ module.exports=function(app) {
                 res.sendStatus(500).send(error);
             })
     }
+/*
+    function findAndDeleteReview(req, res) {
+        var rid = req.params['rid'];
+        RestaurantReviewModel
+            .findAllReviews(key)
+            .then(function(reviews) {
+                res.json(reviews);
+            }, function (error)  {
+                res.sendStatus(500).send(error);
+            })
+    }
+
+*/
 
 
 
