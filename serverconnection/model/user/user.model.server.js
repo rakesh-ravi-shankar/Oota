@@ -279,8 +279,11 @@ function deleteUser(userId) {
             if(err)
                 deffered.reject(err);
             else {
-                user.remove();
-                deffered.resolve(user);
+                user.remove()
+                    .then(function () {
+                    deffered.resolve();
+                });
+
             }
         });
     return deffered.promise;
