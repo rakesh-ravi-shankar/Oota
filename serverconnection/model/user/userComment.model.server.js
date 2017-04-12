@@ -9,6 +9,8 @@ var userCommentModel=mongoose.model("UserCommentModel",userCommentSchema);
 
 userCommentModel.findUserComments=findUserComments;
 userCommentModel.createUserComment = createUserComment;
+//userCommentModel.updateUserComment = updateUserComment;
+
 module.exports=userCommentModel;
 
 
