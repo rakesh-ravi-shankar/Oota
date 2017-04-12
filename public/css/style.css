@@ -1,5 +1,7 @@
 body {
 	/*background-color: #21263B;*/
+	overflow-x: hidden;
+	padding-top: 64px;
 }
 
 #background-img {
@@ -135,7 +137,15 @@ body {
 	font-size: 2em;
 }
 .profile-edit-button
-{text-align: right}
+{text-align: right;
+padding: 5px}
+.profile-edit-button a
+{text-align: right;
+color:#999999}
+.profile-edit-button a:hover
+{ text-decoration: none;
+	color: #fff;
+	background: rgba(255,255,255,0.2);}
 
 
 .profile-card {
@@ -244,4 +254,12 @@ body {
 .media-list {
 	padding-left: 0;
 	list-style: none;
+}
+
+/*#wrapper*/
+/*{*/
+	/*margin-top: 16%;*/
+/*}*/
+a{
+	cursor: hand;
 }

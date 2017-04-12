@@ -11,6 +11,10 @@
 
 
         function init() {
+            $("#menu-toggle").click(function(e) {
+                e.preventDefault();
+                $("#wrapper").toggleClass("toggled");
+            });
 
 
             $http.get('/api/loggedin').success(function(user) {
@@ -25,7 +29,7 @@
                     //console.log("curr user : " + vm.uid + "other user name" + vm.otherUser);
                     if(vm.loggedInUsername == vm.urlUsername){
 
-                        vm.currentSelection = "trackorder";
+                        vm.currentSelection = "TRACK ORDER";
                         UserService
                             .findUserById(vm.uid)
                             .success(function (user) {
@@ -117,7 +121,7 @@
         function updateCurrentSelection(cs) {
             vm.currentSelection = cs;
 
-            if (cs == 'comments')
+            if (cs == 'COMMENTS')
             {
                 userProfileService
                     .findUserComments(vm.uid)
@@ -126,7 +130,7 @@
 
                     });
             }
-            else if(cs == 'orderhistory')
+            else if(cs == 'ORDER HISTORY')
             {
                 userProfileService
                     .findoldorder(vm.uid)
@@ -136,7 +140,7 @@
                     });
 
             }
-            else if(cs == 'followers')
+            else if(cs == 'FOLLOWERS')
             {
                 userProfileService
                     .findfollowers(vm.uid)
@@ -147,7 +151,7 @@
                     });
 
             }
-            else if(cs == 'following')
+            else if(cs == 'FOLLOWING')
             {
                 userProfileService
                     .findfollowers(vm.uid)
