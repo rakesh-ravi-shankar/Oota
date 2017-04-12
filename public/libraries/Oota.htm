@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<!-- saved from url=(0037)http://localhost:3000/#/userProfile/r -->
+<html lang="en" ng-app="Oota" class="ng-scope"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>
+    
+    <title>Oota</title>
+
+    <script src="./Oota_files/jquery.min.js"></script>
+    <script src="./Oota_files/jquery-ui.min.js"></script>
+    <script src="./Oota_files/jquery.ui.touch-punch.min.js"></script>
+    <script src="./Oota_files/angular.min.js"></script>
+    <script src="./Oota_files/angular-route.js"></script>
+    <script src="./Oota_files/moment.min.js"></script>
+    <script src="./Oota_files/bootstrap-datetimepicker.min.js"></script>
+    <script src="./Oota_files/highcharts.js"></script>
+    <script src="./Oota_files/exporting.js"></script>
+    <script src="./Oota_files/js"></script>
+    <script src="./Oota_files/ng-map.js"></script>
+    <script src="./Oota_files/angular-local-storage.js"></script>
+
+    <script src="./Oota_files/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>-->
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+
+    <script src="./Oota_files/app.js"></script>
+    <script src="./Oota_files/config.js"></script>
+
+    <link href="./Oota_files/css" rel="stylesheet">
+    <link href="./Oota_files/bootstrap.min.css" rel="stylesheet">
+    <link href="./Oota_files/font-awesome.min.css" rel="stylesheet">
+    <link href="./Oota_files/style.css" rel="stylesheet">
+    <link href="./Oota_files/sidebar.css" rel="stylesheet">
+    <link href="./Oota_files/hover.css" rel="stylesheet">
+
+    <script src="./Oota_files/login.controller.client.js"></script>
+    <script src="./Oota_files/homePage.controller.client.js"></script>
+    <script src="./Oota_files/restaurantList.controller.client.js"></script>
+    <script src="./Oota_files/restaurantDetails.controller.client.js"></script>
+    <script src="./Oota_files/restaurantDashboard.controller.client.js"></script>
+    <script src="./Oota_files/registerUser.controller.client.js"></script>
+    <script src="./Oota_files/registerRestaurant.controller.client.js"></script>
+    <script src="./Oota_files/deliver.controller.client.js"></script>
+    <script src="./Oota_files/menuList.controller.client.js"></script>
+    <script src="./Oota_files/reviewOrder.controller.client.js"></script>
+    <script src="./Oota_files/admin.controller.client.js"></script>
+
+    <script src="./Oota_files/user.service.client.js"></script>
+    <script src="./Oota_files/restaurantList.service.client.js"></script>
+    <script src="./Oota_files/restaurant.service.client.js"></script>
+    <script src="./Oota_files/userProfile.service.client.js"></script>
+    <script src="./Oota_files/userProfile.controller.client.js"></script>
+    <script src="./Oota_files/order.service.client.js"></script>
+    <script src="./Oota_files/profile.edit.controller.client.js"></script>
+    <script src="./Oota_files/login.controller.client.js"></script>
+
+    <script src="./Oota_files/restaurantReview.service.client.js"></script>
+
+<script type="text/javascript" charset="UTF-8" src="./Oota_files/common.js"></script><script type="text/javascript" charset="UTF-8" src="./Oota_files/util.js"></script><script type="text/javascript" charset="UTF-8" src="./Oota_files/stats.js"></script></head>
+
+
+
+
+
+<body class="">
+
+	<!-- ngView: --><div ng-view="" class="ng-scope"><!--<nav class=" navbar navbar-default navbar-fixed-top">-->
+
+    <!--<div class="row container-fluid">-->
+        <!--<div class="hidden-xs col-sm-4 col-md-4 col-lg-4">-->
+            <!--<div class="navbar-text pull-left" >-->
+                <!--<a>-->
+                    <!--<span class="glyphicon  glyphicon-user"></span>-->
+                <!--</a>-->
+            <!--</div>-->
+
+            <!--<div class="navbar-header pull-left">-->
+                <!--<a class="navbar-brand" href="">-->
+                    <!--PROFILE-->
+                <!--</a>-->
+            <!--</div>-->
+
+        <!--</div>-->
+        <!--<div class="col-xs-1 hidden-lg hidden-md hidden-sm">-->
+            <!--<div class="navbar-text pull-left" >-->
+                <!--<a>-->
+                    <!--<span class="glyphicon glyphicon-chevron-left"></span>-->
+                <!--</a>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="col-xs-10 col-sm-8 col-md-8">-->
+            <!--<div class="navbar-header pull-left">-->
+                <!--<a class="navbar-brand" href="#">-->
+                    <!--{{model.currentSelection}}-->
+                <!--</a>-->
+            <!--</div>-->
+
+
+        <!--</div>-->
+    <!--</div>-->
+<!--</nav>-->
+<nav class="navbar navbar-inverse navbar-fixed-top ng-scope">
+
+    <div class="row container-fluid">
+        <div class="navbar-text">
+            <a href="http://localhost:3000/#menu-toggle" class="btn btn-default" id="menu-toggle">
+                <span class="glyphicon glyphicon-menu-hamburger"></span>
+            </a>
+        </div>
+
+        </div>
+    
+</nav>
+
+<div id="wrapper" class="ng-scope toggled">
+
+<div id="sidebar-wrapper">
+
+
+
+
+    <ul class="sidebar-nav">
+
+        <div class="profile-edit-button">
+                <a href="http://localhost:3000/#/editProfile"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a>
+        </div>
+
+        <li>
+
+            <div class="square">
+                <img class="img-responsive img-circle content">
+            </div>
+        </li>
+        <li>
+
+            <h2 style="color: #F2F2F1;overflow-wrap: break-word;text-align:center;" class="ng-binding">Rakesh Ravi Shankar</h2>
+        </li>
+        <li>
+            <button id="followBtn" class="btn ng-binding btn-success" ng-click="model.followUser(&#39;58e862d6aef6f1574cd71197&#39;)">
+                Follow</button>
+        </li>
+        <li>
+            <a ng-click="model.updateCurrentSelection(&#39;TRACK ORDER&#39;)">TRACK ORDER</a>
+        </li>
+        <li>
+            <a ng-click="model.updateCurrentSelection(&#39;ORDER HISTORY&#39;)">ORDER HISTORY</a>
+        </li>
+        <li>
+            <a ng-click="model.updateCurrentSelection(&#39;COMMENTS&#39;)">COMMENTS</a>
+        </li>
+        <li>
+            <a ng-click="model.updateCurrentSelection(&#39;FOLLOWERS&#39;)">FOLLOWERS</a>
+        </li>
+        <li>
+            <a ng-click="model.updateCurrentSelection(&#39;FOLLOWING&#39;)">FOLLOWING</a>
+        </li>
+    </ul>
+</div>
+
+<div id="page-content-wrapper">
+
+    <div ng-switch="model.currentSelection">
+
+        <!-- ngSwitchWhen: TRACK ORDER --><div ng-switch-when="TRACK ORDER" class="ng-scope">
+
+            <table class="table table-striped">
+                <tbody>
+                </tbody><colgroup><col width="40%">
+                <col width="40%">
+                <col width="20%">
+                </colgroup><tbody><tr>
+                    <th>Order</th>
+                    <th>Restaurant Name</th>
+                    <th>Status</th>
+                </tr>
+                <!-- ngRepeat: order in model.orders --><tr ng-repeat="order in model.orders" class="ng-scope">
+                    <td class="ng-binding">1</td>
+                    <td class="ng-binding">Boston Shawarma</td>
+                    <td class="ng-binding">DELIVERED</td>
+                </tr><!-- end ngRepeat: order in model.orders --><tr ng-repeat="order in model.orders" class="ng-scope">
+                    <td class="ng-binding">2</td>
+                    <td class="ng-binding">Angora Cafe</td>
+                    <td class="ng-binding">DELIVERED</td>
+                </tr><!-- end ngRepeat: order in model.orders --><tr ng-repeat="order in model.orders" class="ng-scope">
+                    <td class="ng-binding">3</td>
+                    <td class="ng-binding">#1 Food</td>
+                    <td class="ng-binding">DELIVERED</td>
+                </tr><!-- end ngRepeat: order in model.orders --><tr ng-repeat="order in model.orders" class="ng-scope">
+                    <td class="ng-binding">4</td>
+                    <td class="ng-binding">Boston Shawarma</td>
+                    <td class="ng-binding">DELIVERED</td>
+                </tr><!-- end ngRepeat: order in model.orders --><tr ng-repeat="order in model.orders" class="ng-scope">
+                    <td class="ng-binding">5</td>
+                    <td class="ng-binding">Asia Wok</td>
+                    <td class="ng-binding">DELIVERED</td>
+                </tr><!-- end ngRepeat: order in model.orders --><tr ng-repeat="order in model.orders" class="ng-scope">
+                    <td class="ng-binding">6</td>
+                    <td class="ng-binding">Boston Shawarma</td>
+                    <td class="ng-binding">DELIVERED</td>
+                </tr><!-- end ngRepeat: order in model.orders --><tr ng-repeat="order in model.orders" class="ng-scope">
+                    <td class="ng-binding">7</td>
+                    <td class="ng-binding">Elephant Walk</td>
+                    <td class="ng-binding">DELIVERED</td>
+                </tr><!-- end ngRepeat: order in model.orders --><tr ng-repeat="order in model.orders" class="ng-scope">
+                    <td class="ng-binding">8</td>
+                    <td class="ng-binding">#1 Food</td>
+                    <td class="ng-binding">ORDERED</td>
+                </tr><!-- end ngRepeat: order in model.orders --><tr ng-repeat="order in model.orders" class="ng-scope">
+                    <td class="ng-binding">9</td>
+                    <td class="ng-binding">Boston Shawarma</td>
+                    <td class="ng-binding">ORDERED</td>
+                </tr><!-- end ngRepeat: order in model.orders --><tr ng-repeat="order in model.orders" class="ng-scope">
+                    <td class="ng-binding">10</td>
+                    <td class="ng-binding">Boston Shawarma</td>
+                    <td class="ng-binding">ORDERED</td>
+                </tr><!-- end ngRepeat: order in model.orders --><tr ng-repeat="order in model.orders" class="ng-scope">
+                    <td class="ng-binding">11</td>
+                    <td class="ng-binding">Boston Shawarma</td>
+                    <td class="ng-binding">ORDERED</td>
+                </tr><!-- end ngRepeat: order in model.orders --><tr ng-repeat="order in model.orders" class="ng-scope">
+                    <td class="ng-binding">12</td>
+                    <td class="ng-binding">Boston Shawarma</td>
+                    <td class="ng-binding">ORDERED</td>
+                </tr><!-- end ngRepeat: order in model.orders --><tr ng-repeat="order in model.orders" class="ng-scope">
+                    <td class="ng-binding">13</td>
+                    <td class="ng-binding">#1 Food</td>
+                    <td class="ng-binding">ORDERED</td>
+                </tr><!-- end ngRepeat: order in model.orders -->
+                </tbody>
+            </table>
+        </div><!-- end ngSwitchWhen: -->
+        <!-- ngSwitchWhen: ORDER HISTORY -->
+        <!-- ngSwitchWhen: COMMENTS -->
+        <!-- ngSwitchWhen: FOLLOWERS -->
+        <!-- ngSwitchWhen: FOLLOWING -->
+    </div>
+</div>
+</div></div>
+    
+
+
+</body></html>

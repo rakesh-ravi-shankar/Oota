@@ -7,12 +7,7 @@
         var vm = this;
         vm.updateCurrentSelection=updateCurrentSelection;
         vm.followUser=followUser;
-        vm.login = loginUser;
-        vm.closeModal=closeModal;
-        vm.loginUser = loginUser;
-        vm.logout = logout;
-        vm.loginClick=loginClick;
-        vm.user= $rootScope.user;
+
 
 
         function init() {
@@ -116,7 +111,6 @@
         }
         function updateStatus() {
             console.log("updating..");
-            // TODO:change the frequency
             OrderService
                 .findActiveOrdersForOrderer(vm.uid)
                 .success(function (orders) {
@@ -167,55 +161,6 @@
 
             }
         }
-
-        function loginClick()
-        {
-            $("#validateUserModal").modal("show");
-        }
-
-        function logout() {
-            UserService
-                .logout()
-                .success(function () {
-                    console.log("User logged out");
-                    $rootScope.user = null;
-                    vm.user = null;
-                    $location.url("/homePage")
-                });
-        }
-
-        function loginUser(user)
-        {
-            UserService
-                .findUserByCredentials(user)
-                .success(function (loggedUser) {
-                    console.log(loggedUser);
-                    if(loggedUser)
-                    {
-                        console.log(loggedUser);
-                        $("#validateUserModal").modal("hide");
-                        $("body").removeClass("modal-open");
-                        $(".modal-backdrop").remove();
-                        $rootScope.user = loggedUser;
-                        vm.user= $rootScope.user;
-                        console.log("logged in user" + $rootScope.user);
-
-                       init();
-                        closeModal();
-
-                        }
-                    else
-                    {
-                        vm.error="user not found";
-                    }
-                });
-        }
-
-        function closeModal() {
-            $("#validateUserModal").modal("hide");
-            return;
-        }
-
 
 
 
