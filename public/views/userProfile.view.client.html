@@ -39,8 +39,8 @@
             </a>
         </div>
         <div class="logout/login navbar-text" style="text-align: right">
-            <button ng-show=!model.user ng-click="model.loginClick()" class="btn btn-primary">Login</button>
-            <button ng-show=model.user ng-click="model.logout()" class="btn btn-success">Logout</button>
+            <button ng-show=!model.loggedInUser ng-click="model.loginClick()" class="btn btn-primary">Login</button>
+            <button ng-show=model.loggedInUser ng-click="model.logout()" class="btn btn-success">Logout</button>
         </div>
 
         </div>

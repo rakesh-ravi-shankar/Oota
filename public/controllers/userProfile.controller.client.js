@@ -38,11 +38,11 @@
                         if (user !== '0') {
                             $rootScope.user = user;
                             vm.uid = user._id;
-                            vm.loggedInUsername = $rootScope.user.username;
+                            vm.loggedInUser = $rootScope.user;
 
 
                             //console.log("curr user : " + vm.uid + "other user name" + vm.otherUser);
-                            if (vm.loggedInUsername == vm.urlUsername) {
+                            if (vm.loggedInUser.username == vm.urlUsername) {
 
                                 vm.currUser = true;
                                 vm.currentSelection = "TRACK ORDER";
@@ -104,18 +104,22 @@
         }
 
         function followUser() {
-            var loggedInUser = $rootScope.user._id;
+            //var loggedInUser = $rootScope.user._id;
+            if(vm.loggedInUser==null){
+                loginClick();
+                return;
+            }
             var usertofollow = vm.user._id;
             if (!vm.followed) {
                 userProfileService
-                    .followUser(loggedInUser, usertofollow)
+                    .followUser(vm.loggedInUser._id, usertofollow)
                     .then(function (followed) {
                         updateFollowBtnStatus("btn-success","btn-danger","Unfollow",true);
                     });
             }
             else {
                 userProfileService
-                    .unfollowUser(loggedInUser, usertofollow)
+                    .unfollowUser(vm.loggedInUser_id, usertofollow)
                     .then(function (followed) {
                         updateFollowBtnStatus("btn-danger","btn-success","Follow",false);
                     });
