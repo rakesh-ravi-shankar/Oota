@@ -125,7 +125,7 @@ module.exports=function(app){
         orderModel
             .findOrderByUserIdAndStatus(userid,status)
             .then(function (orders){
-                console.log(orders);
+                // console.log(orders);
                 res.json(orders);
 
             }, function (error) {

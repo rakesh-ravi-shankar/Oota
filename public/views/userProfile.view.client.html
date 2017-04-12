@@ -1,45 +1,49 @@
-<!--<nav class=" navbar navbar-default navbar-fixed-top">-->
+<div class="modal fade" id="validateUserModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Login/Register</h5>
+            </div>
+            <div class="modal-body">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" data-target="#home">Login</a></li>
+                    <li><a data-toggle="tab" data-target="#menu1">Register</a></li>
 
-    <!--<div class="row container-fluid">-->
-        <!--<div class="hidden-xs col-sm-4 col-md-4 col-lg-4">-->
-            <!--<div class="navbar-text pull-left" >-->
-                <!--<a>-->
-                    <!--<span class="glyphicon  glyphicon-user"></span>-->
-                <!--</a>-->
-            <!--</div>-->
+                </ul>
 
-            <!--<div class="navbar-header pull-left">-->
-                <!--<a class="navbar-brand" href="">-->
-                    <!--PROFILE-->
-                <!--</a>-->
-            <!--</div>-->
+                <div class="tab-content">
+                    <div id="home" class="tab-pane fade in active">
+                        <ng-include src="'views/login.view.client.html'"></ng-include>
+                    </div>
+                    <div id="menu1" class="tab-pane fade">
+                        <ng-include src="'views/registerUser.view.client.html'"></ng-include>
+                    </div>
+                </div>
+                <!--<label>Username:</label>-->
+                <!--<input type="text" class="form-control" placeholder="username" ng-model="user.username">-->
+                <!--<label>Password:</label>-->
+                <!--<input type="text" class="form-control" placeholder="password" ng-model="user.password">-->
+            </div>
 
-        <!--</div>-->
-        <!--<div class="col-xs-1 hidden-lg hidden-md hidden-sm">-->
-            <!--<div class="navbar-text pull-left" >-->
-                <!--<a>-->
-                    <!--<span class="glyphicon glyphicon-chevron-left"></span>-->
-                <!--</a>-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<div class="col-xs-10 col-sm-8 col-md-8">-->
-            <!--<div class="navbar-header pull-left">-->
-                <!--<a class="navbar-brand" href="#">-->
-                    <!--{{model.currentSelection}}-->
-                <!--</a>-->
-            <!--</div>-->
+            <div class="modal-footer">
+                <a class="btn btn-success" ng-click="model.closeModal()">Close</a>
+            </div>
+        </div>
+    </div>
+</div>
 
 
-        <!--</div>-->
-    <!--</div>-->
-<!--</nav>-->
 <nav class=" navbar navbar-inverse navbar-fixed-top">
 
     <div class="row container-fluid">
-        <div class="navbar-text">
+        <div class="navbar-text col-lg-10 col-sm-10 col-xs-10">
             <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">
                 <span class="glyphicon glyphicon-menu-hamburger"></span>
             </a>
+        </div>
+        <div class="logout/login navbar-text" style="text-align: right">
+            <button ng-show=!model.user ng-click="model.loginClick()" class="btn btn-primary">Login</button>
+            <button ng-show=model.user ng-click="model.logout()" class="btn btn-success">Logout</button>
         </div>
 
         </div>
@@ -53,7 +57,7 @@
 
 
 
-    <ul class="sidebar-nav">
+    <ul class="sidebar-nav" >
 
         <div class="profile-edit-button">
                 <a href="#/editProfile  "><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a>
@@ -97,7 +101,7 @@
 
         <div ng-switch-when="TRACK ORDER">
 
-            <table class="table table-striped">
+            <table class="table table-striped table-bordered">
                 <tbody>
                 <col width="40%" />
                 <col width="40%" />
@@ -116,9 +120,24 @@
             </table>
         </div>
         <div ng-switch-when="ORDER HISTORY">
-            <div ng-repeat="order in model.oldorders">
-                {{order}}
-
+            <div ng-repeat="order in model.oldorders.data">
+                <table class="table table-striped table-bordered">
+                    <tbody>
+                    <col width="40%" />
+                    <col width="40%" />
+                    <col width="20%" />
+                    <tr>
+                        <th>Order</th>
+                        <th>Restaurant Name</th>
+                        <th>Status</th>
+                    </tr>
+                    <tr ng-repeat="order in model.oldorders.data">
+                        <td>{{$index + 1}}</td>
+                        <td>{{order.restaurantName}}</td>
+                        <td>{{order.deliveryStatus}}</td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
         <div ng-switch-when="COMMENTS">
