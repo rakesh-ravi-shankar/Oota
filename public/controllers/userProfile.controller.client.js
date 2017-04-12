@@ -199,8 +199,7 @@
                         $rootScope.user = loggedUser;
                         vm.user= $rootScope.user;
                         console.log("logged in user" + $rootScope.user);
-
-                       init();
+                        location.reload();
                         closeModal();
 
                         }

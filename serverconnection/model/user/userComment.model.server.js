@@ -9,7 +9,8 @@ var userCommentModel=mongoose.model("UserCommentModel",userCommentSchema);
 
 userCommentModel.findUserComments=findUserComments;
 userCommentModel.createUserComment = createUserComment;
-//userCommentModel.updateUserComment = updateUserComment;
+userCommentModel.deleteUserComment = deleteSingleComment;
+userCommentModel.updateComment = updateComment;
 
 module.exports=userCommentModel;
 
@@ -49,4 +50,41 @@ function findUserComments(userid) {
         });
     return deffered.promise;
 }
+// Find all mentions of userid
+function deleteSingleComment(commentId) {
+    var deffered =q.defer();
+    userCommentModel
+        .findByIdAndRemove(commentId,function (err, comment) {
+            if(err)
+                deffered.reject(err);
+            else {
+                comment.remove()
+                    .then(function () {
+                        deffered.resolve();
+                    });
 
+            }
+        });
+    return deffered.promise;
+}
+
+
+function updateComment(commId,comment) {
+
+    var deffered =q.defer();
+    userCommentModel
+        .update(
+            {_id: commId},
+            {$set: comment},function (err, comment) {
+                if(err) {
+                    deffered.reject(err);
+                }
+                else{
+                    deffered.resolve(comment);
+                }
+
+            });
+
+    return deffered.promise;
+
+}
