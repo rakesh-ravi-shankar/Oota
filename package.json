@@ -11,6 +11,7 @@
     "ejs": "^2.5.3",
     "express": "^4.13.4",
     "express-session": "^1.14.2",
+    "hover.css": "^2.2.0",
     "mongojs": "^2.4.0",
     "mongoose": "^4.4.15",
     "multer": "^1.2.0",

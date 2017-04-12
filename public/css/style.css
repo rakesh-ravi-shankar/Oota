@@ -1,5 +1,7 @@
 body {
 	/*background-color: #21263B;*/
+	overflow-x: hidden;
+	padding-top: 64px;
 }
 
 #background-img {
@@ -8,7 +10,7 @@ body {
 	height: 100%;
 	top: 0;
 	left: 0;
-	background: url("../img/food_bck.jpg") no-repeat center center fixed;
+	background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.4)), url("../img/LandingPageBackground.jpeg") no-repeat center center fixed;
 	background-size: cover;
 	transform: scale(1.1);
 	z-index: -1;
@@ -29,12 +31,17 @@ body {
 }
 #title {
 	font-family: 'Pacifico', cursive;
-	color: #851972	;
-	text-shadow: 3px 6px 5px #FFF4DC;
+	color: #F0E2C1;
+	text-shadow: 3px 6px 5px black;
 	font-size: 8em;
 	text-align: center;
-
+	margin-bottom: 10%;
 }
+
+.homepage-btn{
+	margin-bottom: 2%;
+}
+
 #datetimepicker4{
 	margin-left: 2%;
 }
@@ -130,7 +137,15 @@ body {
 	font-size: 2em;
 }
 .profile-edit-button
-{text-align: right}
+{text-align: right;
+padding: 5px}
+.profile-edit-button a
+{text-align: right;
+color:#999999}
+.profile-edit-button a:hover
+{ text-decoration: none;
+	color: #fff;
+	background: rgba(255,255,255,0.2);}
 
 
 .profile-card {
@@ -239,4 +254,12 @@ body {
 .media-list {
 	padding-left: 0;
 	list-style: none;
+}
+
+/*#wrapper*/
+/*{*/
+	/*margin-top: 16%;*/
+/*}*/
+a{
+	cursor: hand;
 }

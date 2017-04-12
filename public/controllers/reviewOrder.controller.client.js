@@ -84,6 +84,7 @@
             });
 
             var order = {
+                apiKey:vm.restuarantId,
                 _orderer: vm.userId,
                 restaurantName: vm.restaurantName,
                 deliveryLoc: vm.deliveryLoc,
@@ -99,7 +100,7 @@
             OrderService
                 .createOrder(order)
                 .then(function () {
-                    $location.url("/userProfile");
+                    $location.url("/userProfile/"+$rootScope.user.username);
                 })
         }
 

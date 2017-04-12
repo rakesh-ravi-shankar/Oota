@@ -11,7 +11,8 @@
 
             "findRestaurantByUsername":findRestaurantByUsername,
             "findRestaurantByCredentials":findRestaurantByCredentials,
-            "findAllRestaurants":findAllRestaurants
+            "findAllRestaurants":findAllRestaurants,
+            "findRestaurantByApiKey":findRestaurantByApiKey
             // "updateUser":updateUser,
             // "deleteUser":deleteUser
 
@@ -25,20 +26,18 @@
         function findRestaurantByUsername(username) {
             var username= encodeURIComponent(username);
             return $http.get("/api/restaurant?username="+username);
-
-
         }
 
         function findRestaurantByCredentials(restaurant,password) {
-
             return $http.get("/api/restaurant?username="+username+"&password="+password);
-
         }
 
         function findAllRestaurants() {
-
             return $http.get("/api/allRestaurants");
+        }
 
+        function findRestaurantByApiKey(apiKey) {
+            return $http.get("/api/restaurantDashboard/" + apiKey);
         }
 
         //

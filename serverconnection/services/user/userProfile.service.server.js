@@ -9,13 +9,14 @@ module.exports=function(app){
     app.get("/:uid/userdetails",findUserDetails);
     app.get("/:uid/orderhistory",findoldorders);
     app.put("/:uid/updateuser",updateUser);
-    app.put("/follow-user",followUser)
-    app.put("/unfollow-user",unfollowUser)
+    app.put("/follow-user",followUser);
+    app.put("/unfollow-user",unfollowUser);
+    app.get("/followers/:uid",findfollowers)
     app.put("/already-following",alreadyFollowing)
     var multer = require('multer'); // npm install multer --save
     var storage = multer.diskStorage({
         destination: function (req, file, cb) {
-            cb(null, __dirname + "/../../public/uploads")
+            cb(null, __dirname + "/../../../public/uploads")
         },
         filename: function (req, file, cb) {
             var extArray = file.mimetype.split("/");
@@ -40,7 +41,7 @@ module.exports=function(app){
                 .findUserById(userid)
                 .then(function (user) {
                     user.profilepicurl=url;
-                    userModel
+                        userModel
                         .updateUser(user,userid)
                         .then(function (user) {
                             res.redirect("/#/editProfile");// res.json(user);
@@ -55,6 +56,18 @@ module.exports=function(app){
         }
     }
 
+
+    function findfollowers(req,res) {
+        var uid=req.params['uid'];
+        userModel
+            .findUserById(uid)
+            .then(function (users) {
+                res.json(users);
+            }, function (error) {
+            res.sendStatus(500).send(error);
+        });
+
+    }
     function alreadyFollowing(req,res) {
         var obj=req.body;
         userModel

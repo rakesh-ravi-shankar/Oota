@@ -28,6 +28,12 @@
                                 if(fetchedRestaurant.data.restaurants.length > 0)
                                 {
                                     restaurant.apiKey = fetchedRestaurant.data.restaurants[0].apiKey;
+                                    restaurant.acceptsCard = fetchedRestaurant.data.restaurants[0].acceptsCard;
+                                    restaurant.acceptsCash = fetchedRestaurant.data.restaurants[0].acceptsCash;
+                                    restaurant.logoUrl = fetchedRestaurant.data.restaurants[0].logoUrl;
+                                    restaurant.url = fetchedRestaurant.data.restaurants[0].url;
+                                    restaurant.phone = fetchedRestaurant.data.restaurants[0].phone;
+                                    restaurant.offersPickup = fetchedRestaurant.data.restaurants[0].offersPickup;
                                 }
                                 else {
                                     restaurant.apiKey = "";

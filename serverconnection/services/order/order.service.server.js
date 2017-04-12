@@ -10,6 +10,7 @@ module.exports=function(app){
     app.get("/api/order/orderer/:uid",findActiveOrdersForOrderer);
     app.get("/api/order/activeOrders",findActiveOrders);
     app.get("/api/allOrders",findAllOrders);
+    app.get("/api/allOrders/:apiKey",findAllOrdersForRestaurant);
     app.post("/api/order/updateOrder",updateOrder);
 
     // app.get("/api/restaurant/:uid",findRestaurantById);
@@ -73,6 +74,17 @@ module.exports=function(app){
             });
 
 
+    }
+
+    function findAllOrdersForRestaurant(req, res) {
+        var apiKey = req.params.apiKey;
+        orderModel
+            .findAllOrdersForRestaurant(apiKey)
+            .then(function (orders) {
+                res.json(orders);
+            }, function (error) {
+                res.sendStatus(500).send(error);
+            });
     }
 
 

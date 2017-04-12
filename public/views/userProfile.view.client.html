@@ -1,124 +1,139 @@
-<nav class=" navbar navbar-default navbar-fixed-top">
+<!--<nav class=" navbar navbar-default navbar-fixed-top">-->
+
+    <!--<div class="row container-fluid">-->
+        <!--<div class="hidden-xs col-sm-4 col-md-4 col-lg-4">-->
+            <!--<div class="navbar-text pull-left" >-->
+                <!--<a>-->
+                    <!--<span class="glyphicon  glyphicon-user"></span>-->
+                <!--</a>-->
+            <!--</div>-->
+
+            <!--<div class="navbar-header pull-left">-->
+                <!--<a class="navbar-brand" href="">-->
+                    <!--PROFILE-->
+                <!--</a>-->
+            <!--</div>-->
+
+        <!--</div>-->
+        <!--<div class="col-xs-1 hidden-lg hidden-md hidden-sm">-->
+            <!--<div class="navbar-text pull-left" >-->
+                <!--<a>-->
+                    <!--<span class="glyphicon glyphicon-chevron-left"></span>-->
+                <!--</a>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="col-xs-10 col-sm-8 col-md-8">-->
+            <!--<div class="navbar-header pull-left">-->
+                <!--<a class="navbar-brand" href="#">-->
+                    <!--{{model.currentSelection}}-->
+                <!--</a>-->
+            <!--</div>-->
+
+
+        <!--</div>-->
+    <!--</div>-->
+<!--</nav>-->
+<nav class=" navbar navbar-inverse navbar-fixed-top">
 
     <div class="row container-fluid">
-        <div class="hidden-xs col-sm-4 col-md-4 col-lg-4">
-            <div class="navbar-text pull-left" >
-                <a>
-                    <span class="glyphicon  glyphicon-user"></span>
-                </a>
-            </div>
-
-            <div class="navbar-header pull-left">
-                <a class="navbar-brand" href="">
-                    PROFILE
-                </a>
-            </div>
-
+        <div class="navbar-text">
+            <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">
+                <span class="glyphicon glyphicon-menu-hamburger"></span>
+            </a>
         </div>
-        <div class="col-xs-1 hidden-lg hidden-md hidden-sm">
-            <div class="navbar-text pull-left" >
-                <a>
-                    <span class="glyphicon glyphicon-chevron-left"></span>
-                </a>
-            </div>
-        </div>
-        <div class="col-xs-10 col-sm-8 col-md-8">
-            <div class="navbar-header pull-left">
-                <a class="navbar-brand" href="#">
-                    COMMENTS
-                </a>
-            </div>
-
 
         </div>
     </div>
 </nav>
 
-<div class="container-fluid col-md-4 col-sm-4 hidden-xs vertical-line web-left-pane" >
+<div id="wrapper" class="toggled">
+
+<div id="sidebar-wrapper">
+
+
+
+
+    <ul class="sidebar-nav">
+
         <div class="profile-edit-button">
-            <a href="#/editProfile  "><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a>
+                <a href="#/editProfile  "><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a>
         </div>
-    <div class="row">
+
+        <li>
+
             <div class="square">
-                <img src="../img/food.jpg" class="img-responsive img-circle content"/>
+                <img src="{{model.user.profilepicurl}}" class="img-responsive img-circle content"/>
+            </div>
+        </li>
+        <li>
+
+            <h2 style="color: #F2F2F1;overflow-wrap: break-word;">{{model.user.firstName}} {{model.user.lastName}}</h2>
+        </li>
+        <li>
+            <button id="followBtn" class="btn" ng-click="model.followUser('58e862d6aef6f1574cd71197')">
+                {{model.followStatus}}</button>
+        </li>
+        <li>
+            <a  ng-click="model.updateCurrentSelection('TRACK ORDER')">TRACK ORDER</a>
+        </li>
+        <li>
+            <a ng-click="model.updateCurrentSelection('ORDER HISTORY')">ORDER HISTORY</a>
+        </li>
+        <li>
+            <a ng-click="model.updateCurrentSelection('COMMENTS')">COMMENTS</a>
+        </li>
+        <li>
+            <a ng-click="model.updateCurrentSelection('FOLLOWERS')">FOLLOWERS</a>
+        </li>
+        <li>
+            <a ng-click="model.updateCurrentSelection('FOLLOWING')">FOLLOWING</a>
+        </li>
+    </ul>
+</div>
+
+<div id="page-content-wrapper">
+
+    <div ng-switch="model.currentSelection">
+
+        <div ng-switch-when="TRACK ORDER">
+
+            <table class="table table-striped">
+                <tbody>
+                <col width="40%" />
+                <col width="40%" />
+                <col width="20%" />
+                <tr>
+                    <th>Order</th>
+                    <th>Restaurant Name</th>
+                    <th>Status</th>
+                </tr>
+                <tr ng-repeat="order in model.orders">
+                    <td>{{$index + 1}}</td>
+                    <td>{{order.restaurantName}}</td>
+                    <td>{{order.deliveryStatus}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div ng-switch-when="ORDER HISTORY">
+            <div ng-repeat="order in model.oldorders">
+                {{order}}
 
             </div>
-
-    </div>
-    <button id="followBtn" class="btn" ng-click="model.followUser('58e862d6aef6f1574cd71197')">{{model.followStatus}}</button>
-
-
-<h1 style="text-align: center">{{model.user.firstName}} {{model.user.lastName}}</h1>
-<br><br>
-    <div class="container-fluid">
-       <h3><a  ng-click="model.updateCurrentSelection('trackorder')">TRACK ORDER</a></h3>
-        <h3><a ng-click="model.updateCurrentSelection('orderhistory')">ORDER HISTORY</a></h3>
-        <h3><a ng-click="model.updateCurrentSelection('comments')">COMMENTS</a></h3>
-    </div>
-</div>
-
-
-
-</div>
-
-<div ng-switch="model.currentSelection" class="container-fluid col-md-8 col-sm-8 col-xs-12 web-right-pane">
-
-    <div ng-switch-when="trackorder">
-
-        <table class="table table-striped">
-            <tbody>
-            <col width="40%" />
-            <col width="40%" />
-            <col width="20%" />
-            <tr>
-                <th>Order</th>
-                <th>Restaurant Name</th>
-                <th>Status</th>
-            </tr>
-            <tr ng-repeat="order in model.orders">
-                <td>{{$index + 1}}</td>
-                <td>{{order.restaurantName}}</td>
-                <td>{{order.deliveryStatus}}</td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-
-
-
-    <div ng-switch-when="orderhistory">
-        <div ng-repeat="order in model.oldorders">
-            {{order}}
-
         </div>
-    </div>
+        <div ng-switch-when="COMMENTS">
+            <div ng-repeat="comment in model.comments.data">
+                {{comment.feedback_giver_name}}
+                {{comment.comment}}
 
-
-
-    <div ng-switch-when="comments">
-        <div ng-repeat="comment in model.comments.data">
-            {{comment.feedback_giver_name}}
-            {{comment.comment}}
-
-        </div>
-    </div>
-</div>
-
-
-
-
-
-
-<nav class=" navbar navbar-default navbar-fixed-bottom">
-    <div class="row container-fluid">
-        <div class="col-xs-8">
-        </div>
-        <div class="col-xs-4">
-            <div class="navbar-text pull-right">
-                <a>
-                    <span class="glyphicon glyphicon-user"></span>
-                </a>
             </div>
         </div>
+        <div ng-switch-when="FOLLOWERS">
+            {{model.followers}}
+        </div>
+        <div ng-switch-when="FOLLOWING">
+            {{model.following}}
+        </div>
     </div>
-</nav>
+</div>
+</div>
