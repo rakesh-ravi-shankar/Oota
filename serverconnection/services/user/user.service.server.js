@@ -21,7 +21,7 @@ module.exports=function(app){
     //app.put   ('/api/user/:id', auth, updateUser);
     //app.delete('/api/user/:id', auth, deleteUser);
 
-    //app.get("/api/user",findUser);
+    app.get("/api/user",findUserByUsername);
     //app.post("/api/user",createUser);
     app.get("/api/user/:uid",findUserById);
     // app.put("/api/user/:uid",updateUser);
@@ -236,29 +236,32 @@ module.exports=function(app){
 
 
     }
-
+/*
     function findUser(req,res) {
 
         var username=req.query['username'];
         var password=req.query['password'];
+
+        console.log("u and p "+ username+password);
         if(username&&password)
         {
             findUserByCredentials(req,res);
 
         }
         else if(username)
-        {findUserByUsername(req,res);}
+        {
+            findUserByUsername(req,res);
+        }
 
     }
-
+*/
     function findUserByUsername(req,res) {
         var username=req.query['username'];
-
-
+        console.log("u = " + username);
         userModel
             .findUserByUsername(username)
             .then(function (user) {
-                console.log(user);
+                console.log("user by name"+ user);
                 res.json(user);
 
             }, function (error) {

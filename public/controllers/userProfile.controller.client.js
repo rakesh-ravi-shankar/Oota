@@ -1,124 +1,138 @@
-(function() {
+(function () {
     angular
         .module("Oota")
         .controller("userProfileController", userProfileController);
 
-    function userProfileController($http, $routeParams,$rootScope, userProfileService, UserService, OrderService, $location) {
+    function userProfileController($http, $routeParams, $rootScope, userProfileService, UserService, OrderService, $location) {
         var vm = this;
-        vm.updateCurrentSelection=updateCurrentSelection;
-        vm.followUser=followUser;
+        vm.updateCurrentSelection = updateCurrentSelection;
+        vm.followUser = followUser;
         vm.login = loginUser;
-        vm.closeModal=closeModal;
+        vm.closeModal = closeModal;
         vm.loginUser = loginUser;
         vm.logout = logout;
-        vm.loginClick=loginClick;
-        vm.user= $rootScope.user;
+        vm.loginClick = loginClick;
+        vm.followButtonStatus = followButtonStatus;
+        //vm.user= $rootScope.user;
+        vm.currUser = false;
 
 
         function init() {
-            $("#menu-toggle").click(function(e) {
+            $("#menu-toggle").click(function (e) {
                 e.preventDefault();
                 $("#wrapper").toggleClass("toggled");
             });
 
 
-            $http.get('/api/loggedin').success(function(user) {
-                $rootScope.errorMessage = null;
-                if (user !== '0') {
-                    $rootScope.user = user;
-                    vm.uid=user._id;
-                    vm.urlUsername=$routeParams['username'];
-                    vm.loggedInUsername=$rootScope.user.username;
+            vm.urlUsername = $routeParams['username'];
+            console.log("urlusername : " + vm.urlUsername);
+
+            UserService
+                .findUserByUsername(vm.urlUsername)
+                .success(function (user) {
+                    vm.user = user;
 
 
-                    //console.log("curr user : " + vm.uid + "other user name" + vm.otherUser);
-                    if(vm.loggedInUsername == vm.urlUsername){
-
-                        vm.currentSelection = "TRACK ORDER";
-                        UserService
-                            .findUserById(vm.uid)
-                            .success(function (user) {
-                                vm.user = user;
-                            });
-                        OrderService
-                            .findActiveOrdersForOrderer(vm.uid)
-                            .success(function (orders) {
-                                vm.orders = orders;
-                            });
-                        window.setInterval(updateStatus, 5000);
-                       // console.log(vm.orders);
-
-                        //check if already followed
-                        var usertofollow = '58e862d6aef6f1574cd71197';
-                        userProfileService
-                            .alreadyfollowing(vm.uid, usertofollow)
-                            .then(function (followed) {
-                                if (followed.data.length != 0)
-                                    vm.followed = true;
-                                else
-                                    vm.followed = false
-
-                                if (vm.followed) {
-                                    $("#followBtn").addClass("btn-danger");
-                                    vm.followStatus = "Unfollow";
-                                }
-                                else {
-                                    $("#followBtn").addClass("btn-success");
-                                    vm.followStatus = "Follow";
-                                }
-                            });
-
-                    }
+                    $http.get('/api/loggedin').success(function (user) {
+                        $rootScope.errorMessage = null;
+                        if (user !== '0') {
+                            $rootScope.user = user;
+                            vm.uid = user._id;
+                            vm.loggedInUser = $rootScope.user;
 
 
-                } else {
-                    console.log("Dont come here!!!");
-                }
-            });
+                            //console.log("curr user : " + vm.uid + "other user name" + vm.otherUser);
+                            if (vm.loggedInUser.username == vm.urlUsername) {
+
+                                vm.currUser = true;
+                                vm.currentSelection = "TRACK ORDER";
 
 
+                                OrderService
+                                    .findActiveOrdersForOrderer(vm.uid)
+                                    .success(function (orders) {
+                                        vm.orders = orders;
+                                    });
+                                window.setInterval(updateStatus, 5000);
+                                // console.log(vm.orders);
 
+                                //check if already followed
+
+                            }
+                            else {
+                                vm.currUser = false;
+                                followButtonStatus();
+                            }
+
+
+                        } else {
+                            console.log("Dont come here!!!");
+                            followButtonStatus();
+                        }
+                    });
+                });
 
 
         }
 
         init();
 
-        function followUser(usertofollow) {
-            vm.uid=$rootScope.user._id;
+        function followButtonStatus() {
+            var usertofollow = vm.user._id;
+            vm.followed = false;
+            $("#followBtn").addClass("btn-success");
+            vm.followStatus = "Follow";
 
-            if(!vm.followed) {
+            if (vm.uid != null) {
                 userProfileService
-                    .followUser(vm.uid,usertofollow)
+                    .alreadyfollowing(vm.uid, usertofollow)
                     .then(function (followed) {
-                        vm.followed=true;
-                        console.log("followed");
-                        $("#followBtn").removeClass("btn-success");
-                        $("#followBtn").addClass("btn-danger");
-                        vm.followStatus = "Unfollow";
-                        vm.followed = true;
+                        if (followed.data.length != 0) {
+                            updateFollowBtnStatus("btn-success","btn-danger","Unfollow",true);
+                        }
+
+
+                    });
+            }
+        }
+
+        function updateFollowBtnStatus(remove,add,newStatus,newStatusBool){
+            $("#followBtn").removeClass(remove);
+            $("#followBtn").addClass(add);
+            vm.followStatus = newStatus;
+            vm.followed = newStatusBool;
+        }
+
+        function followUser() {
+            //var loggedInUser = $rootScope.user._id;
+            if(vm.loggedInUser==null){
+                loginClick();
+                return;
+            }
+            var usertofollow = vm.user._id;
+            if (!vm.followed) {
+                userProfileService
+                    .followUser(vm.loggedInUser._id, usertofollow)
+                    .then(function (followed) {
+                        updateFollowBtnStatus("btn-success","btn-danger","Unfollow",true);
                     });
             }
             else {
                 userProfileService
-                    .unfollowUser(vm.uid,usertofollow)
+                    .unfollowUser(vm.loggedInUser_id, usertofollow)
                     .then(function (followed) {
-                        vm.followed=true;
-                        console.log("followed");
-                        $("#followBtn").removeClass("btn-danger");
-                        $("#followBtn").addClass("btn-success");
-                        vm.followStatus = "Follow";
-                        vm.followed = false;
+                        updateFollowBtnStatus("btn-danger","btn-success","Follow",false);
                     });
             }
 
 
         }
+
         function updateStatus() {
             console.log("updating..");
             // TODO:change the frequency
             OrderService
-                .findActiveOrdersForOrderer(vm.uid)
+                .findActiveOrdersForOrderer(vm.user._id)
                 .success(function (orders) {
                     vm.orders = orders;
                 });
@@ -127,29 +141,26 @@
         function updateCurrentSelection(cs) {
             vm.currentSelection = cs;
 
-            if (cs == 'COMMENTS')
-            {
+            if (cs == 'COMMENTS') {
                 userProfileService
-                    .findUserComments(vm.uid)
+                    .findUserComments(vm.user._id)
                     .then(function (comments) {
                         vm.comments = comments;
 
                     });
             }
-            else if(cs == 'ORDER HISTORY')
-            {
+            else if (cs == 'ORDER HISTORY') {
                 userProfileService
-                    .findoldorder(vm.uid)
+                    .findoldorder(vm.user._id)
                     .then(function (orders) {
                         vm.oldorders = orders;
 
                     });
 
             }
-            else if(cs == 'FOLLOWERS')
-            {
+            else if (cs == 'FOLLOWERS') {
                 userProfileService
-                    .findfollowers(vm.uid)
+                    .findfollowers(vm.user._id)
                     .then(function (users) {
                         vm.followers = users.followers;
 
@@ -157,10 +168,9 @@
                     });
 
             }
-            else if(cs == 'FOLLOWING')
-            {
+            else if (cs == 'FOLLOWING') {
                 userProfileService
-                    .findfollowers(vm.uid)
+                    .findfollowers(vm.user._id)
                     .then(function (users) {
                         vm.following = users.data.following;
                     });
@@ -168,8 +178,7 @@
             }
         }
 
-        function loginClick()
-        {
+        function loginClick() {
             $("#validateUserModal").modal("show");
         }
 
@@ -184,28 +193,26 @@
                 });
         }
 
-        function loginUser(user)
-        {
+        function loginUser(user) {
             UserService
                 .findUserByCredentials(user)
                 .success(function (loggedUser) {
                     console.log(loggedUser);
-                    if(loggedUser)
-                    {
+                    if (loggedUser) {
                         console.log(loggedUser);
                         $("#validateUserModal").modal("hide");
                         $("body").removeClass("modal-open");
                         $(".modal-backdrop").remove();
                         $rootScope.user = loggedUser;
-                        vm.user= $rootScope.user;
+                        vm.user = $rootScope.user;
                         console.log("logged in user" + $rootScope.user);
+
                         location.reload();
                         closeModal();
 
-                        }
-                    else
-                    {
-                        vm.error="user not found";
+                    }
+                    else {
+                        vm.error = "user not found";
                     }
                 });
         }
@@ -214,8 +221,6 @@
             $("#validateUserModal").modal("hide");
             return;
         }
-
-
 
 
     }

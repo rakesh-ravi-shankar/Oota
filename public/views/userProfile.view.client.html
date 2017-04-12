@@ -38,9 +38,9 @@
                 <span class="glyphicon glyphicon-menu-hamburger"></span>
             </a>
         </div>
-        <div class=" col-lg-2 col-sm-2 logout/login navbar-text" style="text-align: right">
-            <button ng-show=!model.user ng-click="model.loginClick()" class="btn btn-primary">Login</button>
-            <button ng-show=model.user ng-click="model.logout()" class="btn btn-success">Logout</button>
+        <div class="logout/login navbar-text" style="text-align: right">
+            <button ng-show=!model.loggedInUser ng-click="model.loginClick()" class="btn btn-primary">Login</button>
+            <button ng-show=model.loggedInUser ng-click="model.logout()" class="btn btn-success">Logout</button>
         </div>
 
         </div>
@@ -56,7 +56,7 @@
 
     <ul class="sidebar-nav" >
 
-        <div class="profile-edit-button">
+        <div ng-show="model.currUser" class="profile-edit-button">
                 <a href="#/editProfile  "><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a>
         </div>
 
@@ -70,14 +70,15 @@
 
             <h2 style="text-align:center;color: #F2F2F1;overflow-wrap: break-word;">{{model.user.firstName}} {{model.user.lastName}}</h2>
         </li>
-        <li><div>
-            <button style="margin-left: 25%" id="followBtn" class="btn" ng-click="model.followUser('58e862d6aef6f1574cd71197')">
-                {{model.followStatus}}</button></div>
+
+        <li ng-show="!model.currUser">
+            <button id="followBtn" class="btn" ng-click="model.followUser()">
+                {{model.followStatus}}</button>
         </li>
-        <li>
+        <li ng-show="model.currUser">
             <a  ng-click="model.updateCurrentSelection('TRACK ORDER')">TRACK ORDER</a>
         </li>
-        <li>
+        <li ng-show="model.currUser">
             <a ng-click="model.updateCurrentSelection('ORDER HISTORY')">ORDER HISTORY</a>
         </li>
         <li>
