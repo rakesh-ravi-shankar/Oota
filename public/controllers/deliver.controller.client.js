@@ -32,6 +32,8 @@
         vm.selectedWaypoint = [];
         vm.waypoints = [];
 
+        //TODO: Remove orders made by the deliverer
+        //TODO: Remove multiple orders from same location
         // each waypoint in vm.waypoints is an order
         OrderService
             .findActiveOrders()
