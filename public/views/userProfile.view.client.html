@@ -139,8 +139,7 @@
 
         </div>
         <div ng-switch-when="COMMENTS">
-            <div ng-repeat="comment in model.comments.data">
-                <ul class="list-group">
+                 <ul class="list-group">
                     <li class="list-group-item" ng-repeat="comment in model.comments.data">
                         <a href="#" class="pull-left">
                             <img src="" alt="" class="img-circle">
@@ -156,8 +155,6 @@
                         </div>
                     </li>
                 </ul>
-
-            </div>
         </div>
         <div ng-switch-when="FOLLOWERS">
             {{model.followers}}
