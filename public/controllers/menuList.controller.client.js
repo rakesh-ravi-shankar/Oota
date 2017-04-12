@@ -47,7 +47,6 @@
 
         function setCategory(category) {
             vm.selectedCategory = category;
-            console.log(category);
         }
 
 

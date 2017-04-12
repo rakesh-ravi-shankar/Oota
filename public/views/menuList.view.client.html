@@ -53,7 +53,9 @@
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
             <li ng-repeat="category in model.menu.data">
-                <a ng-click="model.setCategory(category)">{{category.name}}</a>
+                <a ng-click="model.setCategory(category)"
+                    class="btn"
+                    style="text-align: left">{{category.name}}</a>
             </li>
         </ul>
     </div>
@@ -73,14 +75,14 @@
                     <td>{{order.name}}</td>
                     <td>{{order.basePrice}}</td>
                     <td>
-                    <a class="btn btn-default btn-sm"
+                    <a class="btn btn-success btn-sm"
                     ng-click="count = model.updateOrder(count+1, order.name, order.basePrice)"
                     ng-init="count = model.initializeCount(order.name)"
                     type="button">
                     <span class=" glyphicon glyphicon-plus"></span>
                     </a>
                     {{count}}
-                    <a class="btn btn-default btn-sm"
+                    <a class="btn btn-danger btn-sm"
                     ng-click="count = model.updateOrder(count-1, order.name, order.basePrice)"
                     type="button">
                     <span class=" glyphicon glyphicon-minus"></span>
