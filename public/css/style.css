@@ -35,6 +35,17 @@ body {
 	text-shadow: 3px 6px 5px black;
 	font-size: 8em;
 	text-align: center;
+
+	margin-bottom: 10%;
+}
+#home-page-title
+{
+	font-family: 'Pacifico', cursive;
+	color: #F0E2C1;
+	text-shadow: 3px 6px 5px black;
+	font-size: 8em;
+	text-align: center;
+	margin-top: -10%;
 	margin-bottom: 10%;
 }
 

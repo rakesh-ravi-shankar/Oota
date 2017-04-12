@@ -33,12 +33,12 @@
 <nav class=" navbar navbar-inverse navbar-fixed-top">
 
     <div class="row container-fluid">
-        <div class="navbar-text col-lg-10 col-sm-10 col-xs-10">
+        <div class="navbar-text col-lg-10 col-sm-9 col-xs-8">
             <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">
                 <span class="glyphicon glyphicon-menu-hamburger"></span>
             </a>
         </div>
-        <div class="logout/login navbar-text" style="text-align: right">
+        <div class=" col-lg-2 col-sm-2 logout/login navbar-text" style="text-align: right">
             <button ng-show=!model.user ng-click="model.loginClick()" class="btn btn-primary">Login</button>
             <button ng-show=model.user ng-click="model.logout()" class="btn btn-success">Logout</button>
         </div>
@@ -68,11 +68,11 @@
         </li>
         <li>
 
-            <h2 style="color: #F2F2F1;overflow-wrap: break-word;">{{model.user.firstName}} {{model.user.lastName}}</h2>
+            <h2 style="text-align:center;color: #F2F2F1;overflow-wrap: break-word;">{{model.user.firstName}} {{model.user.lastName}}</h2>
         </li>
-        <li>
-            <button id="followBtn" class="btn" ng-click="model.followUser('58e862d6aef6f1574cd71197')">
-                {{model.followStatus}}</button>
+        <li><div>
+            <button style="margin-left: 25%" id="followBtn" class="btn" ng-click="model.followUser('58e862d6aef6f1574cd71197')">
+                {{model.followStatus}}</button></div>
         </li>
         <li>
             <a  ng-click="model.updateCurrentSelection('TRACK ORDER')">TRACK ORDER</a>
@@ -81,7 +81,7 @@
             <a ng-click="model.updateCurrentSelection('ORDER HISTORY')">ORDER HISTORY</a>
         </li>
         <li>
-            <a ng-click="model.updateCurrentSelection('COMMENTS')">COMMENTS</a>
+            <a ng-click="model.updateCurrentSelection('COMMENTS')">MENTIONS</a>
         </li>
         <li>
             <a ng-click="model.updateCurrentSelection('FOLLOWERS')">FOLLOWERS</a>
@@ -139,8 +139,22 @@
         </div>
         <div ng-switch-when="COMMENTS">
             <div ng-repeat="comment in model.comments.data">
-                {{comment.feedback_giver_name}}
-                {{comment.comment}}
+                <ul class="list-group">
+                    <li class="list-group-item" ng-repeat="comment in model.comments.data">
+                        <a href="#" class="pull-left">
+                            <img src="" alt="" class="img-circle">
+                        </a>
+                        <div class="media-body">
+                            <span class="text-muted pull-right">
+                                <small class="text-muted">{{review.createdAt}}</small>
+                            </span>
+                            <strong class="text-success">{{comment.feedback_giver_name}}</strong>
+                            <p>
+                                {{comment.comment}}
+                            </p>
+                        </div>
+                    </li>
+                </ul>
 
             </div>
         </div>
