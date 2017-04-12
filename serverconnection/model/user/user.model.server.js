@@ -239,13 +239,13 @@ function findUserByCredentials(username,password) {
 function findUserByUsername(username) {
     var deffered =q.defer();
     userModel
-        .find({username: username },function (err,user) {
+        .find({username: username},function (err,user) {
             if(err){
                 deffered.reject(err);
             }
             else
             {
-                deffered.resolve();
+                deffered.resolve(user[0]);
             }
 
         });
