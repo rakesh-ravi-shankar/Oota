@@ -49,6 +49,8 @@
         }
         init();
 
+
+
         function loginClick()
         {
             $("#validateUserModal").modal("show");
