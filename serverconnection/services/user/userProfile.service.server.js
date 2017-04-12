@@ -11,6 +11,8 @@ module.exports=function(app){
     app.put("/:uid/updateuser",updateUser);
     app.put("/follow-user",followUser);
     app.put("/unfollow-user",unfollowUser);
+    app.put("/editUserComment/:commId",editUserComment);
+    app.delete("/deleteUserComment/:commId",deleteSingleComment);
     app.get("/followers/:uid",findfollowers)
     app.put("/already-following",alreadyFollowing)
     var multer = require('multer'); // npm install multer --save
@@ -172,6 +174,32 @@ module.exports=function(app){
             });
 
     }
+    function deleteSingleComment(req,res) {
+        var commId=req.params.commId;
+        userCommentModel
+            .deleteSingleComment(commId)
+            .then(function (comment) {
+                res.json(comment);
+            }, function (error) {
+                res.sendStatus(500).send(error);
+            });
+
+    }
+    function editUserComment(req,res) {
+        var commId=req.params.commId;
+        var comment=req.body;
+        userCommentModel
+            .updateComment(commId,comment)
+            .then(function (comment) {
+                res.json(comment);
+            }, function (error) {
+                res.sendStatus(500).send(error);
+            });
+
+    }
+
+
+
 
 
 };

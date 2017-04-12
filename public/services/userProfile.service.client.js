@@ -14,7 +14,9 @@
             "followUser":followUser,
             "unfollowUser":unfollowUser,
             "alreadyfollowing":alreadyfollowing,
-            "findfollowers":findfollowers
+            "deleteSingleComment":deleteSingleComment,
+            "findfollowers":findfollowers,
+            "editUserComment":editUserComment
         };
         return api;
 
@@ -66,6 +68,12 @@
         function updateUser(userId,user) {
             return $http.put("/"+userId+"/updateuser",user);
 
+        }
+        function deleteSingleComment(commId) {
+            return $http.delete("/deleteUserComment/"+commId);
+        }
+        function editUserComment(commId,comment) {
+            return $http.put("/editUserComment/"+commId,comment);
         }
 
 
