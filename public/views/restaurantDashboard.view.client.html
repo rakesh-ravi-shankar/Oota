@@ -1,16 +1,18 @@
-<script src="../services/restaurantReview.service.client.js"></script>
 <nav class=" navbar navbar-inverse navbar-fixed-top">
 
     <div class="row container-fluid">
-            <div class="navbar-text">
-                <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">
+        <div class="navbar-text col-lg-10 col-sm-9 col-xs-8">
+            <div>
+                <a href="#menu-toggle" class="btn btn-default pull-left" id="menu-toggle">
                     <span class="glyphicon glyphicon-menu-hamburger"></span>
                 </a>
+                <a class=" btn oota" href="#/">OOTA</a>
             </div>
+        </div>
 
-            <div class="navbar-text navbar-brand">
-                Restaurant Profile
-            </div>
+        <div class="logout-login navbar-text pull-right" style="margin-right: 2%;">
+            <a  href="#/homepage" class="btn btn-danger">Logout</a>
+        </div>
     </div>
 </nav>
 
@@ -20,32 +22,41 @@
 
     <!-- Sidebar -->
     <div id="sidebar-wrapper">
-        <ul class="sidebar-nav" style="margin-top: 2em;">
+        <ul class="sidebar-nav">
+
             <li>
-                <a ng-click="model.updateCurrentSelection('overview')">Overview</a>
+
+                <div class="square">
+                    <img  src="{{model.restaurant.logoUrl}}" style="margin-top: 1em" class="img-responsive img-circle content"/>
+
+                </div>
+            </li>
+            <br><br>
+            <li>
+                <a class="btn align-btn-left" ng-click="model.updateCurrentSelection('overview')">Overview</a>
             </li>
             <li>
-                <a ng-click="model.updateCurrentSelection('graphical')">Graphical</a>
+                <a class="btn align-btn-left" ng-click="model.updateCurrentSelection('graphical')">Graphical</a>
             </li>
             <li>
-                <a ng-click="model.updateCurrentSelection('reviews')">Reviews</a>
+                <a class="btn align-btn-left" ng-click="model.updateCurrentSelection('reviews')">Reviews</a>
             </li>
         </ul>
     </div>
     <!-- /#sidebar-wrapper -->
 
     <!-- Page Content -->
-    <div id="page-content-wrapper" style="margin-top: 3em;">
+    <div id="page-content-wrapper">
 
         <div class="container-fluid" ng-switch="model.currentSelection">
 
             <div ng-switch-when="overview">
-                <img src="{{model.restaurant.logoUrl}}" style="width: 100%; height: 20em;">
+
                 <div class="container-fluid">
                     <a href="{{model.restaurant.url}}"><h3>{{model.restaurant.restaurantName}}, {{model.restaurant.address}}</h3></a>
                     <ul class="list-group">
                         <li class="list-group-item">
-                            Ph no: {{model.restaurant.phone}}
+                            Phone no: {{model.restaurant.phone}}
                         </li>
                         <li class="list-group-item">
                             Accepts Card: {{model.restaurant.acceptsCard}}

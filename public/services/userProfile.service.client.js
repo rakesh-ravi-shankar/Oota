@@ -31,8 +31,6 @@
         }
 
         function followUser(uid,usertofollow) {
-            // var uid="58e6e0f7bff60421039c4c9f";
-            // var usertofollow="";
             var obj=[{user_id:uid,usertofollow:usertofollow}];
             return $http.put("/follow-user",obj);
         }
