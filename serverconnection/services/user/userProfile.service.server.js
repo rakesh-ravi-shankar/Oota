@@ -5,7 +5,7 @@ module.exports=function(app){
     var orderModel =require("../../model/order/order.model.server");
 
     app.get("/:uid/usercomments",findUserComments);
-    app.post("/create-comment",createUserComment);
+    app.post("/createcomment",createUserComment);
     app.get("/:uid/userdetails",findUserDetails);
     app.get("/:uid/orderhistory",findoldorders);
     app.put("/:uid/updateuser",updateUser);
