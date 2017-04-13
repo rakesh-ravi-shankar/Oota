@@ -33,7 +33,7 @@
 <nav class=" navbar navbar-inverse navbar-fixed-top">
 
     <div class="row container-fluid">
-        <div class="navbar-text col-lg-10 col-sm-9 col-xs-8">
+        <div class="navbar-text col-lg-10 col-sm-9 col-xs-7">
             <div>
                 <a href="#menu-toggle" class="btn btn-default pull-left" id="menu-toggle">
                     <span class="glyphicon glyphicon-menu-hamburger"></span>
@@ -44,7 +44,8 @@
         <div class="logout-login navbar-text pull-right" style="margin-right: 2%;">
             <button ng-show=!model.loggedInUser ng-click="model.loginClick()" class="btn btn-primary">Login</button>
             <button ng-show=model.loggedInUser ng-click="model.logout()" class="btn btn-success">Logout</button>
-
+            <span  ng-show=model.user >
+                <a href="#/userProfile/{{model.user.username}}" class="btn fa fa-user fa-2x" aria-hidden="true"></a></span>
         </div>
 
         </div>
