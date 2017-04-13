@@ -16,8 +16,8 @@
         //vm.user= $rootScope.user;
         vm.currUser = false;
         var trackStatus;
-        vm.followers_objs = []
-
+        vm.followers_objs = [];
+        vm.following_objs = [];
 
         function init() {
             $("#menu-toggle").click(function (e) {
@@ -182,8 +182,8 @@
                         .findfollowers(vm.user._id)
                         .then(function (users) {
                             vm.followers = users.data.followers;
-                            getUsers(vm.followers);
-                            console.log(vm.followers_objs);
+                            vm.followers_objs = [];
+                            getUsers(vm.followers, vm.followers_objs);
                         });
 
                 }
@@ -192,22 +192,24 @@
                         .findfollowers(vm.user._id)
                         .then(function (users) {
                             vm.following = users.data.following;
+                            vm.following_objs = [];
+                            getUsers(vm.following, vm.following_objs);
                         });
 
                 }
             }
         }
 
-        function getUsers(user_ids) {
-            if (user_ids != undefined)
+        function getUsers(user_ids, target_obj) {
+            if (user_ids.length > 0)
             {
                 var user_id = user_ids.pop();
                 UserService
                     .findUserById(user_id)
                     .success(function (user) {
                         console.log(user);
-                        vm.followers_objs.push(user);
-                        getUsers(user_ids);
+                        target_obj.push(user);
+                        getUsers(user_ids, target_obj);
                     })
             }
             else
