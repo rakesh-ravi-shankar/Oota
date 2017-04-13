@@ -6,7 +6,7 @@
 
 	function configuration($routeProvider) {
 		$routeProvider
-            .when("/homePage", {
+            .when("/homep   age", {
                 templateUrl: 'views/homePage.view.client.html',
                 controller: 'HomePageController',
                 controllerAs: 'model'
