@@ -11,7 +11,7 @@ var userSchema= mongoose.Schema({
     followers:[{type:mongoose.Schema.Types.ObjectId, ref:"UserModel"}],
     following:[{type:mongoose.Schema.Types.ObjectId, ref:"UserModel"}],
     dateofbirth:Date,
-    profilepicurl:String,
+    profilepicurl:{type:String,default:"http://localhost:3000/uploads/default.png"},
     registerationDate:{type: Date, default: Date.now},
     foodOrdered:[{type: mongoose.Schema.Types.ObjectId, ref: 'OrderModel'}],
     foodDelivered:[{type: mongoose.Schema.Types.ObjectId, ref: 'OrderModel'}],

@@ -7,7 +7,7 @@
         .controller("MenuListController", MenuListController);
 
 
-    function MenuListController($routeParams, RestaurantListService, $location, localStorageService, UserService, $rootScope) {
+    function MenuListController($routeParams,$http, RestaurantListService, $location, localStorageService, UserService, $rootScope) {
         var vm = this;
         vm.updateOrder = updateOrder;
         vm.checkout = checkout;
@@ -16,8 +16,28 @@
         vm.registerUser = registerUser;
         vm.closeModal=closeModal;
         vm.setCategory = setCategory;
+        vm.logout = logout;
+        vm.login = loginUser;
+        vm.loginClick=loginClick;
 
         function init() {
+
+            $http.get('/api/loggedin').success(function(user) {
+                $rootScope.errorMessage = null;
+                if (user !== '0') {
+                    $rootScope.user = user;
+                } else {
+                    console.log("Dont come here!!!");
+                }
+            });
+
+            if($rootScope.user != null){
+                vm.user=$rootScope.user;
+            }
+
+            $("body").removeClass("modal-open");
+            $(".modal-backdrop").remove();
+
             vm.restaurantId = $routeParams['resid'];
             vm.userId = $routeParams['uid'];
             var res = $routeParams['resid'];
@@ -100,7 +120,8 @@
                         $("body").removeClass("modal-open");
                         $(".modal-backdrop").remove();
                         $rootScope.user = loggedUser;
-                        $location.url("/restaurantList/" + vm.restaurantId + "/restaurantMenu/order");
+                        init();
+                        // $location.url("/restaurantList/" + vm.restaurantId + "/restaurantMenu");
                     }
                     else
                     {
@@ -175,7 +196,20 @@
                 $location.url("/restaurantList/" + vm.restaurantId + "/restaurantMenu/order");
             }
         }
+        function logout() {
+            UserService
+                .logout()
+                .success(function () {
+                    console.log("User logged out");
+                    $rootScope.user = null;
+                    vm.user = null;
+                });
+        }
 
+        function loginClick()
+        {
+            $("#validateUserModal").modal("show");
+        }
 
 
 

@@ -33,7 +33,7 @@
                 controllerAs: 'model'
             })
 
-            .when("/registerRestaurant", {
+            .when("/registerrestaurant", {
                 templateUrl: 'views/registerRestaurant.view.client.html',
                 controller: 'RegisterRestaurantController',
                 controllerAs: 'model'
@@ -78,13 +78,13 @@
                 controller: 'AdminController',
                 controllerAs: 'model'
             })
-/*
+
             .otherwise({
                  templateUrl: 'views/homePage.view.client.html',
                  controller: 'HomePageController',
                  controllerAs: 'model'
             })
-            */
+
 	}
 
 })();

@@ -15,13 +15,27 @@
         vm.followButtonStatus = followButtonStatus;
         //vm.user= $rootScope.user;
         vm.currUser = false;
-
+        var trackStatus;
+        vm.followers_objs = [];
+        vm.following_objs = [];
 
         function init() {
             $("#menu-toggle").click(function (e) {
                 e.preventDefault();
                 $("#wrapper").toggleClass("toggled");
             });
+
+            $(document).ready(function () {
+                $(window).bind("beforeunload", function () {
+                    console.log("UNLOADED");
+                    clearTimeout(trackStatus);
+                });
+                $(window).bind("navigate", function (event, data) {
+                    console.log("NAVIGATE");
+                    clearTimeout(trackStatus);
+                });
+            });
+
 
 
             vm.urlUsername = $routeParams['username'];
@@ -53,10 +67,9 @@
                                     .success(function (orders) {
                                         vm.orders = orders;
                                     });
-                                window.setInterval(updateStatus, 5000);
-                                // console.log(vm.orders);
+                                trackStatus = window.setInterval(updateStatus, 5000);
 
-                                //check if already followed
+                                //TODO: check if already followed
 
                             }
                             else {
@@ -119,7 +132,7 @@
             }
             else {
                 userProfileService
-                    .unfollowUser(vm.loggedInUser_id, usertofollow)
+                    .unfollowUser(vm.loggedInUser._id, usertofollow)
                     .then(function (followed) {
                         updateFollowBtnStatus("btn-danger","btn-success","Follow",false);
                     });
@@ -141,41 +154,78 @@
         function updateCurrentSelection(cs) {
             vm.currentSelection = cs;
 
-            if (cs == 'COMMENTS') {
-                userProfileService
-                    .findUserComments(vm.user._id)
-                    .then(function (comments) {
-                        vm.comments = comments;
-
-                    });
+            if (cs == 'TRACK ORDER') {
+                clearTimeout(trackStatus);
+                trackStatus = window.setInterval(updateStatus, 5000);
             }
-            else if (cs == 'ORDER HISTORY') {
-                userProfileService
-                    .findoldorder(vm.user._id)
-                    .then(function (orders) {
-                        vm.oldorders = orders;
+            else {
+                clearTimeout(trackStatus);
+                if (cs == 'COMMENTS') {
+                    userProfileService
+                        .findUserComments(vm.user._id)
+                        .then(function (comments) {
+                            vm.comments = comments;
+                            // var comments_id=[];
+                            // for(i in comments.data)
+                            // {
+                            //     comments_id.push(comments.data[i].feedback_giver_id);
+                            // }
+                            // var comments_objs=[];
+                            // getUsers(comments_id,comments_objs);
+                            //
+                            // for(i in comments_objs)
+                            // {
+                            //     vm.comments.data[i].url=comments_objs[i].profilepicurl;
+                            // }
 
-                    });
+                        });
+                }
+                else if (cs == 'ORDER HISTORY') {
+                    userProfileService
+                        .findoldorder(vm.user._id)
+                        .then(function (orders) {
+                            vm.oldorders = orders;
 
+                        });
+
+                }
+                else if (cs == 'FOLLOWERS') {
+                    userProfileService
+                        .findfollowers(vm.user._id)
+                        .then(function (users) {
+                            vm.followers = users.data.followers;
+                            vm.followers_objs = [];
+                            getUsers(vm.followers, vm.followers_objs);
+                        });
+
+                }
+                else if (cs == 'FOLLOWING') {
+                    userProfileService
+                        .findfollowers(vm.user._id)
+                        .then(function (users) {
+                            vm.following = users.data.following;
+                            vm.following_objs = [];
+                            getUsers(vm.following, vm.following_objs);
+                        });
+
+                }
             }
-            else if (cs == 'FOLLOWERS') {
-                userProfileService
-                    .findfollowers(vm.user._id)
-                    .then(function (users) {
-                        vm.followers = users.followers;
+        }
 
-
-                    });
-
+        function getUsers(user_ids, target_obj) {
+            if (user_ids.length > 0)
+            {
+                var user_id = user_ids.pop();
+                UserService
+                    .findUserById(user_id)
+                    .success(function (user) {
+                        console.log(user);
+                        target_obj.push(user);
+                        getUsers(user_ids, target_obj);
+                    })
             }
-            else if (cs == 'FOLLOWING') {
-                userProfileService
-                    .findfollowers(vm.user._id)
-                    .then(function (users) {
-                        vm.following = users.data.following;
-                    });
-
-            }
+            else
+                return;
         }
 
         function loginClick() {
