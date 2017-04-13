@@ -286,3 +286,10 @@ a{
 .align-btn-left {
 	text-align: left;
 }
+
+.rl-img
+{
+	margin-left: auto;
+	margin-right: auto;
+	padding-top: 4%
+}

@@ -25,7 +25,7 @@
 
 
         function searchRestaurant(restaurant,location) {
-            if(restaurant=="")
+            if(restaurant==undefined||restaurant=="")
             {
                 var res = encodeURIComponent(location);
                 var url="https://api.eatstreet.com/publicapi/v1/restaurant/search?method=both&street-address="+res+"&access-token=9519d5bba99b4fc1";

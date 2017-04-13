@@ -5,6 +5,7 @@ module.exports=function(app){
     var LocalStrategy = require('passport-local').Strategy;
     var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
     var FacebookStrategy = require('passport-facebook').Strategy;
+    var bcrypt = require("bcrypt-nodejs");
     passport.use(new LocalStrategy(localStrategy));
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
@@ -71,6 +72,7 @@ module.exports=function(app){
                 } else {
                     console.log(profile);
                     var displayname = profile.displayName;
+                    console.log(profile);
                     var user = {
 
                         //username: profile.emails[0].value,
@@ -106,10 +108,11 @@ module.exports=function(app){
                     console.log(111);
                     done(null, user);
                 } else {
-                    console.log(222);
+                    console.log(profile);
                     var user = {
                         username: profile.emails[0].value,
-                        //photo: profile.photos[0].value,
+                        //profilepicurl: profile.image.url,
+                        profilepicurl: profile.photos[0].value,
                         firstName: profile.name.givenName,
                         lastName:  profile.name.familyName,
                         email:     profile.emails[0].value,
@@ -162,11 +165,12 @@ module.exports=function(app){
 
     function localStrategy(username, password, done) {
         userModel
-            .findUserByCredentials(username, password)
+            .findUserByUsername(username)
             .then(
                 function(user) {
-                    if (!user) { return done(null, false); }
-                    return done(null, user);
+                    if(user && bcrypt.compareSync(password, user.password))
+                    { return done(null, user); }
+                    return done(null, false);
                 },
                 function(err) {
                     if (err) { return done(err); }
@@ -194,6 +198,7 @@ module.exports=function(app){
 
     function register(req,res) {
         var newUser = req.body;
+        newUser.password = bcrypt.hashSync(newUser.password);
         userModel
             .createUser(newUser)
             .then(function(user) {
