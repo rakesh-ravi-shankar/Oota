@@ -19,6 +19,7 @@
         vm.user= $rootScope.user;
 
         function init() {
+
             //clear the local storage
 
             $http.get('/api/loggedin').success(function(user) {

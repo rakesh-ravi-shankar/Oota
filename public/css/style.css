@@ -282,3 +282,8 @@ a{
 	right: 5%;
 	box-shadow: 5px 5px 5px #222222;
 }
+	
+.rl-img
+{margin-left: auto;
+margin-right: auto;
+padding-top: 4%}

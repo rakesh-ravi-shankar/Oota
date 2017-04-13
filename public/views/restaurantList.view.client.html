@@ -36,25 +36,27 @@
 <nav class=" navbar navbar-inverse navbar-fixed-top">
 
     <div class="row container-fluid">
-        <div class="navbar-text col-lg-10 col-sm-10 col-xs-10">
+        <div class="navbar-text col-lg-10 col-sm-9 col-xs-8">
          <h5>RESTAURANTS</h5>        </div>
-        <div class="logout/login navbar-text" style="text-align: right">
+        <div class="logout/login navbar-text pull-right" style="margin-right: 2%;">
             <button ng-show=!model.user ng-click="model.loginClick()" class="btn btn-primary">Login</button>
             <button ng-show=model.user ng-click="model.logout()" class="btn btn-success">Logout</button>
         </div>
     </div>
 </nav>
 
-<div class="restaurantlist">
 
-<div class="container" style='margin-top:5%'>
+
+<div class="container">
+    <div id="background-img"></div>
+    <br><br>
     <div class="row">
-        <div class="col-sm-6">
+        <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
             <input ng-model="searchLoc"
                    placeholder="Area"
                    type="text" class="form-control">
         </div>
-        <div class="col-sm-6">
+        <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
             <div class="input-group">
                 <input ng-model="searchRes" type="text"
                        placeholder="Restaurant Name"
@@ -78,8 +80,7 @@
                 <div class="row" style="display:flex;flex-wrap: wrap;margin-bottom: 22px;" ng-if="$index%3==0">
                     <div class="container col-lg-4 col-md-4" ng-if="$index<model.restaurants.data.restaurants.length">
                         <div class="profile-card text-center">
-                            <img class="circle img-responsive"
-                                 style="padding-left: 25%;padding-top: 4%"
+                            <img class="img-responsive rl-img"
                                  src="{{model.restaurants.data.restaurants[$index].logoUrl}}">
                             <div class="profile-info">
                                 <h2 class="hvr-underline-from-center">
@@ -94,6 +95,7 @@
                                 </span>
                                 <p ng-if="model.restaurants.data.restaurants[$index].offersPickup">
                                 <h6>Offers Pick Up: YES</h6>
+
                                 <p class="card-text">
                                     <button class="btn btn-block menu-button"
                                             ng-click="model.searchMenu(model.restaurants.data.restaurants[$index])">
@@ -107,8 +109,8 @@
                     <div class="container col-lg-4 col-md-4" ng-if="$index+1<model.restaurants.data.restaurants.length">
                         <div class="profile-card text-center">
 
-                            <img style="padding-left: 25%;padding-top: 4%"
-                                 class="img-responsive"
+                            <img
+                                 class="img-responsive rl-img"
                                  src="{{model.restaurants.data.restaurants[$index+1].logoUrl}}">
                             <div class="profile-info">
                                 <h2 class="hvr-underline-from-center">
@@ -136,7 +138,7 @@
                     <div class="container col-lg-4 col-md-4" ng-if="$index+2<model.restaurants.data.restaurants.length">
                         <div class="profile-card text-center" >
 
-                            <img class="img-responsive" style="padding-left: 25%;padding-top: 4%"
+                            <img class="img-responsive rl-img"
                                  src="{{model.restaurants.data.restaurants[$index+2].logoUrl}}">
                             <div class="profile-info">
                                 <h2 class="hvr-underline-from-center">
@@ -170,5 +172,4 @@
 
         </div>
 
-</div>
 </div>
