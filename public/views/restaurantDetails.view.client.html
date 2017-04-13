@@ -34,18 +34,18 @@
 
 
 
-<nav class=" navbar navbar-default navbar-fixed-top">
+<nav class=" navbar navbar-inverse navbar-fixed-top">
 
     <div class="row container-fluid">
         <div class="hidden-xs col-sm-4 col-md-4 col-lg-4">
             <div class="navbar-text pull-left" >
-                <a>
+                <a href="#/restaurantList">
                     <span class="glyphicon glyphicon-chevron-left"></span>
                 </a>
             </div>
 
             <div class="navbar-header pull-left">
-                <a class="navbar-brand" href="">
+                <a class="navbar-brand" href="#/">
                     {{model.restaurantName}}
                 </a>
             </div>
@@ -73,7 +73,7 @@
 <div class="container-fluid col-md-4 col-sm-4 hidden-xs vertical-line web-left-pane" >
 
     <div class="row">
-        <div class="square">
+        <div class="square rl-img">
             <img src="{{model.restaurantLogo}}" class="img-responsive img-circle content"/>
 
         </div>
@@ -98,18 +98,26 @@
 
     <ul class="list-group">
         <li class="list-group-item" ng-repeat="review in model.allReviews">
-            <a href="#" class="pull-left">
-                <img src="" alt="" class="img-circle">
-            </a>
-            <div class="media-body">
+
+            <img src="{{review.profilepicurl}}"
+                 alt=""
+                 class="img-circle"
+                 style="width: 2em;height: 2em;">
+
+            <div class="media-body" style="display: inline;">
                 <span class="text-muted pull-right">
                     <small class="text-muted">{{review.createdAt}}</small>
                 </span>
-                <strong class="text-success">{{review.firstName}} {{review.lastName}}</strong>
-                <p>
+                <a href="#/userProfile/{{review.username}}">
+                    <strong class="text-success">{{review.firstName}} {{review.lastName}}</strong>
+                </a>
+
+                <p style="margin-left:1em; margin-top: 1em; ">
                     {{review.reviewText}}
                 </p>
+
             </div>
+
         </li>
     </ul>
 

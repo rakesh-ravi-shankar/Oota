@@ -33,7 +33,7 @@
                 controllerAs: 'model'
             })
 
-            .when("/registerRestaurant", {
+            .when("/registerrestaurant", {
                 templateUrl: 'views/registerRestaurant.view.client.html',
                 controller: 'RegisterRestaurantController',
                 controllerAs: 'model'

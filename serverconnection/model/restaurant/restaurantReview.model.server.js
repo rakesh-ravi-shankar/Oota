@@ -28,6 +28,7 @@ function createReview(review) {
                     console.log(restaurantReview);
                     restaurantReview._users.push(review._user);
                     restaurantReview.reviews.push(review.review);
+                    restaurantReview.dateCreated.push(review.dateCreated);
                     restaurantReview
                         .save()
                         .then(function () {
@@ -37,7 +38,10 @@ function createReview(review) {
                 else
                 {
                     RestaurantReviewModel
-                        .create({apiKey: review.apiKey, _users:[review._user], reviews:[review.review]}, function(err, newReview) {
+                        .create({apiKey: review.apiKey,
+                                _users:[review._user],
+                                reviews:[review.review],
+                                dateCreated:[review.dateCreated]}, function(err, newReview) {
                             if (err){
                                 deffered.reject(err);
                             }

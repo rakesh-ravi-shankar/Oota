@@ -54,15 +54,6 @@
             RestaurantReviewService
                 .findAllReviews(vm.apiKey)
                 .success(function (allReviews) {
-                    // for (i in allReviews._users)
-                    // {
-                    //     UserService
-                    //         .findUserById(allReviews._users[i])
-                    //         .success(function (user) {
-                    //             console.log(allReviews.reviews[i]);
-                    //             vm.allReviews.push({firstName: user.firstName, lastName: user.lastName, reviewText: allReviews.reviews[i], createdAt:allReviews.dateCreated[i]});
-                    //         });
-                    // }
 
                     if (allReviews != null)
                     {
@@ -78,12 +69,18 @@
                                     }
                                 });
 
-                                console.log(allReviews);
 
                                 for (i in allReviews._users)
                                 {
-                                    vm.allReviews.push({firstName: user_objs[allReviews._users[i]].firstName, lastName: user_objs[allReviews._users[i]].lastName, reviewText: allReviews.reviews[i], createdAt:allReviews.dateCreated[i]});
+                                    vm.allReviews
+                                        .push({firstName: user_objs[allReviews._users[i]].firstName,
+                                                lastName: user_objs[allReviews._users[i]].lastName,
+                                                username: user_objs[allReviews._users[i]].username,
+                                                profilepicurl:user_objs[allReviews._users[i]].profilepicurl,
+                                                reviewText: allReviews.reviews[i],
+                                                createdAt:allReviews.dateCreated[i].split("T")[0]});
                                 }
+                                vm.allReviews.reverse();
                             });
                     }
 
@@ -99,10 +96,10 @@
             }
             else {
                 RestaurantReviewService
-                    .createReview({apiKey: vm.apiKey, _user: user._id, review: review})
+                    .createReview({apiKey: vm.apiKey, _user: user._id, review: review, dateCreated:Date.now()})
                     .success(function (createdReview) {
                         console.log(createdReview);
-                        $("#reviewTextArea").value = "";
+                        $("#reviewTextArea").val("");
                         fetchAllReviews();
                     });
 
@@ -124,20 +121,20 @@
 
         function loginUser(user)
         {
-
+            // console.log(user);
             UserService
                 .findUserByCredentials(user)
                 .success(function (loggedUser) {
-                    console.log(loggedUser);
+                    // console.log(loggedUser);
                     if(loggedUser)
                     {
-                        console.log(loggedUser);
+                        // console.log(loggedUser);
                         $("#validateUserModal").modal("hide");
                         $("body").removeClass("modal-open");
                         $(".modal-backdrop").remove();
                         $rootScope.user = loggedUser;
                         vm.user= $rootScope.user;
-                        console.log("logged in user " + $rootScope.user);
+                        // console.log("logged in user " + $rootScope.user);
                         closeModal();
                         //$location.url("/restaurantList/" + vm.restaurantId + "/restaurantMenu/" + $rootScope.currentUser.username );
                     }
