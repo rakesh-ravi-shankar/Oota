@@ -73,12 +73,13 @@
                 controller: 'AdminController',
                 controllerAs: 'model'
             })
-
+/*
             .otherwise({
                  templateUrl: 'views/homePage.view.client.html',
                  controller: 'HomePageController',
                  controllerAs: 'model'
             })
+            */
 	}
 
 })();
