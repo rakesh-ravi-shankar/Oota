@@ -44,7 +44,7 @@
         <div class="logout-login navbar-text pull-right" style="margin-right: 2%;">
             <button ng-show=!model.loggedInUser ng-click="model.loginClick()" class="btn btn-primary">Login</button>
             <button ng-show=model.loggedInUser ng-click="model.logout()" class="btn btn-success">Logout</button>
-            <span  ng-show=model.user >
+            <span  ng-show=model.loggedInUser >
                 <a href="#/userProfile/{{model.user.username}}" class="btn fa fa-user fa-2x" aria-hidden="true"></a></span>
         </div>
 
@@ -149,13 +149,7 @@
         <div ng-switch-when="COMMENTS">
                  <ul class="list-group">
                     <li class="list-group-item" ng-repeat="comment in model.comments.data">
-                        <a href="#" class="pull-left">
-                            <img src="" alt="" class="img-circle">
-                        </a>
                         <div class="media-body">
-                            <span class="text-muted pull-right">
-                                <small class="text-muted">{{review.createdAt}}</small>
-                            </span>
                             <strong class="text-success">{{comment.feedback_giver_name}}</strong>
                             <p>
                                 {{comment.comment}}
@@ -165,10 +159,42 @@
                 </ul>
         </div>
         <div ng-switch-when="FOLLOWERS">
-            {{model.followers_objs}}
+            <!--{{model.followers_objs}}-->
+
+            <ul class="list-group">
+
+                <li class="list-group-item" ng-repeat="followers in model.followers_objs">
+                    <img src="{{followers.profilepicurl}}"
+                         alt=""
+                         class="img-circle"
+                         style="width: 3em;height: 3em;">
+                    <div class="media-body" style="display: inline;">
+
+                        <a href="#/userProfile/{{followers.username}}">
+                            <strong style="font-size: 2em" class="text-success">{{followers.firstName}} {{followers.lastName}}</strong>
+                        </a>
+
+
+                    </div>
+                </li>
+            </ul>
         </div>
         <div ng-switch-when="FOLLOWING">
-            {{model.following_objs}}
+            <!--{{model.following_objs}}-->
+            <li class="list-group-item" ng-repeat="followers in model.following_objs">
+                <img src="{{followers.profilepicurl}}"
+                     alt=""
+                     class="img-circle"
+                     style="width: 3em;height: 3em;">
+                <div class="media-body" style="display: inline;">
+
+                    <a href="#/userProfile/{{followers.username}}">
+                        <strong style="font-size: 2em" class="text-success">{{followers.firstName}} {{followers.lastName}}</strong>
+                    </a>
+
+
+                </div>
+            </li>
         </div>
     </div>
 </div>

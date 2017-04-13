@@ -4,16 +4,33 @@
         .module("Oota")
         .controller("ReviewOrderController", ReviewOrderController);
 
-    function ReviewOrderController($window, $location, $routeParams, localStorageService,OrderService,$rootScope) {
+    function ReviewOrderController($window, $location, $http,$routeParams, localStorageService,OrderService,$rootScope) {
         var vm = this;
         vm.updateOrder = updateOrder;
         vm.placeOrder = placeOrder;
         vm.getCurrentAddress = getCurrentAddress;
         vm.getActiveOrderForUser = getActiveOrderForUser;
         vm.getActiveOrders = getActiveOrders;
+        vm.logout = logout;
         vm.orders = [];
 
         function init() {
+            $http.get('/api/loggedin').success(function(user) {
+                $rootScope.errorMessage = null;
+                if (user !== '0') {
+                    $rootScope.user = user;
+                } else {
+                    console.log("Dont come here!!!");
+                }
+            });
+
+            if($rootScope.user != null){
+                vm.user=$rootScope.user;
+            }
+
+            $("body").removeClass("modal-open");
+            $(".modal-backdrop").remove();
+
             vm.restuarantId = $routeParams['resid'];
             vm.userId = $rootScope.user._id;
             vm.pickupLoc = localStorageService.get("pickupLoc");
@@ -122,7 +139,15 @@
                     vm.activeOrders = orders;
                 });
         }
-
+        function logout() {
+            UserService
+                .logout()
+                .success(function () {
+                    console.log("User logged out");
+                    $rootScope.user = null;
+                    vm.user = null;
+                });
+        }
 
 
     }

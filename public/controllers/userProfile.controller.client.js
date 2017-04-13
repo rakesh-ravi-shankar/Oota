@@ -165,6 +165,18 @@
                         .findUserComments(vm.user._id)
                         .then(function (comments) {
                             vm.comments = comments;
+                            // var comments_id=[];
+                            // for(i in comments.data)
+                            // {
+                            //     comments_id.push(comments.data[i].feedback_giver_id);
+                            // }
+                            // var comments_objs=[];
+                            // getUsers(comments_id,comments_objs);
+                            //
+                            // for(i in comments_objs)
+                            // {
+                            //     vm.comments.data[i].url=comments_objs[i].profilepicurl;
+                            // }
 
                         });
                 }

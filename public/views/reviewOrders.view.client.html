@@ -1,3 +1,53 @@
+<div class="modal fade" id="validateUserModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Login/Register</h5>
+            </div>
+            <div class="modal-body">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" data-target="#home">Login</a></li>
+                    <li><a data-toggle="tab" data-target="#menu1">Register</a></li>
+
+                </ul>
+
+                <div class="tab-content">
+                    <div id="home" class="tab-pane fade in active">
+                        <ng-include src="'views/login.view.client.html'"></ng-include>
+                    </div>
+                    <div id="menu1" class="tab-pane fade">
+                        <ng-include src="'views/registerUser.view.client.html'"></ng-include>
+                    </div>
+                </div>
+                <!--<label>Username:</label>-->
+                <!--<input type="text" class="form-control" placeholder="username" ng-model="user.username">-->
+                <!--<label>Password:</label>-->
+                <!--<input type="text" class="form-control" placeholder="password" ng-model="user.password">-->
+            </div>
+
+            <div class="modal-footer">
+                <a class="btn btn-success" ng-click="model.closeModal()">Close</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<nav class=" navbar navbar-inverse navbar-fixed-top">
+
+    <div class="row container-fluid">
+        <div class="navbar-text col-lg-10 col-sm-8  col-xs-5">
+            <a class=" btn oota" href="#/">OOTA</a>    </div>
+        <div class="logout-login navbar-text pull-right" style="margin-right: 2%;">
+            <button ng-show=model.user ng-click="model.logout()" class="btn btn-success">Logout</button>
+            <span  ng-show=model.user >
+                <a href="#/userProfile/{{model.user.username}}" class="btn fa fa-user fa-2x" aria-hidden="true"></a></span>
+        </div>
+    </div>
+</nav>
+
+
 <div class="container">
     <h1>{{model.restaurantName}}</h1>
     <h3>Orders:</h3>
