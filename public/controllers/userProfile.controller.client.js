@@ -16,6 +16,7 @@
         //vm.user= $rootScope.user;
         vm.currUser = false;
         var trackStatus;
+        vm.followers_objs = []
 
 
         function init() {
@@ -131,7 +132,7 @@
             }
             else {
                 userProfileService
-                    .unfollowUser(vm.loggedInUser_id, usertofollow)
+                    .unfollowUser(vm.loggedInUser._id, usertofollow)
                     .then(function (followed) {
                         updateFollowBtnStatus("btn-danger","btn-success","Follow",false);
                     });
@@ -180,9 +181,9 @@
                     userProfileService
                         .findfollowers(vm.user._id)
                         .then(function (users) {
-                            vm.followers = users.followers;
-
-
+                            vm.followers = users.data.followers;
+                            getUsers(vm.followers);
+                            console.log(vm.followers_objs);
                         });
 
                 }
@@ -195,6 +196,22 @@
 
                 }
             }
+        }
+
+        function getUsers(user_ids) {
+            if (user_ids != undefined)
+            {
+                var user_id = user_ids.pop();
+                UserService
+                    .findUserById(user_id)
+                    .success(function (user) {
+                        console.log(user);
+                        vm.followers_objs.push(user);
+                        getUsers(user_ids);
+                    })
+            }
+            else
+                return;
         }
 
         function loginClick() {

@@ -1,7 +1,7 @@
 body {
 	/*background-color: #21263B;*/
 	overflow-x: hidden;
-	padding-top: 64px;
+	padding-top: 82px;
 }
 
 #background-img {
@@ -274,8 +274,10 @@ color:#999999}
 /*}*/
 a{
 	cursor: hand;
-}
 
+}
+a:hover
+{text-decoration: none;}
 .floating-btn {
 	position: fixed;
 	bottom: 5%;
@@ -293,3 +295,31 @@ a{
 	margin-right: auto;
 	padding-top: 4%
 }
+#menu-toggle
+{
+	margin-top:0.8em;
+}
+
+.oota
+{
+	margin-top: auto;
+	margin-bottom: auto;
+	style:"margin-left: 6%";
+	font-family: 'Pacifico', cursive;
+	color: #F0E2C1;
+	text-shadow: 3px 6px 5px black;
+	font-size: 2em;
+}
+.oota:hover
+{
+	color: #F0E2C1;
+}
+.logout-login
+{
+	margin-top:1.7em;
+}
+
+.fa-user
+{color:whitesmoke}
+.fa-user:hover
+{color:snow}
