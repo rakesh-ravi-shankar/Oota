@@ -81,21 +81,29 @@
 
             <div ng-switch-when="reviews">
                 <h1>Reviews</h1>
+
                 <ul class="list-group">
+
                     <li class="list-group-item" ng-repeat="review in model.allReviews">
-                        <a href="#" class="pull-left">
-                            <img src="assets/img/1.png" alt="" class="img-circle">
-                        </a>
-                        <div class="media-body">
-                <span class="text-muted pull-right">
-                    <small class="text-muted">{{review.createdAt}}</small>
-                </span>
-                            <strong class="text-success">{{review.firstName}} {{review.lastName}}</strong>
-                            <p>
+                        <img src="{{review.profilepicurl}}"
+                             alt=""
+                             class="img-circle"
+                             style="width: 2em;height: 2em;">
+
+                        <div class="media-body" style="display: inline;">
+                            <span class="text-muted pull-right">
+                                <small class="text-muted">{{review.createdAt}}</small>
+                            </span>
+                            <a href="#/userProfile/{{review.username}}">
+                                <strong class="text-success">{{review.firstName}} {{review.lastName}}</strong>
+                            </a>
+
+                            <p style="margin-left:1em; margin-top: 1em; ">
                                 {{review.reviewText}}
                             </p>
                         </div>
                     </li>
+
                 </ul>
             </div>
         </div>

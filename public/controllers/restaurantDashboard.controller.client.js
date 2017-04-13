@@ -69,8 +69,15 @@
 
                                 for (i in allReviews._users)
                                 {
-                                    vm.allReviews.push({firstName: user_objs[allReviews._users[i]].firstName, lastName: user_objs[allReviews._users[i]].lastName, reviewText: allReviews.reviews[i], createdAt:allReviews.dateCreated[i]});
+                                    vm.allReviews
+                                        .push({firstName: user_objs[allReviews._users[i]].firstName,
+                                            lastName: user_objs[allReviews._users[i]].lastName,
+                                            username: user_objs[allReviews._users[i]].username,
+                                            profilepicurl:user_objs[allReviews._users[i]].profilepicurl,
+                                            reviewText: allReviews.reviews[i],
+                                            createdAt:allReviews.dateCreated[i].split("T")[0]});
                                 }
+                                vm.allReviews.reverse();
                             });
                     }
                 })
