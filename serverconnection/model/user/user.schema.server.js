@@ -7,6 +7,7 @@ var userSchema= mongoose.Schema({
     lastName:String,
     email:String,
     phone:String,
+    role:{type: String, enum: ['NORMAL','ADMIN'],default:'NORMAL'},
     followers:[{type:mongoose.Schema.Types.ObjectId, ref:"UserModel"}],
     following:[{type:mongoose.Schema.Types.ObjectId, ref:"UserModel"}],
     dateofbirth:Date,

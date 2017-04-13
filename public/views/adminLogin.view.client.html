@@ -1,0 +1,25 @@
+<div class="container-fluid GodLoginContainer">
+
+    <h1 id="title">God Login</h1>
+    <form>
+        <div class="form-group">
+            <div ng-show="model.error" class="alert alert-danger" role="alert">
+                {{model.error}}
+            </div>
+            <label> God Username</label>
+            <input type="text" name="username" placeholder="username"
+                   class="form-control" ng-model="user.username">
+            <br>
+            <label> God Password</label>
+            <input type="password" name="password" placeholder="*****"
+                   class="form-control" ng-model="user.password">
+            <br>
+
+            <button id="login" class="btn btn-block btn-primary"
+                    ng-click="model.loginUser(user)">Login</button>
+            <br>
+
+        </div>
+    </form>
+
+</div>

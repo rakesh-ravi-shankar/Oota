@@ -6,7 +6,7 @@
 
 	function configuration($routeProvider) {
 		$routeProvider
-            .when("/homep   age", {
+            .when("/homepage", {
                 templateUrl: 'views/homePage.view.client.html',
                 controller: 'HomePageController',
                 controllerAs: 'model'
@@ -66,6 +66,11 @@
             .when("/delivererLogin", {
                 templateUrl: 'views/deliverer.login.view.client.html',
                 controller: 'LoginController',
+                controllerAs: 'model'
+            })
+            .when("/adminLogin", {
+                templateUrl: 'views/adminLogin.view.client.html',
+                controller: 'AdminController',
                 controllerAs: 'model'
             })
             .when("/adminPage", {
