@@ -59,6 +59,9 @@
         <div ng-show="model.currUser" class="profile-edit-button">
                 <a href="#/editProfile  "><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a>
         </div>
+        <div ng-show="!model.currUser" style="margin-top: 2em;">
+
+        </div>
 
         <li>
 
@@ -71,24 +74,24 @@
             <h2 style="text-align:center;color: #F2F2F1;overflow-wrap: break-word;">{{model.user.firstName}} {{model.user.lastName}}</h2>
         </li>
 
-        <li ng-show="!model.currUser">
+        <li ng-show="!model.currUser" style="text-align: center">
             <button id="followBtn" class="btn" ng-click="model.followUser()">
                 {{model.followStatus}}</button>
         </li>
         <li ng-show="model.currUser">
-            <a  ng-click="model.updateCurrentSelection('TRACK ORDER')">TRACK ORDER</a>
+            <a class="btn align-btn-left" ng-click="model.updateCurrentSelection('TRACK ORDER')">TRACK ORDER</a>
         </li>
         <li ng-show="model.currUser">
-            <a ng-click="model.updateCurrentSelection('ORDER HISTORY')">ORDER HISTORY</a>
+            <a class="btn align-btn-left" ng-click="model.updateCurrentSelection('ORDER HISTORY')">ORDER HISTORY</a>
         </li>
         <li>
-            <a ng-click="model.updateCurrentSelection('COMMENTS')">MENTIONS</a>
+            <a class="btn align-btn-left" ng-click="model.updateCurrentSelection('COMMENTS')">MENTIONS</a>
         </li>
         <li>
-            <a ng-click="model.updateCurrentSelection('FOLLOWERS')">FOLLOWERS</a>
+            <a class="btn align-btn-left" ng-click="model.updateCurrentSelection('FOLLOWERS')">FOLLOWERS</a>
         </li>
         <li>
-            <a ng-click="model.updateCurrentSelection('FOLLOWING')">FOLLOWING</a>
+            <a class="btn align-btn-left" ng-click="model.updateCurrentSelection('FOLLOWING')">FOLLOWING</a>
         </li>
     </ul>
 </div>

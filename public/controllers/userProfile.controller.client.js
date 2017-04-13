@@ -15,6 +15,7 @@
         vm.followButtonStatus = followButtonStatus;
         //vm.user= $rootScope.user;
         vm.currUser = false;
+        var trackStatus;
 
 
         function init() {
@@ -22,6 +23,18 @@
                 e.preventDefault();
                 $("#wrapper").toggleClass("toggled");
             });
+
+            $(document).ready(function () {
+                $(window).bind("beforeunload", function () {
+                    console.log("UNLOADED");
+                    clearTimeout(trackStatus);
+                });
+                $(window).bind("navigate", function (event, data) {
+                    console.log("NAVIGATE");
+                    clearTimeout(trackStatus);
+                });
+            });
+
 
 
             vm.urlUsername = $routeParams['username'];
@@ -53,10 +66,9 @@
                                     .success(function (orders) {
                                         vm.orders = orders;
                                     });
-                                window.setInterval(updateStatus, 5000);
-                                // console.log(vm.orders);
+                                trackStatus = window.setInterval(updateStatus, 5000);
 
-                                //check if already followed
+                                //TODO: check if already followed
 
                             }
                             else {
@@ -141,40 +153,47 @@
         function updateCurrentSelection(cs) {
             vm.currentSelection = cs;
 
-            if (cs == 'COMMENTS') {
-                userProfileService
-                    .findUserComments(vm.user._id)
-                    .then(function (comments) {
-                        vm.comments = comments;
-
-                    });
+            if (cs == 'TRACK ORDER') {
+                clearTimeout(trackStatus);
+                trackStatus = window.setInterval(updateStatus, 5000);
             }
-            else if (cs == 'ORDER HISTORY') {
-                userProfileService
-                    .findoldorder(vm.user._id)
-                    .then(function (orders) {
-                        vm.oldorders = orders;
+            else {
+                clearTimeout(trackStatus);
+                if (cs == 'COMMENTS') {
+                    userProfileService
+                        .findUserComments(vm.user._id)
+                        .then(function (comments) {
+                            vm.comments = comments;
 
-                    });
+                        });
+                }
+                else if (cs == 'ORDER HISTORY') {
+                    userProfileService
+                        .findoldorder(vm.user._id)
+                        .then(function (orders) {
+                            vm.oldorders = orders;
 
-            }
-            else if (cs == 'FOLLOWERS') {
-                userProfileService
-                    .findfollowers(vm.user._id)
-                    .then(function (users) {
-                        vm.followers = users.followers;
+                        });
+
+                }
+                else if (cs == 'FOLLOWERS') {
+                    userProfileService
+                        .findfollowers(vm.user._id)
+                        .then(function (users) {
+                            vm.followers = users.followers;
 
 
-                    });
+                        });
 
-            }
-            else if (cs == 'FOLLOWING') {
-                userProfileService
-                    .findfollowers(vm.user._id)
-                    .then(function (users) {
-                        vm.following = users.data.following;
-                    });
+                }
+                else if (cs == 'FOLLOWING') {
+                    userProfileService
+                        .findfollowers(vm.user._id)
+                        .then(function (users) {
+                            vm.following = users.data.following;
+                        });
 
+                }
             }
         }
 

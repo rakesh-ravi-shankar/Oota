@@ -282,3 +282,7 @@ a{
 	right: 5%;
 	box-shadow: 5px 5px 5px #222222;
 }
+
+.align-btn-left {
+	text-align: left;
+}
