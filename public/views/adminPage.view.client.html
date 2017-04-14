@@ -24,7 +24,7 @@
                 <a href="#menu-toggle" class="btn btn-default pull-left" id="menu-toggle">
                     <span class="glyphicon glyphicon-menu-hamburger"></span>
                 </a>
-                <a class=" btn oota" href="#/">OOTA</a>
+                <a class=" btn oota" href="#/">OOTA - Admin</a>
             </div>
         </div>
         <div class="logout-login navbar-text pull-right" style="margin-right: 2%;">
@@ -45,15 +45,7 @@
                 <a href="#/editProfile"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a>
             </div>
             -->
-            <li>
-                <div class="square">
-                    <img src="{{model.user.profilepicurl}}" class="img-responsive img-circle content"/>
-                </div>
-            </li>
-            <li>
-                <h2 style="text-align:center;color: #F2F2F1;overflow-wrap: break-word;">{{model.user.firstName}}
-                    {{model.user.lastName}}</h2>
-            </li>
+
 
             <li>
                 <a ng-click="model.findAllUsers()">USERS</a>
@@ -103,14 +95,16 @@
                     <ul class="list-group">
                         <li ng-repeat="user in model.users" class="list-group-item">
                             <!-- <a href="#/user/{{websiteNewController.userId}}/website/{{website._id}}/page"> -->
+                            <div class="input-group">
                             <a href="/#/userProfile/{{user.username}}">
                                 {{user.username}} {{ user.lastname}}
                             </a>
                             <span class="input-group-btn">
-                            <a ng-click="model.editProfile(user)" class="btn btn-default pull-right" type="button">
+                            <a ng-click="model.editProfile(user)" class="btn  pull-right" type="button">
                                 <span class="pull-right glyphicon glyphicon-cog"></span>
                             </a>
                             </span>
+                            </div>
                         </li>
                     </ul>
                 </div>
@@ -153,8 +147,8 @@
                             <col width="20%" />
                             <col width="20%" />
                             <col width="20%" />
-                            <col width="10%" />
-                            <col width="10%" />
+                            <col width="15%" />
+                            <col width="5%" />
                             <tr>
                                 <th>Order Id</th>
                                 <th>Restaurant Name</th>
@@ -171,7 +165,7 @@
                                 <td>{{order._deliverer}}</td>
                                 <td>{{order.deliveryStatus}}</td>
                                 <td><span class="input-group-btn">
-                            <a ng-click="model.editMyOrder(order)" class="btn btn-default pull-right" type="button">
+                            <a ng-click="model.editMyOrder(order)" class="btn  pull-right" type="button">
                                 <span class="pull-right glyphicon glyphicon-cog"></span>
                             </a>
                             </span></td>
@@ -204,14 +198,37 @@
 
         <div ng-switch-when="restaurants">
             <div class="row">
+                <h3> Restaurants </h3>
+                <hr>
+
+                <h4>Search by</h4>
+
+                <div >
+                    <div class="input-group">
+                        <input ng-model="SearchRestId"
+                               placeholder="Restaurant Id"
+                               type="text" class="form-control">
+
+                        <span class="input-group-btn">
+                            <a ng-click="model.searchRestaurant(SearchRestId)"
+                               class="btn btn-default" type="button">
+                            <span class="glyphicon glyphicon-search widget-class"></span>
+                            </a>
+                            </span>
+                    </div>
+                </div>
+
+            </div>
+            <br>
+            <div class="row">
                 <div>
                     <ul class="list-group">
                         <li ng-repeat="restaurant in model.restaurants" class="list-group-item">
                             <!-- <a href="#/user/{{websiteNewController.userId}}/website/{{website._id}}/page"> -->
-                            <a href="#">
+                            <a href="#/{{restaurant.apiKey}}/restaurantDetails">
                                 {{restaurant.username}}
                             </a>
-                            <a href="#">
+                            <a ng-click="model.editMyRestaurant(restaurant)">
                                 <span class="pull-right glyphicon glyphicon-cog"></span>
                             </a>
                         </li>
@@ -260,18 +277,27 @@
                     <input type="password" ng-model="model.editUser.password" class="form-control" id="confirm-password" placeholder="Wonderland">
                 </div>
                 <div class="form-group">
-                    <label for="birthday">Birthday</label>
-                    <input ng-model="model.editUser.dateofbirth" class="form-control" id="birthday" placeholder="Wonderland">
+                    <label for="datetimepicker1">Birthday</label>
+                    <div class='input-group date' id='datetimepicker1'>
+                        <input  ng-model="model.editUser.dateofbirth"
+                                type='text' class="form-control" />
+                        <span class="input-group-addon">
+                                      <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                    </div>
+                    <script type="text/javascript">
+                        $(function () {
+                            $('#datetimepicker1').datetimepicker({format: 'YYYY-MM-DD'});
+                        });
+                    </script>
                 </div>
+                <!--
+                <div class="form-group">
+                    <label for="birthday">Birthday</label>
+                    <input ng-model="model.editUser.dateofbirth" class="form-control" id="birthday" type="date">
+                </div>
+-->
 
-                <label>Upload</label>
-                <input type="file"
-                       class="form-control"
-                       name="myFile"
-                       value="https://www.google.com/search?q=images&espv=2&biw=753&bih=970&source=lnms"
-                />
-                <br>
-                <button  type="submit" class="btn btn-primary btn-block">Upload Image</button>
                 <br>
                 <div class="form-group">
                     <a class="btn btn-success btn-block" ng-click="model.updateUser(model.editUser)"> Done
@@ -325,7 +351,7 @@
 
                     <div class="form-group">
                     <label for="deliveryStatus">Delivery Status</label>
-                    <select class="form-control" id="deliveryStatus" ng-value="model.editOrder.deliveryStatus">
+                    <select class="form-control" id="deliveryStatus" ng-model="model.editOrder.deliveryStatus">
                         <option>ORDERED</option>
                         <option>SELECTED_FOR_DELIVERY</option>
                         <option>PICKED_ORDER</option>
@@ -351,6 +377,66 @@
                 <a class="btn btn-danger btn-block"
                    ng-click="model.deleteOrder()">Delete Order</a>
             </div>
+
+
+            <div ng-switch-when="editRestaurant">
+                <div class="alert alert-danger" ng-show="model.error">
+                    {{model.error}}
+                </div>
+                <div class="alert alert-success" ng-show=" model.message">
+                    {{model.message}}
+                </div>
+
+                <form >
+
+                    <label for="restaurantUsername">Username</label>
+                    <h2 ng-model="model.editRest.username" id="restaurantUsername" > {{model.editRest.username}}</h2>
+
+                    <div class="form-group">
+                        <label for="resEmail">Email</label>
+                        <input type="email" ng-model="model.editRest.email"  class="form-control" id="resEmail" placeholder="alice@wonderland.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="restaurantNameEdit">Restaurant Name</label>
+                        <input type="text" ng-model="model.editRest.restaurantName" class="form-control" id="restaurantNameEdit" placeholder="Alice">
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        <input type="text" ng-model="model.editRest.address" class="form-control" id="address" placeholder="Wonderland">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" ng-model="model.editRest.phone" class="form-control" id="phone" placeholder="Wonderland">
+                    </div>
+                    <div class="form-group">
+                        <label for="resPassword">Password</label>
+                        <input type="password" ng-model="model.editRest.password" class="form-control" id="resPassword" placeholder="Wonderland">
+                    </div>
+                    <div class="form-group">
+                        <label for="res-confirm-password">Confirm Password</label>
+                        <input type="password" ng-model="model.editRest.password" class="form-control" id="res-confirm-password" placeholder="Wonderland">
+                    </div>
+
+                    <!--
+                    <div class="form-group">
+                        <label for="birthday">Birthday</label>
+                        <input ng-model="model.editUser.dateofbirth" class="form-control" id="birthday" type="date">
+                    </div>
+    -->
+
+                    <br>
+                    <div class="form-group">
+                        <a class="btn btn-success btn-block" ng-click="model.updateRestaurant(model.editRest)"> Done
+                        </a>
+                    </div>
+
+                </form>
+
+                <a class="btn btn-danger btn-block"
+                   ng-click="model.deleteRestaurant()">Delete Account</a>
+            </div>
+
+
 
 
         </div>

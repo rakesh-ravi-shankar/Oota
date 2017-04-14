@@ -12,12 +12,17 @@
             "findRestaurantByCredentials":findRestaurantByCredentials,
             "findAllRestaurants":findAllRestaurants,
             "findRestaurantByApiKey":findRestaurantByApiKey,
-            "deleteRestaurant":deleteRestaurant
+            "updateRestaurant":updateRestaurant,
+            "deleteRestaurant":deleteRestaurant,
+            "findRestaurantById":findRestaurantById
         };
         return api;
 
         function createRestaurant(restaurant) {
             return $http.post("/api/restaurant",restaurant);
+        }
+        function updateRestaurant(rest) {
+            return $http.post("/api/updaterestaurant/",rest);
         }
 
         function findRestaurantByUsername(username) {
@@ -32,6 +37,10 @@
 
         function findAllRestaurants() {
             return $http.get("/api/allRestaurants");
+        }
+
+        function findRestaurantById(restId) {
+            return $http.get("/api/restaurant/"+restId);
         }
 
         function findRestaurantByApiKey(apiKey) {

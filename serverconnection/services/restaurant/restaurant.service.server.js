@@ -5,7 +5,7 @@ module.exports=function(app){
     app.get("/api/restaurant",findRestaurant);
     app.post("/api/restaurant",createRestaurant);
     app.get("/api/restaurant/:uid",findRestaurantById);
-    app.put("/api/restaurant/:uid",updateRestaurant);
+    app.post("/api/updaterestaurant/",updateRestaurant);
     app.delete("/api/restaurant/:apiKey",deleteRestaurant);
     app.get("/api/allRestaurants",findAllRestaurants);
     app.get("/api/restaurantDashboard/:apiKey", findRestaurantByApiKey);
@@ -106,10 +106,9 @@ module.exports=function(app){
 
 
     function updateRestaurant(req,res) {
-        var restaurantId=req.params.uid;
         var restaurant=req.body;
         restaurantModel
-            .updateRestaurant(restaurant,restaurantId)
+            .updateRestaurant(restaurant,restaurant._id)
             .then(function (restaurant) {
                 res.json(restaurant);
             }, function (error) {

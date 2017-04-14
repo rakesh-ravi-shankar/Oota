@@ -10,10 +10,13 @@
         vm.logout = logout;
         vm.editProfile = editProfile;
         vm.editMyOrder = editMyOrder ;
+        vm.editMyRestaurant = editMyRestaurant ;
         vm.updateUser = updateUser;
         vm.updateOrder = updateOrder;
+        vm.updateRestaurant = updateRestaurant;
         vm.deleteUser=deleteUser;
         vm.deleteOrder=deleteOrder;
+        //vm.deleteRestaurant=deleteRestaurant;
         vm.findAllUsers=findAllUsers;
         vm.findAllOrders=findAllOrders;
         vm.findAllRestaurants=findAllRestaurants;
@@ -23,6 +26,7 @@
         vm.uploadURL = "";
         vm.searchUser=searchUser;
         vm.searchOrder=searchOrder;
+        vm.searchRestaurant=searchRestaurant;
 
 
         function init() {
@@ -37,6 +41,7 @@
                 if (user !== '0') {
                     $rootScope.user = user;
                     vm.user=user;
+                    findAllUsers();
                     //updateCurrentSelection("users");
 
                 } else {
@@ -163,6 +168,17 @@
                 });
 
         }
+        function editMyRestaurant(rest) {
+            RestaurantService
+                .findRestaurantById(rest._id)
+                .success(function (rest) {
+                    vm.editRest = rest ;
+                    console.log(rest);
+                    updateCurrentSelection("editRestaurant");
+
+                });
+
+        }
 
         function updateUser(user) {
 
@@ -191,6 +207,22 @@
 
                     else
                     {vm.error="unable to update order";}
+
+                });
+
+        }
+        function updateRestaurant(rest) {
+
+            console.log(rest);
+            RestaurantService
+                .updateRestaurant(rest)
+                .success(function (rest) {
+                    if(rest!=null)
+                    {vm.message="Restaurant successfully updated";
+                        findAllRestaurants();}
+
+                    else
+                    {vm.error="unable to update Restaurant";}
 
                 });
 
@@ -232,6 +264,20 @@
                         vm.orders= [order];
                         console.log(order);
                         updateCurrentSelection("orders");
+                    });
+            }
+
+        }
+
+
+        function searchRestaurant(rid) {
+            if(rid){
+                RestaurantService
+                    .findRestaurantById(rid)
+                    .success(function (rest) {
+                        vm.restaurants= [rest];
+                        console.log(rest);
+                        updateCurrentSelection("restaurants");
                     });
             }
 
