@@ -8,7 +8,8 @@
 
         var api = {
             "createReview": createReview,
-           "findAllReviews":findAllReviews
+            "findAllReviews":findAllReviews,
+            "deleteReview":deleteReview
         };
         return api;
 
@@ -21,6 +22,9 @@
             return $http.get("/api/find-reviews/"+apiKey);
         }
 
+        function deleteReview(apiKey) {
+            return $http.delete("/api/delete-review/" + apiKey);
+        }
 
     }
 })();/**

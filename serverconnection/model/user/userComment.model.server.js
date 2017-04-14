@@ -9,7 +9,7 @@ var userCommentModel=mongoose.model("UserCommentModel",userCommentSchema);
 
 userCommentModel.findUserComments=findUserComments;
 userCommentModel.createUserComment = createUserComment;
-userCommentModel.deleteUserComment = deleteSingleComment;
+userCommentModel.deleteSingleComment = deleteSingleComment;
 userCommentModel.updateComment = updateComment;
 
 module.exports=userCommentModel;

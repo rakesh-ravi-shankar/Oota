@@ -60,6 +60,9 @@ body {
 	background-color: #F2F2F1;
 }
 
+.managespace{
+	margin-bottom: 5px;
+}
 #card {
 	margin-top: 18%;
 }
@@ -322,6 +325,9 @@ padding-top: 4%}
 	margin-top:1.7em;
 }
 
+#usernameEdit, usernamepedit{
+	margin-top: 0px;
+}
 .fa-user
 {color:whitesmoke}
 .fa-user:hover
