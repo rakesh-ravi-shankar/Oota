@@ -6,7 +6,7 @@
         .module("Oota")
         .controller("DeliverController", DeliverController);
 
-    function DeliverController(NgMap,$http, $window, OrderService,$rootScope, UserService, localStorageService, userProfileService) {
+    function DeliverController(NgMap,$http, $location,$window, OrderService,$rootScope, UserService, localStorageService, userProfileService) {
 
         var vm = this;
         function init() {
@@ -15,7 +15,7 @@
                 if (user !== '0') {
                     $rootScope.user = user;
                 } else {
-                    console.log("Dont come here!!!");
+                   $location.url("/homepage");
                 }
             });
 
@@ -23,8 +23,8 @@
                 vm.user=$rootScope.user;
             }
 
-            $("body").removeClass("modal-open");
-            $(".modal-backdrop").remove();
+            // $("body").removeClass("modal-open");
+            // $(".modal-backdrop").remove();
 
         }
         init();
@@ -33,6 +33,7 @@
         vm.orderPickedUp = orderPickedUp;
         vm.orderDelivered = orderDelivered;
         vm.saveComment = saveComment;
+        vm.logout=logout;
 
         // Ask user to enter his destination first
         $(document).ready(function() {
@@ -207,6 +208,20 @@
                 });
         }
 
+
+        function logout() {
+            UserService
+                .logout()
+                .success(function () {
+                    console.log("User logged out");
+                    $rootScope.user = null;
+                    vm.user = null;
+                    $location.url("/homePage")
+                });
+        }
+
     }
+
+
 
 })();
