@@ -290,11 +290,14 @@ a:hover
 }
 
 .rl-img
-{
-	margin-left: auto;
-	margin-right: auto;
-	padding-top: 4%
+{margin-left: auto;
+margin-right: auto;
+padding-top: 4%}
+
+.GodLoginContainer {
+	align-self: auto;
 }
+
 #menu-toggle
 {
 	margin-top:0.8em;

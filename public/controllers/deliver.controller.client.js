@@ -6,8 +6,28 @@
         .module("Oota")
         .controller("DeliverController", DeliverController);
 
-    function DeliverController(NgMap, $window, OrderService,$rootScope, UserService, localStorageService, userProfileService) {
+    function DeliverController(NgMap,$http, $window, OrderService,$rootScope, UserService, localStorageService, userProfileService) {
+
         var vm = this;
+        function init() {
+            $http.get('/api/loggedin').success(function(user) {
+                $rootScope.errorMessage = null;
+                if (user !== '0') {
+                    $rootScope.user = user;
+                } else {
+                    console.log("Dont come here!!!");
+                }
+            });
+
+            if($rootScope.user != null){
+                vm.user=$rootScope.user;
+            }
+
+            $("body").removeClass("modal-open");
+            $(".modal-backdrop").remove();
+
+        }
+        init();
         vm.restaurantName = "";
         vm.pickUpOrder = pickUpOrder;
         vm.orderPickedUp = orderPickedUp;
@@ -183,6 +203,7 @@
                 .then(function() {
                     //TODO: this button is not being disabled
                     $("#commentModal").modal("hide")
+                    // location.reload();
                 });
         }
 

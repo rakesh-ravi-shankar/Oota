@@ -68,6 +68,11 @@
                 controller: 'LoginController',
                 controllerAs: 'model'
             })
+            .when("/adminLogin", {
+                templateUrl: 'views/adminLogin.view.client.html',
+                controller: 'AdminController',
+                controllerAs: 'model'
+            })
             .when("/adminPage", {
                 templateUrl: 'views/adminPage.view.client.html',
                 controller: 'AdminController',

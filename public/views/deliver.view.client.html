@@ -1,3 +1,5 @@
+
+
 <div class="modal fade" id="destinationModal">
  <div class="modal-dialog" role="document">
   <div class="modal-content">
@@ -29,7 +31,18 @@
   </div>
  </div>
 </div>
+<nav class=" navbar navbar-inverse navbar-fixed-top">
 
+ <div class="row container-fluid">
+  <div class="navbar-text col-lg-10 col-sm-8  col-xs-5">
+   <a class=" btn oota" href="#/">OOTA</a>    </div>
+  <div class="logout-login navbar-text pull-right" style="margin-right: 2%;">
+   <button ng-show=model.user ng-click="model.logout()" class="btn btn-success">Logout</button>
+   <span  ng-show=model.user >
+                <a href="#/userProfile/{{model.user.username}}" class="btn fa fa-user fa-2x" aria-hidden="true"></a></span>
+  </div>
+ </div>
+</nav>
 <ng-map id="mapDemo"
         default-style="true"
         center="current-location"
@@ -81,6 +94,7 @@
 
 
 </ng-map>
+
 
 <div class="container" ng-if="model.selectedWaypoint.length > 0">
  <h1>{{model.restaurantName}}</h1>
