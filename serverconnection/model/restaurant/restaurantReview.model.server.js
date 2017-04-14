@@ -8,6 +8,8 @@ var RestaurantReviewModel=mongoose.model("RestaurantReviewModel",restaurantRevie
 
 RestaurantReviewModel.findAllReviews=findAllReviews;
 RestaurantReviewModel.createReview=createReview;
+RestaurantReviewModel.deleteReview=deleteReview;
+
 
 
 module.exports=RestaurantReviewModel;
@@ -73,5 +75,19 @@ function findAllReviews(key) {
         });
 
     return deffered.promise;
+}
+
+function deleteReview(key) {
+    var deffered = q.defer();
+
+    RestaurantReviewModel
+        .findByIdAndRemove({apiKey:key}, function(err) {
+            if(err) {
+                deffered.reject(err);
+            }
+            else {
+                deffered.resolve();
+            }
+        });
 }
 
