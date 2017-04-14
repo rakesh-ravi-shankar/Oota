@@ -1,12 +1,15 @@
 
 <div class="container-fluid">
-    <div ng-show="model.message" class="alert alert-success" role="alert">
-        {{model.message}}
+
+    <div ng-show="model.register_message" class="alert alert-success" role="alert">
+        {{model.register_message}}
     </div>
-    <div ng-show="model.error" class="alert alert-danger" role="alert">
-        {{model.error}}
+
+    <div ng-show="model.register_error" class="alert alert-danger" role="alert">
+        {{model.register_error}}
     </div>
-    <div >
+
+    <div>
         <!--<h1 id="title">Oota</h1>-->
         <form>
             <div class="form-group register">
@@ -64,7 +67,8 @@
                         class="form-control"
                         placeholder="Password"/>
                 <label>Confirm Password</label>
-                <input type="password"
+                <input ng-model="user.verify_password"
+                       type="password"
                        class="form-control"
                        placeholder="Confirm Password"/>
                 <label></label>

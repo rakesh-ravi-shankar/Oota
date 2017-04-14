@@ -3,6 +3,15 @@
 <div class="container noheader">
     <div id="card">
         <h1 id="title">Register</h1>
+
+        <div ng-show="model.register_message" class="alert alert-success" role="alert">
+            {{model.register_message}}
+        </div>
+
+        <div ng-show="model.register_error" class="alert alert-danger" role="alert">
+            {{model.register_error}}
+        </div>
+
         <form>
             <div class="form-group register">
                 <label for="username"> User Name </label>

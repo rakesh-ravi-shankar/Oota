@@ -16,5 +16,32 @@ var orderSchema= mongoose.Schema({
 },{collection:'order.project.collection'});
 
 
+orderSchema.post("remove", function(order) {
+    var userModel =require("../../model/user/user.model.server");
+    var userCommentModel =require("../../model/user/userComment.model.server");
+
+    userModel
+        .findById({$in: [order._orderer, order._deliverer]})
+        .then(function(user) {
+            for(i in user.foodOrdered) {
+                if (user.foodOrdered[i] == order._id)
+                {
+                    user.foodOrdered[i].splice(i, 1);
+                }
+            }
+            for(i in user.foodDelivered) {
+                if (user.foodDelivered[i] == order._id)
+                {
+                    user.foodDelivered[i].splice(i, 1);
+                }
+            }
+            user.save();
+        });
+
+    userCommentModel.remove({order_id:order._id}).exec();
+
+});
+
+
 
 module.exports=orderSchema;

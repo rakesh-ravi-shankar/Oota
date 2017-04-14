@@ -39,7 +39,7 @@
         function findAllOrdersForRestaurant(apiKey){
             return $http.get("/api/allOrders/" + apiKey);
         }
-        function deleteOrder(orderId, _orderer, _deliverer) {
+        function deleteOrder(orderId) {
             return $http.delete("/api/order/" + orderId);
         }
 

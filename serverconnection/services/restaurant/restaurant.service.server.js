@@ -91,7 +91,8 @@ module.exports=function(app){
             .findRestaurantByCredentials(username,password)
             .then(function (restaurant) {
                 if(restaurant.length==0)
-                { res.json();
+                {
+                    res.sendStatus(500).send(error);
                 }
 
                 res.json(restaurant);
