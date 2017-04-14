@@ -8,8 +8,6 @@ var restaurantSchema= mongoose.Schema({
     address:String,
     pincode:Number,
     apiKey:String,
-    startTime:Number,
-    closeTime:Number,
     phone:String,
     email:String,
     registerationDate:{type: Date, default: Date.now},

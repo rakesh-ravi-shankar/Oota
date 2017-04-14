@@ -51,6 +51,8 @@ module.exports=function(app){
 
         var username=req.query['username'];
         var password=req.query['password'];
+        // console.log(req);
+        // console.log(password);
         if(username&&password)
         {
             findRestaurantByCredentials(req,res);

@@ -118,7 +118,7 @@
                             });
                     }
                     else {
-                        vm.message="User name already taken!";
+                        vm.error="User name already taken!";
                         // console.log("EXISTS")
                     }
 

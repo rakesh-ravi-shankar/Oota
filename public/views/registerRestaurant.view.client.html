@@ -1,41 +1,36 @@
 <div id="background-img"></div>
 
-<div class="container">
+<div class="container noheader">
     <div id="card">
         <h1 id="title">Register</h1>
         <form>
             <div class="form-group register">
-                <label> User Name </label>
-                <input type="text" name="username" placeholder="username" class="form-control" ng-model="restaurant.username">
-                <label> Password </label>
-                <input type="password" name="password" placeholder="********" class="form-control" ng-model="restaurant.password">
+                <label for="username"> User Name </label>
+                <input type="text" id="username" name="username" placeholder="username" class="form-control" ng-model="restaurant.username">
 
-                <label> Verify Password </label>
-                <input type="password" name="v_password" placeholder="********" class="form-control" ng-model="restaurant.verifyPassword">
+                <label for="password"> Password </label>
+                <input type="password" id="password" name="password" placeholder="********" class="form-control" ng-model="restaurant.password">
 
-                <label> Restaurant Name </label>
-                <input type="text" name="restaurantName" placeholder="Restaurant Name" class="form-control" ng-model="restaurant.restaurantName">
+                <label for="vpassword"> Verify Password </label>
+                <input id="vpassword" type="password" name="v_password" placeholder="********" class="form-control" ng-model="restaurant.verifyPassword">
 
-                <label> Address </label>
-                <input type="text" name="address1" placeholder="Address Line 1" class="form-control" ng-model="restaurant.address">
+                <label for="rname"> Restaurant Name </label>
+                <input id="rname" type="text" name="restaurantName" placeholder="Restaurant Name" class="form-control" ng-model="restaurant.restaurantName">
+
+                <label for="address"> Address </label>
+                <input id="address" type="text" name="address1" placeholder="Address Line 1" class="form-control" ng-model="restaurant.address">
 
 
-                <label> Pincode </label>
-                <input type="text" name="pincode" placeholder="Pincode" pattern="[0-9]{5}" maxlength="5" class="form-control" ng-model="restaurant.pincode">
-
-                <label> Store Opening Time </label>
-                <input type="time" name="startTime" placeholder="HHMM(Military Time)" class="form-control" ng-model="restaurant.startTime">
-
-                <label> Store Closing Time </label>
-                <input type="time" name="closeTime" placeholder="HHMM(Military Time)" class="form-control" ng-model="restaurant.closeTime">
+                <label for="pincode"> Pincode </label>
+                <input id="pincode" type="text" name="pincode" placeholder="Pincode" pattern="[0-9]{5}" maxlength="5" class="form-control" ng-model="restaurant.pincode">
 
                 <input type="checkbox" name="deliveryOption" value="Delivery Available" ng-model="restaurant.deliveryOption"> <label>Delivery Available?</label><br>
 
-                <label> Contact Number </label>
-                <input type="text" name="phoneNumber" placeholder="Phone Number" class="form-control" ng-model="restaurant.phoneNumber">
+                <label for="contactno"> Contact Number </label>
+                <input id="contactno" type="text" name="phoneNumber" placeholder="Phone Number" class="form-control" ng-model="restaurant.phoneNumber">
 
-                <label> Email </label>
-                <input type="email" name="email" placeholder="Email" class="form-control" ng-model="restaurant.email">
+                <label for="email"> Email </label>
+                <input id="email" type="email" name="email" placeholder="Email" class="form-control" ng-model="restaurant.email">
 
                 <button id="register" class="btn btn-block btn-primary" ng-click="model.register(restaurant)">Register</button>
 

@@ -25,7 +25,7 @@ function createRestaurant(restaurant) {
     restaurantModel
         .create(restaurant,function (err,restaurant) {
             if(err){
-                deffered.abort(err);
+                deffered.reject(err);
             }
             else
             {
@@ -97,7 +97,7 @@ function findRestaurantByCredentials(username,password) {
     restaurantModel
         .find({username: username , password:password},function (err,restaurant) {
             if(err){
-                deffered.abort(err);
+                deffered.reject(err);
             }
             else
             {

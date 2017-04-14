@@ -25,8 +25,9 @@
             return $http.get("/api/restaurant?username="+username);
         }
 
-        function findRestaurantByCredentials(restaurant,password) {
-            return $http.get("/api/restaurant?username="+username+"&password="+password);
+        function findRestaurantByCredentials(res) {
+            var resname=encodeURIComponent(res.username);
+            return $http.get("/api/restaurant?username="+resname+"&password="+res.password);
         }
 
         function findAllRestaurants() {

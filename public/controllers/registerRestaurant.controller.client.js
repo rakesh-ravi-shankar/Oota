@@ -9,11 +9,32 @@
     function RegisterRestaurantController($location,RestaurantListService,RestaurantService) {
         var vm=this;
         vm.register=register;
+        vm.loginRes=loginRes;
+
 
         function init() {
 
         }
         init();
+        function loginRes(res) {
+            RestaurantService
+                .findRestaurantByCredentials(res)
+                .success(function (res) {
+                    console.log(res);
+                    if(res)
+                    {
+                        vm.user=res;
+                        $location.url("/"+vm.user[0].apiKey+"/restaurantDashboard")
+                        }
+                    else
+                    {
+                        vm.error="user not found";
+                    }
+                })
+                .error(function (err) {
+                    vm.error="user not found";
+                });
+        }
         function register(restaurant) {
             console.log(restaurant);
 
