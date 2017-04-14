@@ -78,6 +78,11 @@
                 controller: 'AdminController',
                 controllerAs: 'model'
             })
+            .when("/loginrestaurant", {
+                templateUrl: 'views/login.restaurant.view.client.html',
+                controller: 'RegisterRestaurantController',
+                controllerAs: 'model'
+            })
 
             .otherwise({
                  templateUrl: 'views/homePage.view.client.html',

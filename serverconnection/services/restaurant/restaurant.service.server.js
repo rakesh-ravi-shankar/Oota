@@ -6,7 +6,7 @@ module.exports=function(app){
     app.post("/api/restaurant",createRestaurant);
     app.get("/api/restaurant/:uid",findRestaurantById);
     app.put("/api/restaurant/:uid",updateRestaurant);
-    app.delete("/api/restaurant/:uid",deleteRestaurant);
+    app.delete("/api/restaurant/:apiKey",deleteRestaurant);
     app.get("/api/allRestaurants",findAllRestaurants);
     app.get("/api/restaurantDashboard/:apiKey", findRestaurantByApiKey);
 
@@ -51,6 +51,8 @@ module.exports=function(app){
 
         var username=req.query['username'];
         var password=req.query['password'];
+        // console.log(req);
+        // console.log(password);
         if(username&&password)
         {
             findRestaurantByCredentials(req,res);
@@ -130,7 +132,7 @@ module.exports=function(app){
 
 
     function deleteRestaurant(req,res) {
-        var restaurantId=req.params.uid;
+        var restaurantId=req.params.apiKey;
 
         restaurantModel
             .deleteRestaurant(restaurantId)

@@ -7,6 +7,7 @@ module.exports=function(app) {
 
     app.post("/api/create-review", createReview);
     app.get("/api/find-reviews/:apiKey", findAllReviews);
+    app.delete("/api/delete-review/:apiKey", deleteReview);
 
 
     function createReview(req, res) {
@@ -27,6 +28,17 @@ module.exports=function(app) {
             .then(function(reviews) {
                 res.json(reviews);
             }, function (error)  {
+                res.sendStatus(500).send(error);
+            })
+    }
+
+    function deleteReview(req, res) {
+        var key = req.params["apiKey"];
+        RestaurantReviewModel
+            .deleteReview(key)
+            .then(function () {
+                res.sendStatus(200);
+            }, function(error) {
                 res.sendStatus(500).send(error);
             })
     }

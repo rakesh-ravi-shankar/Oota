@@ -25,7 +25,7 @@ function createRestaurant(restaurant) {
     restaurantModel
         .create(restaurant,function (err,restaurant) {
             if(err){
-                deffered.abort(err);
+                deffered.reject(err);
             }
             else
             {
@@ -94,7 +94,7 @@ function findRestaurantByCredentials(username,password) {
     restaurantModel
         .find({username: username , password:password},function (err,restaurant) {
             if(err){
-                deffered.abort(err);
+                deffered.reject(err);
             }
             else
             {
@@ -146,15 +146,14 @@ function updateRestaurant(restaurant,restaurantId) {
 
 }
 
-function deleteRestaurant(restaurantId) {
+function deleteRestaurant(key) {
     var deffered = q.defer();
     restaurantModel
-        .findByIdAndRemove(restaurantId, function (err, restaurant) {
+        .findByIdAndRemove({apiKey:key}, function (err) {
             if(err)
                 deffered.reject(err);
             else {
-                restaurant.remove();
-                deffered.resolve(restaurant);
+                deffered.resolve();
             }
         });
     return deffered.promise;

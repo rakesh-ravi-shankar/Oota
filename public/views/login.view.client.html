@@ -1,11 +1,12 @@
+<div class="container-fluid">
 
-    <div class="container-fluid">
 		<div ng-show="model.message" class="alert alert-danger" role="alert">
 			{{model.message}}
 		</div>
-			<h1 id="title">Oota</h1>
+
+			<!--<h1 id="title">Oota</h1>-->
 	    	<form>
-	    		<div class="form-group">
+	    		<div class="form-group" style="margin-top: 1em">
 					<div ng-show="model.error" class="alert alert-danger" role="alert">
 						{{model.error}}
 					</div>
@@ -17,15 +18,14 @@
 					<br>
 		    		<button id="login" class="btn btn-block btn-primary"
 							ng-click="model.loginUser(user)">Login</button>
-					<br>
-					<a href="/auth/google" class="btn btn-danger btn-block">
+					<button href="/auth/google" class="btn btn-danger btn-block">
 						<span class="fa fa-google-plus"></span>
 						Google
-					</a>
-					<a href="/auth/facebook" class="btn btn-primary btn-block">
+					</button>
+					<button href="/auth/facebook" class="btn btn-primary btn-block">
 						<span class="fa fa-facebook"></span>
 						Facebook
-					</a>
+					</button>
 		    	</div>
 	    	</form>
 

@@ -33,9 +33,17 @@ body {
 	font-family: 'Pacifico', cursive;
 	color: #F0E2C1;
 	text-shadow: 3px 6px 5px black;
-	font-size: 8em;
+	font-size: 10vw;
 	text-align: center;
 
+	margin-bottom: 10%;
+}
+.title1 {
+	font-family: 'Pacifico', cursive;
+	color: #F0E2C1;
+	text-shadow: 3px 6px 5px black;
+	font-size: 8vw;
+	text-align: center;
 	margin-bottom: 10%;
 }
 #home-page-title
@@ -332,3 +340,40 @@ padding-top: 4%}
 {color:whitesmoke}
 .fa-user:hover
 {color:snow}
+.noheader
+{margin-top: -15%;
+color:whitesmoke;}
+.noheader label
+{margin-top:1em }
+
+.deliverlogin
+{color:whitesmoke;}
+.bootstrap-datetimepicker-widget
+{color: black}
+{color:whitesmoke;}
+.deliverlogin label
+{margin-top:1em }
+.deliverlogin-ul li a{
+	text-decoration: none;
+	color: white;
+}
+.deliverlogin-ul li a:hover{
+	text-decoration: none;
+	color: black;
+	cursor: hand;
+}
+
+.oota-deliver
+{
+	margin-top: auto;
+	margin-bottom: auto;
+	style:"margin-left: 6%";
+	font-family: 'Pacifico', cursive;
+	color: #F0E2C1;
+	text-shadow: 3px 6px 5px black;
+	font-size: 1em;
+}
+.oota-deliver:hover
+{
+	color: #F0E2C1;
+}

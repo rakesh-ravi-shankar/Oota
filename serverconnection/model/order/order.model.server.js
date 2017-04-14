@@ -14,7 +14,8 @@ orderModel.createOrder = createOrder;
 orderModel.updateOrder = updateOrder;
 orderModel.findOrderByUserId = findOrderByUserId;
 orderModel.findAllOrders=findAllOrders;
-orderModel.findAllOrdersForRestaurant = findAllOrdersForRestaurant
+orderModel.findAllOrdersForRestaurant = findAllOrdersForRestaurant;
+orderModel.deleteOrder = deleteOrder;
 
 
 module.exports=orderModel;
@@ -149,6 +150,22 @@ function updateOrder(order) {
 
     return deffered.promise;
 
+}
+
+
+function deleteOrder(orderId) {
+    var deffered = q.defer();
+    orderModel
+        .findByIdAndRemove(orderId, function(err, order) {
+           if(err) {
+               deffered.reject(err);
+           }
+           else {
+
+               deffered.resolve();
+           }
+        });
+    return deffered.promise;
 }
 
 
