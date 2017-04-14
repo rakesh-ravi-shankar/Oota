@@ -25,16 +25,10 @@
                 $("#wrapper").toggleClass("toggled");
             });
 
-            $(document).ready(function () {
-                $(window).bind("beforeunload", function () {
-                    console.log("UNLOADED");
-                    clearTimeout(trackStatus);
+            $rootScope.$on('$stateChangeStart',
+                function(event, toState, toParams, fromState, fromParams){
+                    console.log('Page change happened');
                 });
-                $(window).bind("navigate", function (event, data) {
-                    console.log("NAVIGATE");
-                    clearTimeout(trackStatus);
-                });
-            });
 
 
 
