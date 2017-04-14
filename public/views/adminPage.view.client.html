@@ -1,3 +1,4 @@
+<!--
 <nav class=" navbar navbar-inverse navbar-fixed-top">
 
     <div class="row container-fluid">
@@ -13,14 +14,37 @@
     </div>
     </div>
 </nav>
+-->
+
+<nav class=" navbar navbar-inverse navbar-fixed-top">
+
+    <div class="row container-fluid">
+        <div class="navbar-text col-lg-10 col-sm-9 col-xs-7">
+            <div>
+                <a href="#menu-toggle" class="btn btn-default pull-left" id="menu-toggle">
+                    <span class="glyphicon glyphicon-menu-hamburger"></span>
+                </a>
+                <a class=" btn oota" href="#/">OOTA</a>
+            </div>
+        </div>
+        <div class="logout-login navbar-text pull-right" style="margin-right: 2%;">
+            <button ng-click="model.logout()" class="btn btn-success">Logout</button>
+
+        </div>
+
+    </div>
+    </div>
+</nav>
 
 
 <div id="wrapper" class="toggled">
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
+            <!--
             <div class="profile-edit-button">
                 <a href="#/editProfile"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a>
             </div>
+            -->
             <li>
                 <div class="square">
                     <img src="{{model.user.profilepicurl}}" class="img-responsive img-circle content"/>
@@ -32,13 +56,13 @@
             </li>
 
             <li>
-                <a ng-click="model.updateCurrentSelection('users')">USERS</a>
+                <a ng-click="model.findAllUsers()">USERS</a>
             </li>
             <li>
-                <a ng-click="model.updateCurrentSelection('orders')">ORDERS</a>
+                <a ng-click="model.findAllOrders()">ORDERS</a>
             </li>
             <li>
-                <a ng-click="model.updateCurrentSelection('restaurants')">RESTAUTANTS</a>
+                <a ng-click="model.findAllRestaurants()">RESTAUTANTS</a>
             </li>
         </ul>
     </div>
@@ -64,7 +88,7 @@
                                    type="text" class="form-control">
 
                             <span class="input-group-btn">
-                            <a ng-click="model.searchRestaurant(searchRes,searchLoc)"
+                            <a ng-click="model.searchUser(SearchUserId,SearchUserName)"
                                class="btn btn-default" type="button">
                             <span class="glyphicon glyphicon-search widget-class"></span>
                             </a>
@@ -98,11 +122,67 @@
         <div ng-switch-when="orders">
             <div ng-repeat="order in model.orders">
                 <div class="row">
-                    <div>
-                        <h3> Orders </h3>
+                    <h3> Orders </h3>
+                    <hr>
+
+                    <h4>Search by</h4>
+
+                    <div >
+                        <div class="input-group">
+                            <input ng-model="SearchOrderId"
+                                   placeholder="Order Id"
+                                   type="text" class="form-control">
+
+                            <span class="input-group-btn">
+                            <a ng-click="model.searchOrder(SearchOrderId)"
+                               class="btn btn-default" type="button">
+                            <span class="glyphicon glyphicon-search widget-class"></span>
+                            </a>
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+                <br>
+
+                <div class="row">
+
+                        <table class="table table-striped table-bordered">
+                            <tbody>
+                            <col width="20%" />
+                            <col width="20%" />
+                            <col width="20%" />
+                            <col width="20%" />
+                            <col width="10%" />
+                            <col width="10%" />
+                            <tr>
+                                <th>Order Id</th>
+                                <th>Restaurant Name</th>
+                                <th>Orderer</th>
+                                <th>Deliverer</th>
+                                <th>Status</th>
+                                <th>Edit</th>
+                            </tr>
+                            <tr ng-repeat="order in model.orders">
+
+                                <td>{{order._id}}</td>
+                                <td>{{order.restaurantName}}</td>
+                                <td>{{order._orderer}}</td>
+                                <td>{{order._deliverer}}</td>
+                                <td>{{order.deliveryStatus}}</td>
+                                <td><span class="input-group-btn">
+                            <a ng-click="model.editMyOrder(order)" class="btn btn-default pull-right" type="button">
+                                <span class="pull-right glyphicon glyphicon-cog"></span>
+                            </a>
+                            </span></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--
                         <ul class="list-group">
                             <li ng-repeat="order in model.orders" class="list-group-item">
-                                <!-- <a href="#/user/{{websiteNewController.userId}}/website/{{website._id}}/page"> -->
+                                <!-- <a href="#/user/{{websiteNewController.userId}}/website/{{website._id}}/page">
                                 <a href="#">
                                     {{order._id}}
                                 </a>
@@ -117,10 +197,10 @@
                                 </a>
                             </li>
                         </ul>
-                    </div>
+                        -->
+
                 </div>
             </div>
-        </div>
 
         <div ng-switch-when="restaurants">
             <div class="row">
@@ -203,6 +283,76 @@
             <a class="btn btn-danger btn-block"
                ng-click="model.deleteUser()">Delete Account</a>
         </div>
+
+
+
+            <div ng-switch-when="editOrder">
+                <div class="alert alert-danger" ng-show="model.error">
+                    {{model.error}}
+                </div>
+                <div class="alert alert-success" ng-show=" model.message">
+                    {{model.message}}
+                </div>
+
+                <form >
+
+                    <label for="orderEdit">Order Id</label>
+                    <h2 ng-model="model.editOrder._id" id="orderEdit" > {{model.editOrder._id}}</h2>
+
+                    <div class="form-group">
+                        <label for="restaurantName">Restaurant Name</label>
+                        <input type="text" ng-model="model.editOrder.restaurantName" class="form-control" id="restaurantName" placeholder="Wonderland">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Orderer">Orderer</label>
+                        <input type="text" ng-model="model.editOrder._orderer" class="form-control" id="Orderer" placeholder="Alice">
+                    </div>
+                    <div class="form-group">
+                        <label for="Deliverer">Deliverer</label>
+                        <input type="text" ng-model="model.editOrder._deliverer" class="form-control" id="Deliverer" placeholder="Wonderland">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="deliveryLoc">Delivery Location</label>
+                        <input type="text" ng-model="model.editOrder.deliveryLoc" class="form-control" id="deliveryLoc" placeholder="Wonderland">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pickupLoc">Pickup Location</label>
+                        <input type="text" ng-model="model.editOrder.pickupLoc" class="form-control" id="pickupLoc" placeholder="Wonderland">
+                    </div>
+
+                    <div class="form-group">
+                    <label for="deliveryStatus">Delivery Status</label>
+                    <select class="form-control" id="deliveryStatus" ng-value="model.editOrder.deliveryStatus">
+                        <option>ORDERED</option>
+                        <option>SELECTED_FOR_DELIVERY</option>
+                        <option>PICKED_ORDER</option>
+                        <option>DELIVERED</option>
+                    </select>
+                    </div>
+<!--
+
+                    <div class="form-group">
+                        <label for="deliveryStatus">deliveryStatus</label>
+                        <input type="text" ng-model="model.editUser.deliveryStatus" class="form-control" id="deliveryStatus" placeholder="Wonderland">
+                    </div>
+
+-->
+                    <br>
+                    <div class="form-group">
+                        <a class="btn btn-success btn-block" ng-click="model.updateOrder(model.editOrder)"> Done
+                        </a>
+                    </div>
+
+                </form>
+
+                <a class="btn btn-danger btn-block"
+                   ng-click="model.deleteOrder()">Delete Order</a>
+            </div>
+
+
         </div>
     </div>
 </div>

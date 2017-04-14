@@ -38,6 +38,7 @@ function createOrder(order) {
 
 function findOrderById(orderId) {
     var deffered=q.defer();
+    console.log("hello order model" + orderId);
     orderModel
         .findById(orderId,function (err,order) {
             if(err){
