@@ -84,6 +84,18 @@
             var orderPrices = [];
             var orderQtys = [];
 
+            if(localStorageService.keys().length <= 2)
+            {
+                alert("Please select a food item before proceding to checkout!");
+                return;
+            }
+
+            if ((vm.deliveryLoc == "") || (typeof vm.deliveryLoc == "undefined")){
+                alert("Please enter a delivery location before place your order!");
+                return;
+            }
+
+
             localStorageService.remove("restaurantName");
             localStorageService.remove("pickupLoc");
             var dishes = localStorageService.keys();

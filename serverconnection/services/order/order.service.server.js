@@ -13,7 +13,7 @@ module.exports=function(app){
     app.get("/api/allOrders",findAllOrders);
     app.get("/api/allOrders/:apiKey",findAllOrdersForRestaurant);
     app.post("/api/order/updateOrder",updateOrder);
-    app.delete("/api/order/delete/:orderId",deleteOrder);
+    app.delete("/api/order/:orderId",deleteOrder);
 
     // app.get("/api/restaurant/:uid",findRestaurantById);
     // app.put("/api/restaurant/:uid",updateRestaurant);

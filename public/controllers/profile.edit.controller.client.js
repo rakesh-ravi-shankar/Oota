@@ -60,10 +60,12 @@
                 .updateUser($rootScope.user._id,newUser)
                 .success(function (user) {
                     if(user!=null)
-                    {vm.message="user successfully updated";}
+                    {
+                        vm.message="user successfully updated";
+                        $location.url("/userProfile/" + newUser.username);
+                    }
                     else
                     {vm.error="unable to update user";}
-
                 });
 
         }

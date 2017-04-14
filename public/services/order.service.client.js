@@ -41,13 +41,15 @@
             return $http.get("/api/allOrders/" + apiKey);
         }
 
+        function deleteOrder(orderId) {
+            return $http.delete("/api/order/" + orderId);
+        }
+
         function findOrderById(oid) {
             return $http.get("/api/order/" + oid);
         }
 
-        function deleteOrder(orderId, _orderer, _deliverer) {
-            return $http.delete("/api/order/delete/" + orderId);
-        }
+
 
         /*
         function findRestaurantByUsername(username) {

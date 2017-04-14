@@ -162,7 +162,11 @@ function deleteOrder(orderId) {
            }
            else {
 
-               deffered.resolve();
+               order
+                    .remove()
+                    .then(function () {
+                        deffered.resolve();
+                    });
            }
         });
     return deffered.promise;
