@@ -87,6 +87,9 @@
                     {
                         vm.error="user not found";
                     }
+                })
+                .error(function (err) {
+                    vm.error="user not found";
                 });
         }
 
@@ -97,7 +100,7 @@
                 .success(function (u) {
                     if(u.length == 0)
                     {
-                        vm.message="User name NOT taken!";
+                        // vm.message="User name NOT taken!";
                         UserService.createUser(user)
                             .success(function (user) {
                                 if (user) {
@@ -116,13 +119,13 @@
                     }
                     else {
                         vm.message="User name already taken!";
-                        console.log("EXISTS")
+                        // console.log("EXISTS")
                     }
 
 
                 })
                 .error(function (err) {
-                    vm.message="User name NOT taken!";
+                    // vm.message="User name NOT taken!";
                     UserService.createUser(user)
                         .success(function (user) {
                             if (user) {

@@ -7,33 +7,33 @@
 <div class="tab-content">
     <div id="home" class="tab-pane fade in active">
         <!--<div class="container">-->
-        <!--<ng-include src="'views/login.view.client.html'"></ng-include>-->
+        <ng-include src="'views/login.view.client.html'"></ng-include>
         <!--</div>-->
-        <div class="container-fluid">
+        <!--<div class="container-fluid">-->
 
-            <h1 id="title">Oota</h1>
-            <form>
-                <div class="form-group">
-                    <div ng-show="model.error" class="alert alert-danger" role="alert">
-                        {{model.error}}
-                    </div>
-                    <input type="text" name="username" placeholder="username"
-                           class="form-control" ng-model="user.username">
-                    <br>
-                    <input type="password" name="password" placeholder="*****"
-                           class="form-control" ng-model="user.password">
-                    <br>
-                    <button id="login" class="btn btn-block btn-primary"
-                            ng-click="model.loginUser(user)">Login</button>
-                    <br>
-                    <a href="/auth/google" class="btn btn-danger btn-block">
-                        <span class="fa fa-google-plus"></span>
-                        Google
-                    </a>
-                </div>
-            </form>
+            <!--<h1 id="title">Oota</h1>-->
+            <!--<form>-->
+                <!--<div class="form-group">-->
+                    <!--<div ng-show="model.error" class="alert alert-danger" role="alert">-->
+                        <!--{{model.error}}-->
+                    <!--</div>-->
+                    <!--<input type="text" name="username" placeholder="username"-->
+                           <!--class="form-control" ng-model="user.username">-->
+                    <!--<br>-->
+                    <!--<input type="password" name="password" placeholder="*****"-->
+                           <!--class="form-control" ng-model="user.password">-->
+                    <!--<br>-->
+                    <!--<button id="login" class="btn btn-block btn-primary"-->
+                            <!--ng-click="model.loginUser(user)">Login</button>-->
+                    <!--<br>-->
+                    <!--<a href="/auth/google" class="btn btn-danger btn-block">-->
+                        <!--<span class="fa fa-google-plus"></span>-->
+                        <!--Google-->
+                    <!--</a>-->
+                <!--</div>-->
+            <!--</form>-->
 
-        </div>
+        <!--</div>-->
     </div>
     <div id="menu1" class="tab-pane fade">
         <div class="container">

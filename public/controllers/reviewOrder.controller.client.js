@@ -4,7 +4,7 @@
         .module("Oota")
         .controller("ReviewOrderController", ReviewOrderController);
 
-    function ReviewOrderController($window, $location, $http,$routeParams, localStorageService,OrderService,$rootScope) {
+    function ReviewOrderController($window, $location, UserService,$http,$routeParams, localStorageService,OrderService,$rootScope) {
         var vm = this;
         vm.updateOrder = updateOrder;
         vm.placeOrder = placeOrder;
@@ -146,6 +146,7 @@
                     console.log("User logged out");
                     $rootScope.user = null;
                     vm.user = null;
+                    $location.url("/homepage");
                 });
         }
 

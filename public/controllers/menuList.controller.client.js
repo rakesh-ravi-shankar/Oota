@@ -120,15 +120,22 @@
                         $("body").removeClass("modal-open");
                         $(".modal-backdrop").remove();
                         $rootScope.user = loggedUser;
-                        init();
-                        // $location.url("/restaurantList/" + vm.restaurantId + "/restaurantMenu");
+                        vm.user= $rootScope.user;
+                        console.log("logged in user " + $rootScope.user);
+                        closeModal();
+                        //$location.url("/restaurantList/" + vm.restaurantId + "/restaurantMenu/" + $rootScope.currentUser.username );
                     }
                     else
                     {
                         vm.error="user not found";
                     }
-            });
+                })
+                .error(function (err) {
+                    vm.error="user not found";
+                });
         }
+
+
 
 
         function registerUser(user) {
@@ -137,7 +144,7 @@
                 .success(function (u) {
                     if(u.length == 0)
                     {
-                        vm.message="User name NOT taken!";
+                        // vm.message="User name NOT taken!";
                         UserService.createUser(user)
                             .success(function (user) {
                                 if (user) {
@@ -145,23 +152,24 @@
                                     $("body").removeClass("modal-open");
                                     $(".modal-backdrop").remove();
                                     $rootScope.user = user;
-                                    $location.url("/restaurantList/" + vm.restaurantId + "/restaurantMenu/order");
+                                    vm.user= $rootScope.user;
+                                    //$location.url("/restaurantList/" + vm.restaurantId + "/restaurantMenu/");
 
                                     vm.message = "User created successfully";
                                 }
-                                 else
+                                else
                                     vm.error = "User not created successfully!"
                             });
                     }
                     else {
                         vm.message="User name already taken!";
-                        console.log("EXISTS")
+                        // console.log("EXISTS")
                     }
 
 
                 })
                 .error(function (err) {
-                    vm.message="User name NOT taken!";
+                    // vm.message="User name NOT taken!";
                     UserService.createUser(user)
                         .success(function (user) {
                             if (user) {
@@ -169,7 +177,8 @@
                                 $("body").removeClass("modal-open");
                                 $(".modal-backdrop").remove();
                                 $rootScope.user = user;
-                                $location.url("/restaurantList/" + vm.restaurantId + "/restaurantMenu/order");
+                                vm.user= $rootScope.user;
+                                //$location.url("/restaurantList/" + vm.restaurantId + "/restaurantMenu/" + $rootScope.currentUser.username + "/order");
 
                                 vm.message = "User created successfully";
                             }
@@ -182,7 +191,6 @@
 
 
         }
-
 
         function checkout()
         {
