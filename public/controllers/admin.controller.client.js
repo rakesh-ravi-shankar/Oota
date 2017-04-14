@@ -10,9 +10,11 @@
         vm.logout = logout;
         vm.editProfile = editProfile;
         vm.updateUser = updateUser;
+        vm.deleteUser=deleteUser;
         vm.users = [];
         vm.orders = [];
         vm.restaurants = [];
+        vm.uploadURL = "";
 
 
         function init() {
@@ -145,6 +147,8 @@
                     console.log(user);
                     updateCurrentSelection("editUser");
 
+                    //vm.user_id=user_id;
+                    vm.uploadURL = '/api/' + user._id + "/upload";
                 });
 
         }
@@ -161,6 +165,9 @@
 
                 });
 
+        }
+        function deleteUser() {
+            console.log("delete user");
         }
 
 

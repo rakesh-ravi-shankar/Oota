@@ -19,7 +19,7 @@
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
             <div class="profile-edit-button">
-                <a href="#/editProfile  "><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a>
+                <a href="#/editProfile"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a>
             </div>
             <li>
                 <div class="square">
@@ -151,20 +151,9 @@
 
             <form action="{{model.uploadURL}}"  method="post" enctype="multipart/form-data">
                 <input name="uid" value="model.editUser._id" style="display:none">
-                <div class="form-group">
-                    <a  ng-click="model.updateUser(model.editUser)">
-                        <span class="glyphicon glyphicon-ok"></span>
-                    </a>
-                </div>
-                <label>Upload</label>
-                <input type="file"
-                       class="form-control"
-                       name="myFile"
-                       value="https://www.google.com/search?q=images&espv=2&biw=753&bih=970&source=lnms"
-                />
-                <button type="submit" class="btn btn-primary btn-block">Upload Image</button>
-                <label for="username">Username</label>
-                <h2 ng-model="model.editUser.username" id="username"></h2>
+
+                <label for="usernameEdit">Username</label>
+                <h2 ng-model="model.editUser.username" id="usernameEdit" > {{model.editUser.username}}</h2>
 
                 <div class="form-group">
                     <label for="email">Email</label>
@@ -194,6 +183,21 @@
                     <label for="birthday">Birthday</label>
                     <input ng-model="model.editUser.dateofbirth" class="form-control" id="birthday" placeholder="Wonderland">
                 </div>
+
+                <label>Upload</label>
+                <input type="file"
+                       class="form-control"
+                       name="myFile"
+                       value="https://www.google.com/search?q=images&espv=2&biw=753&bih=970&source=lnms"
+                />
+                <br>
+                <button  type="submit" class="btn btn-primary btn-block">Upload Image</button>
+                <br>
+                <div class="form-group">
+                    <a class="btn btn-success btn-block" ng-click="model.updateUser(model.editUser)"> Done
+                    </a>
+                </div>
+
             </form>
 
             <a class="btn btn-danger btn-block"
@@ -203,11 +207,6 @@
     </div>
 </div>
 
-
-<div ng-switch="model.currentSelection" class="container-fluid col-md-8 col-sm-8 col-xs-12 web-right-pane">
-
-
-</div>
 
 
 
