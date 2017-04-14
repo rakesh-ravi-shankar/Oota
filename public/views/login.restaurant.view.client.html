@@ -1,0 +1,24 @@
+<div id="background-img"></div>
+<div class="container">
+    <div ng-show="model.message" class="alert alert-danger" role="alert">
+        {{model.message}}
+    </div>
+    <h1 id="title">Login</h1>
+    <!--<h1 id="title">Oota</h1>-->
+    <form>
+        <div class="form-group" style="margin-top: 8em">
+            <div ng-show="model.error" class="alert alert-danger" role="alert">
+                {{model.error}}
+            </div>
+            <input type="text" name="username" placeholder="username"
+                   class="form-control" ng-model="user.username">
+            <br>
+            <input type="password" name="password" placeholder="*****"
+                   class="form-control" ng-model="user.password">
+            <br>
+            <button id="login" class="btn btn-block btn-primary"
+                    ng-click="model.loginRes(user)">Login</button>
+        </div>
+    </form>
+
+</div>
