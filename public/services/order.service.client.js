@@ -14,8 +14,8 @@
             "updateOrder":updateOrder,
             "findAllOrders":findAllOrders,
             "findAllOrdersForRestaurant":findAllOrdersForRestaurant,
-            // "deleteUser":deleteUser
-            getCurrentAddress:getCurrentAddress
+            "getCurrentAddress":getCurrentAddress,
+            "deleteOrder":deleteOrder
         };
         return api;
 
@@ -38,6 +38,9 @@
         }
         function findAllOrdersForRestaurant(apiKey){
             return $http.get("/api/allOrders/" + apiKey);
+        }
+        function deleteOrder(orderId, _orderer, _deliverer) {
+            return $http.delete("/api/order/" + orderId);
         }
 
         /*
