@@ -9,12 +9,20 @@
         vm.loginUser = loginUser;
         vm.logout = logout;
         vm.editProfile = editProfile;
+        vm.editMyOrder = editMyOrder ;
         vm.updateUser = updateUser;
+        vm.updateOrder = updateOrder;
         vm.deleteUser=deleteUser;
+        vm.deleteOrder=deleteOrder;
+        vm.findAllUsers=findAllUsers;
+        vm.findAllOrders=findAllOrders;
+        vm.findAllRestaurants=findAllRestaurants;
         vm.users = [];
         vm.orders = [];
         vm.restaurants = [];
         vm.uploadURL = "";
+        vm.searchUser=searchUser;
+        vm.searchOrder=searchOrder;
 
 
         function init() {
@@ -29,7 +37,7 @@
                 if (user !== '0') {
                     $rootScope.user = user;
                     vm.user=user;
-                    updateCurrentSelection("users");
+                    //updateCurrentSelection("users");
 
                 } else {
                     $location.url("/adminLogin")
@@ -70,29 +78,21 @@
          */
         function updateCurrentSelection(cs) {
             vm.currentSelection = cs;
-
+            vm.error="";
+            vm.message="";
             if (cs == 'orders') {
-                OrderService
-                    .findAllOrders()
-                    .success(function (orders) {
-                        vm.orders = orders;
-                    });
+
             }
             else if (cs == 'restaurants') {
-                RestaurantService
-                    .findAllRestaurants()
-                    .success(function (restaurants) {
-                        vm.restaurants = restaurants;
-                    });
+
             }
             else if (cs == 'users') {
-                UserService
-                    .findAllUsers()
-                    .success(function (users) {
-                        vm.users = users;
-                    });
+
             }
             else if (cs == 'editUser') {
+                //nothing to do
+            }
+            else if (cs == 'editOrder') {
                 //nothing to do
             }
         }
@@ -152,6 +152,17 @@
                 });
 
         }
+        function editMyOrder(order) {
+            OrderService
+                .findOrderById(order._id)
+                .success(function (order) {
+                    vm.editOrder = order ;
+                    console.log(order);
+                    updateCurrentSelection("editOrder");
+
+                });
+
+        }
 
         function updateUser(user) {
 
@@ -159,15 +170,97 @@
                 .updateUser(vm.editUser._id,user)
                 .success(function (user) {
                     if(user!=null)
-                    {vm.message="user successfully updated";}
+                    {vm.message="user successfully updated";
+                        findAllUsers();}
+
                     else
                     {vm.error="unable to update user";}
 
                 });
 
         }
+        function updateOrder(order) {
+
+            console.log(order);
+            OrderService
+                .updateOrder(order)
+                .success(function (order) {
+                    if(order!=null)
+                    {vm.message="order successfully updated";
+                        findAllOrders();}
+
+                    else
+                    {vm.error="unable to update order";}
+
+                });
+
+        }
         function deleteUser() {
             console.log("delete user");
+        }
+        function deleteOrder() {
+            console.log("delete order");
+        }
+
+        function searchUser(uid,uname) {
+            if(uid){
+                UserService
+                    .findUserById(uid)
+                    .success(function (user) {
+                        vm.users= [user];
+                        console.log(user);
+                        updateCurrentSelection("users");
+                    });
+            }
+            else if(uname){
+                UserService
+                    .findUserByUsername(uname)
+                    .success(function (user) {
+                        vm.users= [user];
+                        console.log(user);
+                        updateCurrentSelection("users");
+                    });
+            }
+
+        }
+
+        function searchOrder(oid) {
+            if(oid){
+                OrderService
+                    .findOrderById(oid)
+                    .success(function (order) {
+                        vm.orders= [order];
+                        console.log(order);
+                        updateCurrentSelection("orders");
+                    });
+            }
+
+        }
+
+        function findAllUsers() {
+            UserService
+                .findAllUsers()
+                .success(function (users) {
+                    vm.users = users;
+                    updateCurrentSelection("users");
+                });
+        }
+        function findAllOrders() {
+            OrderService
+                .findAllOrders()
+                .success(function (orders) {
+                    vm.orders = orders;
+                    updateCurrentSelection("orders");
+                });
+        }
+
+        function findAllRestaurants() {
+            RestaurantService
+                .findAllRestaurants()
+                .success(function (restaurants) {
+                    vm.restaurants = restaurants;
+                    updateCurrentSelection("restaurants");
+                });
         }
 
 

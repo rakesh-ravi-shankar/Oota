@@ -75,7 +75,7 @@ function findRestaurantByApiKey(ak) {
 function findAllRestaurants() {
     var deffered=q.defer();
     restaurantModel
-        .findById(function (err,restaurants) {
+        .find(function (err,restaurants) {
             if(err){
                 deffered.abort(err);
             }
@@ -83,9 +83,6 @@ function findAllRestaurants() {
             {
                 deffered.resolve(restaurants);
             }
-
-
-
         });
     return deffered.promise;
 

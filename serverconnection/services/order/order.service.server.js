@@ -7,6 +7,7 @@ module.exports=function(app){
     var userModel =require("../../model/user/user.model.server");
 
     app.post("/api/order",createOrder);
+    app.get("/api/order/:oid",findOrderById);
     app.get("/api/order/orderer/:uid",findActiveOrdersForOrderer);
     app.get("/api/order/activeOrders",findActiveOrders);
     app.get("/api/allOrders",findAllOrders);
@@ -36,6 +37,19 @@ module.exports=function(app){
             },function (error) {
                 res.sendStatus(500).send(error);
             });
+    }
+
+    function findOrderById(req,res) {
+        var orderId=req.params.oid;
+        orderModel
+            .findOrderById(orderId)
+            .then(function (order) {
+                res.json(order);
+            }, function (error) {
+                res.sendStatus(500).send(error);
+            });
+
+
     }
 
     function findActiveOrdersForOrderer(req,res) {

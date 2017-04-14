@@ -10,6 +10,7 @@
             "createOrder":createOrder,
             "findActiveOrdersForOrderer":findActiveOrdersForOrderer,
             "findActiveOrders":findActiveOrders,
+            "findOrderById":findOrderById,
             //"findRestaurantByCredentials":findRestaurantByCredentials
             "updateOrder":updateOrder,
             "findAllOrders":findAllOrders,
@@ -39,9 +40,16 @@
         function findAllOrdersForRestaurant(apiKey){
             return $http.get("/api/allOrders/" + apiKey);
         }
+
         function deleteOrder(orderId) {
             return $http.delete("/api/order/" + orderId);
         }
+
+        function findOrderById(oid) {
+            return $http.get("/api/order/" + oid);
+        }
+
+
 
         /*
         function findRestaurantByUsername(username) {
