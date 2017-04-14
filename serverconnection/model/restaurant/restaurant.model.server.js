@@ -149,15 +149,14 @@ function updateRestaurant(restaurant,restaurantId) {
 
 }
 
-function deleteRestaurant(restaurantId) {
+function deleteRestaurant(key) {
     var deffered = q.defer();
     restaurantModel
-        .findByIdAndRemove(restaurantId, function (err, restaurant) {
+        .findByIdAndRemove({apiKey:key}, function (err) {
             if(err)
                 deffered.reject(err);
             else {
-                restaurant.remove();
-                deffered.resolve(restaurant);
+                deffered.resolve();
             }
         });
     return deffered.promise;
