@@ -25,7 +25,7 @@
 
 
                 } else {
-                    console.log("Dont come here!!!");
+                    $location.url("/homePage");
                 }
             });
 
