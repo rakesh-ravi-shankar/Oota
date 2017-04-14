@@ -65,6 +65,12 @@
                 }
                 else
                 {
+                    console.log($rootScope.user)
+                    for (i in orders.data){
+                        if ($rootScope.user._id == orders.data[i]._orderer){
+                            orders.data.splice(i, 1);
+                        }
+                    }
                     vm.waypoints = orders.data;
                 }
                 console.log(vm.waypoints);
@@ -167,7 +173,6 @@
         function orderDelivered() {
             vm.selectedOrder.deliveryStatus = "DELIVERED";
             vm.selectedOrder.deliveryTime = new Date().getDate();
-            //TODO: update the _deliverer id in the selected order
 
             OrderService
                 .updateOrder(vm.selectedOrder)

@@ -3,8 +3,12 @@
         .module("Oota")
         .controller("userProfileController", userProfileController);
 
+
+    // vm.user --> page's user
+    // vm.uid --> logged in user
     function userProfileController($http, $routeParams, $rootScope, userProfileService, UserService, OrderService, $location) {
         var vm = this;
+        var trackStatus;
         vm.updateCurrentSelection = updateCurrentSelection;
         vm.followUser = followUser;
         vm.login = loginUser;
@@ -15,7 +19,6 @@
         vm.followButtonStatus = followButtonStatus;
         //vm.user= $rootScope.user;
         vm.currUser = false;
-        var trackStatus;
         vm.followers_objs = [];
         vm.following_objs = [];
 
@@ -25,21 +28,14 @@
                 $("#wrapper").toggleClass("toggled");
             });
 
-            $(document).ready(function () {
-                $(window).bind("beforeunload", function () {
-                    console.log("UNLOADED");
+            $rootScope.$on('$routeChangeStart',
+                function(event, toState, toParams, fromState, fromParams){
                     clearTimeout(trackStatus);
                 });
-                $(window).bind("navigate", function (event, data) {
-                    console.log("NAVIGATE");
-                    clearTimeout(trackStatus);
-                });
-            });
 
 
 
             vm.urlUsername = $routeParams['username'];
-            console.log("urlusername : " + vm.urlUsername);
 
             UserService
                 .findUserByUsername(vm.urlUsername)
@@ -67,9 +63,9 @@
                                     .success(function (orders) {
                                         vm.orders = orders;
                                     });
+
                                 trackStatus = window.setInterval(updateStatus, 5000);
 
-                                //TODO: check if already followed
 
                             }
                             else {
@@ -79,7 +75,6 @@
 
 
                         } else {
-                            console.log("Dont come here!!!");
                             followButtonStatus();
                         }
                     });
@@ -142,13 +137,13 @@
         }
 
         function updateStatus() {
-            console.log("updating..");
-            // TODO:change the frequency
+
             OrderService
-                .findActiveOrdersForOrderer(vm.user._id)
+                .findActiveOrdersForOrderer(vm.uid)
                 .success(function (orders) {
                     vm.orders = orders;
                 });
+
         }
 
         function updateCurrentSelection(cs) {
@@ -219,7 +214,6 @@
                 UserService
                     .findUserById(user_id)
                     .success(function (user) {
-                        console.log(user);
                         target_obj.push(user);
                         getUsers(user_ids, target_obj);
                     })
@@ -239,6 +233,7 @@
                     console.log("User logged out");
                     $rootScope.user = null;
                     vm.user = null;
+                    clearTimeout(trackStatus);
                     $location.url("/homePage")
                 });
         }
@@ -254,7 +249,7 @@
                         $("body").removeClass("modal-open");
                         $(".modal-backdrop").remove();
                         $rootScope.user = loggedUser;
-                        vm.user = $rootScope.user;
+                        //vm.user = $rootScope.user;
                         console.log("logged in user" + $rootScope.user);
 
                         location.reload();
