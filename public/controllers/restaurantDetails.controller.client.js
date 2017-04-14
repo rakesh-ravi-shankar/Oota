@@ -121,20 +121,20 @@
 
         function loginUser(user)
         {
-            // console.log(user);
+
             UserService
                 .findUserByCredentials(user)
                 .success(function (loggedUser) {
-                    // console.log(loggedUser);
+                    console.log(loggedUser);
                     if(loggedUser)
                     {
-                        // console.log(loggedUser);
+                        console.log(loggedUser);
                         $("#validateUserModal").modal("hide");
                         $("body").removeClass("modal-open");
                         $(".modal-backdrop").remove();
                         $rootScope.user = loggedUser;
                         vm.user= $rootScope.user;
-                        // console.log("logged in user " + $rootScope.user);
+                        console.log("logged in user " + $rootScope.user);
                         closeModal();
                         //$location.url("/restaurantList/" + vm.restaurantId + "/restaurantMenu/" + $rootScope.currentUser.username );
                     }
@@ -142,6 +142,9 @@
                     {
                         vm.error="user not found";
                     }
+                })
+                .error(function (err) {
+                    vm.error="user not found";
                 });
         }
 
@@ -152,7 +155,7 @@
                 .success(function (u) {
                     if(u.length == 0)
                     {
-                        vm.message="User name NOT taken!";
+                        // vm.message="User name NOT taken!";
                         UserService.createUser(user)
                             .success(function (user) {
                                 if (user) {
@@ -171,13 +174,13 @@
                     }
                     else {
                         vm.message="User name already taken!";
-                        console.log("EXISTS")
+                        // console.log("EXISTS")
                     }
 
 
                 })
                 .error(function (err) {
-                    vm.message="User name NOT taken!";
+                    // vm.message="User name NOT taken!";
                     UserService.createUser(user)
                         .success(function (user) {
                             if (user) {
@@ -199,6 +202,7 @@
 
 
         }
+
         function logout() {
             UserService
                 .logout()

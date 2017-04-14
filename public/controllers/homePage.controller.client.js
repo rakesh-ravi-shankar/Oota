@@ -8,6 +8,13 @@
         vm.order = order;
         vm.deliver = deliver;
 
+        function init() {
+            $("body").removeClass("modal-open");
+            $(".modal-backdrop").remove();
+
+
+        }
+
         function order() {
             $location.url("/login");
         }

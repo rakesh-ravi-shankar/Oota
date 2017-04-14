@@ -19,7 +19,7 @@
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
             <div class="profile-edit-button">
-                <a href="#/editProfile  "><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a>
+                <a href="#/editProfile"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a>
             </div>
             <li>
                 <div class="square">
@@ -47,79 +47,70 @@
     <div id="page-content-wrapper">
         <div ng-switch="model.currentSelection">
             <div ng-switch-when="users">
-
                 <div class="row">
-                    <div>
-                        <h3> Users </h3>
-                        <div>
-                            <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
-                                <input ng-model="SearchUserId"
-                                       placeholder="User Id"
-                                       type="text" class="form-control">
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
-                                <input ng-model="SearchUserName"
-                                       placeholder="Username"
-                                       type="text" class="form-control">
-                            </div>
+                    <h3> Users </h3>
+                    <hr>
+
+                    <h4>Search by</h4>
+                    <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+                        <input ng-model="SearchUserId"
+                               placeholder="User Id"
+                               type="text" class="form-control">
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+                        <div class="input-group">
+                            <input ng-model="SearchUserName"
+                                   placeholder="Username"
+                                   type="text" class="form-control">
+
                             <span class="input-group-btn">
                             <a ng-click="model.searchRestaurant(searchRes,searchLoc)"
-                            class="btn btn-default" type="button">
+                               class="btn btn-default" type="button">
                             <span class="glyphicon glyphicon-search widget-class"></span>
-                </a>
-                </span>
+                            </a>
+                            </span>
                         </div>
-                        <ul class="list-group">
-                            <li ng-repeat="user in model.users" class="list-group-item">
-                                <!-- <a href="#/user/{{websiteNewController.userId}}/website/{{website._id}}/page"> -->
-                                <a href="#">
-                                    {{user.username}} {{ user.lastname}}
-                                </a>
-                                <a href="#">
-                                    <span class="pull-right glyphicon glyphicon-cog"></span>
-                                </a>
-                            </li>
-                        </ul>
                     </div>
 
                 </div>
-            </div>
+                <br>
 
-            <div ng-switch-when="orders">
-                <div ng-repeat="order in model.orders">
-                    <div class="row">
-                        <div>
-                            <h3> Orders </h3>
-                            <ul class="list-group">
-                                <li ng-repeat="order in model.orders" class="list-group-item">
-                                    <!-- <a href="#/user/{{websiteNewController.userId}}/website/{{website._id}}/page"> -->
-                                    <a href="#">
-                                        {{order._id}}
-                                    </a>
-                                    <a href="#">
-                                        {{order._orderer}}
-                                    </a>
-                                    <a href="#">
-                                        {{order._deliverer}}
-                                    </a>
-                                    <a href="#">
-                                        <span class="pull-right glyphicon glyphicon-cog"></span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                <div class="row">
+                    <ul class="list-group">
+                        <li ng-repeat="user in model.users" class="list-group-item">
+                            <!-- <a href="#/user/{{websiteNewController.userId}}/website/{{website._id}}/page"> -->
+                            <a href="/#/userProfile/{{user.username}}">
+                                {{user.username}} {{ user.lastname}}
+                            </a>
+                            <span class="input-group-btn">
+                            <a ng-click="model.editProfile(user)" class="btn btn-default pull-right" type="button">
+                                <span class="pull-right glyphicon glyphicon-cog"></span>
+                            </a>
+                            </span>
+                        </li>
+                    </ul>
                 </div>
+
             </div>
 
-            <div ng-switch-when="restaurants">
+
+
+        <div ng-switch-when="orders">
+            <div ng-repeat="order in model.orders">
                 <div class="row">
                     <div>
+                        <h3> Orders </h3>
                         <ul class="list-group">
-                            <li ng-repeat="restaurant in model.restaurants" class="list-group-item">
+                            <li ng-repeat="order in model.orders" class="list-group-item">
                                 <!-- <a href="#/user/{{websiteNewController.userId}}/website/{{website._id}}/page"> -->
                                 <a href="#">
-                                    {{restaurant.username}}
+                                    {{order._id}}
+                                </a>
+                                <a href="#">
+                                    {{order._orderer}}
+                                </a>
+                                <a href="#">
+                                    {{order._deliverer}}
                                 </a>
                                 <a href="#">
                                     <span class="pull-right glyphicon glyphicon-cog"></span>
@@ -130,14 +121,92 @@
                 </div>
             </div>
         </div>
+
+        <div ng-switch-when="restaurants">
+            <div class="row">
+                <div>
+                    <ul class="list-group">
+                        <li ng-repeat="restaurant in model.restaurants" class="list-group-item">
+                            <!-- <a href="#/user/{{websiteNewController.userId}}/website/{{website._id}}/page"> -->
+                            <a href="#">
+                                {{restaurant.username}}
+                            </a>
+                            <a href="#">
+                                <span class="pull-right glyphicon glyphicon-cog"></span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <div ng-switch-when="editUser">
+            <div class="alert alert-danger" ng-show="model.error">
+                {{model.error}}
+            </div>
+            <div class="alert alert-success" ng-show=" model.message">
+                {{model.message}}
+            </div>
+
+            <form action="{{model.uploadURL}}"  method="post" enctype="multipart/form-data">
+                <input name="uid" value="model.editUser._id" style="display:none">
+
+                <label for="usernameEdit">Username</label>
+                <h2 ng-model="model.editUser.username" id="usernameEdit" > {{model.editUser.username}}</h2>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" ng-model="model.editUser.email"  class="form-control" id="email" placeholder="alice@wonderland.com">
+                </div>
+                <div class="form-group">
+                    <label for="first-name">First Name</label>
+                    <input type="text" ng-model="model.editUser.firstName" class="form-control" id="first-name" placeholder="Alice">
+                </div>
+                <div class="form-group">
+                    <label for="last-name">Last Name</label>
+                    <input type="text" ng-model="model.editUser.lastName" class="form-control" id="last-name" placeholder="Wonderland">
+                </div>
+                <div class="form-group">
+                    <label for="phone-no">Phone Number</label>
+                    <input type="tel" ng-model="model.editUser.phone" class="form-control" id="phone-no" placeholder="Wonderland">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" ng-model="model.editUser.password" class="form-control" id="password" placeholder="Wonderland">
+                </div>
+                <div class="form-group">
+                    <label for="confirm-password">Confirm Password</label>
+                    <input type="password" ng-model="model.editUser.password" class="form-control" id="confirm-password" placeholder="Wonderland">
+                </div>
+                <div class="form-group">
+                    <label for="birthday">Birthday</label>
+                    <input ng-model="model.editUser.dateofbirth" class="form-control" id="birthday" placeholder="Wonderland">
+                </div>
+
+                <label>Upload</label>
+                <input type="file"
+                       class="form-control"
+                       name="myFile"
+                       value="https://www.google.com/search?q=images&espv=2&biw=753&bih=970&source=lnms"
+                />
+                <br>
+                <button  type="submit" class="btn btn-primary btn-block">Upload Image</button>
+                <br>
+                <div class="form-group">
+                    <a class="btn btn-success btn-block" ng-click="model.updateUser(model.editUser)"> Done
+                    </a>
+                </div>
+
+            </form>
+
+            <a class="btn btn-danger btn-block"
+               ng-click="model.deleteUser()">Delete Account</a>
+        </div>
+        </div>
     </div>
 </div>
 
-
-<div ng-switch="model.currentSelection" class="container-fluid col-md-8 col-sm-8 col-xs-12 web-right-pane">
-
-
-</div>
 
 
 

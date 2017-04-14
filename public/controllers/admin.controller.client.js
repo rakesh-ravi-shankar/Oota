@@ -3,14 +3,18 @@
         .module("Oota")
         .controller("AdminController", AdminController);
 
-    function AdminController($http, UserService, OrderService, RestaurantService, $rootScope, $location) {
+    function AdminController($http, UserService, userProfileService, OrderService, RestaurantService, $rootScope, $location) {
         var vm = this;
         vm.updateCurrentSelection = updateCurrentSelection;
         vm.loginUser = loginUser;
         vm.logout = logout;
+        vm.editProfile = editProfile;
+        vm.updateUser = updateUser;
+        vm.deleteUser=deleteUser;
         vm.users = [];
         vm.orders = [];
         vm.restaurants = [];
+        vm.uploadURL = "";
 
 
         function init() {
@@ -25,10 +29,10 @@
                 if (user !== '0') {
                     $rootScope.user = user;
                     vm.user=user;
-
+                    updateCurrentSelection("users");
 
                 } else {
-                    console.log("Dont come here!!!");
+                    $location.url("/adminLogin")
                 }
             });
 
@@ -88,6 +92,9 @@
                         vm.users = users;
                     });
             }
+            else if (cs == 'editUser') {
+                //nothing to do
+            }
         }
 
         function loginUser(user) {
@@ -107,17 +114,17 @@
                             $location.url("/adminPage");
                         } else {
                             logout();
-                            vm.error = "You are not God!! Use God Credentials";
+                            vm.error = "You are not Admin!! Use Admin Credentials";
                         }
 
 
                     }
                     else {
-                        vm.error = "You are not God!! Use God Credentials";
+                        vm.error = "You are not Admin!! Use Admin Credentials";
                     }
                 })
                 .error(function () {
-                    vm.error = "You are not God!! Use God Credentials";
+                    vm.error = "You are not Admin!! Use Admin Credentials";
                 });
         }
 
@@ -131,6 +138,38 @@
                     $location.url("/adminLogin");
                 });
         }
+
+        function editProfile(user) {
+            UserService
+                .findUserById(user._id)
+                .success(function (user) {
+                    vm.editUser = user;
+                    console.log(user);
+                    updateCurrentSelection("editUser");
+
+                    //vm.user_id=user_id;
+                    vm.uploadURL = '/api/' + user._id + "/upload";
+                });
+
+        }
+
+        function updateUser(user) {
+
+            userProfileService
+                .updateUser(vm.editUser._id,user)
+                .success(function (user) {
+                    if(user!=null)
+                    {vm.message="user successfully updated";}
+                    else
+                    {vm.error="unable to update user";}
+
+                });
+
+        }
+        function deleteUser() {
+            console.log("delete user");
+        }
+
 
 
     }

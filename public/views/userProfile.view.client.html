@@ -45,7 +45,7 @@
             <button ng-show=!model.loggedInUser ng-click="model.loginClick()" class="btn btn-primary">Login</button>
             <button ng-show=model.loggedInUser ng-click="model.logout()" class="btn btn-success">Logout</button>
             <span  ng-show=model.loggedInUser >
-                <a href="#/userProfile/{{model.user.username}}" class="btn fa fa-user fa-2x" aria-hidden="true"></a></span>
+                <a href="#/userProfile/{{model.loggedInUser.username}}" class="btn fa fa-user fa-2x" aria-hidden="true"></a></span>
         </div>
 
         </div>
@@ -62,7 +62,7 @@
     <ul class="sidebar-nav" >
 
         <div ng-show="model.currUser" class="profile-edit-button">
-                <a href="#/editProfile  "><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a>
+                <a href="#/editProfile"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a>
         </div>
         <div ng-show="!model.currUser" style="margin-top: 2em;">
 

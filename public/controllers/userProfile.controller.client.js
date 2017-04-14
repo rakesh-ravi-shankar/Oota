@@ -259,7 +259,9 @@
                     else {
                         vm.error = "user not found";
                     }
-                });
+                }) .error(function (err) {
+                vm.error="user not found";
+            });
         }
 
         function closeModal() {
