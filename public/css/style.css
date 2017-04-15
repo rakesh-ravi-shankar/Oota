@@ -33,10 +33,10 @@ body {
 	font-family: 'Pacifico', cursive;
 	color: #F0E2C1;
 	text-shadow: 3px 6px 5px black;
-	font-size: 10vw;
+	font-size: 6vw;
 	text-align: center;
 
-	margin-bottom: 10%;
+	margin-bottom: 5%;
 }
 .title1 {
 	font-family: 'Pacifico', cursive;
@@ -405,11 +405,16 @@ color:whitesmoke;}
 	0% {
 		transform: perspective(120px) rotateX(0deg) rotateY(0deg);
 		-webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg)
-	} 50% {
-		  transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
-		  -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg)
-	  } 100% {
-			transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
-			-webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
-		}
+	}
+	50% {
+		transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+		-webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg)
+	}
+	100% {
+		transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+		-webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+	}
+}
+.rl-a:hover{
+	cursor: pointer;
 }

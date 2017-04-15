@@ -42,7 +42,7 @@ function findRestaurantById(restaurantId) {
     restaurantModel
         .findById(restaurantId,function (err,restaurant) {
             if(err){
-                deffered.abort(err);
+                deffered.reject(err);
             }
             else
             {
@@ -127,7 +127,7 @@ function findRestaurantByUsername(username) {
 }
 
 function updateRestaurant(restaurant,restaurantId) {
-
+console.log(restaurant);
     var deffered =q.defer();
     restaurantModel
         .update(
@@ -137,6 +137,8 @@ function updateRestaurant(restaurant,restaurantId) {
                     deffered.abort(err);
                 }
                 else{
+                    console.log("hello rest!!");
+                    console.log(restaurant);
                     deffered.resolve(restaurant);
                 }
 
@@ -146,14 +148,18 @@ function updateRestaurant(restaurant,restaurantId) {
 
 }
 
-function deleteRestaurant(key) {
+function deleteRestaurant(rid) {
     var deffered = q.defer();
     restaurantModel
-        .findByIdAndRemove({apiKey:key}, function (err) {
+        .findByIdAndRemove(rid, function (err,rest) {
             if(err)
                 deffered.reject(err);
             else {
-                deffered.resolve();
+                rest.remove()
+                    .then(function () {
+                        deffered.resolve();
+                    });
+
             }
         });
     return deffered.promise;

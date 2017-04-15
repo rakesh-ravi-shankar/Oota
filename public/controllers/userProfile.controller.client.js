@@ -73,6 +73,9 @@
                             }
                             else {
                                 vm.currUser = false;
+                                vm.currentSelection = "COMMENTS";
+                                updateCurrentSelection("COMMENTS");
+                                // console.log(vm.currentSelection);
                                 followButtonStatus();
                             }
 

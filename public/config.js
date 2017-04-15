@@ -24,7 +24,8 @@
             .when("/restaurantList/:resid/restaurantMenu/order", {
                 templateUrl: 'views/reviewOrders.view.client.html',
                 controller: 'ReviewOrderController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve: { loggedin: checkLoggedin }
             })
 
             .when("/registerUser", {
@@ -91,5 +92,21 @@
             })
 
 	}
+
+    var checkLoggedin = function($q, $timeout, $http, $location, $rootScope) {
+        var deferred = $q.defer();
+        $http.get('/api/loggedin').success(function(user) {
+            $rootScope.errorMessage = null;
+            if (user !== '0') {
+                $rootScope.currentUser = user;
+                console.log("config says user found");
+                deferred.resolve();
+            } else {
+                deferred.reject();
+                //$location.url('/');
+            }
+        });
+        return deferred.promise;
+    };
 
 })();
