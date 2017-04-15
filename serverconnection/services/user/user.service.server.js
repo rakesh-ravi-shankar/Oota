@@ -182,7 +182,7 @@ module.exports=function(app){
 
     function login(req, res) {
         var user = req.user;
-        console.log("login service" +user);
+        //console.log("login service" +user);
         res.json(user);
     }
 
