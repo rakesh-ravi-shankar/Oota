@@ -17,7 +17,7 @@ var cookieParser  = require('cookie-parser');
 var session       = require('express-session');
 
 app.use(session({
-    secret: process.env.SESSION_SECRET,
+    secret: "this is a secret",
     resave: true,
     saveUninitialized: true
 }));
@@ -29,14 +29,15 @@ app.set('view engine', 'ejs');
 
 app.use(express.static(__dirname + '/public'));
 
-require ("./setup/app.js")(app);
+require ("./test/app.js")(app);
 
 var options = {
-    key: fs.readFileSync('setup/keys/agent2-key.pem'),
-    cert: fs.readFileSync('setup/keys/agent2-cert.pem')
+    key: fs.readFileSync('keys/key.pem'),
+    cert: fs.readFileSync('keys/cert.pem'),
+    passphrase: 'oota'
 };
 
-var server = require('./server/app.js');
+var server = require('./serverconnection/app.js');
 server(app);
 
 https.createServer(options, app).listen(8443);
@@ -46,4 +47,4 @@ http.createServer(function (req, res) {
     site=site+':8443';
     res.writeHead(301, { "Location": "https://" + site + req.url });
     res.end();
-}).listen(9000);
+}).listen(8000);
