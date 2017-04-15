@@ -6,6 +6,7 @@
     function userProfileService($http) {
 
         var api={
+            "findAllComments":findAllComments,
             "findUserComments":findUserComments,
             "findUserDetails":findUserDetails,
             "findoldorder":findoldorder,
@@ -72,6 +73,11 @@
         function editUserComment(commId,comment) {
             return $http.put("/editUserComment/"+commId,comment);
         }
+
+        function findAllComments() {
+            return $http.get("/allcomments");
+        }
+
 
 
     };
