@@ -16,24 +16,30 @@
         vm.registerUser = registerUser;
         vm.closeModal=closeModal;
         vm.loginClick=loginClick;
-        vm.user= $rootScope.user;
+        //vm.user= $rootScope.user;
 
         function init() {
 
             //clear the local storage
 
+            console.log("Init called!!!");
+            console.log($rootScope.user);
             $http.get('/api/loggedin').success(function(user) {
                 $rootScope.errorMessage = null;
                 if (user !== '0') {
                     $rootScope.user = user;
+                    console.log("after logenin");
+                    console.log($rootScope.user);
+                    vm.user=$rootScope.user;
                 } else {
                     console.log("Dont come here!!!");
                 }
             });
-
+/*
             if($rootScope.user != null){
+                console.log("user present 1");
                 vm.user=$rootScope.user;
-            }
+             } */
             localStorageService.clearAll();
             //vm.user= $rootScope.user;
 

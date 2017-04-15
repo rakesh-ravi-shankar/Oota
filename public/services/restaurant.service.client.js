@@ -22,7 +22,7 @@
             return $http.post("/api/restaurant",restaurant);
         }
         function updateRestaurant(rest) {
-            return $http.post("/api/updaterestaurant/",rest);
+            return $http.put("/api/updaterestaurant/"+rest._id,rest);
         }
 
         function findRestaurantByUsername(username) {
@@ -47,8 +47,8 @@
             return $http.get("/api/restaurantDashboard/" + apiKey);
         }
 
-        function deleteRestaurant(apiKey) {
-            return $http.delete("/api/deleteRestaurant/" + apiKey);
+        function deleteRestaurant(rid) {
+            return $http.delete("/api/deleteRestaurant/" + rid);
         }
 
     };
