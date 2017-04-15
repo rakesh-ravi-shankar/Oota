@@ -101,7 +101,7 @@
             var dishes = localStorageService.keys();
             vm.orders = [];
             dishes.forEach(function (dish) {
-                vm.orders.push({"dish":dish, "price": localStorageService.get(dish).price, "count": localStorageService.get(dish).count});
+                vm.orders.push({"dish":dish.replace(/ *\([^)]*\) */g, ""), "price": localStorageService.get(dish).price, "count": localStorageService.get(dish).count});
             });
 
             console.log(vm.orders);
