@@ -208,7 +208,7 @@
                 .then(function() {
                     //TODO: this button is not being disabled
                     $("#commentModal").modal("hide");
-                    location.reload();
+                    $location.url("/homePage");
                 });
         }
 
