@@ -43,6 +43,7 @@
                             .searchRestaurantByLocation(position.coords.latitude,position.coords.longitude)
                             .then(function (res) {
                                 vm.restaurants=res;
+                                $(".spinner").addClass("hide");
                             });
             });
             $("body").removeClass("modal-open");
