@@ -5,8 +5,8 @@ module.exports=function(app){
     app.get("/api/restaurant",findRestaurant);
     app.post("/api/restaurant",createRestaurant);
     app.get("/api/restaurant/:uid",findRestaurantById);
-    app.post("/api/updaterestaurant/",updateRestaurant);
-    app.delete("/api/restaurant/:apiKey",deleteRestaurant);
+    app.put("/api/updaterestaurant/:rid",updateRestaurant);
+    app.delete("/api/deleteRestaurant/:rid",deleteRestaurant);
     app.get("/api/allRestaurants",findAllRestaurants);
     app.get("/api/restaurantDashboard/:apiKey", findRestaurantByApiKey);
 
@@ -107,9 +107,15 @@ module.exports=function(app){
 
 
     function updateRestaurant(req,res) {
+        var restaurantId=req.params.rid;
         var restaurant=req.body;
+        console.log("service server");
+        console.log(restaurant);
+        console.log(restaurantId);
+        console.log("service server ends");
+
         restaurantModel
-            .updateRestaurant(restaurant,restaurant._id)
+            .updateRestaurant(restaurant,restaurantId)
             .then(function (restaurant) {
                 res.json(restaurant);
             }, function (error) {
@@ -132,7 +138,7 @@ module.exports=function(app){
 
 
     function deleteRestaurant(req,res) {
-        var restaurantId=req.params.apiKey;
+        var restaurantId=req.params.rid;
 
         restaurantModel
             .deleteRestaurant(restaurantId)

@@ -43,7 +43,6 @@
             return $http.put("/unfollow-user",obj);
 
         };
-        return api;
 
         function createUserComment(comment) {
             return $http.post("/createcomment", comment);

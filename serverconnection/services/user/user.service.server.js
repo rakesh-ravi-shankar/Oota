@@ -270,7 +270,6 @@ module.exports=function(app){
                 res.json(user);
 
             }, function (error) {
-                // console.log('ERRRRR')
                 res.sendStatus(500).send(error);
             });
 

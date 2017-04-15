@@ -16,10 +16,12 @@
         vm.updateRestaurant = updateRestaurant;
         vm.deleteUser=deleteUser;
         vm.deleteOrder=deleteOrder;
-        //vm.deleteRestaurant=deleteRestaurant;
+        vm.deleteRestaurant=deleteRestaurant;
         vm.findAllUsers=findAllUsers;
         vm.findAllOrders=findAllOrders;
         vm.findAllRestaurants=findAllRestaurants;
+        vm.createUserPage=createUserPage;
+        vm.createUser=createUser;
         vm.users = [];
         vm.orders = [];
         vm.restaurants = [];
@@ -218,7 +220,9 @@
                 .updateRestaurant(rest)
                 .success(function (rest) {
                     if(rest!=null)
-                    {vm.message="Restaurant successfully updated";
+                    {
+                        console.log(rest);
+                        vm.message="Restaurant successfully updated";
                         findAllRestaurants();}
 
                     else
@@ -230,8 +234,25 @@
         function deleteUser() {
             console.log("delete user");
         }
-        function deleteOrder() {
+        function deleteOrder(oid) {
             console.log("delete order");
+            OrderService
+                .deleteOrder(oid)
+                .success(function () {
+                    console.log("delete order successful");
+                    findAllOrders();
+                });
+        }
+
+        function deleteRestaurant(rid){
+            console.log("delete rest");
+            RestaurantService
+                .deleteRestaurant(rid)
+                .success(function () {
+                    console.log("delete rest successful");
+                    findAllRestaurants();
+                });
+
         }
 
         function searchUser(uid,uname) {
@@ -250,7 +271,11 @@
                     .success(function (user) {
                         vm.users= [user];
                         console.log(user);
+                        vm.error="";
                         updateCurrentSelection("users");
+                    })
+                    .error(function () {
+                        vm.error="User not found";
                     });
             }
 
@@ -263,7 +288,11 @@
                     .success(function (order) {
                         vm.orders= [order];
                         console.log(order);
+                        vm.error="";
                         updateCurrentSelection("orders");
+                    })
+                    .error(function () {
+                        vm.error="Order Id not found";
                     });
             }
 
@@ -277,7 +306,11 @@
                     .success(function (rest) {
                         vm.restaurants= [rest];
                         console.log(rest);
+                        vm.error="";
                         updateCurrentSelection("restaurants");
+                    })
+                    .error(function () {
+                        vm.error="Restaurant Id not found";
                     });
             }
 
@@ -306,6 +339,16 @@
                 .success(function (restaurants) {
                     vm.restaurants = restaurants;
                     updateCurrentSelection("restaurants");
+                });
+        }
+        function createUserPage() {
+                    updateCurrentSelection("createUserPage");
+        }
+        function createUser(newUser) {
+            UserService
+                .createUser(newUser)
+                .success(function (user) {
+                    findAllUsers();
                 });
         }
 
