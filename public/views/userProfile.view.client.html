@@ -116,7 +116,6 @@
 </div>
 
 <div id="page-content-wrapper">
-
     <div ng-switch="model.currentSelection">
 
         <div ng-switch-when="TRACK ORDER">
@@ -171,13 +170,15 @@
 
         </div>
         <div ng-switch-when="COMMENTS">
+            <!--{{model.comments.data}}-->
                  <ul class="list-group">
                     <li class="list-group-item" ng-repeat="comment in model.comments.data">
                         <div class="media-body">
-                            <strong class="text-success">{{comment.feedback_giver_name}}</strong>
-                            <p>
+                            <strong class="text-success">
+                                <a href="#/userProfile/{{comment.feedback_giver_name}}">{{comment.feedback_giver_name}}:</a></strong>
+                            <h>
                                 {{comment.comment}}
-                            </p>
+                            </h>
                         </div>
                     </li>
                 </ul>
