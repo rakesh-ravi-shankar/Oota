@@ -362,7 +362,10 @@ color:whitesmoke;}
 	color: black;
 	cursor: hand;
 }
-
+.profile-edit
+{
+	color: whitesmoke;
+}
 .oota-deliver
 {
 	margin-top: auto;
@@ -376,4 +379,11 @@ color:whitesmoke;}
 .oota-deliver:hover
 {
 	color: #F0E2C1;
+}
+
+.push-down {
+	margin-top: 2em;
+}
+.rl-a:hover{
+	cursor: pointer;
 }

@@ -12,9 +12,9 @@
             "findUserByUsername":findUserByUsername,
             "findUserByCredentials":findUserByCredentials,
             "findAllUsers":findAllUsers,
-            "logout":logout
+            "logout":logout,
             // "updateUser":updateUser,
-            // "deleteUser":deleteUser
+            "deleteUser":deleteUser
         };
         return api;
 
@@ -51,11 +51,11 @@
         //
         // }
         //
-        // function deleteUser(userId) {
-        //     return $http.delete("/api/user/"+userId);
-        //
-        //
-        // }
+        function deleteUser(userId) {
+            return $http.delete("/api/user/delete/"+userId);
+
+
+        }
 
 
 

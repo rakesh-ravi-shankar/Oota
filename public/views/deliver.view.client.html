@@ -31,18 +31,19 @@
   </div>
  </div>
 </div>
-<nav class=" navbar navbar-inverse navbar-fixed-top">
 
+<nav class=" navbar navbar-inverse navbar-fixed-top">
  <div class="row container-fluid">
   <div class="navbar-text col-lg-10 col-sm-8  col-xs-5">
    <a class=" btn oota" href="#/">OOTA</a>    </div>
   <div class="logout-login navbar-text pull-right" style="margin-right: 2%;">
-   <button ng-show=model.user ng-click="model.logout()" class="btn btn-success">Logout</button>
+   <button ng-show=model.user ng-click="model.logout()" class="btn btn-danger">Logout</button>
    <span  ng-show=model.user >
                 <a href="#/userProfile/{{model.user.username}}" class="btn fa fa-user fa-2x" aria-hidden="true"></a></span>
   </div>
  </div>
 </nav>
+
 <ng-map id="mapDemo"
         default-style="true"
         center="current-location"
@@ -96,6 +97,14 @@
 </ng-map>
 
 
+<div class="container well push-down" ng-if="model.waypoints.length == 0">
+ <h1>No orders available for pick-up</h1>
+</div>
+
+<div class="container well push-down" ng-if="(model.waypoints.length > 0) && (!(model.selectedWaypoint.length > 0))">
+ <h1>Select an order</h1>
+</div>
+
 <div class="container" ng-if="model.selectedWaypoint.length > 0">
  <h1>{{model.restaurantName}}</h1>
  <table class="table table-striped">
@@ -117,7 +126,7 @@
  </table>
 
 
- <div class="row" ng-if="model.selectedWaypoint.length > 0">
+ <div class="row " ng-if="model.selectedWaypoint.length > 0">
   <div class="col-sm-6">
    <h3>Pickup Details:</h3>
    <h5>Restaurant Name:</h5>{{model.restaurantName}}
@@ -128,6 +137,7 @@
   <div class="col-sm-6">
    <h3>Delivery Details:</h3>
    <h5>Drop off to:</h5>{{model.orderer.firstName}} {{model.orderer.lastName}}
+   <h5>Phone No:</h5><b>{{model.orderer.phone}}</b>
    <h5>Drop off point:</h5>{{model.selectedWaypoint[1].location}}
 
   </div>

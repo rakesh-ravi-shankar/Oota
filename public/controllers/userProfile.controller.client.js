@@ -17,10 +17,13 @@
         vm.logout = logout;
         vm.loginClick = loginClick;
         vm.followButtonStatus = followButtonStatus;
+        vm.saveComment = saveComment;
+        vm.triggerComment = triggerComment;
         //vm.user= $rootScope.user;
         vm.currUser = false;
         vm.followers_objs = [];
         vm.following_objs = [];
+        vm.comment = {};
 
         function init() {
             $("#menu-toggle").click(function (e) {
@@ -70,6 +73,9 @@
                             }
                             else {
                                 vm.currUser = false;
+                                vm.currentSelection = "COMMENTS";
+                                updateCurrentSelection("COMMENTS");
+                                // console.log(vm.currentSelection);
                                 followButtonStatus();
                             }
 
@@ -267,6 +273,32 @@
         function closeModal() {
             $("#validateUserModal").modal("hide");
             return;
+        }
+
+        function saveComment(comment_text) {
+            vm.comment.comment = comment_text;
+            userProfileService
+                .createUserComment(vm.comment)
+                .then(function() {
+                    $("#commentModal").modal("hide");
+                });
+        }
+
+
+        function triggerComment(order) {
+            vm.comment = {
+                feedback_giver_id:$rootScope.user._id,
+                feedback_giver_name:$rootScope.user.firstName,
+                feedback_reciever_id:order._deliverer,
+                order_id:order._id
+            };
+
+            UserService
+                .findUserById(order._orderer)
+                .then(function (user) {
+                    vm.orderer = user;
+                    $("#commentModal").modal("show")
+                });
         }
 
 

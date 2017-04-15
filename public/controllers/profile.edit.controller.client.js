@@ -7,6 +7,8 @@
         var vm = this;
         vm.updateUser=updateUser;
         vm.logout=logout;
+        vm.deleteUser=deleteUser;
+        
         function init() {
 
             $http.get('/api/loggedin').success(function(user) {
@@ -38,8 +40,23 @@
 
         }
         init();
+        
+        function deleteUser() {
+            UserService
+                .deleteUser(vm.user._id)
+                .success(function(user){
+                    if(user!=null)
+                    {vm.message="user successfully deleted";
+                        logout();
+                        $location.url("/");
 
+                    }
+                    else
+                    {vm.error="unable to delete user";}
 
+                });
+            
+        }
         function logout() {
             UserService
                 .logout()

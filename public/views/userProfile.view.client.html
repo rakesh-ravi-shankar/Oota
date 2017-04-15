@@ -30,8 +30,24 @@
 </div>
 
 
-<nav class=" navbar navbar-inverse navbar-fixed-top">
+<div class="modal fade" id="commentModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Write {{model.orderer.firstName}} {{model.orderer.lastName}} a message:</h5>
+            </div>
+            <div class="modal-body">
+                <textarea type="text" class="form-control" placeholder="Great meeting you...enjoy your meal" ng-model="comment"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" ng-click="model.saveComment(comment)">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
 
+
+<nav class=" navbar navbar-inverse navbar-fixed-top">
     <div class="row container-fluid">
         <div class="navbar-text col-lg-10 col-sm-9 col-xs-7">
             <div>
@@ -43,11 +59,9 @@
         </div>
         <div class="logout-login navbar-text pull-right" style="margin-right: 2%;">
             <button ng-show=!model.loggedInUser ng-click="model.loginClick()" class="btn btn-primary">Login</button>
-            <button ng-show=model.loggedInUser ng-click="model.logout()" class="btn btn-success">Logout</button>
+            <button ng-show=model.loggedInUser ng-click="model.logout()" class="btn btn-danger">Logout</button>
             <span  ng-show=model.loggedInUser >
                 <a href="#/userProfile/{{model.loggedInUser.username}}" class="btn fa fa-user fa-2x" aria-hidden="true"></a></span>
-        </div>
-
         </div>
     </div>
 </nav>
@@ -102,7 +116,6 @@
 </div>
 
 <div id="page-content-wrapper">
-
     <div ng-switch="model.currentSelection">
 
         <div ng-switch-when="TRACK ORDER">
@@ -120,7 +133,12 @@
                 <tr ng-repeat="order in model.orders">
                     <td>{{$index + 1}}</td>
                     <td>{{order.restaurantName}}</td>
-                    <td>{{order.deliveryStatus}}</td>
+                    <td>
+                        {{order.deliveryStatus}}
+                        <a class="btn btn-primary btn-sm"
+                           ng-if="(order.deliveryStatus == 'DELIVERED')"
+                           ng-click="model.triggerComment(order)">Comment</a>
+                    </td>
                 </tr>
                 </tbody>
             </table>
@@ -140,20 +158,27 @@
                     <tr ng-repeat="order in model.oldorders.data">
                         <td>{{$index + 1}}</td>
                         <td>{{order.restaurantName}}</td>
-                        <td>{{order.deliveryStatus}}</td>
+                        <td>
+                            {{order.deliveryStatus}}
+                            <a class="btn btn-primary btn-sm"
+                               ng-if="(order.deliveryStatus == 'DELIVERED')"
+                               ng-click="model.triggerComment(order)">Comment</a>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
 
         </div>
         <div ng-switch-when="COMMENTS">
+            <!--{{model.comments.data}}-->
                  <ul class="list-group">
                     <li class="list-group-item" ng-repeat="comment in model.comments.data">
                         <div class="media-body">
-                            <strong class="text-success">{{comment.feedback_giver_name}}</strong>
-                            <p>
+                            <strong class="text-success">
+                                <a href="#/userProfile/{{comment.feedback_giver_name}}">{{comment.feedback_giver_name}}:</a></strong>
+                            <h>
                                 {{comment.comment}}
-                            </p>
+                            </h>
                         </div>
                     </li>
                 </ul>
