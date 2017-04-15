@@ -30,8 +30,24 @@
 </div>
 
 
-<nav class=" navbar navbar-inverse navbar-fixed-top">
+<div class="modal fade" id="commentModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Write {{model.orderer.firstName}} {{model.orderer.lastName}} a message:</h5>
+            </div>
+            <div class="modal-body">
+                <textarea type="text" class="form-control" placeholder="Great meeting you...enjoy your meal" ng-model="comment"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" ng-click="model.saveComment(comment)">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
 
+
+<nav class=" navbar navbar-inverse navbar-fixed-top">
     <div class="row container-fluid">
         <div class="navbar-text col-lg-10 col-sm-9 col-xs-7">
             <div>
@@ -46,8 +62,6 @@
             <button ng-show=model.loggedInUser ng-click="model.logout()" class="btn btn-success">Logout</button>
             <span  ng-show=model.loggedInUser >
                 <a href="#/userProfile/{{model.loggedInUser.username}}" class="btn fa fa-user fa-2x" aria-hidden="true"></a></span>
-        </div>
-
         </div>
     </div>
 </nav>
@@ -120,7 +134,12 @@
                 <tr ng-repeat="order in model.orders">
                     <td>{{$index + 1}}</td>
                     <td>{{order.restaurantName}}</td>
-                    <td>{{order.deliveryStatus}}</td>
+                    <td>
+                        {{order.deliveryStatus}}
+                        <a class="btn btn-primary btn-sm"
+                           ng-if="(order.deliveryStatus == 'DELIVERED')"
+                           ng-click="model.triggerComment(order)">Comment</a>
+                    </td>
                 </tr>
                 </tbody>
             </table>
@@ -140,7 +159,12 @@
                     <tr ng-repeat="order in model.oldorders.data">
                         <td>{{$index + 1}}</td>
                         <td>{{order.restaurantName}}</td>
-                        <td>{{order.deliveryStatus}}</td>
+                        <td>
+                            {{order.deliveryStatus}}
+                            <a class="btn btn-primary btn-sm"
+                               ng-if="(order.deliveryStatus == 'DELIVERED')"
+                               ng-click="model.triggerComment(order)">Comment</a>
+                        </td>
                     </tr>
                     </tbody>
                 </table>

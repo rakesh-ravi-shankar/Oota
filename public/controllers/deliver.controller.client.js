@@ -23,6 +23,11 @@
                 vm.user=$rootScope.user;
             }
 
+            $rootScope.$on('$routeChangeStart',
+                function(event, toState, toParams, fromState, fromParams){
+                    $("#destinationModal").modal("hide");
+                });
+
             // $("body").removeClass("modal-open");
             // $(".modal-backdrop").remove();
 
@@ -66,7 +71,7 @@
                 }
                 else
                 {
-                    console.log($rootScope.user)
+
                     for (i in orders.data){
                         if ($rootScope.user._id == orders.data[i]._orderer){
                             orders.data.splice(i, 1);
@@ -74,7 +79,6 @@
                     }
                     vm.waypoints = orders.data;
                 }
-                console.log(vm.waypoints);
 
                 // Get current location and set marker icons
                 $window.navigator.geolocation.getCurrentPosition(function() {
@@ -203,8 +207,8 @@
                 .createUserComment(comment)
                 .then(function() {
                     //TODO: this button is not being disabled
-                    $("#commentModal").modal("hide")
-                    // location.reload();
+                    $("#commentModal").modal("hide");
+                    location.reload();
                 });
         }
 

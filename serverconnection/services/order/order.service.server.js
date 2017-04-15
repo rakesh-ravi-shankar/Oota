@@ -7,9 +7,9 @@ module.exports=function(app){
     var userModel =require("../../model/user/user.model.server");
 
     app.post("/api/order",createOrder);
+    app.get("/api/order/activeOrders",findActiveOrders);
     app.get("/api/order/:oid",findOrderById);
     app.get("/api/order/orderer/:uid",findActiveOrdersForOrderer);
-    app.get("/api/order/activeOrders",findActiveOrders);
     app.get("/api/allOrders",findAllOrders);
     app.get("/api/allOrders/:apiKey",findAllOrdersForRestaurant);
     app.post("/api/order/updateOrder",updateOrder);
