@@ -53,7 +53,7 @@
 
     <div class="row">
         <div class="square rl-img">
-            <img src="{{model.restaurantLogo}}" class="img-responsive img-circle content"/>
+            <img src="{{model.restaurantLogo}}" class="img-responsive img-circle content" style="padding: 15px"/>
 
         </div>
     </div>
@@ -91,9 +91,9 @@
                     <strong class="text-success">{{review.firstName}} {{review.lastName}}</strong>
                 </a>
 
-                <input type="text" value="{{review.reviewText}}" disabled style="margin-left:1em; margin-top: 1em; ">
-                </input>
-                <button>edit</button>
+                <p style="margin-left:1em; margin-top: 1em; ">
+                    {{review.reviewText}}
+                </p>
             </div>
 
         </li>
