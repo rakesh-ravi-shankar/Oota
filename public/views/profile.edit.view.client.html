@@ -16,9 +16,9 @@
     </div>
     </div>
 </nav>
+<div id="background-img"></div>
 
-
-<div class="container">
+<div class="container profile-edit">
 
     <div class="alert alert-danger" ng-show="model.error">
         {{model.error}}
@@ -29,7 +29,7 @@
 
     <form action="{{model.uploadURL}}"  method="post" enctype="multipart/form-data">
         <input name="uid" value="model.user_id" style="display:none">
-
+            <br>
 
             <label for="usernameEdit">Username</label>
             <h2 ng-model="model.user.username" id="usernameEdit" > {{model.user.username}}</h2>
@@ -49,19 +49,15 @@
         </div>
         <div class="form-group">
             <label for="phone-no">Phone Number</label>
-            <input type="tel" ng-model="model.user.phone" class="form-control" id="phone-no" placeholder="Wonderland">
+            <input type="tel" ng-model="model.user.phone" class="form-control" id="phone-no" placeholder="8000080000">
         </div>
         <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" ng-model="model.user.password" class="form-control" id="password" placeholder="Wonderland">
+            <input type="password" ng-model="model.user.password" class="form-control" id="password" placeholder="******">
         </div>
         <div class="form-group">
             <label for="confirm-password">Confirm Password</label>
-            <input type="password" ng-model="model.user.password" class="form-control" id="confirm-password" placeholder="Wonderland">
-        </div>
-        <div class="form-group">
-            <label for="birthday">Birthday</label>
-            <input ng-model="model.user.dateofbirth" class="form-control" id="birthday" placeholder="Wonderland">
+            <input type="password" ng-model="model.user.password" class="form-control" id="confirm-password" placeholder="***">
         </div>
         <label>Upload</label>
         <input type="file"

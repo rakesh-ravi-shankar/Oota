@@ -28,28 +28,30 @@
                         type="text"
                         class="form-control"
                         placeholder="Last Name"/>
-                <label>Birthday</label>
-                <div class="container">
-                    <div class="row" id="Birthday">
-                        <div class='col-sm-6'>
-                            <div class="form-group">
-                                <div class='input-group date' id='datetimepicker1'>
-                                    <input  ng-model="user.dob"
-                                            type='text' class="form-control" />
-                                    <span class="input-group-addon">
-                                      <span class="glyphicon glyphicon-calendar"></span>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <script type="text/javascript">
-                            $(function () {
-                                $('#datetimepicker1').datetimepicker({format: 'YYYY-MM-DD'});
-                            });
-                        </script>
-                    </div>
+                    <!--<label>Birthday</label>-->
+                    <!--<div class="container">-->
+                        <!--<div class="row" id="Birthday">-->
+                            <!--<div class='col-sm-6'>-->
+                                <!--<div class="form-group">-->
+                                    <!--<div class='input-group date' id='datetimepicker1'>-->
+                                        <!--<input  ng-model="user.dateofbirth"-->
+                                                <!--class="form-control"-->
+                                                <!--type='text' class="form-control" />-->
 
-                </div>
+                                        <!--<span class="input-group-addon">-->
+                                          <!--<span class="glyphicon glyphicon-calendar"></span>-->
+                                        <!--</span>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<script type="text/javascript">-->
+                                <!--$(function () {-->
+                                    <!--$('#datetimepicker1').datetimepicker({format: 'YYYY-MM-DD'});-->
+                                <!--});-->
+                            <!--</script>-->
+                        <!--</div>-->
+                        <!--{{user.dateofbirth}}-->
+                    <!--</div>-->
                 <label>Email</label>
                 <input  ng-model="user.email"
                         type="email"

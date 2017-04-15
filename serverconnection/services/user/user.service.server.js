@@ -20,7 +20,7 @@ module.exports=function(app){
     //app.get   ('/api/loggedin',       loggedin);
     //app.get   ('/api/user',     auth, findAllUsers);
     //app.put   ('/api/user/:id', auth, updateUser);
-    //app.delete('/api/user/:id', auth, deleteUser);
+    app.delete('/api/user/delete/:uid', deleteUser);
 
     app.get("/api/user",findUserByUsername);
     //app.post("/api/user",createUser);
@@ -266,11 +266,11 @@ module.exports=function(app){
         userModel
             .findUserByUsername(username)
             .then(function (user) {
-                console.log("user by name"+ user);
+                // console.log("user by name"+ user);
                 res.json(user);
 
             }, function (error) {
-                console.log('ERRRRR')
+                // console.log('ERRRRR')
                 res.sendStatus(500).send(error);
             });
 
@@ -319,7 +319,7 @@ module.exports=function(app){
 
     function deleteUser(req,res) {
         var userId=req.params.uid;
-
+        // console.log(userId);
         userModel
             .deleteUser(userId)
             .then(function (status) {

@@ -362,7 +362,10 @@ color:whitesmoke;}
 	color: black;
 	cursor: hand;
 }
-
+.profile-edit
+{
+	color: whitesmoke;
+}
 .oota-deliver
 {
 	margin-top: auto;

@@ -18,7 +18,7 @@ userModel.followUser=followUser;
 userModel.alreadyFollowing=alreadyFollowing;
 userModel.unfollowUser=unfollowUser;
 userModel.findAllUsers=findAllUsers;
-// userModel.deleteUser=deleteUser;
+userModel.deleteUser=deleteUser;
 
 
 module.exports=userModel;
@@ -276,16 +276,13 @@ function updateUser(user,userId) {
 function deleteUser(userId) {
 
     var deffered = q.defer();
+    console.log(userId);
     userModel
         .findByIdAndRemove(userId, function (err, user) {
             if(err)
                 deffered.reject(err);
             else {
-                user.remove()
-                    .then(function () {
-                    deffered.resolve();
-                });
-
+                deffered.resolve(user);
             }
         });
     return deffered.promise;
