@@ -43,6 +43,9 @@
             <li>
                 <a ng-click="model.createUserPage()">CREATE USER</a>
             </li>
+            <li>
+                <a ng-click="model.findAllComments()">USER COMMENTS</a>
+            </li>
         </ul>
     </div>
 
@@ -233,6 +236,59 @@
             </div>
         </div>
 
+            <div ng-switch-when="commentsPage">
+
+                <div class="row">
+                    <h3> Comments </h3>
+                    <hr>
+
+
+                    <div class="alert alert-danger" ng-show="model.error">
+                        {{model.error}}
+                    </div>
+                    <div class="alert alert-success" ng-show=" model.message">
+                        {{model.message}}
+                    </div>
+
+                    <br>
+
+                    <div class="row container-fluid">
+
+                        <table class="table table-striped table-bordered">
+                            <tbody>
+                            <col width="15%" />
+                            <col width="15%" />
+                            <col width="15%" />
+                            <col width="15%" />
+                            <col width="35%" />
+                            <col width="5%" />
+                            <tr>
+                                <th>Comment Id</th>
+                                <th>Given By</th>
+                                <th>Received By</th>
+                                <th>Order Id</th>
+                                <th>Comment</th>
+                                <th>Delete</th>
+                            </tr>
+                            <tr ng-repeat="comment in model.comments">
+
+                                <td>{{comment._id}}</td>
+                                <td>{{comment.feedback_giver_id}}</td>
+                                <td>{{comment.feedback_reciever_id}}</td>
+                                <td>{{comment.order_id}}</td>
+                                <td>{{comment.comment}}</td>
+                                <td><span class="input-group-btn">
+                            <a ng-click="model.deleteComment(comment._id)" class="btn  pull-right" type="button">
+                                <span class="pull-right glyphicon glyphicon-trash"></span>
+                            </a>
+                            </span></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
 
         <div ng-switch-when="editUser">
             <div class="alert alert-danger" ng-show="model.error">

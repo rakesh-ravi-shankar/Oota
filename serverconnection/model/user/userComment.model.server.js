@@ -11,6 +11,7 @@ userCommentModel.findUserComments=findUserComments;
 userCommentModel.createUserComment = createUserComment;
 userCommentModel.deleteSingleComment = deleteSingleComment;
 userCommentModel.updateComment = updateComment;
+userCommentModel.findAllComments = findAllComments;
 
 module.exports=userCommentModel;
 
@@ -51,8 +52,27 @@ function findUserComments(userid) {
     return deffered.promise;
 }
 // Find all mentions of userid
+function findAllComments() {
+    var deffered =q.defer();
+
+    userCommentModel
+        .find(function (err,comments) {
+            if(err){
+                deffered.reject(err);
+            }
+            else
+            {
+                deffered.resolve(comments);
+            }
+
+        });
+    return deffered.promise;
+}
+// Find all mentions of userid
 function deleteSingleComment(commentId) {
     var deffered =q.defer();
+    console.log("hello delete comment" + commentId);
+    console.log(commentId);
     userCommentModel
         .findByIdAndRemove(commentId,function (err, comment) {
             if(err)

@@ -13,8 +13,9 @@ module.exports=function(app){
     app.put("/unfollow-user",unfollowUser);
     app.put("/editUserComment/:commId",editUserComment);
     app.delete("/deleteUserComment/:commId",deleteSingleComment);
-    app.get("/followers/:uid",findfollowers)
-    app.put("/already-following",alreadyFollowing)
+    app.get("/followers/:uid",findfollowers);
+    app.put("/already-following",alreadyFollowing);
+    app.get("/allcomments",findAllComments);
     var multer = require('multer'); // npm install multer --save
     var storage = multer.diskStorage({
         destination: function (req, file, cb) {
@@ -197,6 +198,19 @@ module.exports=function(app){
             });
 
     }
+
+    function findAllComments(req,res) {
+        userCommentModel
+            .findAllComments()
+            .then(function (comments) {
+                res.json(comments);
+            }, function (error) {
+                res.sendStatus(500).send(error);
+            });
+
+    }
+
+
 
 
 

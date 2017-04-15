@@ -20,11 +20,15 @@
         vm.findAllUsers=findAllUsers;
         vm.findAllOrders=findAllOrders;
         vm.findAllRestaurants=findAllRestaurants;
+        vm.findAllComments=findAllComments;
         vm.createUserPage=createUserPage;
         vm.createUser=createUser;
+        //vm.commentsPage=commentsPage;
+        vm.deleteComment=deleteComment;
         vm.users = [];
         vm.orders = [];
         vm.restaurants = [];
+        vm.comments=[];
         vm.uploadURL = "";
         vm.searchUser=searchUser;
         vm.searchOrder=searchOrder;
@@ -255,6 +259,19 @@
 
         }
 
+        function deleteComment(cid){
+            console.log("delete comment");
+            userProfileService
+                .deleteSingleComment(cid)
+                .success(function () {
+                    console.log("delete comment successful");
+                    findAllComments();
+                });
+
+        }
+
+
+
         function searchUser(uid,uname) {
             if(uid){
                 UserService
@@ -331,6 +348,18 @@
                     vm.orders = orders;
                     updateCurrentSelection("orders");
                 });
+        }
+
+
+        function findAllComments(){
+            userProfileService
+                .findAllComments()
+                .success(function (comments) {
+                    vm.comments = comments;
+                    updateCurrentSelection("commentsPage");
+                });
+
+
         }
 
         function findAllRestaurants() {
