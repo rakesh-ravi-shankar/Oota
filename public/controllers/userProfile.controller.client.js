@@ -289,6 +289,7 @@
             vm.comment = {
                 feedback_giver_id:$rootScope.user._id,
                 feedback_giver_name:$rootScope.user.firstName,
+                feedback_giver_username:$rootScope.user.username,
                 feedback_reciever_id:order._deliverer,
                 order_id:order._id
             };

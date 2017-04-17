@@ -215,6 +215,7 @@
             var comment = {
                 feedback_giver_id:$rootScope.user._id,
                 feedback_giver_name:$rootScope.user.firstName,
+                feedback_giver_username:$rootScope.user.username,
                 feedback_reciever_id:vm.orderer._id,
                 comment:comm,
                 order_id:vm.selectedOrder._id
