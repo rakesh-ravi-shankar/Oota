@@ -68,6 +68,7 @@
 <div class="container-fluid col-md-8 col-sm-8 col-xs-12 web-right-pane">
 
     <div class="well">
+        <h2 class="visible-xs" style="text-align: center">{{model.restaurantName}}</h2>
         <h3>Write a Review</h3>
         <textarea id="reviewTextArea" rows="3" style="width: 100%" ng-model="reviewText"></textarea>
         <button class="btn btn-success" ng-click="model.submitReview(reviewText)">Submit</button>
