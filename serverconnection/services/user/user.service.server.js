@@ -75,11 +75,11 @@ module.exports=function(app){
                     console.log(profile);
                     var user = {
 
-                        username: displayname.split()[0].split(" ")[0]+displayname.split()[0].split(" ")[1],
+                        username: displayname.split(" ")[0]+displayname.split(" ")[1],
                         //photo: profile.photos[0].value,
 
-                        firstName: displayname.split()[0].split(" ")[0],
-                        lastName:  displayname.split()[1].split(" ")[1],
+                        firstName: displayname.split(" ")[0],
+                        lastName:  displayname.split(" ")[1],
                         facebook: {
                             id:    profile.id
                         }
