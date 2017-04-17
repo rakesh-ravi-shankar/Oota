@@ -239,8 +239,14 @@
                 });
 
         }
-        function deleteUser() {
+        function deleteUser(uid) {
             console.log("delete user");
+            UserService
+                .deleteUser(uid)
+                .success(function () {
+                    console.log("delete user successful");
+                    findAllUsers();
+                });
         }
         function deleteOrder(oid) {
             console.log("delete order");
@@ -342,6 +348,13 @@
                 .findAllUsers()
                 .success(function (users) {
                     vm.users = users;
+                    for(var i = vm.users.length - 1; i >= 0; i--) {
+                        if(vm.users[i].username === "admin") {
+                            vm.users.splice(i, 1);
+                            break;
+                        }
+                    }
+                    //var index = vm.users.indexOf("admin");
                     updateCurrentSelection("users");
                 });
         }
