@@ -47,6 +47,10 @@
                 if (user !== '0') {
                     $rootScope.user = user;
                     vm.user=user;
+                    if(vm.user.role != "ADMIN"){
+                        logout();
+                        $location.url("/adminLogin");
+                    }
                     findAllUsers();
                     //updateCurrentSelection("users");
 
