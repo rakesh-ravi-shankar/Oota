@@ -32,14 +32,9 @@
                     console.log($rootScope.user);
                     vm.user=$rootScope.user;
                 } else {
-                    console.log("Dont come here!!!");
                 }
             });
-/*
-            if($rootScope.user != null){
-                console.log("user present 1");
-                vm.user=$rootScope.user;
-             } */
+
             localStorageService.clearAll();
             //vm.user= $rootScope.user;
 

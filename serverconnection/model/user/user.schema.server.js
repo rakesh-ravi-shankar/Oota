@@ -25,6 +25,47 @@ var userSchema= mongoose.Schema({
     }
 },{collection:'user.project.collection'});
 
+userSchema.post('remove',function () {
+    var orderModel = require("../../model/order/order.model.server");
+    var userModel = require("../../model/user/user.model.server");
+    var restaurantReviewModel = require("../../model/restaurant/restaurantReview.model.server");
+    var user=this;
+
+    orderModel
+        .deleteOrder({$in: [user.foodDelivered + user.foodOrdered]})
+        .exec();
+
+
+    restaurantReviewModel
+        .find()
+        .success(function (res) {
+            for(i in res) {
+                for (j in res[i]._users) {
+                    if(user._id == res[i]._users[j]) {
+                        res[i]._users.splice(i, 1);
+                        res[i].save();
+                    }
+                }
+            }
+        });
+
+
+    userModel
+        .findUserById({$in: user.followers})
+        .success(function (follower) {
+            for(i in follower.following) {
+                if (user._id == follower.following[i])
+                {
+                    follower.following.splice(i, 1);
+                    follower.save();
+                }
+            }
+        })
+
+
+
+});
+
 
 
 

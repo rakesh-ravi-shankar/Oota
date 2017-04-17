@@ -47,6 +47,10 @@
                 if (user !== '0') {
                     $rootScope.user = user;
                     vm.user=user;
+                    if(vm.user.role != "ADMIN"){
+                        logout();
+                        $location.url("/adminLogin");
+                    }
                     findAllUsers();
                     //updateCurrentSelection("users");
 
@@ -55,38 +59,10 @@
                 }
             });
 
-            /*
-             vm.user = $rootScope.user;
-             vm.currentSelection="users";
-             UserService
-             .findAllUsers()
-             .success(function (users) {
-             vm.users = users;
-             });
-             console.log(vm.users);
-             /*
-             OrderService
-             .findActiveOrdersForOrderer(vm.uid)
-             .success(function (orders) {
-             vm.orders = orders;
-             }); */
-            //window.setInterval(updateStatus, 5000);
-
-
         }
 
         init();
 
-        /*
-         function updateStatus() {
-         console.log("updating..");
-         OrderService
-         .findActiveOrdersForOrderer(vm.uid)
-         .success(function (orders) {
-         vm.users = orders;
-         });
-         }
-         */
         function updateCurrentSelection(cs) {
             vm.currentSelection = cs;
             vm.error="";
@@ -235,8 +211,14 @@
                 });
 
         }
-        function deleteUser() {
+        function deleteUser(uid) {
             console.log("delete user");
+            UserService
+                .deleteUser(uid)
+                .success(function () {
+                    console.log("delete user successful");
+                    findAllUsers();
+                });
         }
         function deleteOrder(oid) {
             console.log("delete order");
@@ -338,6 +320,13 @@
                 .findAllUsers()
                 .success(function (users) {
                     vm.users = users;
+                    for(var i = vm.users.length - 1; i >= 0; i--) {
+                        if(vm.users[i].username === "admin") {
+                            vm.users.splice(i, 1);
+                            break;
+                        }
+                    }
+                    //var index = vm.users.indexOf("admin");
                     updateCurrentSelection("users");
                 });
         }
