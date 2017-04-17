@@ -20,7 +20,7 @@
                 if (user !== '0') {
                     $rootScope.user = user;
                 } else {
-                    console.log("Dont come here!!!");
+
                 }
             });
 

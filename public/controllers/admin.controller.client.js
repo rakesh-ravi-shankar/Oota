@@ -59,38 +59,10 @@
                 }
             });
 
-            /*
-             vm.user = $rootScope.user;
-             vm.currentSelection="users";
-             UserService
-             .findAllUsers()
-             .success(function (users) {
-             vm.users = users;
-             });
-             console.log(vm.users);
-             /*
-             OrderService
-             .findActiveOrdersForOrderer(vm.uid)
-             .success(function (orders) {
-             vm.orders = orders;
-             }); */
-            //window.setInterval(updateStatus, 5000);
-
-
         }
 
         init();
 
-        /*
-         function updateStatus() {
-         console.log("updating..");
-         OrderService
-         .findActiveOrdersForOrderer(vm.uid)
-         .success(function (orders) {
-         vm.users = orders;
-         });
-         }
-         */
         function updateCurrentSelection(cs) {
             vm.currentSelection = cs;
             vm.error="";
