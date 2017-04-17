@@ -14,6 +14,7 @@
 
 
         }
+        init();
 
         function order() {
             $location.url("/login");
