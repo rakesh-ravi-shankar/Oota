@@ -185,11 +185,10 @@
         </div>
         <div ng-switch-when="FOLLOWERS">
             <!--{{model.followers_objs}}-->
-
-            <ul class="list-group">
+<div ng-if = "model.followers_objs">            <ul class="list-group">
 
                 <li class="list-group-item" ng-repeat="followers in model.followers_objs">
-                    <img src="{{followers.profilepicurl}}"
+                    <img ng-src="{{followers.profilepicurl}}"
                          alt=""
                          class="img-circle"
                          style="width: 3em;height: 3em;">
@@ -203,18 +202,19 @@
                     </div>
                 </li>
             </ul>
-        </div>
+        </div></div>
+
         <div ng-switch-when="FOLLOWING">
             <!--{{model.following_objs}}-->
-            <li class="list-group-item" ng-repeat="followers in model.following_objs">
-                <img src="{{followers.profilepicurl}}"
+            <li class="list-group-item" ng-repeat="following in model.following_objs">
+                <img ng-src="{{following.profilepicurl}}"
                      alt=""
                      class="img-circle"
                      style="width: 3em;height: 3em;">
                 <div class="media-body" style="display: inline;">
 
-                    <a href="#/userProfile/{{followers.username}}">
-                        <strong style="font-size: 2em" class="text-success">{{followers.firstName}} {{followers.lastName}}</strong>
+                    <a href="#/userProfile/{{following.username}}">
+                        <strong style="font-size: 2em" class="text-success">{{following.firstName}} {{following.lastName}}</strong>
                     </a>
 
 
