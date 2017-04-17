@@ -12,7 +12,6 @@
             $("body").removeClass("modal-open");
             $(".modal-backdrop").remove();
 
-
         }
         init();
 

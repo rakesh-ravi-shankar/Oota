@@ -26,6 +26,9 @@
             $rootScope.$on('$routeChangeStart',
                 function(event, toState, toParams, fromState, fromParams){
                     $("#destinationModal").modal("hide");
+                    $("#commentModal").modal("hide");
+                    $("body").removeClass("modal-open");
+                    $(".modal-backdrop").remove();
                 });
 
             // $("body").removeClass("modal-open");
