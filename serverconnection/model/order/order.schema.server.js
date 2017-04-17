@@ -22,19 +22,23 @@ orderSchema.post("remove", function(order) {
 
     userModel
         .findById({$in: [order._orderer, order._deliverer]})
-        .then(function(user) {
-            for(i in user.foodOrdered) {
-                if (user.foodOrdered[i] == order._id)
+        .then(function(err, user) {
+            var len1 = user.foodOrdered.length;
+            while(len1--){
+                if (user.foodOrdered[len1].toString() === order._id.toString())
                 {
-                    user.foodOrdered[i].splice(i, 1);
+                    user.foodOrdered.splice(len1, 1);
                 }
             }
-            for(i in user.foodDelivered) {
-                if (user.foodDelivered[i] == order._id)
+
+            var len2 = user.foodDelivered.length;
+            while(len2--){
+                if (user.foodDelivered[len2].toString() === order._id.toString())
                 {
-                    user.foodDelivered[i].splice(i, 1);
+                    user.foodDelivered.splice(len2, 1);
                 }
             }
+
             user.save();
         });
 

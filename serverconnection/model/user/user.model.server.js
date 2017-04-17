@@ -5,6 +5,7 @@ var mongoose=require("mongoose");
 var q=require("q");
 var userSchema =require("./user.schema.server");
 var userModel=mongoose.model("UserModel",userSchema);
+var orderModel = require("../../model/order/order.model.server");
 
 userModel.findUserByUsername=findUserByUsername;
 userModel.findUserByCredentials=findUserByCredentials;
@@ -277,19 +278,61 @@ function deleteUser(userId) {
 
     var deffered = q.defer();
     console.log(userId);
+    // userModel
+    //     .findByIdAndRemove(userId, function (err, user) {
+    //         if(err)
+    //             deffered.reject(err);
+    //         else {
+    //             user
+    //                 .remove()
+    //                 .then(function () {
+    //                     orderModel
+    //                         .deleteOrder({$in: [user.foodDelivered + user.foodOrdered]})
+    //                         .then(function () {
+    //                             deffered.resolve();
+    //                         });
+    //
+    //                 })
+    //
+    //         }
+    //     });
+
     userModel
-        .findByIdAndRemove(userId, function (err, user) {
-            if(err)
-                deffered.reject(err);
-            else {
+        .findById(userId, function (err, user) {
+            var temp = user.foodOrdered.concat(user.foodDelivered);
+            console.log("TEMP")
+            console.log(user.foodOrdered)
+            console.log(user.foodDelivered)
+            console.log(temp);
+
+
+            if (temp.length > 0)
+            {
+                // orderModel
+                //     .deleteOrder({$in: temp})
+                //     .then(function () {
+                //
+                //     });
+
                 user
                     .remove()
                     .then(function () {
                         deffered.resolve();
-                    })
-
+                    });
             }
+            else
+            {
+                user
+                    .remove()
+                    .then(function () {
+                        deffered.resolve();
+                    });
+            }
+
+
         });
+
+
     return deffered.promise;
 }
 

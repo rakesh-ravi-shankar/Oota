@@ -26,41 +26,62 @@ var userSchema= mongoose.Schema({
 },{collection:'user.project.collection'});
 
 userSchema.post('remove',function () {
-    var orderModel = require("../../model/order/order.model.server");
     var userModel = require("../../model/user/user.model.server");
+    var orderModel = require("../../model/order/order.model.server");
     var restaurantReviewModel = require("../../model/restaurant/restaurantReview.model.server");
     var user=this;
 
-    orderModel
-        .deleteOrder({$in: [user.foodDelivered + user.foodOrdered]})
-        .exec();
+
+    var temp = user.foodOrdered.concat(user.foodDelivered);
+    orderModel.remove({_id: {$in: temp}}).exec();
 
 
     restaurantReviewModel
-        .find()
-        .success(function (res) {
-            for(i in res) {
-                for (j in res[i]._users) {
-                    if(user._id == res[i]._users[j]) {
-                        res[i]._users.splice(i, 1);
-                        res[i].save();
+        .find({},function (err, res) {
+            for(k in res) {
+                var temp = [];
+                for (j in res[k]._users) {
+                    if(user._id.toString() === res[k]._users[j].toString()) {
+                        temp.push(j);
                     }
                 }
+                var len = res[k]._users.length;
+                while(len--) {
+                    if (temp.includes(len.toString())) {
+                        res[k]._users.splice(len, 1);
+                        res[k].reviews.splice(len, 1);
+                        res[k].dateCreated.splice(len, 1);
+                    }
+                }
+                res[k].save();
             }
+
+
         });
 
 
     userModel
-        .findUserById({$in: user.followers})
-        .success(function (follower) {
-            for(i in follower.following) {
-                if (user._id == follower.following[i])
-                {
-                    follower.following.splice(i, 1);
-                    follower.save();
-                }
+        .find({"_id": {$in: user.followers}},  function (err, follower) {
+        console.log("__________________");
+        console.log(follower);
+            for (k in follower) {
+                follower[k].following.forEach(function (u) {
+                    if (user._id.toString() === u.toString())
+                    {
+                        var i = follower[k].following.indexOf(u);
+                        follower[k].following.splice(i, 1)
+                    }
+                });
+                follower[k].followers.forEach(function (u) {
+                    if (user._id.toString() === u.toString())
+                    {
+                        var i = follower[k].followers.indexOf(u);
+                        follower[k].followers.splice(i, 1)
+                    }
+                });
+                follower[k].save();
             }
-        })
+        });
 
 
 
