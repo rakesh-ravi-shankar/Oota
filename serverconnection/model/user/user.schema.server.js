@@ -29,11 +29,17 @@ userSchema.post('remove',function () {
     var userModel = require("../../model/user/user.model.server");
     var orderModel = require("../../model/order/order.model.server");
     var restaurantReviewModel = require("../../model/restaurant/restaurantReview.model.server");
+    var userCommentModel = require("../../model/user/userComment.model.server");
     var user=this;
-
-
     var temp = user.foodOrdered.concat(user.foodDelivered);
+
+
+    userCommentModel.remove({order_id: {$in: temp}}).exec();
+
+
     orderModel.remove({_id: {$in: temp}}).exec();
+
+
 
 
     restaurantReviewModel

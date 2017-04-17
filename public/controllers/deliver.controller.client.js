@@ -146,6 +146,7 @@
             }
             vm.selectedOrder.deliveryStatus = "SELECTED_FOR_DELIVERY";
             vm.selectedOrder._deliverer=$rootScope.user._id;
+
             OrderService
                 .updateOrder(vm.selectedOrder)
                 .then(function(order){
@@ -185,10 +186,24 @@
             OrderService
                 .updateOrder(vm.selectedOrder)
                 .then(function(order){
-                    //vm.selectedOrder = order;
-                    console.log("Status updated");
-                    $("#orderDeliveredBtn").addClass("disabled");
-                    $("#commentModal").modal("show")
+
+
+                    UserService
+                        .findUserById($rootScope.user._id)
+                        .success(function (deliverer) {
+                            deliverer.foodDelivered.push(vm.selectedOrder._id);
+
+                            userProfileService
+                                .updateUser(deliverer._id, deliverer)
+                                .success(function () {
+                                    //vm.selectedOrder = order;
+                                    console.log("Status updated");
+                                    $("#orderDeliveredBtn").addClass("disabled");
+                                    $("#commentModal").modal("show")
+                                });
+
+
+                        });
                 });
 
 
