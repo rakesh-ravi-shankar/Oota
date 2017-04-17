@@ -48,13 +48,13 @@ module.exports=function(app){
     var googleConfig = {
         clientID     : "1073284949463-7pg2bp9g1u0buahb1tnie0uquvbaq2jj.apps.googleusercontent.com",
         clientSecret : "dQpcCHPXWyhyAVGlKGY-5hyG",
-        callbackURL  : "http://localhost:3000/google/oauth/callback"
+        callbackURL  : "https://ec2-54-164-148-55.compute-1.amazonaws.com:8443/google/oauth/callback"
     };
 
     var facebookConfig = {
         clientID     : "1846643555623628",
         clientSecret : "bb873f797ae32cb11c07d6b07853aeaf",
-        callbackURL  : "http://localhost:3000/auth/facebook/callback"
+        callbackURL  : "https://ec2-54-164-148-55.compute-1.amazonaws.com:8443/auth/facebook/callback"
     };
 
     passport.use(new GoogleStrategy(googleConfig, googleStrategy));
